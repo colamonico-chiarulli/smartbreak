@@ -1,0 +1,12 @@
+* {
+    font-family: "Nunito", sans-serif;
+}
+
+.product-title {
+    line-height: 16px;
+}
+
+.product-description {
+    line-height: 16px;
+    font-size: 0.8rem;
+}
