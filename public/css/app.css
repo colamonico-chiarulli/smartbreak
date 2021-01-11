@@ -6,7 +6,6 @@
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
     border-radius: 0.25rem;
     background-color: #fff;
-    display: -ms-flexbox;
     margin-bottom: 1rem;
     min-height: 80px;
     padding: 0.5rem;

@@ -28,5 +28,6 @@ class HomeController extends Controller
         $categories = Category::all();
 
         return view('pages.home', ['categories' => $categories]);
+
     }
 }

@@ -9,6 +9,7 @@
         </span>
     </div>
 
+
     <div class="product-content d-flex">
         <div class="product-image d-flex align-items-center">
             <img src="/img/products/formaggio.png" class="img-fluid">
