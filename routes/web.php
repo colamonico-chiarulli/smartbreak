@@ -18,10 +18,6 @@ use App\Http\Controllers\ProductController;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
     Route::get('/products', [ProductController::class, 'index'])->name('products.list');
-
 });
