@@ -6,10 +6,13 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contattaci</a>
+            <a href="{{ route('products.list') }}" class="nav-link">Lista prodotti</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route('products.create') }}" class="nav-link">Crea prodotto</a>
         </li>
     </ul>
 
@@ -27,7 +30,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="img/user1-128x128.jpg" alt="User Avatar"
-                            class="img-size-50 mr-3 img-circle">
+                             class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -44,7 +47,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="img/user8-128x128.jpg" alt="User Avatar"
-                            class="img-size-50 img-circle mr-3">
+                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -61,12 +64,12 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="img/user3-128x128.jpg" alt="User Avatar"
-                            class="img-size-50 img-circle mr-3">
+                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
                                 <span class="float-right text-sm text-warning"><i
-                                        class="fas fa-star"></i></span>
+                                       class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">The subject goes here</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
