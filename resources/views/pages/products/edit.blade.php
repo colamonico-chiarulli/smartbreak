@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Crea prodotto'])
+@extends('layouts.app', ['title' => 'Modifica prodotto'])
 
 @section('content')
     <div class="container">
@@ -7,14 +7,14 @@
                 <a href="{{ route('products.index') }}" class="btn btn-info">Elenco prodotti</a>
             </div>
         </div>
-
         <div class="row">
-            <div class="card col-12 shadow">
+            <div class="col-12 card shadow">
                 <div class="card-header">
-                    <h3 class="card-title">Inserisci nuovo prodotto</h3>
+                    <h3 class="card-title">Modifica un prodotto</h3>
                 </div>
-                <form action="{{ route('products.store') }}" method="post">
+                <form action="{{ route('products.update', $product->id) }}" method="post">
                     @csrf
+                    @method('PUT')
 
                     <div class="card-body">
 
@@ -32,27 +32,26 @@
                         <div class="form-group">
                             <label for="name">Nome *</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Inserisci un nome"
-                                value="{{ old('name') }}">
+                                value="{{ $product->name }}">
                         </div>
 
                         <div class=" form-group">
                             <label for="description">Descrizione *</label>
                             <textarea class="form-control" id="description" name="description"
-                                placeholder="Inserisci una descrizione o gli ingredienti"
-                                value="{{ old('description') }}"></textarea>
+                                placeholder="Inserisci una descrizione o gli ingredienti">{{ $product->description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="allergens">Allergeni</label>
                             <input type="text" class="form-control" id="allergens" name="allergens"
-                                placeholder="Inserisci gli allergeni" value="{{ old('allergens') }}">
+                                placeholder="Inserisci gli allergeni" value="{{ $product->allergens }}">
                         </div>
 
                         <div class="form-group">
                             <label for="price">Prezzo *</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" id="price" name="price"
-                                    placeholder="Inserisci il prezzo" value="{{ old('price') }}">
+                                    placeholder="Inserisci il prezzo" value="{{ $product->price }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text">€</span>
                                 </div>
@@ -65,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="num_items">Quantità disponibile *</label>
                                     <input type="number" class="form-control" id="num_items" name="num_items"
-                                        placeholder="Inserisci la quantità disponibile" value="{{ old('num_items') }}">
+                                        placeholder="Inserisci la quantità disponibile" value="{{ $product->num_items }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -73,7 +72,7 @@
                                     <label for="default_daily_stock">Disponibilità quotidiana</label>
                                     <input type="number" class="form-control" id="default_daily_stock"
                                         name="default_daily_stock" placeholder="Inserisci la disponibilità quotidiana"
-                                        value="{{ old('default_daily_stock') }}">
+                                        value="{{ $product->default_daily_stock }}">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +83,7 @@
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="photo_path" name="photo_path"
-                                        value="{{ old('photo_path') }}">
+                                        value="{{ $product->photo_path }}">
                                     <label class="custom-file-label" for="photo_path">Sfoglia</label>
                                 </div>
                             </div>
@@ -96,7 +95,7 @@
                             <select class="form-control" id="category_id" name="category_id">
                                 <option value="">Seleziona una categoria</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @if ($category->id == old('category_id'))
+                                    <option value="{{ $category->id }}" @if ($category->id == $product->category_id)
                                         selected="selected"
                                 @endif>
                                 {{ $category->name }}
@@ -107,7 +106,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Inserisci</button>
+                        <button type="submit" class="btn btn-primary">Aggiorna</button>
                     </div>
                 </form>
             </div>

@@ -55,12 +55,9 @@
                             <a class="btn btn-warning btn-sm" href="{{ route('products.edit', $product->id) }}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="post"
-                                style="display: inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm"" type=" submit"><i class=" fas fa-trash"></i></button>
-                            </form>
+                            <a class="btn btn-danger btn-sm" href="{{ route('products.delete', $product->id) }}">
+                                <i class=" fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

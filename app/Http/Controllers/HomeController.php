@@ -27,6 +27,5 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         return view('pages.home', ['categories' => $categories]);
-        //return view('pages.products.create', ['categories' => $categories]);
     }
 }

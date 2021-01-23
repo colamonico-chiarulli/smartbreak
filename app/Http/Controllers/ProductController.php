@@ -15,9 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
-        return view('pages.products.index', compact('products'));
+        $products = Product::latest()->paginate(8);
+        return view('pages.products2.index', compact('products'))
+            ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
     /**
@@ -27,13 +27,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-       
         $categories = Category::all();
-//        return view('products.create', compact('categories'));
+        //        return view('products.create', compact('categories'));
 
-        return view('pages.products.create', ['categories' => $categories]);
-
+        return view('pages.products2.create', ['categories' => $categories]);
     }
 
     /**
@@ -45,18 +42,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // validare i dati di input
-        $this->validate($request, [
+        $request->validate([
             "name" => ["required"],
             "description" => ["required"],
-            "allergens" => [],
             "price" => ["required", "numeric"],
             "num_items" => ["required", "numeric"],
-            "num_daily_stock" => ["numeric"],
+            "default_daily_stock" => ["numeric"],
+            "category_id" => ["required"],
         ]);
-
-        echo "prodotto inserito";
-
-        // inserire il prodotto nel database
+        Product::create($request->all());
+        return redirect()->route('products.index')
+            ->with('success', 'Prodotto aggiunto.');
     }
 
     /**
@@ -67,7 +63,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('pages.products.show', compact('product'));
+        $categories = Category::all();
+        return view('pages.products2.show', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -78,7 +75,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('pages.products2.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -90,7 +88,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            "name" => ["required"],
+            "description" => ["required"],
+            "price" => ["required", "numeric"],
+            "num_items" => ["required", "numeric"],
+            "default_daily_stock" => ["numeric"],
+            "category_id" => ["required"],
+        ]);
+        $product->update($request->all());
+        return redirect()->route('products.index')
+            ->with('success', 'Prodotto aggiornato!');
     }
 
     /**
@@ -101,6 +109,20 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index')
+            ->with('success', 'Prodotto cancellato!');
+    }
+
+    /**
+     * Display the specified resource for delete confimation
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Product $product)
+    {
+        $categories = Category::all();
+        return view('pages.products2.delete', ['product' => $product, 'categories' => $categories]);
     }
 }

@@ -24,9 +24,5 @@ Route::group(['middleware' => 'auth'], function () {
     //Route::post('/products-store', [ProductController::class, 'store'])->name('products.store');
     //Route::get('/products', [ProductController::class, 'index'])->name('products.list');
     Route::resource('products', ProductController::class);
-
+    Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
 });
-
-Route::resource('products', ProductController::class);
-
-
