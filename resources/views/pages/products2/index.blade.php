@@ -1,14 +1,14 @@
 @extends('layouts.app', ['title' => 'Elenco prodotti'])
 
-@section('content')
+@section('stylesheets')
+  @parent
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">    
+@endsection
 
+@section('content')
     <div class="row">
         <div class="container">
-            @if ($message = Session::get('success'))
-                <div class="col-xl-8 alert alert-success float-left">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('products.create') }}">Aggiungi un prodotto</a>
             </div>
@@ -65,4 +65,9 @@
         </table>
         {!! $products->links() !!}
     </div>
+@endsection
+
+@section('js_scripts')
+    @parent
+    @include('partials.notification')
 @endsection

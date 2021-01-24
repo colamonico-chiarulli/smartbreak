@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('notification', [HomeController::class, 'notification']);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
