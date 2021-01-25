@@ -23,9 +23,3 @@
 @endforeach
 
 @endsection
-
-@section('js_scripts')
-    @parent
-
-    @include('partials.notification')
-@endsection
