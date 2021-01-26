@@ -11,12 +11,14 @@ class Product extends Model
 
     //public $table = "products";
     protected $fillable = [
-        "name", 
-        "description", 
+        "name",
+        "description",
         "allergens",
         "price",
         "num_items",
         "category_id",
         "default_daily_stock",
-    ]; 
+    ];
+
+    protected $guarded = array('id', 'password');
 }
