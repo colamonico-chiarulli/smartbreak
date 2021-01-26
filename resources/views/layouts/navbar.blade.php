@@ -9,7 +9,7 @@
             <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('products.list') }}" class="nav-link">Lista prodotti</a>
+            <a href="{{ route('products.index') }}" class="nav-link">Lista prodotti</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('products.create') }}" class="nav-link">Crea prodotto</a>

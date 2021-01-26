@@ -24,10 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $categories = Category::all();
-
         return view('pages.home', ['categories' => $categories]);
-
     }
 }
