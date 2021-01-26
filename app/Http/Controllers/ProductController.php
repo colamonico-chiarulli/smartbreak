@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(8);
-        return view('pages.products2.index', compact('products'))
+        return view('pages.products.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
@@ -28,9 +28,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        //        return view('products.create', compact('categories'));
-
-        return view('pages.products2.create', ['categories' => $categories]);
+        $formCategory = old('category_id') ?: null;
+        return view('pages.products.create', compact('categories', 'formCategory'));
     }
 
     /**
@@ -64,7 +63,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $categories = Category::all();
-        return view('pages.products2.show', ['product' => $product, 'categories' => $categories]);
+        $formCategory = $product->category_id;
+        return view('pages.products.show', compact('product', 'categories', 'formCategory'));
     }
 
     /**
@@ -76,7 +76,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('pages.products2.edit', ['product' => $product, 'categories' => $categories]);
+        $formCategory = $product->category_id;
+        return view('pages.products.edit', compact('product', 'categories', 'formCategory'));
     }
 
     /**
@@ -123,6 +124,7 @@ class ProductController extends Controller
     public function delete(Product $product)
     {
         $categories = Category::all();
-        return view('pages.products2.delete', ['product' => $product, 'categories' => $categories]);
+        $formCategory = $product->category_id;
+        return view('pages.products.delete', compact('product', 'categories', 'formCategory'));
     }
 }

@@ -1,3 +1,4 @@
+{{-- Toastr Notifiche - da includere, quando serve nella section('js_scripts') --}} 
 <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
 <script>

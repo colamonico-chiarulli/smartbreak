@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('pages.products2.form', [
+    @include('pages.products.form', [
         'cardTitle' => 'Cancella un prodotto',
         'headercolor' => 'bg-danger',
         'action' => route('products.destroy', $product->id),
