@@ -25,3 +25,8 @@
     line-height: 16px;
     font-size: 0.8rem;
 }
+
+.table td,
+.table th {
+    vertical-align: middle !important;
+}

@@ -10,10 +10,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Appfactory</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">   
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
@@ -31,20 +31,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="layout-top-nav">
 
     <div class="wrapper">
 
         @include('layouts.navbar')
 
+        {{--
         @include('layouts.sidebar')
-
+        --}}
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="mb-2">
-                        <h1 class="m-0">{{ $title ?? 'Pagina generica' }}</h1>
+                        <h1 class="my-2">{{ $title ?? '' }}</h1>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -66,12 +67,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
     @section('js_scripts')
-        <!-- jQuery -->
-        <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{asset('js/adminlte.min.js')}}"></script>
+    <!-- jQuery -->
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{asset('js/adminlte.min.js')}}"></script>
     @show
     <script type="text/javascript">
         $(function () {

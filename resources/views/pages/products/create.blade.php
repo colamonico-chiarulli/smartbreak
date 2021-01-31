@@ -7,6 +7,6 @@
         'headercolor' => 'bg-success',
         'action' => route('products.store'),
         'button' => 'Salva',
-        ])
+    ])
 
 @endsection
