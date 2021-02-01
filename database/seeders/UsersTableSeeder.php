@@ -22,5 +22,12 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Giovanni',
             'last_name' => 'Ciriello'
         ]);
+
+        DB::table('users')->insert([
+            'email' => 'utentino@appfactory.it',
+            'password' => Hash::make('password'),
+            'first_name' => 'Ciccio',
+            'last_name' => 'Ciriello'
+        ]);
     }
 }

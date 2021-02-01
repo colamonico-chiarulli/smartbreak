@@ -24,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('pages.home', ['categories' => $categories]);
+        $categories = Category::with('products')->get();
+
+        return view('pages.home', compact('categories'));
+
     }
 }

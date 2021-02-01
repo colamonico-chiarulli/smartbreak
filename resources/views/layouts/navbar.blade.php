@@ -79,7 +79,25 @@
 
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            {{--<!-- Messages Dropdown Menu -->
+
+            @if (Auth::check())
+            <li class="nav-item">
+                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
+            </li>
+            @endif
+
+            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:;" onclick="document.getElementById('logout-form').submit();">
+                    Esci
+                </a>
+            </li>
+
+            {{--
+            <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="fas fa-comments"></i>

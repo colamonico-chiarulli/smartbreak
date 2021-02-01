@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +21,8 @@ Route::get('notification', [HomeController::class, 'notification']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
     Route::resource('products', ProductController::class);
+
     Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
 });

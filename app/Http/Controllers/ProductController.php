@@ -15,9 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         $products = Product::latest()->paginate(8);
-        return view('pages.products.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 8);
+
+        return view('pages.products.index', compact('products'));
+
     }
 
     /**
@@ -40,6 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         // validare i dati di input
         $request->validate([
             "name" => ["required"],
@@ -49,7 +52,9 @@ class ProductController extends Controller
             "default_daily_stock" => ["numeric"],
             "category_id" => ["required"],
         ]);
+
         Product::create($request->all());
+
         return redirect()->route('products.index')
             ->with('success', 'Prodotto aggiunto.');
     }
@@ -97,6 +102,7 @@ class ProductController extends Controller
             "default_daily_stock" => ["numeric"],
             "category_id" => ["required"],
         ]);
+
         $product->update($request->all());
         return redirect()->route('products.index')
             ->with('success', 'Prodotto aggiornato!');
