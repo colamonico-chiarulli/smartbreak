@@ -69,5 +69,5 @@
 
 @section('js_scripts')
     @parent
-    @include('partials.notification')
+    @include('partials._notification')
 @endsection

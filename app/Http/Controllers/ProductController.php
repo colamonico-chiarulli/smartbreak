@@ -19,7 +19,6 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(8);
 
         return view('pages.products.index', compact('products'));
-
     }
 
     /**
@@ -30,6 +29,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        //Recupera l'eventuale categoria già inserita nel Form (in presenza di errori)
         $formCategory = old('category_id') ?: null;
         return view('pages.products.create', compact('categories', 'formCategory'));
     }
@@ -43,15 +43,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        // validare i dati di input
-        $request->validate([
-            "name" => ["required"],
-            "description" => ["required"],
-            "price" => ["required", "numeric"],
-            "num_items" => ["required", "numeric"],
-            "default_daily_stock" => ["numeric"],
-            "category_id" => ["required"],
-        ]);
+        // validare i dati di input 
+        $request->validate(Product::validationRules());
 
         Product::create($request->all());
 
@@ -94,14 +87,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $request->validate([
-            "name" => ["required"],
-            "description" => ["required"],
-            "price" => ["required", "numeric"],
-            "num_items" => ["required", "numeric"],
-            "default_daily_stock" => ["numeric"],
-            "category_id" => ["required"],
-        ]);
+        $request->validate(Product::validationRules());
 
         $product->update($request->all());
         return redirect()->route('products.index')

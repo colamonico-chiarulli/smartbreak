@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('pages.products.form', [
+    @include('pages.products._form', [
             'cardTitle' => 'Dettaglio prodotto',
             'action' => route('products.index'),
             'button' => 'Indietro',
