@@ -27,13 +27,14 @@
                 <div class="input-group input-group-sm" style="max-width: 90px;">
                     <span class="input-group-prepend">
                         <button type="button" class="btn btn-info btn-flat"
-                                onclick="addProdcutToCart({{ $product->id }}, -1)"> - </button>
+                                onclick="editCart({{ $product->id }}, -1)"> - </button>
                     </span>
-                    <input type="number" class="form-control noarrows text-center" id="product-{{ $product->id }}"
-                           value="{{ session('cart.'.$product->id) ?? 0 }}">
+                    <input type="number" class="form-control noarrows text-center cart-product-amount"
+                           id="product-{{ $product->id }}"
+                           value="{{ session('cart.'.$product->id) ?? 0 }}" disabled>
                     <span class="input-group-append">
                         <button type="button" class="btn btn-info btn-flat"
-                                onclick="addProdcutToCart({{ $product->id }}, 1)"> + </button>
+                                onclick="editCart({{ $product->id }}, 1)"> + </button>
                     </span>
                 </div>
 

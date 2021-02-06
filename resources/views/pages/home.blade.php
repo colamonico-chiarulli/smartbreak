@@ -2,6 +2,12 @@
 
 @section('content')
 
+<div class="text-right mb-2">
+    <a class="text-danger" href="javascript:;" onclick="emptyCart()">
+        <i class="fa fa-cart-arrow-down"></i> Svuota carrello
+    </a>
+</div>
+
 @foreach($categories as $category)
 <div id="accordion">
     <div class="card card-default">
@@ -37,26 +43,37 @@
 @parent
 
 <script type="text/javascript">
-    function addProdcutToCart(product_id, quantity, price){
-            const product = $('#product-'+product_id);
-
-            const result = parseInt(product.val() || 0) + quantity;
-            if(result >= 0 ){
-                product.val(result);
-
-                $.ajax({
-                    url: '{{ route("cart.edit") }}',
-                    method: 'PUT',
-                    data: {
-                        product_id : product_id,
-                        quantity: result
-                    },
-                    success: function(){
-                        console.log('added');
-                    }
-                })
-
+    function emptyCart(){
+        $.ajax({
+            url: '{{ route("cart.empty") }}',
+            method: 'DELETE',
+            success: function(){
+                toastr.success("Carrello svuotato con successo");
+                $('input.cart-product-amount').val(0);
             }
+        })
+    }
+
+    function editCart(product_id, quantity, price){
+        const product = $('#product-'+product_id);
+
+        const result = parseInt(product.val() || 0) + quantity;
+        if(result >= 0 ){
+            product.val(result);
+
+            $.ajax({
+                url: '{{ route("cart.edit") }}',
+                method: 'PUT',
+                data: {
+                    product_id : product_id,
+                    quantity: result
+                },
+                success: function(){
+                    console.log('added');
+                }
+            })
+
+        }
         }
 </script>
 @endsection

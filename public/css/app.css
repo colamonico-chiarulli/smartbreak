@@ -42,3 +42,7 @@ input.noarrows::-webkit-inner-spin-button {
 input.noarr[type="number"] {
     -moz-appearance: textfield;
 }
+
+.toast {
+    opacity: 1 !important;
+}

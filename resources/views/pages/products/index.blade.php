@@ -34,11 +34,11 @@
                        <span class="badge badge-danger">
                         {{ $product->num_items }}
                         </span>
-                    @else
+                        @else
                         <span class="badge badge-success">
                             {{ $product->num_items }}
                         </span>
-                    @endif
+                        @endif
 
                 </td>
                 <td></td>
@@ -65,9 +65,4 @@
 </div>
 
 </div>
-@endsection
-
-@section('js_scripts')
-    @parent
-    @include('partials._notification')
 @endsection
