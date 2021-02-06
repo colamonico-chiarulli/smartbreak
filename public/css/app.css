@@ -30,3 +30,15 @@
 .table th {
     vertical-align: middle !important;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input.noarrows::-webkit-outer-spin-button,
+input.noarrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input.noarr[type="number"] {
+    -moz-appearance: textfield;
+}

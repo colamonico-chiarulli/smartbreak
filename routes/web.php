@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class);
 
     Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
+
+    // Order
+    Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
+    Route::get('cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');
 });

@@ -2,10 +2,11 @@
 
     <div class="product-title m-2">
         <b>{{ $product->name }}</b>
-        <span class="fa-stack" data-toggle="tooltip" data-placement="top" title="Allergeni: {{ $product->allergens }}"
-              style="font-size: 12px">
-            <i class="far fa-circle fa-stack-2x text-success"></i>
-            <i class="fas fa-leaf fa-stack-1x text-success"></i>
+        <span data-toggle="tooltip" data-placement="right" title="Allergeni: {{ $product->allergens }}">
+            <span class="fa-stack" style="font-size: 12px">
+                <i class="far fa-circle fa-stack-2x text-success"></i>
+                <i class="fas fa-leaf fa-stack-1x text-success"></i>
+            </span>
         </span>
     </div>
 
@@ -21,21 +22,26 @@
                 {{ $product->description }}
             </span>
 
-            <div class="my-2 d-flex justify-content-between align-items-center">
+            <div class="my-2 d-flex justify-content-end align-items-center">
 
-                <span class="info-box-number">{{ $product->formatted_price }}</span>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary"> - </button>
-                    <button type="button" class="btn btn-sm btn-default btn-disbled">0</button>
-                    <button type="button" class="btn btn-sm btn-primary"> + </button>
+                <div class="input-group input-group-sm" style="max-width: 90px;">
+                    <span class="input-group-prepend">
+                        <button type="button" class="btn btn-info btn-flat"
+                                onclick="addProdcutToCart({{ $product->id }}, -1)"> - </button>
+                    </span>
+                    <input type="number" class="form-control noarrows text-center" id="product-{{ $product->id }}"
+                           value="{{ session('cart.'.$product->id) ?? 0 }}">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-info btn-flat"
+                                onclick="addProdcutToCart({{ $product->id }}, 1)"> + </button>
+                    </span>
                 </div>
 
             </div>
 
             @if($product->num_items < 2)
               <small class="text-danger mt-2">
-                <i class="fas fa-exclamation-triangle"></i>
-                Disponibilità limitata
+                <i class="fas fa-exclamation-triangle"></i>Disponibilità limitata
                 </small>
                 @endif
 
