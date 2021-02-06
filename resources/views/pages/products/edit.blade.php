@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('pages.products.form', [
+@include('pages.products._form', [
     'cardTitle' => 'Modifica un prodotto',
     'headercolor' => 'bg-info',
     'action' => route('products.update', $product->id),
