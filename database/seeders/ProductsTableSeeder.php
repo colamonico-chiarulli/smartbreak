@@ -25,7 +25,7 @@ class ProductsTableSeeder extends Seeder
         DB::table('products')->insert([
 			[
                 'name' => 'Pomodori',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -35,7 +35,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Cipolle',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -45,7 +45,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Angry onion',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -55,7 +55,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Insalata',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -65,7 +65,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Formaggio',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -75,7 +75,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Salsa king',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -85,7 +85,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Bacon',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -95,7 +95,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Cipolle pastellate',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -105,7 +105,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Prosciutto',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -115,7 +115,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Acqua',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -125,7 +125,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Pepperjack',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -135,7 +135,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Cipolle fritte',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,
@@ -145,7 +145,7 @@ class ProductsTableSeeder extends Seeder
 			],
 			[
                 'name' => 'Insalatina',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur impedit explicabo molestias dolor ipsa earum recusandae placeat eaque. Dolorum eos fugiat nesciunt dolor. Eligendi possimus ullam enim, non excepturi voluptatibus.',
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
                 'price' => 10.5,
                 'num_items' => 50,

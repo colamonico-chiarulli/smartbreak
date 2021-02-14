@@ -30,7 +30,7 @@
                     </span>
                 </p>
 
-                <div>
+                <div class="text-right">
                     <div class="input-group input-group-sm" style="max-width: 90px;">
                         <span class="input-group-prepend">
                             <button type="button" class="btn btn-primary btn-flat"
@@ -44,18 +44,19 @@
                                     onclick="editCart({{ $product->id }}, 1)"> + </button>
                         </span>
                     </div>
-                    <small class="text-center">
+                    <small>
                         Tot.
-                        <span id="product-total-{{ $product->id }}" class="cart-product-totals">
+                        <b id="product-total-{{ $product->id }}" class="cart-product-totals">
                             {{ formatPrice($product->price * session('cart.'.$product->id)) }}
-                        </span>
+                        </b>
                     </small>
                 </div>
             </div>
 
             @if($product->num_items < 2)
               <small class="text-danger mt-2">
-                <i class="fas fa-exclamation-triangle"></i>Disponibilità limitata
+                <i class="fas fa-exclamation-triangle"></i>
+                Disponibilità limitata
                 </small>
                 @endif
 

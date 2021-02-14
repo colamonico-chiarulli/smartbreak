@@ -42,12 +42,6 @@
 
 @parent
 
-<script>
-    const edit_cart_route = '{{ route("cart.edit") }}';
-    const empty_cart_route = '{{ route("cart.empty") }}';
-    const products = @JSON($categories->pluck('products')->collapse()->keyBy('id'));
-</script>
-
-<script src="{{ asset('js/cart.js') }}"></script>
+@include('partials._cartjs', ['products' => $categories->pluck('products')->collapse()->keyBy('id')])
 
 @endsection

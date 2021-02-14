@@ -23,14 +23,14 @@ Route::get('notification', [HomeController::class, 'notification']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::resource('products', ProductController::class);
-
-    Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
+    Route::resource('products', ProductController::class)->middleware('can:is-manager');
+    Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete')->middleware('can:is-manager');
 
     // Order
 
 
     Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
+    Route::get('cart/get', [CartController::class, 'getCart'])->name('cart.get');
     Route::delete('cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');
     Route::get('cart/checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
     Route::post('cart/create-order', [CartController::class, 'createOrder'])->name('cart.create-order');

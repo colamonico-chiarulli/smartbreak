@@ -2,28 +2,28 @@
 
 @section('content')
 
-@foreach($products as $product)
-@include('partials._product-card', ['product' => $product])
-@endforeach
 
-<div class="text-right">
-    <h4>Totale carrello: <b>€ 25,00</b></h4>
+@forelse($products as $product)
+@include('partials._product-card', ['product' => $product])
+@empty
+<p class="text-center text-muted">🛒 &nbsp;Il carrello è al momento vuoto. <a href="{{ route('home') }}">Vai alla
+        home</a></p>
+@endforelse
+
+@if($products->count() > 0)
+<div class="text-right mb-3">
+    <h4 class="my-4">Totale carrello: <b class="cart-total"></b></h4>
     <button class="btn btn-success btn-lg">
         <i class="fa fa-check"></i> Conferma ordine
     </button>
 </div>
-
+@endif
 
 @endsection
 
 @section('js_scripts')
 @parent
 
-<script>
-    const edit_cart_route = '{{ route("cart.edit") }}';
-    const empty_cart_route = '{{ route("cart.empty") }}';
-</script>
-
-<script src="{{ asset('js/cart.js') }}"></script>
+@include('partials._cartjs', ['products' => $products->keyBy('id')])
 
 @endsection

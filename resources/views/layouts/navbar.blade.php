@@ -12,12 +12,16 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
+
+                @can('is-manager')
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Prodotti</a>
                 </li>
+
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Categorie</a>
                 </li>
+                @endcan
                 {{--
                 <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>
@@ -81,20 +85,28 @@
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
             @if (Auth::check())
+
+            <li class="nav-item">
+                <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
+                    🛒 &nbsp;<span class="cart-total">{{ formatPrice(0) }}</span>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
             </li>
-            @endif
 
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:;" onclick="document.getElementById('logout-form').submit();">
+                <a class="nav-link text-dark" href="javascript:;"
+                   onclick="document.getElementById('logout-form').submit();">
                     Esci
                 </a>
             </li>
+            @endif
 
             {{--
             <!-- Messages Dropdown Menu -->

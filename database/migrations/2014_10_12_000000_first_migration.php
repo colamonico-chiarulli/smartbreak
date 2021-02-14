@@ -28,6 +28,7 @@ class FirstMigration extends Migration
             $table->string('last_name', 120);
             $table->string('email')->unique();
             $table->string('password');
+            $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN'])->default('STUDENT');
             $table->rememberToken();
 
             $table->foreignId('class_id')->nullable();

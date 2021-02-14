@@ -19,8 +19,22 @@ class CartController extends Controller
             session()->put($product_index, $product_quantity);
         }
 
-        return;
+        return response()->json($this->getCart());
 
+    }
+
+
+    public function getCart(){
+
+        $product_ids = collect(session()->get('cart'))->keys();
+        $products = Product::whereIn('id', $product_ids)->get();
+
+        return [
+            'cart' => session('cart'),
+            'total' => $products->sum(function($product){
+                return $product->price * session('cart.'.$product->id);
+            })
+        ];
     }
 
     public function emptyCart()
