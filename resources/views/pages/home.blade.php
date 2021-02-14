@@ -18,7 +18,7 @@
                 </a>
             </h4>
         </div>
-        <div id="category-{{ $category->id }}" class="{{ $loop->first ? '' : 'collapse' }}" data-parent="#accordion">
+        <div id="category-{{ $category->id }}" class="{{ $loop->first ? 'show' : 'collapse' }}">
             <div class="card-body">
                 @foreach($category->products as $product)
                 @include('partials._product-card', ['product' => $product])
