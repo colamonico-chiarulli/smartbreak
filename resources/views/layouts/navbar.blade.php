@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="{{ url('/') }}" class="navbar-brand">
-            <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 45px;">
+            <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 35px;">
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"

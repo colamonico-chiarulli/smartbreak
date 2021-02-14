@@ -22,22 +22,35 @@
                 {{ $product->description }}
             </span>
 
-            <div class="my-2 d-flex justify-content-end align-items-center">
+            <div class="my-2 d-flex justify-content-between align-items-center">
 
-                <div class="input-group input-group-sm" style="max-width: 90px;">
-                    <span class="input-group-prepend">
-                        <button type="button" class="btn btn-info btn-flat"
-                                onclick="editCart({{ $product->id }}, -1)"> - </button>
+                <p class="my-auto">
+                    <span class="badge badge-primary">
+                        {{ $product->formatted_price }}
                     </span>
-                    <input type="number" class="form-control noarrows text-center cart-product-amount"
-                           id="product-{{ $product->id }}"
-                           value="{{ session('cart.'.$product->id) ?? 0 }}" disabled>
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-info btn-flat"
-                                onclick="editCart({{ $product->id }}, 1)"> + </button>
-                    </span>
+                </p>
+
+                <div>
+                    <div class="input-group input-group-sm" style="max-width: 90px;">
+                        <span class="input-group-prepend">
+                            <button type="button" class="btn btn-primary btn-flat"
+                                    onclick="editCart({{ $product->id }}, -1)"> - </button>
+                        </span>
+                        <input type="number" class="form-control noarrows text-center cart-product-items"
+                               id="product-items-{{ $product->id }}"
+                               value="{{ session('cart.'.$product->id) ?? 0 }}" disabled>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-primary btn-flat"
+                                    onclick="editCart({{ $product->id }}, 1)"> + </button>
+                        </span>
+                    </div>
+                    <small class="text-center">
+                        Tot.
+                        <span id="product-total-{{ $product->id }}" class="cart-product-totals">
+                            {{ formatPrice($product->price * session('cart.'.$product->id)) }}
+                        </span>
+                    </small>
                 </div>
-
             </div>
 
             @if($product->num_items < 2)

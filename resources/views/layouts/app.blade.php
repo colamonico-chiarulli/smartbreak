@@ -29,6 +29,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- alpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
 </head>
 
 <body class="layout-top-nav">
@@ -83,6 +86,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        function formatPrice(price) {
+            if (price < 0) {
+                return " - " ;
+            }
+            return parseFloat(price).toLocaleString("it", {
+                style: "currency" ,
+                currency: "EUR" ,
+            });
+        }
+
     </script>
 
     @include('partials._notification')

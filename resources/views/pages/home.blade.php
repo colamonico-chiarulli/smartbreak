@@ -14,7 +14,7 @@
         <div class="card-header">
             <h4 class="card-title w-100">
                 <a class="d-block w-100" data-toggle="collapse" href="#category-{{ $category->id }}">
-                    {{ $category->name }}
+                    {{ $category->name }} <small class="text-muted">{{ $category->products->count() }} prodotti</small>
                 </a>
             </h4>
         </div>
@@ -30,9 +30,9 @@
 @endforeach
 
 <div class="text-center">
-    <button class="btn btn-lg btn-success btn-block">
+    <a class="btn btn-lg btn-success btn-block" href="{{ route('cart.checkout') }}">
         <i class="fa fa-shopping-cart"></i> Vai al riepilogo
-    </button>
+    </a>
 </div>
 
 
@@ -42,38 +42,12 @@
 
 @parent
 
-<script type="text/javascript">
-    function emptyCart(){
-        $.ajax({
-            url: '{{ route("cart.empty") }}',
-            method: 'DELETE',
-            success: function(){
-                toastr.success("Carrello svuotato con successo");
-                $('input.cart-product-amount').val(0);
-            }
-        })
-    }
-
-    function editCart(product_id, quantity, price){
-        const product = $('#product-'+product_id);
-
-        const result = parseInt(product.val() || 0) + quantity;
-        if(result >= 0 ){
-            product.val(result);
-
-            $.ajax({
-                url: '{{ route("cart.edit") }}',
-                method: 'PUT',
-                data: {
-                    product_id : product_id,
-                    quantity: result
-                },
-                success: function(){
-                    console.log('added');
-                }
-            })
-
-        }
-        }
+<script>
+    const edit_cart_route = '{{ route("cart.edit") }}';
+    const empty_cart_route = '{{ route("cart.empty") }}';
+    const products = @JSON($categories->pluck('products')->collapse()->keyBy('id'));
 </script>
+
+<script src="{{ asset('js/cart.js') }}"></script>
+
 @endsection

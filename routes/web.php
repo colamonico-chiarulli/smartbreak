@@ -28,6 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
 
     // Order
+
+
     Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
     Route::delete('cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');
+    Route::get('cart/checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
+    Route::post('cart/create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
+
 });

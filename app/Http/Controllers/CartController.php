@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -27,6 +28,26 @@ class CartController extends Controller
         session()->pull('cart');
 
         return;
+
+    }
+
+    public function checkoutCart()
+    {
+
+        $product_ids = collect(session()->get('cart'))->keys();
+        $products = Product::whereIn('id', $product_ids)->get();
+
+        return view("pages.checkout", compact('products'));
+    }
+
+    public function createOrder()
+    {
+
+        // Controllare che ogni prodotto selezionato abbia una quantità minore o uguale di quella disponibile
+
+        // Creazione di un nuovo ordine con la lista dei prodotti scelti
+
+        // Aggiornare la quantità di prodotti disponibile
 
     }
 }

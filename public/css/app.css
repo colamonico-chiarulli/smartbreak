@@ -39,7 +39,7 @@ input.noarrows::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input.noarr[type="number"] {
+input.noarrows[type="number"] {
     -moz-appearance: textfield;
 }
 
