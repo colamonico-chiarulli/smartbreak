@@ -154,5 +154,15 @@ class ProductsTableSeeder extends Seeder
 			 	'photo_path' => 'insalatina.png',
 			]
 		]);
+
+        $order_id = DB::table('orders')->insert(
+            ['user_id' => 1]
+        );
+
+        DB::table('order_product')->insert([
+            ['product_id' => 1, 'order_id' => $order_id, 'quantity' => 3, 'price' => 10],
+            ['product_id' => 2, 'order_id' => $order_id, 'quantity' => 5, 'price' => 10],
+            ['product_id' => 3, 'order_id' => $order_id, 'quantity' => 1, 'price' => 10],
+        ]);
     }
 }

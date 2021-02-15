@@ -20,14 +20,16 @@ class UsersTableSeeder extends Seeder
             'email' => 'utente@appfactory.it',
             'password' => Hash::make('password'),
             'first_name' => 'Giovanni',
-            'last_name' => 'Ciriello'
+            'last_name' => 'Ciriello',
+            'role' => 'MANAGER'
         ]);
 
         DB::table('users')->insert([
             'email' => 'utentino@appfactory.it',
             'password' => Hash::make('password'),
             'first_name' => 'Ciccio',
-            'last_name' => 'Ciriello'
+            'last_name' => 'Ciriello',
+            'role' => 'STUDENT'
         ]);
     }
 }

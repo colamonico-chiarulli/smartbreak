@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Order
 
-
     Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
     Route::get('cart/get', [CartController::class, 'getCart'])->name('cart.get');
     Route::delete('cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');

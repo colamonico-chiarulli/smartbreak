@@ -57,11 +57,49 @@ class CartController extends Controller
     public function createOrder()
     {
 
+        $cart_items = session('cart');
+
         // Controllare che ogni prodotto selezionato abbia una quantità minore o uguale di quella disponibile
+        $unavaiable_products = [];
+        foreach($cart_items as $product_id => $product_quantity){
 
-        // Creazione di un nuovo ordine con la lista dei prodotti scelti
+            $product = Product::find($product_id);
 
-        // Aggiornare la quantità di prodotti disponibile
+            if($product_quantity > $product->num_items){
+                $unavaiable_products[] = [$product_id => $product->num_items];
+            }
+
+        }
+
+        // Restituire all'utente un errore contenente il messaggio: Non ci sono abbastanza unità per questo prodotto.
+        if(count($unavaiable_products) > 0){
+            return response()->json([
+                'success' => false,
+                'unavailability_products' => $unavaiable_products
+            ]);
+        }
+
+        // ✅ Creazione di un nuovo ordine con la lista dei prodotti scelti
+        // ✅ Aggiornare la quantità di prodotti disponibile
+        $order = auth()->user()->orders()->create();
+
+        foreach($cart_items as $product_id => $product_quantity){
+
+            $product = Product::find($product_id);
+
+            $order->products()->attach([ $product_id => [
+                'quantity' => $product_quantity,
+                'price' => $product->price
+            ]]);
+
+            $product->decrement('num_items', $product_quantity);
+
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
 
     }
+
 }

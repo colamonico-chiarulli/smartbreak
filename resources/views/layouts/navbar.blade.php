@@ -14,6 +14,7 @@
             <ul class="navbar-nav">
 
                 @can('is-manager')
+
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Prodotti</a>
                 </li>
@@ -21,6 +22,7 @@
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Categorie</a>
                 </li>
+
                 @endcan
                 {{--
                 <li class="nav-item">
