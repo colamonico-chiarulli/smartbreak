@@ -13,8 +13,7 @@ class FirstMigration extends Migration
      */
     public function up()
     {
-
-        Schema::create('classes', function(Blueprint $table){
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->integer('year');
             $table->char('section', 1);
@@ -27,6 +26,10 @@ class FirstMigration extends Migration
             $table->string('first_name', 120);
             $table->string('last_name', 120);
             $table->string('email')->unique();
+
+            // $table->string('google_token')->nullable();
+            // $table->string('google_avatar')->nullable();
+
             $table->string('password');
             $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN'])->default('STUDENT');
             $table->rememberToken();
@@ -35,10 +38,9 @@ class FirstMigration extends Migration
             $table->foreign('class_id')->references('id')->on('classes');
 
             $table->timestamps();
-
         });
 
-        Schema::create('categories', function(Blueprint $table){
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -69,7 +71,6 @@ class FirstMigration extends Migration
         });
 
         Schema::create('order_product', function (Blueprint $table) {
-
             $table->integer('quantity')->default(1);
             $table->decimal('price', 6, 2);
 
@@ -81,9 +82,7 @@ class FirstMigration extends Migration
             $table->primary(['order_id', 'product_id']);
 
             $table->timestamps();
-
         });
-
     }
 
     /**

@@ -3,9 +3,28 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        <div class="col-md-6">
+
+            <h2 class="mb-4 text-muted">Sei uno studente?</h2>
+
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">Login studente</div>
+
+                <div class="card-body d-flex justify-content-center">
+                    <a class="btn btn-primary" href="{{ route('login.google') }}">
+                        <i class="fab fa-google"></i> Accedi con l'account istituzionale
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <h2 class="mb-4 text-muted">Sei un admin?</h2>
+
+            <div class="card">
+                <div class="card-header">Login admin</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -63,8 +82,8 @@
                                 </button>
 
                                 {{--
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                @if (Route::has('password.request'))
+                                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                                 </a>
                                 @endif
@@ -75,6 +94,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection

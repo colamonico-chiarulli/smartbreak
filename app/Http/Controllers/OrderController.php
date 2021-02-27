@@ -31,6 +31,6 @@ class OrderController extends Controller
                 ];
             })->values();
 
-        return view('pages.today-orders', compact('orders'));
+        return view('pages.today-orders', compact('orders'))->with('error', 'Questo account google istituzioneale non esiste');
     }
 }

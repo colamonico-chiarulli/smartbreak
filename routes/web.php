@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,12 @@ use App\Http\Controllers\OrderController;
 */
 
 Auth::routes();
+Route::any('register', function () {
+    abort(404);
+});
+
+Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/login/google/redirect', [LoginController::class, 'handleGoogleCallback']);
 
 Route::get('notification', [HomeController::class, 'notification']);
 
