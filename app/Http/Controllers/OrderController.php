@@ -12,11 +12,10 @@ class OrderController extends Controller
     {
 
         // Prendo tutti gli ordini di oggi
-        $orders = Order::with('products', 'user')->whereDate('created_at', now()->toDateString())->get();
-
-        $grouped_orders = $orders
-            // Raggruppo gli ordini in base alla classe
-            ->groupBy('user.class_id')
+        $orders = Order::with('products', 'user')
+            ->whereDate('created_at', now()->toDateString())
+            ->get()
+            ->groupBy('user.class_id') // Raggruppo gli ordini in base alla classe
             ->map(function ($grouped_order) {
                 return [
                     'class' => $grouped_order->first()->user->class,
@@ -32,6 +31,6 @@ class OrderController extends Controller
                 ];
             })->values();
 
-        return response()->json($grouped_orders);
+        return view('pages.today-orders', compact('orders'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Gate;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -24,9 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('products')->get();
+        if (Gate::check('is-manager')) {
+            $route = 'orders.today';
+        } elseif (Gate::check('is-student')) {
+            $route = 'cart.choose-products';
+        } else {
+            abort(403);
+        }
 
-        return view('pages.home', compact('categories'));
-
+        return redirect()->route($route);
     }
 }

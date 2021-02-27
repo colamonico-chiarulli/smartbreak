@@ -24,18 +24,23 @@ Route::get('notification', [HomeController::class, 'notification']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // Order
 
-    Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
-    Route::get('cart/get', [CartController::class, 'getCart'])->name('cart.get');
-    Route::delete('cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');
-    Route::get('cart/checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
-    Route::post('cart/create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
+    // STUDENT AREA
+    Route::group(['middleware' => 'can:is-student'], function () {
+        Route::group(['prefix' => 'cart'], function () {
+            Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
+            Route::put('edit', [CartController::class, 'editCart'])->name('cart.edit');
+            Route::get('get', [CartController::class, 'getCart'])->name('cart.get');
+            Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
+            Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
+            Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
+        });
+    });
 
+    // MANAGER AREA
     Route::group(['middleware' => 'can:is-manager'], function () {
         Route::resource('products', ProductController::class);
         Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
-
         Route::get('today-orders/', [OrderController::class, 'getOrdersOfToday'])->name('orders.today');
     });
 });

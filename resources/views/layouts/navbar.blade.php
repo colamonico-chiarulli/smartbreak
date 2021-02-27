@@ -90,13 +90,15 @@
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
-            @if (Auth::check())
+            @auth
 
+            @can('is-student')
             <li class="nav-item">
                 <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
                     🛒 &nbsp;<span class="cart-total">{{ formatPrice(0) }}</span>
                 </a>
             </li>
+            @endcan
 
             <li class="nav-item">
                 <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
@@ -112,7 +114,7 @@
                     Esci
                 </a>
             </li>
-            @endif
+            @endauth
 
             {{--
             <!-- Messages Dropdown Menu -->
