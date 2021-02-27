@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\SchoolClass;
+use DB;
 
 class ClassesTableSeeder extends Seeder
 {
@@ -13,91 +13,64 @@ class ClassesTableSeeder extends Seeder
      * @return void
      */
 
-    /*
-array(
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>1,"Sez"=>"B","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>1,"Sez"=>"C","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"MiI","sede"=>"Chiarulli"),
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"TCM","sede"=>"Colamonico"),
-  array("Anno"=>1,"Sez"=>"A","Corso"=>"TUR","sede"=>"Colamonico"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>2,"Sez"=>"B","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>2,"Sez"=>"B","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>2,"Sez"=>"B","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"MiI","sede"=>"Chiarulli"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"TCM","sede"=>"Chiarulli"),
-  array("Anno"=>2,"Sez"=>"A","Corso"=>"TUR","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"B","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"S","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"B","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"B","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"S","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"MiI","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"S","Corso"=>"PIA","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"TBS","sede"=>"Chiarulli"),
-  array("Anno"=>3,"Sez"=>"A","Corso"=>"TUR","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"S","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"AIS","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"B","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"S","Corso"=>"MAT","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"MMT","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"S","Corso"=>"PIA","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"PTS","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"B","Corso"=>"PTS","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"RIM","sede"=>"Colamonico"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"TBS","sede"=>"Chiarulli"),
-  array("Anno"=>4,"Sez"=>"A","Corso"=>"TUR","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"B","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"S","Corso"=>"AFM","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"AIS","sede"=>"Chiarulli"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"INF","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"S","Corso"=>"MAT","sede"=>"Colamonico"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"MMT","sede"=>"Chiarulli"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"PTS","sede"=>"Chiarulli"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"TBS","sede"=>"Chiarulli"),
-  array("Anno"=>5,"Sez"=>"A","Corso"=>"TUR","sede"=>"Colamonico")
-);
-
-    */
     public function run()
     {
-        SchoolClass::create([
-            'year' => 1,
-            'section' => 'A',
-            'course' => 'INF',
-            'site' => 'colamonico'
-        ]);
+        $classes = [
+            ["year"=>1,"section"=>"A","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>1,"section"=>"A","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>1,"section"=>"B","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>1,"section"=>"C","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>1,"section"=>"A","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>1,"section"=>"A","course"=>"MiI","site"=>"Chiarulli"],
+            ["year"=>1,"section"=>"A","course"=>"TCM","site"=>"Colamonico"],
+            ["year"=>1,"section"=>"A","course"=>"TUR","site"=>"Colamonico"],
+            ["year"=>2,"section"=>"A","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>2,"section"=>"B","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>2,"section"=>"A","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>2,"section"=>"B","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>2,"section"=>"A","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>2,"section"=>"B","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>2,"section"=>"A","course"=>"MiI","site"=>"Chiarulli"],
+            ["year"=>2,"section"=>"A","course"=>"TCM","site"=>"Chiarulli"],
+            ["year"=>2,"section"=>"A","course"=>"TUR","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"A","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"B","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"S","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"A","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"B","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>3,"section"=>"A","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"B","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"S","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"A","course"=>"MiI","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"S","course"=>"PIA","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"A","course"=>"TBS","site"=>"Chiarulli"],
+            ["year"=>3,"section"=>"A","course"=>"TUR","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"A","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"S","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"A","course"=>"AIS","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"A","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"B","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"S","course"=>"MAT","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"A","course"=>"MMT","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"S","course"=>"PIA","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"A","course"=>"PTS","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"B","course"=>"PTS","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"A","course"=>"RIM","site"=>"Colamonico"],
+            ["year"=>4,"section"=>"A","course"=>"TBS","site"=>"Chiarulli"],
+            ["year"=>4,"section"=>"A","course"=>"TUR","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"A","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"B","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"S","course"=>"AFM","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"A","course"=>"AIS","site"=>"Chiarulli"],
+            ["year"=>5,"section"=>"A","course"=>"INF","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"S","course"=>"MAT","site"=>"Colamonico"],
+            ["year"=>5,"section"=>"A","course"=>"MMT","site"=>"Chiarulli"],
+            ["year"=>5,"section"=>"A","course"=>"PTS","site"=>"Chiarulli"],
+            ["year"=>5,"section"=>"A","course"=>"TBS","site"=>"Chiarulli"],
+            ["year"=>5,"section"=>"A","course"=>"TUR","site"=>"Colamonico"]
+        ];
 
-        SchoolClass::create([
-            'year' => 2,
-            'section' => 'A',
-            'course' => 'RIM',
-            'site' => 'colamonico'
-        ]);
 
-        SchoolClass::create([
-            'year' => 3,
-            'section' => 'A',
-            'course' => 'TUR',
-            'site' => 'colamonico'
-        ]);
-
-        SchoolClass::create([
-            'year' => 4,
-            'section' => 'A',
-            'course' => 'RIM',
-            'site' => 'colamonico'
-        ]);
+        DB::table('classes')->insert($classes);
     }
 }

@@ -14,7 +14,6 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('categories')->insert([
             ['name' => 'Panini'],
             ['name' => 'Snack'],
@@ -23,7 +22,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
-			[
+            [
                 'name' => 'Pomodori',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -31,9 +30,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 1,
-			 	'photo_path' => 'pomodori.png',
-			],
-			[
+                'photo_path' => 'pomodori.png',
+            ],
+            [
                 'name' => 'Cipolle',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -41,9 +40,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 3,
-			 	'photo_path' => 'cipolle.png',
-			],
-			[
+                'photo_path' => 'cipolle.png',
+            ],
+            [
                 'name' => 'Angry onion',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -51,9 +50,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 3,
-			 	'photo_path' => 'angryonions.png',
-			],
-			[
+                'photo_path' => 'angryonions.png',
+            ],
+            [
                 'name' => 'Insalata',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -61,9 +60,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 2,
-			 	'photo_path' => 'insalata.png',
-			],
-			[
+                'photo_path' => 'insalata.png',
+            ],
+            [
                 'name' => 'Formaggio',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -71,9 +70,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 1,
-			 	'photo_path' => 'formaggio.png',
-			],
-			[
+                'photo_path' => 'formaggio.png',
+            ],
+            [
                 'name' => 'Salsa king',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -81,9 +80,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 2,
-			 	'photo_path' => 'salsa.png',
-			],
-			[
+                'photo_path' => 'salsa.png',
+            ],
+            [
                 'name' => 'Bacon',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -91,9 +90,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 3,
-			 	'photo_path' => 'bacon.png',
-			],
-			[
+                'photo_path' => 'bacon.png',
+            ],
+            [
                 'name' => 'Cipolle pastellate',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -101,9 +100,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 4,
-			 	'photo_path' => 'cipollepastellate.png',
-			],
-			[
+                'photo_path' => 'cipollepastellate.png',
+            ],
+            [
                 'name' => 'Prosciutto',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -111,9 +110,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 1,
-			 	'photo_path' => 'prosciutto.png',
-			],
-			[
+                'photo_path' => 'prosciutto.png',
+            ],
+            [
                 'name' => 'Acqua',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -121,9 +120,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 2,
-			 	'photo_path' => 'acqua.png',
-			],
-			[
+                'photo_path' => 'acqua.png',
+            ],
+            [
                 'name' => 'Pepperjack',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -131,9 +130,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 1,
-			 	'photo_path' => 'pepperjack.png',
-			],
-			[
+                'photo_path' => 'pepperjack.png',
+            ],
+            [
                 'name' => 'Cipolle fritte',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -141,9 +140,9 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 4,
-			 	'photo_path' => 'cipollefritte.png',
-			],
-			[
+                'photo_path' => 'cipollefritte.png',
+            ],
+            [
                 'name' => 'Insalatina',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
                 'allergens' => 'Latte, Uova',
@@ -151,18 +150,8 @@ class ProductsTableSeeder extends Seeder
                 'num_items' => 50,
                 'default_daily_stock' => 100,
                 'category_id' => 2,
-			 	'photo_path' => 'insalatina.png',
-			]
-		]);
-
-        $order_id = DB::table('orders')->insert(
-            ['user_id' => 1]
-        );
-
-        DB::table('order_product')->insert([
-            ['product_id' => 1, 'order_id' => $order_id, 'quantity' => 3, 'price' => 10],
-            ['product_id' => 2, 'order_id' => $order_id, 'quantity' => 5, 'price' => 10],
-            ['product_id' => 3, 'order_id' => $order_id, 'quantity' => 1, 'price' => 10],
+                'photo_path' => 'insalatina.png',
+            ]
         ]);
     }
 }
