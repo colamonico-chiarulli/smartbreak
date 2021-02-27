@@ -38,7 +38,8 @@ class Product extends Model
 
     // relationships
 
-    public function orders(){
+    public function orders()
+    {
         return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
             ->withPivot('quantity', 'price', 'created_at');
     }

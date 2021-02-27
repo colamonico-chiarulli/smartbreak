@@ -11,7 +11,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Appfactory</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet">
 

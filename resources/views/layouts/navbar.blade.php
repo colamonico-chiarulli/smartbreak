@@ -23,6 +23,10 @@
                     <a href="{{ route('products.index') }}" class="nav-link">Categorie</a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('orders.today') }}" class="nav-link">Ordini del giorno</a>
+                </li>
+
                 @endcan
                 {{--
                 <li class="nav-item">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,6 @@ Route::get('notification', [HomeController::class, 'notification']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::resource('products', ProductController::class)->middleware('can:is-manager');
-    Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete')->middleware('can:is-manager');
-
     // Order
 
     Route::put('cart/edit', [CartController::class, 'editCart'])->name('cart.edit');
@@ -34,4 +32,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cart/checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
     Route::post('cart/create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
 
+    Route::group(['middleware' => 'can:is-manager'], function () {
+        Route::resource('products', ProductController::class);
+        Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
+
+        Route::get('today-orders/', [OrderController::class, 'getOrdersOfToday'])->name('orders.today');
+    });
 });
