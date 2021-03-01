@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         Seeder::call(ClassesTableSeeder::class);
         Seeder::call(UsersTableSeeder::class);
         Seeder::call(ProductsTableSeeder::class);
+
+        // only for testing
         Seeder::call(OrdersTableSeeder::class);
     }
 }

@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
         });
+
+        // Route::get('student-orders', [OrderController::class, 'getOrdersOfTodayByClass'])->name('orders.by-student');
+        Route::get('class-orders', [OrderController::class, 'getOrdersOfTodayByClass'])->name('orders.today-by-class');
     });
 
     // MANAGER AREA

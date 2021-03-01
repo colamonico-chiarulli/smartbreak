@@ -28,6 +28,18 @@
                 </li>
 
                 @endcan
+
+                @can('is-student')
+
+                    <li class="nav-item">
+                        <a href="{{ route('orders.by-student') }}" class="nav-link">I miei ordini</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('orders.today-by-class') }}" class="nav-link">Ordine della mia classe</a>
+                    </li>
+
+                @endcan
                 {{--
                 <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>
