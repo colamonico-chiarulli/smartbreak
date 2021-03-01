@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\SchoolClass;
 use Illuminate\Database\Seeder;
 
 use DB;
 use Hash;
+use Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -20,14 +22,25 @@ class UsersTableSeeder extends Seeder
             'email' => 'utente@appfactory.it',
             'password' => Hash::make('password'),
             'first_name' => 'Giovanni',
-            'last_name' => 'Ciriello'
+            'last_name' => 'Ciriello',
+            'role' => 'MANAGER'
         ]);
 
-        DB::table('users')->insert([
-            'email' => 'utentino@appfactory.it',
-            'password' => Hash::make('password'),
-            'first_name' => 'Ciccio',
-            'last_name' => 'Ciriello'
-        ]);
+
+        $classes = SchoolClass::all();
+        $faker = Faker\Factory::create('it_IT');
+
+        // Generating students
+
+        foreach (range(1, 50) as $i) {
+            DB::table('users')->insert([
+                'email' => $faker->email(),
+                'password' => Hash::make('password'),
+                'first_name' => $faker->firstName(),
+                'last_name' => $faker->lastName(),
+                'role' => 'STUDENT',
+                'class_id' => $classes->random()->id
+            ]);
+        }
     }
 }

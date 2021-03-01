@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     public $table = "products";
-    protected $guarded = array('id');
+    protected $guarded = ['id'];
 
     public static function validationRules()
     {
@@ -34,5 +34,13 @@ class Product extends Model
     public function getPhotoUrlAttribute()
     {
         return asset('img/products/' . $this->photo_path);
+    }
+
+    // relationships
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
+            ->withPivot('quantity', 'price', 'created_at');
     }
 }

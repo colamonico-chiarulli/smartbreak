@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="{{ url('/') }}" class="navbar-brand">
-            <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 45px;">
+            <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 35px;">
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -12,12 +12,22 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
+
+                @can('is-manager')
+
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Prodotti</a>
                 </li>
+
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Categorie</a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('orders.today') }}" class="nav-link">Ordini del giorno</a>
+                </li>
+
+                @endcan
                 {{--
                 <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>
@@ -80,21 +90,31 @@
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
-            @if (Auth::check())
+            @auth
+
+            @can('is-student')
+            <li class="nav-item">
+                <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
+                    🛒 &nbsp;<span class="cart-total">{{ formatPrice(0) }}</span>
+                </a>
+            </li>
+            @endcan
+
             <li class="nav-item">
                 <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
             </li>
-            @endif
 
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:;" onclick="document.getElementById('logout-form').submit();">
+                <a class="nav-link text-dark" href="javascript:;"
+                   onclick="document.getElementById('logout-form').submit();">
                     Esci
                 </a>
             </li>
+            @endauth
 
             {{--
             <!-- Messages Dropdown Menu -->

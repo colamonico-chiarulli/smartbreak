@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Seeder::call(ClassesTableSeeder::class);
         Seeder::call(UsersTableSeeder::class);
         Seeder::call(ProductsTableSeeder::class);
+        Seeder::call(OrdersTableSeeder::class);
     }
 }

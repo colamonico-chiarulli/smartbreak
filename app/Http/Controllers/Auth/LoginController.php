@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use App\Models\User;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -38,15 +41,24 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /*
-    public function redirectPath(){
+    // Google login for students
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
-        if(auth()->user()->is_admin){
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
 
+        $logged_user = User::where('email', $user->email)->first();
+
+        if (!$logged_user) {
+            return redirect()->route('login')->with('error', 'Questo account google istituzioneale non esiste');
         }
 
-        // ...
+        Auth::login($logged_user);
 
+        return redirect($this->redirectTo);
     }
-    */
 }

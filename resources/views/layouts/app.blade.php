@@ -11,7 +11,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Appfactory</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet">
 
@@ -28,6 +27,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- alpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
 </head>
 
@@ -73,12 +75,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('js/adminlte.min.js')}}"></script>
-    @show
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        function formatPrice(price) {
+            if (price < 0) {
+                return " - " ;
+            }
+            return parseFloat(price).toLocaleString("it", {
+                style: "currency" ,
+                currency: "EUR" ,
+            });
+        }
+
     </script>
+
+    @include('partials._notification')
+
+    @show
 </body>
 
 </html>
