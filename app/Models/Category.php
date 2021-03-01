@@ -9,6 +9,7 @@ class Category extends Model
 {
 
     protected $table = 'categories';
+    protected $guarded = ['id'];
 
     use HasFactory;
 

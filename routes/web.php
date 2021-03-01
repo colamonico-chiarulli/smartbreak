@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resource('products', ProductController::class);
-
     Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');
+
+    Route::resource('categories', CategoryController::class);
+    Route::get('categories/{category}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
+
 });
