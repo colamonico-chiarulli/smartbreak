@@ -20,7 +20,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('products.index') }}" class="nav-link">Categorie</a>
+                    <a href="{{ route('categories.index') }}" class="nav-link">Categorie</a>
                 </li>
 
                 <li class="nav-item">
