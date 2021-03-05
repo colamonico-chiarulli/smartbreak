@@ -48,8 +48,3 @@
 
 </div>
 @endsection
-
-@section('js_scripts')
-    @parent
-    @include('partials._notification')
-@endsection
