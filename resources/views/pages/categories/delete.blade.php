@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Cancella prodotto'])
+@extends('layouts.app', ['title' => 'Cancella categoria'])
 
 @section('content')
 
-    @include('pages.products._form', [
-        'cardTitle' => 'Cancella un prodotto',
+    @include('pages.categories._form', [
+        'cardTitle' => 'Cancella un categoria',
         'headercolor' => 'bg-danger',
-        'action' => route('products.destroy', $product->id),
+        'action' => route('categories.destroy', $category->id),
         'button' => 'Cancella',
         'method' => "DELETE",
         ])

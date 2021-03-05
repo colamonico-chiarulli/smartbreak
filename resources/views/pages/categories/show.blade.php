@@ -1,10 +1,10 @@
-@extends('layouts.app', ['title' => 'Visualizza Prodotto'])
+@extends('layouts.app', ['title' => 'Visualizza Categoria'])
 
 @section('content')
 
-    @include('pages.products._form', [
-            'cardTitle' => 'Dettaglio prodotto',
-            'action' => route('products.index'),
+    @include('pages.categories._form', [
+            'cardTitle' => 'Dettaglio categoria',
+            'action' => route('categories.index'),
             'button' => 'Indietro',
             'readonly' => 'readonly',
             ])

@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Crea prodotto'])
+@extends('layouts.app', ['title' => 'Crea categoria'])
 
 @section('content')
 
-    @include('pages.products._form', [
-        'cardTitle' => 'Inserisci nuovo prodotto',
+    @include('pages.categories._form', [
+        'cardTitle' => 'Inserisci nuova categoria',
         'headercolor' => 'bg-success',
-        'action' => route('products.store'),
+        'action' => route('categories.store'),
         'button' => 'Salva',
     ])
 

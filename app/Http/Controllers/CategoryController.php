@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.categories.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validare i dati di input 
+        $request->validate(Category::validationRules());
+
+        Category::create($request->all());
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Categoria aggiunta.');
     }
 
     /**
@@ -46,9 +52,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('pages.categories.show', compact('category'));
     }
 
     /**
@@ -57,9 +63,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('pages.categories.edit', compact('category'));
     }
 
     /**
@@ -69,9 +75,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate(Category::validationRules());
+
+        $category->update($request->all());
+        return redirect()->route('categories.index')
+            ->with('success', 'Categoria aggiornata!');
     }
 
     /**
@@ -80,8 +90,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')
+            ->with('success', 'Categoria cancellata!');
+    }
+
+     /**
+     * Display the specified resource for delete confimation
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Category $category)
+    {
+        return view('pages.categories.delete', compact('category'));
     }
 }

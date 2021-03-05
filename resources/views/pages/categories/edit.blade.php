@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Modifica prodotto'])
+@extends('layouts.app', ['title' => 'Modifica categoria'])
 
 @section('content')
 
-@include('pages.products._form', [
-    'cardTitle' => 'Modifica un prodotto',
+@include('pages.categories._form', [
+    'cardTitle' => 'Modifica un categoria',
     'headercolor' => 'bg-info',
-    'action' => route('products.update', $product->id),
+    'action' => route('categories.update', $category->id),
     'button' => 'Aggiorna',
     'method' => "PUT",
 ])
