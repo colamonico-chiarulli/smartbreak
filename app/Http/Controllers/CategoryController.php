@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // validare i dati di input 
+        // validare i dati di input
         $request->validate(Category::validationRules());
 
         Category::create($request->all());
@@ -93,18 +93,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('categories.index')
-            ->with('success', 'Categoria cancellata!');
-    }
-
-     /**
-     * Display the specified resource for delete confimation
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Category $category)
-    {
-        return view('pages.categories.delete', compact('category'));
+        return $category;
     }
 }

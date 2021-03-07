@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             @foreach ($categories as $category)
-            <tr>
+            <tr id="row-{{ $category->id }}">
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
                 <td></td>
@@ -31,7 +31,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('categories.edit', $category->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="{{ route('categories.delete', $category->id) }}">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteCategory('{{ route('categories.destroy', $category->id) }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>
@@ -48,3 +48,33 @@
 
 </div>
 @endsection
+
+@push('js')
+
+<script>
+    function deleteCategory(url){
+
+        Swal.fire({
+            title: 'Sei sicuro di voler eliminare questa categoria?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Conferma',
+            cancelButtonText: 'Annulla'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url,
+                    method: 'DELETE',
+                    success: (deletedCategory) => {
+                        toastr.success('Categiria eliminata con successo');
+                        $('#row-'+deletedCategory.id).remove();
+                    }
+                })
+            }
+        });
+    }
+</script>
+
+@endpush

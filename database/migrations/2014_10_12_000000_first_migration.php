@@ -38,6 +38,8 @@ class FirstMigration extends Migration
             $table->foreign('class_id')->references('id')->on('classes');
 
             $table->timestamps();
+            $table->softDeletes();
+
         });
 
         Schema::create('categories', function (Blueprint $table) {
@@ -45,6 +47,7 @@ class FirstMigration extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('products', function (Blueprint $table) {
@@ -61,6 +64,7 @@ class FirstMigration extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('orders', function (Blueprint $table) {
@@ -68,6 +72,7 @@ class FirstMigration extends Migration
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('order_product', function (Blueprint $table) {

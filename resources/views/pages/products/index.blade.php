@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             @foreach ($products as $product)
-            <tr>
+            <tr id="row-{{ $product->id }}">
                 <td>
                     <img src="{{ asset('img/products/' . $product->photo_path) }}" alt="" width="35px">
                 </td>
@@ -31,17 +31,19 @@
                 <td>€ {{ $product->price }}</td>
                 <td>
                     @if ($product->num_items <= 10)
-                       <span class="badge badge-danger">
+                    <span class="badge badge-danger">
+                    {{ $product->num_items }}
+                    </span>
+                    @else
+                    <span class="badge badge-success">
                         {{ $product->num_items }}
-                        </span>
-                        @else
-                        <span class="badge badge-success">
-                            {{ $product->num_items }}
-                        </span>
-                        @endif
+                    </span>
+                    @endif
 
                 </td>
-                <td></td>
+                <td>
+                    {{ $product->category->name }}
+                </td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('products.show', $product->id) }}">
                         <i class="fas fa-eye"></i>
@@ -49,7 +51,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('products.edit', $product->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="{{ route('products.delete', $product->id) }}">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteProduct('{{ route('products.destroy', $product->id) }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>
@@ -66,3 +68,33 @@
 
 </div>
 @endsection
+
+@push('js')
+
+<script>
+    function deleteProduct(url){
+
+        Swal.fire({
+            title: 'Sei sicuro di voler eliminare questo prodotto?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Conferma',
+            cancelButtonText: 'Annulla'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url,
+                    method: 'DELETE',
+                    success: (deletedProduct) => {
+                        toastr.success('Prodotto eliminato con successo');
+                        $('#row-'+deletedProduct.id).remove();
+                    }
+                })
+            }
+        });
+    }
+</script>
+
+@endpush

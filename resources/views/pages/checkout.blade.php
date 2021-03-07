@@ -21,22 +21,20 @@
 
 @endsection
 
-@section('js_scripts')
-@parent
+@push('js')
 
 @include('partials._cartjs', ['products' => $products->keyBy('id')])
 
-<script>
-    function createOrder(){
+    <script>
+        function createOrder(){
 
-        $.post('{{ route('cart.create-order') }}', function(res){
-            if(res.success){
-                toastr.success("Ordine creato con successo");
-                emptyCart();
-            }
-        });
+            $.post('{{ route('cart.create-order') }}', function(res){
+                if(res.success){
+                    toastr.success("Ordine creato con successo");
+                    emptyCart();
+                }
+            });
+        }
+    </script>
 
-    }
-</script>
-
-@endsection
+@endpush

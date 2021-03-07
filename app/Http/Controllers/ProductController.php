@@ -15,7 +15,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $products = Product::latest()->paginate(8);
 
         return view('pages.products.index', compact('products'));
@@ -43,7 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        // validare i dati di input 
+        // validare i dati di input
         $request->validate(Product::validationRules());
 
         Product::create($request->all());
@@ -103,20 +102,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index')
-            ->with('success', 'Prodotto cancellato!');
-    }
 
-    /**
-     * Display the specified resource for delete confimation
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Product $product)
-    {
-        $categories = Category::all();
-        $formCategory = $product->category_id;
-        return view('pages.products.delete', compact('product', 'categories', 'formCategory'));
+        return $product;
     }
 }

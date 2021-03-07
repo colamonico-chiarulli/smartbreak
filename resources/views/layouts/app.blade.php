@@ -5,14 +5,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 
+@include('plugins.toastr')
+@include('plugins.sweetalert')
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Appfactory</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
@@ -27,6 +29,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @stack('css')
 
     <!-- alpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
@@ -68,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    @section('js_scripts')
+
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
@@ -76,6 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="{{asset('js/adminlte.min.js')}}"></script>
     <script type="text/javascript">
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -98,9 +103,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </script>
 
-    @include('partials._notification')
+    @stack('js')
 
-    @show
 </body>
-
 </html>
+
+
+

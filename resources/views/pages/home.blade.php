@@ -38,10 +38,8 @@
 
 @endsection
 
-@section('js_scripts')
+@push('js')
 
-@parent
+    @include('partials._cartjs', ['products' => $categories->pluck('products')->collapse()->keyBy('id')])
 
-@include('partials._cartjs', ['products' => $categories->pluck('products')->collapse()->keyBy('id')])
-
-@endsection
+@endpush
