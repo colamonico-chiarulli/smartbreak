@@ -4,10 +4,12 @@
             <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 35px;">
         </a>
 
+        @auth
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @endauth
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
