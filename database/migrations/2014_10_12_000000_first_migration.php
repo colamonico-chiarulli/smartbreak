@@ -13,12 +13,17 @@ class FirstMigration extends Migration
      */
     public function up()
     {
+        Schema::create('sites', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+        });
+
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->integer('year');
             $table->char('section', 1);
             $table->char('course', 3);
-            $table->enum('site', ['colamonico', 'chiarulli']);
+            $table->foreignId('site_id')->constrained('sites');
         });
 
         Schema::create('users', function (Blueprint $table) {
@@ -34,12 +39,10 @@ class FirstMigration extends Migration
             $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN'])->default('STUDENT');
             $table->rememberToken();
 
-            $table->foreignId('class_id')->nullable();
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->foreignId('class_id')->on('classes')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
-
+            // $table->softDeletes();
         });
 
         Schema::create('categories', function (Blueprint $table) {
@@ -47,7 +50,7 @@ class FirstMigration extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
 
         Schema::create('products', function (Blueprint $table) {
@@ -60,29 +63,26 @@ class FirstMigration extends Migration
             $table->integer('default_daily_stock');
             $table->string('photo_path')->nullable();
 
-            $table->foreignId('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('site_id')->constrained('sites');
 
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
 
         Schema::create('order_product', function (Blueprint $table) {
             $table->integer('quantity')->default(1);
             $table->decimal('price', 6, 2);
 
-            $table->foreignId('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreignId('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('order_id')->constrained('orders');
 
             $table->primary(['order_id', 'product_id']);
 
@@ -103,5 +103,6 @@ class FirstMigration extends Migration
         Schema::dropIfExists('categories');
         Schema::dropIfExists('users');
         Schema::dropIfExists('classes');
+        Schema::dropIfExists('sites');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Ordini del giorno '.now()->toDateString()])
+@extends('layouts.app', ['title' => 'Ordini del giorno '. formatDate(now())])
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
     <div id="accordion">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" href="#class-{{ $class['class']->id }}">
+            <div class="card-header cursor-pointer" data-toggle="collapse" href="#class-{{ $class['class']->id }}">
                 <h3 class="card-title text-bold" data-card-widget="collapse">{{ $class['class']->name }}</h3>
 
                 {{-- <div class="card-tools">

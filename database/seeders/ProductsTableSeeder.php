@@ -31,6 +31,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 1,
                 'photo_path' => 'pomodori.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Cipolle',
@@ -41,6 +42,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 3,
                 'photo_path' => 'cipolle.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Angry onion',
@@ -51,6 +53,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 3,
                 'photo_path' => 'angryonions.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Insalata',
@@ -61,6 +64,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 2,
                 'photo_path' => 'insalata.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Formaggio',
@@ -71,6 +75,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 1,
                 'photo_path' => 'formaggio.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Salsa king',
@@ -81,6 +86,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 2,
                 'photo_path' => 'salsa.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Bacon',
@@ -91,6 +97,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 3,
                 'photo_path' => 'bacon.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Cipolle pastellate',
@@ -101,6 +108,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 4,
                 'photo_path' => 'cipollepastellate.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Prosciutto',
@@ -111,6 +119,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 1,
                 'photo_path' => 'prosciutto.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Acqua',
@@ -121,6 +130,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 2,
                 'photo_path' => 'acqua.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Pepperjack',
@@ -131,6 +141,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 1,
                 'photo_path' => 'pepperjack.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Cipolle fritte',
@@ -141,6 +152,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 4,
                 'photo_path' => 'cipollefritte.png',
+                'site_id' => 1
             ],
             [
                 'name' => 'Insalatina',
@@ -151,6 +163,7 @@ class ProductsTableSeeder extends Seeder
                 'default_daily_stock' => 100,
                 'category_id' => 2,
                 'photo_path' => 'insalatina.png',
+                'site_id' => 1
             ]
         ]);
     }

@@ -46,3 +46,7 @@ input.noarrows[type="number"] {
 .toast {
     opacity: 1 !important;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}

@@ -9,29 +9,29 @@ return [
         'background_color' => '#007bff',
         'theme_color' => '#007bff',
         'display' => 'standalone',
-        'orientation'=> 'any',
+        'orientation'=> 'portrait',
         'status_bar'=> '#007bff',
         'icons' => [
             '192x192' => [
-                'path' => '/pwa/manifest-icon-192.png',
+                'path' => '/pwa-assets/manifest-icon-192.png',
                 'purpose' => 'any'
             ],
             '512x512' => [
-                'path' => '/pwa/manifest-icon-512.png',
+                'path' => '/pwa-assets/manifest-icon-512.png',
                 'purpose' => 'any'
             ],
         ],
         'splash' => [
-            '640x1136' => '/pwa/apple-splash-640x-136.jpg',
-            '750x1334' => '/pwa/apple-splash-750x-334.jpg',
-            '828x1792' => '/pwa/apple-splash-828x-792.jpg',
-            '1125x2436' => '/pwa/apple-splash-1125-2436.jpg',
-            '1242x2208' => '/pwa/apple-splash-1242-2208.jpg',
-            '1242x2688' => '/pwa/apple-splash-1242-2688.jpg',
-            '1536x2048' => '/pwa/apple-splash-1536-2048.jpg',
-            '1668x2224' => '/pwa/apple-splash-1668-2224.jpg',
-            '1668x2388' => '/pwa/apple-splash-1668-2388.jpg',
-            '2048x2732' => '/pwa/apple-splash-2048-2732.jpg',
+            '640x1136' => '/pwa-assets/apple-splash-640x-136.jpg',
+            '750x1334' => '/pwa-assets/apple-splash-750x-334.jpg',
+            '828x1792' => '/pwa-assets/apple-splash-828x-792.jpg',
+            '1125x2436' => '/pwa-assets/apple-splash-1125-2436.jpg',
+            '1242x2208' => '/pwa-assets/apple-splash-1242-2208.jpg',
+            '1242x2688' => '/pwa-assets/apple-splash-1242-2688.jpg',
+            '1536x2048' => '/pwa-assets/apple-splash-1536-2048.jpg',
+            '1668x2224' => '/pwa-assets/apple-splash-1668-2224.jpg',
+            '1668x2388' => '/pwa-assets/apple-splash-1668-2388.jpg',
+            '2048x2732' => '/pwa-assets/apple-splash-2048-2732.jpg',
         ],
         'shortcuts' => [
             /*

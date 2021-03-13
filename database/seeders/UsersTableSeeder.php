@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password'),
             'first_name' => 'Giovanni',
             'last_name' => 'Ciriello',
-            'role' => 'MANAGER'
+            'role' => 'MANAGER',
+            'class_id' => null
         ]);
 
 
@@ -42,5 +43,14 @@ class UsersTableSeeder extends Seeder
                 'class_id' => $classes->random()->id
             ]);
         }
+
+        DB::table('users')->insert([
+            'email' => 'g.ciriello.pon@colamonicochiarulli.it',
+            'password' => Hash::make('password'),
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'role' => 'STUDENT',
+            'class_id' => $classes->random()->id
+        ]);
     }
 }
