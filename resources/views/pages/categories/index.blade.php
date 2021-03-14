@@ -31,7 +31,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('categories.edit', $category->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteCategory('{{ route('categories.destroy', $category->id) }}')">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteCategory('{{ route('categories.destroy', $category->id) }}', '{{ $category->name }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>
@@ -52,10 +52,10 @@
 @push('js')
 
 <script>
-    function deleteCategory(url){
+    function deleteCategory(url, name){
 
         Swal.fire({
-            title: 'Sei sicuro di voler eliminare questa categoria?',
+            title: 'Sei sicuro di voler eliminare la categoria '+name+'?',
             // text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -70,6 +70,9 @@
                     success: (deletedCategory) => {
                         toastr.success('Categiria eliminata con successo');
                         $('#row-'+deletedCategory.id).remove();
+                    },
+                    error: (error) => {
+                        toastr.error('Impossibile eliminare questa categoria');
                     }
                 })
             }

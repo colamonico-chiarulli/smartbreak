@@ -35,7 +35,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- alpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
-    @laravelPWA
+    <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
+    {{-- @laravelPWA --}}
 
 </head>
 

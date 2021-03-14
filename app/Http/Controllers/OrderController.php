@@ -20,16 +20,6 @@ class OrderController extends Controller
     }
 
 
-    // CALLED BY STUDENT
-    public function getOrdersOfTodayByClass()
-    {
-        $class_id = auth()->user()->class->id;
-
-        $classes = $this->getOrders($class_id);
-
-        return view('pages.today-orders', compact('classes'));
-    }
-
     private function getOrders($class_id = null)
     {
         $data = Order::with('products', 'user')->whereDate('created_at', now()->toDateString());
@@ -62,5 +52,16 @@ class OrderController extends Controller
             })->values();
 
         return $data;
+    }
+
+
+    // CALLED BY STUDENT
+    public function getOrdersOfTodayByClass()
+    {
+        $class_id = auth()->user()->class->id;
+
+        $classes = $this->getOrders($class_id);
+
+        return view('pages.today-orders', compact('classes'));
     }
 }

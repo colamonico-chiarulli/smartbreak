@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
     // MANAGER AREA
     Route::group(['middleware' => 'can:is-manager'], function () {
         Route::resource('products', ProductController::class);
-
         Route::resource('categories', CategoryController::class);
 
 

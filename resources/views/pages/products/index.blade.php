@@ -28,7 +28,7 @@
                     <img src="{{ asset('img/products/' . $product->photo_path) }}" alt="" width="35px">
                 </td>
                 <td>{{ $product->name }}</td>
-                <td>€ {{ $product->price }}</td>
+                <td>{{ formatPrice($product->price) }}</td>
                 <td>
                     @if ($product->num_items <= 10)
                     <span class="badge badge-danger">
@@ -51,7 +51,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('products.edit', $product->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteProduct('{{ route('products.destroy', $product->id) }}')">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteProduct('{{ route('products.destroy', $product->id) }}', '{{ $product->name }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>
@@ -72,10 +72,10 @@
 @push('js')
 
 <script>
-    function deleteProduct(url){
+    function deleteProduct(url, name){
 
         Swal.fire({
-            title: 'Sei sicuro di voler eliminare questo prodotto?',
+            title: 'Sei sicuro di voler eliminare il prodotto '+name+'?',
             // text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -90,6 +90,9 @@
                     success: (deletedProduct) => {
                         toastr.success('Prodotto eliminato con successo');
                         $('#row-'+deletedProduct.id).remove();
+                    },
+                    error: (error) => {
+                        toastr.error('Impossibile eliminare questo prodotto');
                     }
                 })
             }
