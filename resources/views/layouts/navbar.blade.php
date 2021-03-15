@@ -1,5 +1,6 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
+
         <a href="{{ url('/') }}" class="navbar-brand">
             <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 35px;">
         </a>
@@ -26,7 +27,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('orders.today') }}" class="nav-link">Ordini del giorno</a>
+                    <a href="{{ route('orders.by-day') }}" class="nav-link">Ordini del giorno</a>
                 </li>
 
                 @endcan

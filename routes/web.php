@@ -55,7 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
 
+        Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
+        Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
 
-        Route::get('today-orders/', [OrderController::class, 'getOrdersOfToday'])->name('orders.today');
     });
 });

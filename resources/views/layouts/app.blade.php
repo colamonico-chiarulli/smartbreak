@@ -36,7 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
     <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
-    {{-- @laravelPWA --}}
+
+    @laravelPWA
 
 </head>
 
@@ -49,6 +50,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{--
         @include('layouts.sidebar')
         --}}
+
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">

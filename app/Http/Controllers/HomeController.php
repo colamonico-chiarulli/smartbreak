@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         if (Gate::check('is-manager')) {
-            $route = 'orders.today';
+            $route = 'orders.by-day';
         } elseif (Gate::check('is-student')) {
             $route = 'cart.choose-products';
         } elseif (Gate::check('is-admin')) {
