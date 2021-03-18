@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SchoolClassController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     // MANAGER AREA
-    Route::group(['middleware' => 'can:is-manager'], function () {
+    Route::group(['middleware' => 'can:is-admin-or-manager'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
 
@@ -59,4 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
 
     });
+
+    // ADMIN AREA
+    Route::group(['middleware' => 'can:is-admin'], function () {
+        Route::resource('sites', SiteController::class);
+        Route::resource('classes', SchoolclassController::class);
+    });
+
 });
