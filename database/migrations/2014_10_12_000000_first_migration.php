@@ -15,7 +15,7 @@ class FirstMigration extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name', 256)->unique();
         });
 
         Schema::create('classes', function (Blueprint $table) {
@@ -30,7 +30,7 @@ class FirstMigration extends Migration
             $table->id();
             $table->string('first_name', 120);
             $table->string('last_name', 120);
-            $table->string('email')->unique();
+            $table->string('email', 256)->unique();
 
             // $table->string('google_token')->nullable();
             // $table->string('google_avatar')->nullable();
