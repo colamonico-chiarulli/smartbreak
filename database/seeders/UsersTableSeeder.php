@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\SchoolClass;
 use Illuminate\Database\Seeder;
+use App\Models\Site;
 
 use DB;
 use Hash;
@@ -18,6 +19,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $sites=Site::all();
+        DB::table('users')->insert([
+            'email' => 'admin@smartbreak.it',
+            'password' => Hash::make('password'),
+            'first_name' => 'Amministratore',
+            'last_name' => 'SmartBreak',
+            'role' => 'ADMIN',
+            'class_id' => null
+        ]);
+
         DB::table('users')->insert([
             'email' => 'manager@appfactory.it',
             'password' => Hash::make('password'),
@@ -26,16 +37,6 @@ class UsersTableSeeder extends Seeder
             'role' => 'MANAGER',
             'class_id' => null,
             'site_id' => 1
-        ]);
-
-        DB::table('users')->insert([
-            'email' => 'admin@appfactory.it',
-            'password' => Hash::make('password'),
-            'first_name' => 'Giovanni',
-            'last_name' => 'Ciriello',
-            'role' => 'ADMIN',
-            'class_id' => null,
-            'site_id' => null
         ]);
 
 
@@ -53,7 +54,8 @@ class UsersTableSeeder extends Seeder
                 'first_name' => $faker->firstName(),
                 'last_name' => $faker->lastName(),
                 'role' => 'STUDENT',
-                'class_id' => $classes->random()->id
+                'class_id' => $classes->random()->id,
+                'site_id' => 1,
             ]);
         }
 
@@ -63,7 +65,8 @@ class UsersTableSeeder extends Seeder
             'first_name' => $faker->firstName(),
             'last_name' => $faker->lastName(),
             'role' => 'STUDENT',
-            'class_id' => $classes->random()->id
+            'class_id' => $classes->random()->id,
+            'site_id' => 1,
         ]);
     }
 }

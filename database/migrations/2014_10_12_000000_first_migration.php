@@ -15,7 +15,7 @@ class FirstMigration extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 25)->unique();
         });
 
         Schema::create('classes', function (Blueprint $table) {
@@ -23,6 +23,7 @@ class FirstMigration extends Migration
             $table->integer('year');
             $table->char('section', 1);
             $table->char('course', 3);
+            $table->timestamps();
             $table->foreignId('site_id')->constrained('sites');
         });
 

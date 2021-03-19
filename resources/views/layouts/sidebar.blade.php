@@ -38,7 +38,47 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-               @can('is-manager')
+               @can('is-admin')
+               <li class="nav-item">
+                <a href="{{ route('sites.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Sedi
+                    </p>
+                </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('classes.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Classi
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Utenti
+                        </p>
+                    </a>
+                </li>
+
+               @endcan
+
+               @canany(['is-manager', 'is-admin'])
+
+               <li class="nav-item">
+                <a href="{{ route('categories.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Categorie
+                    </p>
+                </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
@@ -48,14 +88,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('categories.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Categorie
-                        </p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -83,7 +115,7 @@
                     </ul>
                 </li>
 
-                @endcan
+                @endcanany
 
                 @can('is-student')
 

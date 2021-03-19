@@ -15,7 +15,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrizione</th>
-                <th></th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +23,6 @@
             <tr id="row-{{ $category->id }}">
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
-                <td></td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('categories.show', $category->id) }}">
                         <i class="fas fa-eye"></i>

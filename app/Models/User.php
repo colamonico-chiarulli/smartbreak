@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -16,9 +17,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'role',
+        'site_id',
     ];
 
     /**
@@ -49,5 +53,29 @@ class User extends Authenticatable
     public function class()
     {
         return $this->belongsTo(SchoolClass::class, 'class_id');
+    }
+    
+    public function site()
+    {
+        return $this->belongsTo(Site::class, 'site_id');
+    }
+    
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    public static function validationRules()
+    {
+        return ([
+            "first_name" => ["required"],
+            "last_name" => ["required"],
+            "email" => ["required"],
+            //Deve Contenere almeno 1 Mauscola, 1minuscola, 1 numero e 1 carattere speciale - minimo 8 caratteri
+            "password" => ["required", "min:8", "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"],
+            "password_confirmation" => ["required_with:password", "same:password", "min:8"],
+            "role" => ["required"],
+            "site_id" => ["required"],
+        ]);
     }
 }
