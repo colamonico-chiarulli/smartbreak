@@ -16,7 +16,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
 
-                @can('is-manager')
+                @can('is-admin-or-manager')
 
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">Prodotti</a>

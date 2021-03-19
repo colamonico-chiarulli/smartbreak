@@ -48,7 +48,7 @@ class ProductController extends Controller
         // validare i dati di input
         $request->validate(Product::validationRules());
 
-        $product = Product::create($request->validated());
+        $product = Product::create($request->all());
 
         if(request()->photo){
             Storage::move('temp/'.request()->photo,'img/products/'.request()->photo);
@@ -70,6 +70,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $sites = Site::all();
         $formCategory = $product->category_id;
+        $formSite = $product->site_id;
         return view('pages.products.show', compact('product', 'categories', 'sites', 'formCategory'));
     }
 
@@ -84,6 +85,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $sites = Site::all();
         $formCategory = $product->category_id;
+        $formSite = $product->site_id;
         return view('pages.products.edit', compact('product', 'categories', 'sites', 'formCategory'));
     }
 
@@ -106,7 +108,7 @@ class ProductController extends Controller
             $product->update(['photo_path' => request()->photo]);
         }
 
-        $product->update($request->validated());
+        $product->update($request->all());
         return redirect()->route('products.index')
             ->with('success', 'Prodotto aggiornato!');
     }

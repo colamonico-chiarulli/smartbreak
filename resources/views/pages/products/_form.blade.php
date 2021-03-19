@@ -104,14 +104,26 @@
                         <select class="form-control @error('category_id')is-invalid @enderror" id="category_id" name="category_id" {{$readonly ?? ''}}>
                             <option value="">Seleziona una categoria</option>
                             @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                    @if($category->id == $formCategory)
-                                selected="selected"
-                                @endif
-                                >{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ isset($product) && $category->id == $product->category_id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
+                    @can('is-admin')
+                    <div class="form-group">
+                        <label for="site_id">Sede *</label>
+                        <select class="form-control @error('site_id')is-invalid @enderror" id="site_id" name="site_id" {{$readonly ?? ''}}>
+                            <option value="">Seleziona una sede</option>
+                            @foreach ($sites as $site)
+                            <option value="{{ $site->id }}" {{ isset($product) && ($site->id == $product->site_id) ? 'selected' : '' }}>
+                                {{ $site->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                     @endcan
 
 
                 </div>
