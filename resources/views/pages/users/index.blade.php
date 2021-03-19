@@ -17,6 +17,7 @@
                 <th>Cognome</th>
                 <th>Email</th>
                 <th>Ruolo</th>
+                <th>Sede</th>
                 <th>Azioni</th>
             </tr>
         </thead>
@@ -26,7 +27,8 @@
                 <td>{{ $user->first_name }}</td>
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>                
+                <td>{{ $user->role }}</td>
+                <td>{{ $user->site->name }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">
                         <i class="fas fa-eye"></i>
@@ -67,7 +69,7 @@
                     url,
                     method: 'DELETE',
                     success: (deletedUser) => {
-                        toastr.success('utente eliminato con successo');
+                        toastr.success('Utente eliminato con successo');
                         $('#row-'+deletedUser.id).remove();
                     },
                     error: (error) => {

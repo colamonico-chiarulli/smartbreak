@@ -69,20 +69,35 @@
                 <div class="form-group">
                     <label for="role">Ruolo *</label>
                     <select class="form-control @error('role')is-invalid @enderror" id="role" name="role" {{$readonly ?? ''}}>
-                        <option value="">Seleziona una Ruolo </option>
+                        <option value="">Seleziona un Ruolo </option>
                         <option value="ADMIN"
-                            @if($formRole == "ADMIN")
+                            
+                            @if($user->role == "ADMIN")
                             selected="selected"
                             @endif
                             >Amministratore</option>
                         </option>
                         <option value="MANAGER"
-                            @if($formRole == "MANAGER")
+                            @if($user->role == "MANAGER")
                             selected="selected"
                             @endif
                             >BAR Manager</option>
                         </option>
                     </select>
+
+                    <div class="form-group">
+                        <label for="site_id">Sede *</label>
+                        <select class="form-control @error('site_id')is-invalid @enderror" id="site_id" name="site_id" {{$readonly ?? ''}}>
+                            <option value="">Seleziona una sede</option>
+                            @foreach ($sites as $site)
+                            <option value="{{ $site->id }}"
+                                    @if($site->id == $user->site_id)
+                                selected="selected"
+                                @endif
+                                >{{ $site->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 </div>
 

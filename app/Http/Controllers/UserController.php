@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Site;
 
 class UserController extends Controller
 {
@@ -15,11 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role','ADMIN')
-                    ->orWhere('role','MANAGER')
-                    ->get();
-
-        return view('pages.users.index', compact('users'));
+        $users = User::where('role', 'MANAGER')
+                       ->orWhere('role', 'ADMIN')
+                       ->get();
+        $sites = Site::all();
+        return view('pages.users.index', compact('users', 'sites'));
     }
 
     /**
@@ -29,9 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //Recupera l'eventuale categoria già inserita nel Form (in presenza di errori)
-        $formRole = old('role') ?: null;
-        return view('pages.users.create', compact('formRole'));
+        $sites = Site::all();
+        $user = new User(); //Serve vuoto per il ruolo nel form
+        return view('pages.users.create', compact('sites','user'));
     }
 
     /**
@@ -42,14 +42,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         // validare i dati di input
         $request->validate(User::validationRules());
 
         User::create($request->all());
 
         return redirect()->route('users.index')
-            ->with('success', 'Utente aggiunto.');
+            ->with('success', 'Utente aggiunto');
     }
 
     /**
@@ -60,8 +59,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $formRole = $user->role;
-        return view('pages.users.show', compact('user','formRole'));
+        $sites = Site::all();
+        return view('pages.users.show', compact('user', 'sites'));
     }
 
     /**
@@ -72,8 +71,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $formRole = $user->role;
-        return view('pages.users.edit', compact('user','formRole'));
+        $sites = Site::all();
+        return view('pages.users.edit', compact('user','sites'));
     }
 
     /**
@@ -101,7 +100,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
         return $user;
     }
 }

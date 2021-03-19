@@ -15,7 +15,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrizione</th>
-                <th></th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>

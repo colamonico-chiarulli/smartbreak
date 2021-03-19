@@ -42,7 +42,7 @@ class FirstMigration extends Migration
             $table->rememberToken();
 
             $table->foreignId('class_id')->on('classes')->nullable();
-
+            $table->foreignId('site_id')->constrained('sites');
             $table->timestamps();
             // $table->softDeletes();
         });
