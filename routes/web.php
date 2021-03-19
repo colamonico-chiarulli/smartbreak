@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -34,6 +35,8 @@ Route::get('notification', [HomeController::class, 'notification']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    Route::post('upload-file', [UploadController::class, 'store']);
+    Route::delete('upload-file', [UploadController::class, 'delete']);
 
     // STUDENT AREA
     Route::group(['middleware' => 'can:is-student'], function () {

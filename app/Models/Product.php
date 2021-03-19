@@ -18,6 +18,7 @@ class Product extends Model
             "num_items" => ["required", "numeric"],
             "default_daily_stock" => ["numeric"],
             "category_id" => ["required"],
+            "allergens" => ['string']
         ]);
     }
 
@@ -30,7 +31,7 @@ class Product extends Model
 
     public function getPhotoUrlAttribute()
     {
-        return asset('img/products/' . $this->photo_path);
+        return $this->photo_path ? asset('img/products/' . $this->photo_path) : null;
     }
 
     // relationships

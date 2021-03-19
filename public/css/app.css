@@ -50,3 +50,7 @@ input.noarrows[type="number"] {
 .cursor-pointer{
     cursor: pointer;
 }
+
+.filepond--credits{
+    display: none;
+}

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Site;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -28,9 +30,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $sites = Site::all();
         //Recupera l'eventuale categoria già inserita nel Form (in presenza di errori)
         $formCategory = old('category_id') ?: null;
-        return view('pages.products.create', compact('categories', 'formCategory'));
+        return view('pages.products.create', compact('categories', 'sites', 'formCategory'));
     }
 
     /**
@@ -45,7 +48,12 @@ class ProductController extends Controller
         // validare i dati di input
         $request->validate(Product::validationRules());
 
-        Product::create($request->all());
+        $product = Product::create($request->validated());
+
+        if(request()->photo){
+            Storage::move('temp/'.request()->photo,'img/products/'.request()->photo);
+            $product->update(['photo_path' => request()->photo]);
+        }
 
         return redirect()->route('products.index')
             ->with('success', 'Prodotto aggiunto.');
@@ -60,8 +68,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $categories = Category::all();
+        $sites = Site::all();
         $formCategory = $product->category_id;
-        return view('pages.products.show', compact('product', 'categories', 'formCategory'));
+        return view('pages.products.show', compact('product', 'categories', 'sites', 'formCategory'));
     }
 
     /**
@@ -73,8 +82,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+        $sites = Site::all();
         $formCategory = $product->category_id;
-        return view('pages.products.edit', compact('product', 'categories', 'formCategory'));
+        return view('pages.products.edit', compact('product', 'categories', 'sites', 'formCategory'));
     }
 
     /**
@@ -86,9 +96,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
         $request->validate(Product::validationRules());
 
-        $product->update($request->all());
+        //dd(request()->all());
+
+        if(request()->photo){
+            Storage::move('temp/'.request()->photo,'img/products/'.request()->photo);
+            $product->update(['photo_path' => request()->photo]);
+        }
+
+        $product->update($request->validated());
         return redirect()->route('products.index')
             ->with('success', 'Prodotto aggiornato!');
     }
