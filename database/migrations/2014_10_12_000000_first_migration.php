@@ -39,8 +39,8 @@ class FirstMigration extends Migration
             $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN'])->default('STUDENT');
             $table->rememberToken();
 
-            $table->foreignId('class_id')->on('classes')->nullable();
-
+            $table->foreignId('class_id')->on('classes')->nullable(); // only for students
+            $table->foreignId('site_id')->on('sites')->nullable(); // only for students and managers
             $table->timestamps();
             // $table->softDeletes();
         });

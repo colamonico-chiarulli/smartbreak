@@ -19,13 +19,25 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'email' => 'utente@appfactory.it',
+            'email' => 'manager@appfactory.it',
             'password' => Hash::make('password'),
             'first_name' => 'Giovanni',
             'last_name' => 'Ciriello',
             'role' => 'MANAGER',
-            'class_id' => null
+            'class_id' => null,
+            'site_id' => 1
         ]);
+
+        DB::table('users')->insert([
+            'email' => 'admin@appfactory.it',
+            'password' => Hash::make('password'),
+            'first_name' => 'Giovanni',
+            'last_name' => 'Ciriello',
+            'role' => 'ADMIN',
+            'class_id' => null,
+            'site_id' => null
+        ]);
+
 
 
         $classes = SchoolClass::all();
