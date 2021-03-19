@@ -17,7 +17,6 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('it_IT');
         $students = User::where('role', 'STUDENT')->get();
         $products = Product::all();
 
@@ -27,7 +26,6 @@ class OrdersTableSeeder extends Seeder
                     'created_at' => $faker->dateTimeBetween('-2 day', '+2 day')
                 ]);
 
-                $faker = Faker\Factory::create('it_IT');
                 foreach (range(0, $faker->randomDigitNotNull()) as $p) {
                     $product = $products->where('id', $faker->unique()->numberBetween(1, 13))->first();
 
