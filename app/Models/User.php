@@ -59,9 +59,9 @@ class User extends Authenticatable
             "first_name" => ["required"],
             "last_name" => ["required"],
             "email" => ["required"],
-            //Deve Contenere almeno 1 Mauscola, 1minuscola, 1 numero e 1 carattere speciale - minimo 8 caratteri
+            //Deve Contenere almeno 1 Maiuscola, 1 minuscola, 1 numero e 1 carattere speciale - minimo 8 caratteri
             "password" => ["required", "min:8", "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"],
-            "password_confimation" => ["required_with:password","same:password","min:8"],
+            "password_confirmation" => ["required_with:password","same:password","min:8"],
             "role" => ["required"],
         ]);
     }

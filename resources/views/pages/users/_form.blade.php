@@ -56,9 +56,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confimation">Conferma Password *</label>
+                        <label for="password_confirmation">Conferma Password *</label>
                         <div class="input-group">
-                            <input type="password" class="form-control @error('password_confimation')is-invalid @enderror" id="password_confimation" name="password_confimation"
+                            <input type="password" class="form-control @error('password_confirmation')is-invalid @enderror" id="password_confirmation" name="password_confirmation"
                                    placeholder="Riscrivi la password" 
                                    {{$readonly ?? ''}}>
                         </div>
