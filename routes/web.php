@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'can:is-admin'], function () {
         Route::resource('sites', SiteController::class);
         Route::resource('classes', SchoolclassController::class);
+        Route::resource('users', UserController::class);
     });
 
 });
