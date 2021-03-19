@@ -41,6 +41,7 @@ class UsersTableSeeder extends Seeder
 
 
         $classes = SchoolClass::all();
+        $faker = Faker\Factory::create('it_IT');
 
         // Generating students
 
