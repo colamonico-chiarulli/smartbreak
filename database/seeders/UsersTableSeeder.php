@@ -43,6 +43,7 @@ class UsersTableSeeder extends Seeder
         $classes = SchoolClass::all();
         $faker = Faker\Factory::create('it_IT');
 
+
         // Generating students
 
         foreach (range(1, 50) as $i) {
