@@ -16,8 +16,8 @@ class ClassesTableSeeder extends Seeder
     public function run()
     {
         DB::table('sites')->insert([
-            ['name' => 'Colamonico'],
-            ['name' => 'Chiarulli']
+            ['id' => 1, 'name' => 'Colamonico'],
+            ['id' => 2, 'name' => 'Chiarulli']
         ]);
 
         $classes = [
