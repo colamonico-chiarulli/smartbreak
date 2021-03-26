@@ -16,7 +16,10 @@ class StudentController extends Controller
     public function index()
     {
         $students = User::where('role', 'STUDENT')
-                    ->paginate(8);
+                    ->orderBy('class_id', 'asc')
+                    ->orderBy('last_name', 'asc')
+                    ->orderBy('first_name', 'asc')
+                            ->paginate(8);
         $classes = SchoolClass::all();
         return view('pages.students.index', compact('students', 'classes'));
     }    

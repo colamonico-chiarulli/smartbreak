@@ -24,7 +24,7 @@ class OrdersTableSeeder extends Seeder
         foreach ($students as $student) {
             foreach (range(1, 10) as $i) {
                 $order = $student->orders()->create([
-                    'created_at' => $faker->dateTimeBetween('-2 day', '+2 day')
+                    'created_at' => $faker->dateTimeBetween('-2 day', 'now')
                 ]);
 
                 $faker = Faker\Factory::create('it_IT');
