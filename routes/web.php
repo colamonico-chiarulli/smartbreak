@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('sites', SiteController::class);
         Route::resource('classes', SchoolclassController::class);
         Route::resource('users', UserController::class);
+        Route::resource('students', StudentController::class);
     });
 
 });
