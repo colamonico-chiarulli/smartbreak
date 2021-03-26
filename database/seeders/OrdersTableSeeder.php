@@ -29,10 +29,10 @@ class OrdersTableSeeder extends Seeder
 
                 $faker = Faker\Factory::create('it_IT');
                 foreach (range(0, $faker->randomDigitNotNull()) as $p) {
-                    $product = $products->where('id', $faker->unique()->numberBetween(1, 13))->first();
+                    $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
 
                     $order->products()->attach($product->id, [
-                        'quantity' => $faker->randomDigitNotNull(),
+                        'quantity' => $faker->numberBetween(1, 5),
                         'price' => $product->price
                     ]);
                 }
