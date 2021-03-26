@@ -1,10 +1,10 @@
-@extends('layouts.app', ['title' => 'Elenco utenti'])
+@extends('layouts.app', ['title' => 'Elenco studenti'])
 
 @section('content')
 <div class="row">
     <div class="container">
         <div class="float-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}">Aggiungi un utente</a>
+            <a class="btn btn-success" href="{{ route('students.create') }}">Aggiungi uno studente</a>
         </div>
     </div>
 </div>
@@ -16,27 +16,27 @@
                 <th>Nome</th>
                 <th>Cognome</th>
                 <th>Email</th>
-                <th>Ruolo</th>
+                <th>Classe</th>
                 <th>Sede</th>
                 <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
-            <tr id="row-{{ $user->id }}">
-                <td>{{ $user->first_name }}</td>
-                <td>{{ $user->last_name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
-                <td>{{ $user->site->name }}</td>
+            @foreach ($students as $student)
+            <tr id="row-{{ $student->id }}">
+                <td>{{ $student->first_name }}</td>
+                <td>{{ $student->last_name }}</td>
+                <td>{{ $student->email }}</td>
+                <td>{{ $student->class->name }}</td>
+                <td>{{ $student->site->name }}</td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">
+                    <a class="btn btn-info btn-sm" href="{{ route('students.show', $student->id) }}">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <a class="btn btn-warning btn-sm" href="{{ route('users.edit', $user->id) }}">
+                    <a class="btn btn-warning btn-sm" href="{{ route('students.edit', $student->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('users.destroy', $user->id) }}', '{{ $user->last_name }}')">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('students.destroy', $student->id) }}', '{{ $student->last_name }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>
@@ -45,7 +45,7 @@
         </tbody>
     </table>
     <div class="w-100 pl-2">
-        {!! $users->links() !!}
+        {!! $students->links() !!}
     </div>
 </div>
 

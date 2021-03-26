@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Modifica utente'])
+@extends('layouts.app', ['title' => 'Modifica studente'])
 
 @section('content')
 
-@include('pages.users._form', [
-    'cardTitle' => 'Modifica un utente',
+@include('pages.students._form', [
+    'cardTitle' => 'Modifica un studente',
     'headercolor' => 'bg-info',
-    'action' => route('users.update', $user->id),
+    'action' => route('students.update', $user->id),
     'button' => 'Aggiorna',
     'method' => "PUT",
     'setPassword' => True,

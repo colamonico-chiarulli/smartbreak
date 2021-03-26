@@ -1,10 +1,10 @@
-@extends('layouts.app', ['title' => 'Visualizza utente'])
+@extends('layouts.app', ['title' => 'Visualizza studente'])
 
 @section('content')
 
-    @include('pages.users._form', [
-            'cardTitle' => 'Dettaglio utente',
-            'action' => route('users.index'),
+    @include('pages.students._form', [
+            'cardTitle' => 'Dettaglio studente',
+            'action' => route('students.index'),
             'button' => 'Indietro',
             'readonly' => 'readonly',
             ])

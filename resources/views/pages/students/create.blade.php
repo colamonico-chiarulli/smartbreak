@@ -1,13 +1,12 @@
-@extends('layouts.app', ['title' => 'Crea utente'])
+@extends('layouts.app', ['title' => 'Crea Studente'])
 
 @section('content')
 
-    @include('pages.users._form', [
-        'cardTitle' => 'Inserisci nuovo utente',
+    @include('pages.students._form', [
+        'cardTitle' => 'Inserisci nuovo studente',
         'headercolor' => 'bg-success',
-        'action' => route('users.store'),
+        'action' => route('students.store'),
         'button' => 'Salva',
-        'setPassword' => True,
     ])
 
 @endsection

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Site;
 use App\Models\SchoolClass;
 
 class StudentController extends Controller
@@ -16,10 +15,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'STUDENT')
-                       ->get()
-                       ->paginate(8);
-        $sites = Site::all();
+        $students = User::where('role', 'STUDENT')
+                    ->paginate(8);
+        $classes = SchoolClass::all();
+        return view('pages.students.index', compact('students', 'classes'));
+    }    
 
     /**
      * Show the form for creating a new resource.
@@ -28,9 +28,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $sites = Site::all();
-        $user = new User(); //Serve vuoto per il ruolo nel form
-        return view('pages.students.create', compact('sites','user'));
+        $classes = SchoolClass::all();
+        $student = new User(); //Serve vuoto per la classe nel form
+        return view('pages.students.create', compact('classes', 'student'));
     }
 
     /**
@@ -53,39 +53,39 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $student)
     {
-        $sites = Site::all();
-        return view('pages.students.show', compact('user', 'sites'));
+        $classes = SchoolClass::all();
+        return view('pages.students.show', compact('student','classes'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $student)
     {
-        $sites = Site::all();
-        return view('pages.students.edit', compact('user','sites'));
+        $classes = SchoolClass::all();
+        return view('pages.students.edit', compact('student','classes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $student)
     {
         $request->validate(User::validationRules());
 
-        $user->update($request->all());
+        $student->update($request->all());
         return redirect()->route('students.index')
             ->with('success', 'Utente aggiornato!');
     }
@@ -93,12 +93,12 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $student)
     {
-        $user->delete();
-        return $user;
+        $student->delete();
+        return $student;
     }
 }
