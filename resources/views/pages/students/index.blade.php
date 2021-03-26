@@ -36,7 +36,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('students.edit', $student->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('students.destroy', $student->id) }}', '{{ $student->last_name }}')">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('students.destroy', $student->id) }}', '{{ $student->last_name }} {{ $student->first_name }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>

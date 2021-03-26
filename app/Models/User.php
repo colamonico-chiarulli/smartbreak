@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'class_id',
         'site_id',
     ];
 
@@ -76,6 +77,17 @@ class User extends Authenticatable
             "password_confirmation" => ["required_with:password", "same:password", "min:8"],
             "role" => ["required"],
             "site_id" => ["required"],
+        ]);
+    }
+
+    public static function StudentValidationRules()
+    {
+        return ([
+            "first_name" => ["required"],
+            "last_name" => ["required"],
+            "email" => ["required"],
+            //Deve Contenere almeno 1 Mauscola, 1minuscola, 1 numero e 1 carattere speciale - minimo 8 caratteri
+            "class_id" => ["required"],
         ]);
     }
 }

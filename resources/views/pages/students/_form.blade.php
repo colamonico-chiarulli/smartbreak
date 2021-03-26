@@ -26,14 +26,14 @@
                     <div class="form-group">
                         <label for="first_name">Nome *</label>
                         <input type="text" class="form-control @error('first_name')is-invalid @enderror" id="first_name" name="first_name" placeholder="Inserisci il nome"
-                               value="{{ $user->first_name ?? old('first_name') }}"
+                               value="{{ $student->first_name ?? old('first_name') }}"
                                {{$readonly ?? ''}}>
                     </div>
                     
                     <div class="form-group">
                         <label for="last_name">Cognome *</label>
                         <input type="text" class="form-control @error('last_name')is-invalid @enderror" id="last_name" name="last_name" placeholder="Inserisci il nome"
-                               value="{{ $user->last_name ?? old('last_name') }}"
+                               value="{{ $student->last_name ?? old('last_name') }}"
                                {{$readonly ?? ''}}>
                     </div>
 
@@ -41,7 +41,7 @@
                         <label for="email">Email *</label>
                         <input type="email" class="form-control @error('email')is-invalid @enderror" id="email" name="email"
                                placeholder="Indirizzo email"
-                               value="{{ $user->email ?? old('email') }}"
+                               value="{{ $student->email ?? old('email') }}"
                                {{$readonly ?? ''}}>
                     </div>
 
@@ -52,16 +52,12 @@
                         <option value="">Seleziona una classe </option>
                         
                         @foreach ($classes as $class)
-                            <option value="{{$class->id}}">
+                            <option value="{{$class->id}}" {{ isset($student) && $class->id == $student->class_id ? 'selected' : '' }} >
                                 {{ $class->name }}
                             </option>
                         @endforeach
 
                     </select>
-
-                    <input type="hidden" name="password" value="">
-                    <input type="hidden" name="confirm_password" value="">
-                    <input type="hidden" name="site_id" value="">
 
                 </div>
 

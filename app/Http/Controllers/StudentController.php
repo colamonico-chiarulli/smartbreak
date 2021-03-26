@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\SchoolClass;
+use Illuminate\Support\Facades\Hash;
+use Faker;
 
 class StudentController extends Controller
 {
@@ -19,7 +21,7 @@ class StudentController extends Controller
                     ->orderBy('class_id', 'asc')
                     ->orderBy('last_name', 'asc')
                     ->orderBy('first_name', 'asc')
-                            ->paginate(8);
+                    ->paginate(8);
         $classes = SchoolClass::all();
         return view('pages.students.index', compact('students', 'classes'));
     }    
@@ -44,8 +46,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // validare i dati di input
-        $request->validate(User::validationRules());
+        // valida i dati di input
+        $request->validate(User::StudentValidationRules());
+
+        //Aggiunge una Password Casuale
+        $faker = Faker\Factory::create('it_IT');
+        $request->request->add(['password' => Hash::make($faker->password())]);
+
+        //Imposta il ruolo di Studente
+        $request->request->add(['role' => "STUDENT"]);
+
+        //Imposta la sede prendendola dalla classe
+        $site=SchoolClass::find($request->class_id)->site_id;
+        $request->request->add(['site_id' => $site]);
 
         User::create($request->all());
 
@@ -86,7 +99,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, User $student)
     {
-        $request->validate(User::validationRules());
+        $request->validate(User::StudentValidationRules());
 
         $student->update($request->all());
         return redirect()->route('students.index')

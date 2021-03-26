@@ -70,8 +70,7 @@
                     <label for="role">Ruolo *</label>
                     <select class="form-control @error('role')is-invalid @enderror" id="role" name="role" {{$readonly ?? ''}}>
                         <option value="">Seleziona un Ruolo </option>
-                        <option value="ADMIN"
-                            
+                        <option value="ADMIN"       
                             @if($user->role == "ADMIN")
                             selected="selected"
                             @endif

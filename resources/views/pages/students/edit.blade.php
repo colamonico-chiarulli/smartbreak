@@ -5,7 +5,7 @@
 @include('pages.students._form', [
     'cardTitle' => 'Modifica un studente',
     'headercolor' => 'bg-info',
-    'action' => route('students.update', $user->id),
+    'action' => route('students.update', $student->id),
     'button' => 'Aggiorna',
     'method' => "PUT",
     'setPassword' => True,

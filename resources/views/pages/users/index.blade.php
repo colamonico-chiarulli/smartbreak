@@ -28,7 +28,7 @@
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
-                <td>{{ $user->site->name }}</td>
+                <td>{{ $user->site->name ?? '' }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">
                         <i class="fas fa-eye"></i>
@@ -36,7 +36,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('users.edit', $user->id) }}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('users.destroy', $user->id) }}', '{{ $user->last_name }}')">
+                    <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('users.destroy', $user->id) }}', '{{ $user->last_name }} {{ $user->first_name }}')">
                         <i class=" fas fa-trash"></i>
                     </a>
                 </td>

@@ -29,7 +29,8 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Amministratore',
             'last_name' => 'SmartBreak',
             'role' => 'ADMIN',
-            'class_id' => null
+            'class_id' => null,
+            'site_id' => null,
         ]);
 
         DB::table('users')->insert([
