@@ -31,9 +31,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $sites = Site::all();
-        //Recupera l'eventuale categoria già inserita nel Form (in presenza di errori)
-        $formCategory = old('category_id') ?: null;
-        return view('pages.products.create', compact('categories', 'sites', 'formCategory'));
+        return view('pages.products.create', compact('categories', 'sites'));
     }
 
     /**
@@ -69,9 +67,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $sites = Site::all();
-        $formCategory = $product->category_id;
-        $formSite = $product->site_id;
-        return view('pages.products.show', compact('product', 'categories', 'sites', 'formCategory'));
+        return view('pages.products.show', compact('product', 'categories', 'sites'));
     }
 
     /**
@@ -84,9 +80,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $sites = Site::all();
-        $formCategory = $product->category_id;
-        $formSite = $product->site_id;
-        return view('pages.products.edit', compact('product', 'categories', 'sites', 'formCategory'));
+        return view('pages.products.edit', compact('product', 'categories', 'sites'));
     }
 
     /**

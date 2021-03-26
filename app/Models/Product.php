@@ -18,6 +18,7 @@ class Product extends Model
             "num_items" => ["required", "numeric"],
             "default_daily_stock" => ["numeric"],
             "category_id" => ["required"],
+            "site_id" => ['required'],
             "allergens" => ['string']
         ]);
     }
