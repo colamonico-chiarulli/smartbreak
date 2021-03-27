@@ -6,10 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +28,11 @@ class User extends Authenticatable
         'site_id',
     ];
 
+    public $sortable = [
+        'first_name',
+        'last_name',
+        'email',
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -55,12 +62,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SchoolClass::class, 'class_id');
     }
-    
+
     public function site()
     {
         return $this->belongsTo(Site::class, 'site_id');
     }
-    
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);

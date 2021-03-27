@@ -9,15 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "kyslik/column-sortable": "^6.4",
         "laravel/framework": "^8.12",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "silviolleite/laravelpwa": "^2.0",
-        "fakerphp/faker": "^1.9.1"
+        "silviolleite/laravelpwa": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

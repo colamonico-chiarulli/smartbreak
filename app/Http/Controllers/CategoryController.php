@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->paginate(8);
-
+        $categories = Category::orderBy('name','asc')
+            ->paginate(8);
         return view('pages.categories.index', compact('categories'));
     }
 

@@ -3,23 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
+    use Sortable;
+    
     public $table = "products";
     protected $guarded = ['id'];
+
+    public $sortable = ['name',
+                        'price',
+                        'num_items',
+                        ];
 
     public static function validationRules()
     {
         return ([
             "name" => ["required"],
             "description" => ["required"],
-            "price" => ["required", "numeric"],
-            "num_items" => ["required", "numeric"],
-            "default_daily_stock" => ["numeric"],
+            "price" => ["required", "numeric","min:0"],
+            "num_items" => ["required", "numeric","min:0"],
+            "default_daily_stock" => ["numeric","min:0"],
             "category_id" => ["required"],
             "site_id" => ['required'],
-            "allergens" => ['string']
         ]);
     }
 
@@ -46,5 +53,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class, 'site_id');
     }
 }

@@ -9,7 +9,7 @@ return [
         'background_color' => '#007bff',
         'theme_color' => '#007bff',
         'display' => 'standalone',
-        'orientation'=> 'any', //Rino
+        'orientation'=> 'any',
         'status_bar'=> '#007bff',
         'icons' => [
             '192x192' => [

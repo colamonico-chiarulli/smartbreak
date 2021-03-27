@@ -4,15 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class SchoolClass extends Model
 {
     use HasFactory;
+    use Sortable;
 
     public $timestamps = false;
 
     protected $table = 'classes';
     protected $guarded = ['id'];
+
+    public $sortable = [
+        'year',
+        'course',
+    ];
 
     public static function validationRules()
     {
@@ -28,12 +35,12 @@ class SchoolClass extends Model
     {
         $this->attributes['section'] = strtoupper($value);
     }
-    
+
     public function setCourseAttribute($value)
     {
         $this->attributes['course'] = strtoupper($value);
     }
-    
+
     protected $appends = ['name'];
 
     public function getNameAttribute()

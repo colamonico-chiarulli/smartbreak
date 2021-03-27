@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="price">Prezzo *</label>
                                 <div class="input-group">
-                                    <input type="number" step="0.01" class="form-control @error('price')is-invalid @enderror" id="price" name="price"
+                                    <input type="number" min="0" step="0.01" class="form-control @error('price')is-invalid @enderror" id="price" name="price"
                                         placeholder="Inserisci il prezzo" value="{{ $product->price ?? old('price') }}"
                                         {{$readonly ?? ''}}>
                                     <div class="input-group-append">
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label for="allergens">Allergeni</label>
                                 <input type="text" class="form-control @error('allergens')is-invalid @enderror" id="allergens" name="allergens"
-                                    placeholder="Inserisci gli allergeni"
+                                    placeholder="Inserisci eventuali allergeni"
                                     value="{{ $product->allergens ?? old('allergens') }}"
                                     {{$readonly ?? ''}}>
                             </div>
@@ -81,7 +81,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="num_items">Quantità disponibile *</label>
-                                <input type="number" class="form-control @error('num_items')is-invalid @enderror" id="num_items" name="num_items"
+                                <input type="number" min="0" class="form-control @error('num_items')is-invalid @enderror" id="num_items" name="num_items"
                                        placeholder="Inserisci la quantità disponibile"
                                        value="{{ $product->num_items ?? old('num_items') }}"
                                        {{$readonly ?? ''}}>
@@ -90,7 +90,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="default_daily_stock">Disponibilità quotidiana</label>
-                                <input type="number" class="form-control @error('default_daily_stock')is-invalid @enderror" id="default_daily_stock"
+                                <input type="number" min="0" class="form-control @error('default_daily_stock')is-invalid @enderror" id="default_daily_stock"
                                        name="default_daily_stock" placeholder="Inserisci la disponibilità quotidiana"
                                        value="{{ $product->default_daily_stock ?? old('default_daily_stock') }}"
                                        {{$readonly ?? ''}}>
@@ -103,11 +103,7 @@
                         <label for="category_id">Categoria *</label>
                         <select class="form-control @error('category_id')is-invalid @enderror" id="category_id" name="category_id" {{$readonly ?? ''}}>
                             <option value="">Seleziona una categoria</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ isset($product) && $category->id == $product->category_id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
+                            @foreach ($catename
                         </select>
                     </div>
 

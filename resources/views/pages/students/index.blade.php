@@ -2,7 +2,15 @@
 
 @section('content')
 <div class="row">
-    <div class="container">
+    <form class="form-inline" method="GET">
+        <div class="form-group mb-2">
+          <label for="filter" class="col-sm-2 col-form-label">Filtro</label>
+          <input type="text" class="form-control" id="filter" name="filter" placeholder="Nominativo..." value="{{$filter}}">
+        </div>
+        <button type="submit" class="btn btn-default mb-2">Filtra</button>
+      </form>
+
+    <div class="col">
         <div class="float-right mb-2">
             <a class="btn btn-success" href="{{ route('students.create') }}">Aggiungi uno studente</a>
         </div>
@@ -13,9 +21,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>Email</th>
+                <th>@sortablelink('first_name', 'Nome')</th>
+                <th>@sortablelink('last_name', 'Cognome')</th>
+                <th>@sortablelink('email', 'Email')</th>
                 <th>Classe</th>
                 <th>Sede</th>
                 <th>Azioni</th>
@@ -27,8 +35,8 @@
                 <td>{{ $student->first_name }}</td>
                 <td>{{ $student->last_name }}</td>
                 <td>{{ $student->email }}</td>
-                <td>{{ $student->class->name }}</td>
-                <td>{{ $student->site->name }}</td>
+                <td>{{ $student->class->name ?? '' }}</td>
+                <td>{{ $student->site->name ?? ''}}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('students.show', $student->id) }}">
                         <i class="fas fa-eye"></i>

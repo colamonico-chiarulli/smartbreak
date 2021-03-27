@@ -16,6 +16,7 @@ class FirstMigration extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('name', 25)->unique();
+            $table->timestamps();
         });
 
         Schema::create('classes', function (Blueprint $table) {

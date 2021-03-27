@@ -13,9 +13,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Anno</th>
+                <th>@sortablelink('name', 'Classe')</th>
+                <th>@sortablelink('year', 'Anno')</th>
                 <th>Sezione</th>
-                <th>Corso</th>
+                <th>@sortablelink('course', 'Corso')</th>
                 <th>Sede</th>
                 <th>Azioni</th>
             </tr>
@@ -23,6 +24,7 @@
         <tbody>
             @foreach ($classes as $class)
             <tr id="row-{{ $class->id }}">
+                <td>{{ $class->name }}</td>
                 <td>{{ $class->year }}</td>
                 <td>{{ $class->section }}</td>
                 <td>{{ $class->course }}</td>

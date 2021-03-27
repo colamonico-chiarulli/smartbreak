@@ -1,8 +1,8 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo - hide sidebar button-->
-    <a href="index3.html" data-widget="pushmenu" href="#" role="button" class="brand-link">
-    <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-width: 80%;">
+    <a data-widget="pushmenu" href="#" role="button" class="brand-link">
+        <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-width: 80%;">
         {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
     </a>
     <!-- Sidebar -->
@@ -37,14 +37,14 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-               @can('is-admin')
-               <li class="nav-item">
-                <a href="{{ route('sites.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Sedi
-                    </p>
-                </a>
+                @can('is-admin')
+                <li class="nav-item">
+                    <a href="{{ route('sites.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Sedi
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -74,17 +74,17 @@
                     </a>
                 </li>
 
-               @endcan
+                @endcan
 
-               @canany(['is-manager', 'is-admin'])
+                @canany(['is-manager', 'is-admin'])
 
-               <li class="nav-item">
-                <a href="{{ route('categories.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Categorie
-                    </p>
-                </a>
+                <li class="nav-item">
+                    <a href="{{ route('categories.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Categorie
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -127,10 +127,35 @@
 
                 @can('is-student')
 
+                <li class="nav-item">
+                    <a href="{{ route('orders.by-student') }} " class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            I miei ordini
+                        </p>
+                    </a>
+                </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('orders.today-by-class') }}" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Ordine della mia classe
+                        </p>
+                    </a>
+                </li>
 
                 @endcan
-
+                <li class="nav-item">
+                    <hr>
+                </li>
+                
+                <li class="nav-item">
+                <a data-widget="pushmenu" href="#" role="button" class="nav-link">
+                    <i class="nav-icon fas fa-window-close"></i>
+                    <p>Chiudi</p>
+                </a>
+            </li>
 
             </ul>
         </nav>

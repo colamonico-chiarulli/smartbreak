@@ -14,9 +14,14 @@ class SchoolClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $classes = SchoolClass::latest()->paginate(8);
+        $classes = SchoolClass::sortable()
+                    ->orderBy('site_id', 'asc')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('course', 'asc')
+                    ->orderBy('section', 'asc')
+                    ->paginate(8);
 
         return view('pages.classes.index', compact('classes'));
     }

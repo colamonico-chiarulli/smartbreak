@@ -12,18 +12,18 @@
             </a>
             <small class="text-muted">{{ config('app.version') }}</small>
         </h6>
-
+    <!-- BUTTTON NAVBAR
         @auth
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         @endauth
-
+    -->
+    <!-- NAVBAR
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
 
+            <ul class="navbar-nav">
 
 
                 @can('is-admin-or-manager')
@@ -96,6 +96,7 @@
                 </li>
                 --}}
             </ul>
+        -->
 
             <!-- SEARCH FORM
             <form class="form-inline ml-0 ml-md-3">
@@ -110,8 +111,10 @@
                 </div>
             </form>
             -->
+    
+    <!-- END NAVBAR        
         </div>
-
+    -->
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 

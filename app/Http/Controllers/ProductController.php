@@ -15,11 +15,31 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(8);
+        //recupera eventuale filtro sul nome prodotto
+        $filter = $request->query('filter');
 
-        return view('pages.products.index', compact('products'));
+        //recupera site_id dell'utente 
+        $site = auth()->user()->site_id;
+
+        if ($site) {
+            $products = Product::sortable()
+                ->where('site_id', $site)
+                ->where('name', 'like', '%'.$filter.'%')
+                ->orderBy('category_id', 'asc')
+                ->orderBy('name', 'asc')
+                ->paginate(8);
+        } else { //Admin
+            $products = Product::sortable()
+                ->where('name', 'like', '%'.$filter.'%')
+                ->orderBy('site_id', 'asc')
+                ->orderBy('category_id', 'asc')
+                ->orderBy('name', 'asc')
+                ->paginate(8);
+        }
+
+        return view('pages.products.index', compact('products','filter'));
     }
 
     /**
@@ -30,7 +50,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $sites = Site::all();
+        $sites = Site::orderBy('id', 'asc')->get();
         return view('pages.products.create', compact('categories', 'sites'));
     }
 
@@ -43,13 +63,19 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        //Imposta la sede del prodotto
+        if (!isset($request->site_id)) {
+            $site = auth()->user()->site_id;
+            $request->request->add(['site_id' => $site]);
+        }
+
         // validare i dati di input
         $request->validate(Product::validationRules());
 
         $product = Product::create($request->all());
 
-        if(request()->photo){
-            Storage::move('temp/'.request()->photo,'img/products/'.request()->photo);
+        if (request()->photo) {
+            Storage::move('temp/' . request()->photo, 'img/products/' . request()->photo);
             $product->update(['photo_path' => request()->photo]);
         }
 
@@ -66,7 +92,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $categories = Category::all();
-        $sites = Site::all();
+        $sites = Site::orderBy('id', 'asc')->get();
         return view('pages.products.show', compact('product', 'categories', 'sites'));
     }
 
@@ -79,7 +105,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        $sites = Site::all();
+        $sites = Site::orderBy('id', 'asc')->get();
         return view('pages.products.edit', compact('product', 'categories', 'sites'));
     }
 
@@ -93,12 +119,16 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
+        //Imposta la sede del prodotto
+        if (!isset($request->site_id)) {
+            $site = auth()->user()->site_id;
+            $request->request->add(['site_id' => $site]);
+        }
+
         $request->validate(Product::validationRules());
 
-        //dd(request()->all());
-
-        if(request()->photo){
-            Storage::move('temp/'.request()->photo,'img/products/'.request()->photo);
+        if (request()->photo) {
+            Storage::move('temp/' . request()->photo, 'img/products/' . request()->photo);
             $product->update(['photo_path' => request()->photo]);
         }
 
