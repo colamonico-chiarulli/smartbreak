@@ -1,5 +1,11 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
+        <!-- Sidebar menu Button -->
+        <ul class="navbar-nav">           
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+        </ul>    
         <h6>
             <a href="{{ url('/') }}" class="navbar-brand">
                 <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
@@ -17,6 +23,8 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
+
+
 
                 @can('is-admin-or-manager')
 

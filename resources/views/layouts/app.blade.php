@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="layout-top-nav">
+<body class="layout-top-nav control-sidebar-slide-open sidebar-collapse">
 
     <div class="wrapper">
 

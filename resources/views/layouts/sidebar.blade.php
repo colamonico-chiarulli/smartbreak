@@ -1,11 +1,10 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-       <img src="{{ asset('img/logos/logo.svg') }}" alt="" style="max-height: 35px;">
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo - hide sidebar button-->
+    <a href="index3.html" data-widget="pushmenu" href="#" role="button" class="brand-link">
+    <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-width: 80%;">
         {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -33,7 +32,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
