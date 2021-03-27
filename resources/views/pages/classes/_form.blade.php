@@ -25,7 +25,7 @@
 
                     <div class="form-group">
                         <label for="year">Anno *</label>
-                        <input type="number" class="form-control @error('year')is-invalid @enderror" id="year" name="year"
+                        <input type="number" min=1 max=5 class="form-control @error('year')is-invalid @enderror" id="year" name="year"
                             placeholder="1..5" 
                                value="{{ $class->year ?? old('year') }}"
                                {{$readonly ?? ''}}>
