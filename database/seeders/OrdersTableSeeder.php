@@ -21,15 +21,26 @@ class OrdersTableSeeder extends Seeder
         $students = User::where('role', 'STUDENT')->get();
         $products = Product::all();
 
+        //Per ogni studente
         foreach ($students as $student) {
-            foreach (range(1, 10) as $i) {
+            // Crea da 1 a 10 Ordini
+            $nOrders = mt_rand(1,10);
+            for($i=0; $i < $nOrders; $i++) { 
+                $dateTime=$faker->dateTimeBetween('-10 day', 'now','Europe/Rome');
                 $order = $student->orders()->create([
-                    'created_at' => $faker->dateTimeBetween('-2 day', 'now')
+                    'created_at' => $dateTime,
+                    'updated_at' => $dateTime,
                 ]);
 
+                //Ciascun ordine ha da 1 a 5 prodotti casuali della sede dell'utente
                 $faker = Faker\Factory::create('it_IT');
-                foreach (range(0, $faker->randomDigitNotNull()) as $p) {
-                    $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
+                $nProducts = mt_rand(1,5);
+                for($p=0; $p <= $nProducts; $p++) { 
+                    if ($student->site_id == 1){
+                        $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
+                    } else {
+                        $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
+                    }    
 
                     $order->products()->attach($product->id, [
                         'quantity' => $faker->numberBetween(1, 5),
