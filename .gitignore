@@ -4,3 +4,4 @@ vendor/
 public/temp
 public/img/products
 composer.lock
+.vscode
