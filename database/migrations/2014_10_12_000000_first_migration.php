@@ -75,7 +75,9 @@ class FirstMigration extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
+
             // $table->softDeletes();
         });
 

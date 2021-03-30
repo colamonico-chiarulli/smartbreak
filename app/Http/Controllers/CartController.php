@@ -10,8 +10,15 @@ class CartController extends Controller
 {
     public function chooseProducts()
     {
-        $categories = Category::with('products')->get();
-        return view('pages.home', compact('categories'));
+        $search_name = request()->search_name;
+
+        $categories = Category::with(['products' => function ($query) use ($search_name) {
+            $query->where('site_id', auth()->user()->site_id)
+                ->where('name', 'like', '%'.$search_name.'%')
+                ->orderBy('name');
+        }])->orderBy('name')->get();
+
+        return view('pages.home', compact('categories', 'search_name'));
     }
 
     public function editCart()

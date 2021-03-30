@@ -29,7 +29,7 @@ class HomeController extends Controller
         } elseif (Gate::check('is-student')) {
             $route = 'cart.choose-products';
         } elseif (Gate::check('is-admin')) {
-            return view('pages.admin');
+            $route = 'analytics';
         } else {
             abort(403);
         }

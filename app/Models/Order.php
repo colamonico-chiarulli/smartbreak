@@ -8,6 +8,15 @@ class Order extends Model
 {
     protected $table = 'orders';
 
+    public function getTotalAttribute()
+    {
+        $total = 0;
+        foreach ($this->products as $product) {
+            $total += $product->pivot->price * $product->pivot->quantity;
+        }
+        return $total;
+    }
+
     // relationships
 
     public function products()

@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -65,15 +66,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
-
     });
 
     // ADMIN AREA
     Route::group(['middleware' => 'can:is-admin'], function () {
+        Route::get('analytics', [AnalyticsController::class, 'getAnalyticsPage'])->name('analytics');
+
         Route::resource('sites', SiteController::class);
         Route::resource('classes', SchoolclassController::class);
         Route::resource('users', UserController::class);
         Route::resource('students', StudentController::class);
     });
-
 });

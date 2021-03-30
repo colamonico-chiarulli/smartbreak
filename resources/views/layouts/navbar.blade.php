@@ -1,11 +1,11 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <!-- Sidebar menu Button -->
-        <ul class="navbar-nav">           
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-        </ul>    
+        </ul>
         <h6>
             <a href="{{ url('/') }}" class="navbar-brand">
                 <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
@@ -111,8 +111,8 @@
                 </div>
             </form>
             -->
-    
-    <!-- END NAVBAR        
+
+    <!-- END NAVBAR
         </div>
     -->
         <!-- Right navbar links -->
@@ -129,7 +129,7 @@
             @endcan
 
             <li class="nav-item">
-                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
+                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }} <small class="text-muted">{{ auth()->user()->role }}</small></a>
             </li>
 
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
