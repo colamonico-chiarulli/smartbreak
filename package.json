@@ -1,0 +1,16 @@
+{
+    "name": "smartbreak",
+    "description": "School Bar food booking web application",
+    "version": "0.6.0 alpha",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/colamonico-chiarulli/smartbreak.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "AGPL 3.0",
+    "bugs": {
+      "url": "https://github.com/colamonico-chiarulli/smartbreak/issues"
+    },
+    "homepage": "https://github.com/colamonico-chiarulli/smartbreak"
+  }
