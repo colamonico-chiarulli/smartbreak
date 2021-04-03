@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 26th, 2021 4:06pm
  * -----
- * Last Modified: 	
- * Modified By: 	
+ * Last Modified: 	April 3rd 2021 12:27:12 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -50,12 +50,22 @@
 @section('content')
 <div class="row">
     <form class="form-inline" method="GET">
-        <div class="form-group mb-2">
-          <label for="filter" class="col-sm-2 col-form-label">Filtro</label>
-          <input type="text" class="form-control" id="filter" name="filter" placeholder="Nominativo..." value="{{$filter}}">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" id="filter" name="filter" placeholder="Nominativo..."
+                value="{{$filter}}">
+
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-info btn-flat">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+            <span class="input-group-append">
+                <a href="{{ route('products.index') }}" type="submit" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i>
+                </a>
+            </span>
         </div>
-        <button type="submit" class="btn btn-default mb-2">Filtra</button>
-      </form>
+    </form>
 
     <div class="col">
         <div class="float-right mb-2">

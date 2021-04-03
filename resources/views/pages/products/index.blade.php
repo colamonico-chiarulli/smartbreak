@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 22nd, 2021 9:12pm
  * -----
- * Last Modified: 	March 27th, 2021 7:17pm
+ * Last Modified: 	April 3rd 2021 12:25:40 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -50,12 +50,22 @@
 @section('content')
 <div class="row">
     <form class="form-inline" method="GET">
-        <div class="form-group mb-2">
-          <label for="filter" class="col-sm-2 col-form-label">Filtro</label>
-          <input type="text" class="form-control" id="filter" name="filter" placeholder="Nome prodotto..." value="{{$filter}}">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" id="filter" name="filter" placeholder="Nome prodotto..."
+                value="{{$filter}}">
+
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-info btn-flat">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+            <span class="input-group-append">
+                <a href="{{ route('products.index') }}" type="submit" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i>
+                </a>
+            </span>
         </div>
-        <button type="submit" class="btn btn-default mb-2">Filtra</button>
-      </form>
+    </form>
 
     <div class="col">
         <div class="float-right mb-2">
@@ -70,7 +80,7 @@
             <thead>
                 <tr>
                     @can('is-admin')
-                    <th>Sede</th>    
+                    <th>Sede</th>
                     @endcan
                     <th></th>
                     <th>@sortablelink('name', 'Nome')</th>
@@ -84,7 +94,7 @@
                 @foreach ($products as $product)
                 <tr id="row-{{ $product->id }}">
                     @can('is-admin')
-                        <td>{{ $product->site->name }}</td>
+                    <td>{{ $product->site->name }}</td>
                     @endcan
 
                     <td>
