@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February, 2nd 2021 11:05pm
  * -----
- * Last Modified: 	March 27th, 2021 7:17pm
+ * Last Modified: 	April 3rd 2021 12:13:51 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -74,22 +74,24 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Nome *</label>
-                                <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" placeholder="Inserisci un nome"
-                                    value="{{ $product->name ?? old('name') }}"
-                                    {{$readonly ?? ''}}>
+                                <input type="text" class="form-control @error('name')is-invalid @enderror" id="name"
+                                    name="name" placeholder="Inserisci un nome"
+                                    value="{{ $product->name ?? old('name') }}" {{$readonly ?? ''}}>
                             </div>
 
                             <div class=" form-group">
                                 <label for="description">Descrizione *</label>
-                                <textarea class="form-control @error('description')is-invalid @enderror" id="description" name="description"
-                                        placeholder="Inserisci una descrizione o gli ingredienti"
-                                        {{$readonly ?? ''}}>{{ $product->description ?? old('description') }}</textarea>
+                                <textarea class="form-control @error('description')is-invalid @enderror"
+                                    id="description" name="description"
+                                    placeholder="Inserisci una descrizione o gli ingredienti"
+                                    {{$readonly ?? ''}}>{{ $product->description ?? old('description') }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="price">Prezzo *</label>
                                 <div class="input-group">
-                                    <input type="number" min="0" step="0.01" class="form-control @error('price')is-invalid @enderror" id="price" name="price"
+                                    <input type="number" min="0" step="0.01"
+                                        class="form-control @error('price')is-invalid @enderror" id="price" name="price"
                                         placeholder="Inserisci il prezzo" value="{{ $product->price ?? old('price') }}"
                                         {{$readonly ?? ''}}>
                                     <div class="input-group-append">
@@ -101,10 +103,9 @@
 
                             <div class="form-group">
                                 <label for="allergens">Allergeni</label>
-                                <input type="text" class="form-control @error('allergens')is-invalid @enderror" id="allergens" name="allergens"
-                                    placeholder="Inserisci eventuali allergeni"
-                                    value="{{ $product->allergens ?? old('allergens') }}"
-                                    {{$readonly ?? ''}}>
+                                <input type="text" class="form-control @error('allergens')is-invalid @enderror"
+                                    id="allergens" name="allergens" placeholder="Inserisci eventuali allergeni"
+                                    value="{{ $product->allergens ?? old('allergens') }}" {{$readonly ?? ''}}>
                             </div>
 
                         </div>
@@ -128,19 +129,21 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="num_items">Quantità disponibile *</label>
-                                <input type="number" min="0" class="form-control @error('num_items')is-invalid @enderror" id="num_items" name="num_items"
-                                       placeholder="Inserisci la quantità disponibile"
-                                       value="{{ $product->num_items ?? old('num_items') }}"
-                                       {{$readonly ?? ''}}>
+                                <input type="number" min="0"
+                                    class="form-control @error('num_items')is-invalid @enderror" id="num_items"
+                                    name="num_items" placeholder="Inserisci la quantità disponibile"
+                                    value="{{ $product->num_items ?? old('num_items') }}" {{$readonly ?? ''}}>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="default_daily_stock">Disponibilità quotidiana</label>
-                                <input type="number" min="0" class="form-control @error('default_daily_stock')is-invalid @enderror" id="default_daily_stock"
-                                       name="default_daily_stock" placeholder="Inserisci la disponibilità quotidiana"
-                                       value="{{ $product->default_daily_stock ?? old('default_daily_stock') }}"
-                                       {{$readonly ?? ''}}>
+                                <input type="number" min="0"
+                                    class="form-control @error('default_daily_stock')is-invalid @enderror"
+                                    id="default_daily_stock" name="default_daily_stock"
+                                    placeholder="Inserisci la disponibilità quotidiana"
+                                    value="{{ $product->default_daily_stock ?? old('default_daily_stock') }}"
+                                    {{$readonly ?? ''}}>
                             </div>
                         </div>
                     </div>
@@ -148,25 +151,33 @@
 
                     <div class="form-group">
                         <label for="category_id">Categoria *</label>
-                        <select class="form-control @error('category_id')is-invalid @enderror" id="category_id" name="category_id" {{$readonly ?? ''}}>
+                        <select class="form-control @error('category_id')is-invalid @enderror" id="category_id"
+                            name="category_id" {{$readonly ?? ''}}>
                             <option value="">Seleziona una categoria</option>
-                            @foreach ($catename
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ isset($product) && $category->id == $product->category_id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 
                     @can('is-admin')
                     <div class="form-group">
                         <label for="site_id">Sede *</label>
-                        <select class="form-control @error('site_id')is-invalid @enderror" id="site_id" name="site_id" {{$readonly ?? ''}}>
+                        <select class="form-control @error('site_id')is-invalid @enderror" id="site_id" name="site_id"
+                            {{$readonly ?? ''}}>
                             <option value="">Seleziona una sede</option>
                             @foreach ($sites as $site)
-                            <option value="{{ $site->id }}" {{ isset($product) && ($site->id == $product->site_id) ? 'selected' : '' }}>
+                            <option value="{{ $site->id }}"
+                                {{ isset($product) && ($site->id == $product->site_id) ? 'selected' : '' }}>
                                 {{ $site->name }}
                             </option>
                             @endforeach
                         </select>
                     </div>
-                     @endcan
+                    @endcan
 
 
                 </div>
@@ -183,7 +194,7 @@
 
 @include('plugins.filepond')
 @push('js')
-    <script>
-        const pond = FilePond.create(document.getElementById('photo'));
-    </script>
+<script>
+    const pond = FilePond.create(document.getElementById('photo'));
+</script>
 @endpush
