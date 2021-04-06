@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 2nd, 2020 11:05pm
  * -----
- * Last Modified: 	February 14th, 2021 11:16pm
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 6th 2021 6:04:10 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -49,18 +49,20 @@
 
     <div class="product-title m-2">
         <b>{{ $product->name }}</b>
-        <span data-toggle="tooltip" data-placement="right" title="Allergeni: {{ $product->allergens }}">
-            <span class="fa-stack" style="font-size: 12px">
-                <i class="far fa-circle fa-stack-2x text-success"></i>
-                <i class="fas fa-leaf fa-stack-1x text-success"></i>
+        @if($product->allergens != "")
+            <span data-toggle="tooltip" data-placement="right" title="Allergeni: {{ $product->allergens }}">
+                <span class="fa-stack" style="font-size: 12px">
+                    <i class="far fa-circle fa-stack-2x text-success"></i>
+                    <i class="fas fa-leaf fa-stack-1x text-success"></i>
+                </span>
             </span>
-        </span>
+        @endif
     </div>
 
 
     <div class="product-content d-flex">
         <div class="product-image d-flex align-items-center">
-            <img src="{{ $product->photo_url }}" class="img-fluid">
+            <img src="{{ $product->photo_url }}" class="img-fluid" height="">
         </div>
 
 
