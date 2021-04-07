@@ -1,12 +1,12 @@
 <?php
 /**
- * File:	/resources/views/pages/analytics/index.blade.php
+ * File:	/app/Http/Controllers/ViewAnalyticsController.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 7th 2021 11:54:21 am
+ * Last Modified: 	April 7th 2021 11:48:32 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,37 +45,36 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Home page'])
+<?php
 
-@include('plugins.chartjs')
+namespace App\Http\Controllers;
 
-@section('content')
-    <canvas id="myChart" width="400" height="400"></canvas>
-@endsection
+use Illuminate\Http\Request;
+use App\Models\ViewOrderByDay;
+use App\Models\Site;
+use Illuminate\Database\Eloquent\Builder;
 
-@push('js')
-    <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-
-        // labels => giorni
-        // data => fatturato giornaliero
-        labels: @json($labels),
-        datasets: @json($datasets)
-    },
-    options: {
-        responsive:true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+class ViewAnalyticsController extends Controller
+{
+    public function getAnalyticsPage()
+    {
+        $datasets = [];
+        $sites = Site::all();
+        for ($i=0; $i<=count($sites); $i++) {
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
         }
+        
+        foreach ($sites as $site) {
+            $orders = ViewOrderByDay::Where('site_id', $site->id)->pluck('total','date_day')->all();        
+        
+        $datasets[] = [
+                'label' => $site->name,
+                'data' => array_values($orders),
+                'backgroundColor' => '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6),
+            ];
+        }
+        $labels = array_keys($orders);
+
+        return view('pages.analytics.index', compact('datasets', 'labels','colours'));
     }
-});
-    </script>
-@endpush
+}

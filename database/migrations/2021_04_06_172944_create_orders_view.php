@@ -1,12 +1,12 @@
 <?php
 /**
- * File:	/resources/views/pages/analytics/index.blade.php
+ * File:	/database/migrations/2021_04_06_172944_create_orders_view.php
  * @package smartbreak
- * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: 	March 30th, 2021 10:54am
+ * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 7th 2021 11:54:21 am
+ * Last Modified: 	April 7th 2021 10:12:16 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,37 +45,68 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Home page'])
+<?php
 
-@include('plugins.chartjs')
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-@section('content')
-    <canvas id="myChart" width="400" height="400"></canvas>
-@endsection
-
-@push('js')
-    <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-
-        // labels => giorni
-        // data => fatturato giornaliero
-        labels: @json($labels),
-        datasets: @json($datasets)
-    },
-    options: {
-        responsive:true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+class CreateOrdersView extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        DB::statement($this->createView1());
+        DB::statement($this->createView2());
     }
-});
-    </script>
-@endpush
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+
+    /**
+     * createView.
+     *
+     * @access	private
+     * @return	void
+     */
+    private function createView1(): string
+    {
+        return <<< END
+        CREATE OR REPLACE VIEW orders_amount_by_id AS
+        SELECT order_id, SUM(quantity*price) as total, site_id, class_id, DATE(orders.created_at) as date_day 
+              from order_product 
+              INNER JOIN orders ON order_id=orders.id 
+              INNER JOIN users ON user_id=users.id 
+              GROUP BY order_id;
+        END;
+    }
+
+    /**
+     * createView.
+     *
+     * @access	private
+     * @return	void
+     */
+    private function createView2(): string
+    {
+        return <<< END
+        CREATE OR REPLACE VIEW orders_amount_by_site_day AS 
+        SELECT site_id, date_day, SUM(total) as total from orders_amount_by_id 
+               GROUP BY site_id, date_day
+               ORDER BY site_id, date_day; 
+        END;
+    }
+
+}

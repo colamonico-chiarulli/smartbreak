@@ -1,12 +1,12 @@
 <?php
 /**
- * File:	/resources/views/pages/analytics/index.blade.php
+ * File:	/app/Models/ViewOrderById.php
  * @package smartbreak
- * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: 	March 30th, 2021 10:54am
+ * Created Date: Wednesday, April 7th 2021, 10:18:58 am
  * -----
- * Last Modified: 	April 7th 2021 11:54:21 am
+ * Last Modified: 	April 7th 2021 10:22:26 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,37 +45,25 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Home page'])
+<?php
 
-@include('plugins.chartjs')
+namespace App\Models;
 
-@section('content')
-    <canvas id="myChart" width="400" height="400"></canvas>
-@endsection
+use Illuminate\Database\Eloquent\Model;
 
-@push('js')
-    <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+class ViewOrderById extends Model
+{
+    protected $table = 'orders_amount_by_id';
 
-        // labels => giorni
-        // data => fatturato giornaliero
-        labels: @json($labels),
-        datasets: @json($datasets)
-    },
-    options: {
-        responsive:true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+    // relationships
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class, 'site_id');
     }
-});
-    </script>
-@endpush
+
+    public function class()
+    {
+        return $this->belongsTo(SchoolClass::class, 'class_id');
+    }
+}
