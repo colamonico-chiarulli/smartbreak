@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File:	/app/Http/Controllers/ViewAnalyticsController.php
  * @package smartbreak
@@ -6,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 7th 2021 11:48:32 am
+ * Last Modified: 	April 7th 2021 4:20:34 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -60,14 +61,12 @@ class ViewAnalyticsController extends Controller
     {
         $datasets = [];
         $sites = Site::all();
-        for ($i=0; $i<=count($sites); $i++) {
-            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-        }
-        
+
         foreach ($sites as $site) {
-            $orders = ViewOrderByDay::Where('site_id', $site->id)->pluck('total','date_day')->all();        
-        
-        $datasets[] = [
+            $orders = ViewOrderByDay::Where('site_id', $site->id)->pluck('total', 'date_day')->all();
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+
+            $datasets[] = [
                 'label' => $site->name,
                 'data' => array_values($orders),
                 'backgroundColor' => '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6),
@@ -75,6 +74,6 @@ class ViewAnalyticsController extends Controller
         }
         $labels = array_keys($orders);
 
-        return view('pages.analytics.index', compact('datasets', 'labels','colours'));
+        return view('pages.analytics.index', compact('datasets', 'labels', 'colours'));
     }
 }
