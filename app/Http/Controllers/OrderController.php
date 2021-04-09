@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	April 9th 2021 4:29:09 pm
+ * Last Modified: 	April 9th 2021 9:30:54 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -53,6 +53,7 @@ use App\Models\Order;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -128,18 +129,52 @@ class OrderController extends Controller
         return $data;
     }
 
-
-    // CALLED BY STUDENT
+    
+    /**
+     * getOrdersOfTodayByClass()
+     * 
+     * CALLED BY STUDENT
+     * @access	public
+     * @return	mixed
+     */
     public function getOrdersOfTodayByClass()
     {
         $class_id = auth()->user()->class->id;
-        $date = $date=date('Y-m-d');
-        $classes = $this->getOrders($class_id, $date);
+        $class_name= auth()->user()->class->name; 
+        $date = date('Y-m-d');
         
-        /**
-         * TODO: Rivedere fornendo elenco ordini per studenti della classe utente
-         */
+        /*
+        SELECT users.id, last_name, first_name, products.id, products.name, SUM(order_product.quantity), 
+                SUM(order_product.price * order_product.quantity) as total FROM `orders` 
+                INNER JOIN order_product on id = order_id
+                INNER JOIN users on user_id = users.id
+                INNER JOIN products on product_id = products.id
+                WHERE class_id = $class_id
+                AND DATE(orders.created_at) = $date
+                GROUP BY users.id, products.id
+                ORDER BY last_name, first_name
+        */   
+   
+        $orders = DB::table('orders')
+                ->join('order_product', 'id', '=', 'order_id')
+                ->join('products', 'product_id', '=', 'products.id')
+                ->join('users', 'user_id', '=', 'users.id')
+                ->select('user_id', 'users.last_name', 'users.first_name', 'products.id', 'products.name', 
+                         DB::raw('SUM(quantity) as quantity'),
+                         DB::raw('SUM(order_product.price * order_product.quantity) as total')
+                         )
+                ->whereDate('orders.created_at', $date)
+                ->where('class_id', $class_id)
+                ->groupBy('user_id', 'product_id')
+                ->orderBy('last_name','asc')
+                ->orderBy('first_name','asc')
+                ->get();
         
-        return view('pages.orders.orders-by-day', compact('classes','date'));
+
+        //$users=$orders->map->only(['user_id', 'first_name', 'last_name'])->unique();
+        $users=$orders->pluck('user_id')->unique()->toArray();
+        $orders=$orders->groupBy('user_id')->toArray();
+        
+        return view('pages.orders.orders-by-class', compact('users','orders','class_name'));
     }
 }
