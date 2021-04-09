@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	March 15th, 2021 5:15pm
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 9th 2021 4:29:09 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -96,6 +96,7 @@ class OrderController extends Controller
     private function getOrders($class_id = null, $date)
     {
         $data = Order::with('products', 'user')->whereDate('created_at', $date);
+        
 
         if ($class_id) {
             $data->whereHas('user', function (Builder $query) use ($class_id) {
@@ -132,9 +133,13 @@ class OrderController extends Controller
     public function getOrdersOfTodayByClass()
     {
         $class_id = auth()->user()->class->id;
-
-        $classes = $this->getOrders($class_id);
-
-        return view('pages.orders.orders-by-day', compact('classes'));
+        $date = $date=date('Y-m-d');
+        $classes = $this->getOrders($class_id, $date);
+        
+        /**
+         * TODO: Rivedere fornendo elenco ordini per studenti della classe utente
+         */
+        
+        return view('pages.orders.orders-by-day', compact('classes','date'));
     }
 }
