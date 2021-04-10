@@ -71,6 +71,13 @@ var myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
+        },
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItems, data) {
+                    return formatPrice(tooltipItems.yLabel);
+                }
+            }
         }
     }
 });
