@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Friday, April 9th 2021, 9:19:53 pm
  * -----
- * Last Modified: 	April 9th 2021 9:26:50 pm
+ * Last Modified: 	April 10th 2021 11:15:00 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -46,20 +46,18 @@
 
 ?>
 
-
-?>
 @extends('layouts.app', ['title' => 'Ordini della Classe '. $class_name])
 
 @section('content')
 
 
-@foreach($users as $user)
+@foreach($orders as $user=>$order)
 
 <div id="accordion">
     <div class="card">
         <div class="card-header cursor-pointer" data-toggle="collapse" href="#user-{{$user}}">
             <h3 class="card-title text-bold" data-card-widget="collapse">{{ $orders[$user][0]->last_name}} {{ $orders[$user][0]->first_name }}</h3>
-
+            <h6 class="text-right"> {{ formatPrice(collect($orders[$user])->sum('total')) }}</h6>
             {{-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -117,5 +115,9 @@
 </div>
 
 @endforeach
+<div class="text-right">
+    <h4>Totale classe: <b>{{ formatPrice(collect($orders)->collapse('total')->sum('total')) }}</h4> 
+</div>
+
 
 @endsection
