@@ -11,36 +11,36 @@
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
- * SmartBreak is a School Bar food booking web application 
- * developed during the PON course "The AppFactory" 2020-2021 with teachers 
- * & students of "Informatica e Telecomunicazioni" 
+ * SmartBreak is a School Bar food booking web application
+ * developed during the PON course "The AppFactory" 2020-2021 with teachers
+ * & students of "Informatica e Telecomunicazioni"
  * at IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
  * Expert dr. Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * ----------------------------------------------------------------------------
  * SmartBreak is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by
  * the Free Software Foundation
- * 
+ *
  * SmartBreak is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
  * details.
- * You should have received a copy of the GNU Affero General Public License along 
+ * You should have received a copy of the GNU Affero General Public License along
  * with this program; if not, see http://www.gnu.org/licenses or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301 USA.
- * 
+ *
  * The interactive user interfaces in original and modified versions
  * of this program must display Appropriate Legal Notices, as required under
  * Section 5 of the GNU Affero General Public License version 3.
- * 
+ *
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the SmartBreak
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
- * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
+ * is not reasonably feasible for technical reasons, the Appropriate Legal Notices
  * must display the words
  * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
- * 
+ *
  * ------------------------------------------------------------------------------
  */
 
@@ -71,9 +71,9 @@ class OrdersTableSeeder extends Seeder
         //Per ogni studente
         foreach ($students as $student) {
             // Crea da 1 a 10 Ordini
-            $nOrders = mt_rand(1,10);
-            for($i=0; $i < $nOrders; $i++) { 
-                $dateTime=$faker->dateTimeBetween('-10 day', 'now','Europe/Rome');
+            $nOrders = mt_rand(1, 10);
+            for ($i=0; $i < $nOrders; $i++) {
+                $dateTime=$faker->dateTimeBetween('-10 day', 'now', 'Europe/Rome');
                 $order = $student->orders()->create([
                     'created_at' => $dateTime,
                     'updated_at' => $dateTime,
@@ -81,13 +81,13 @@ class OrdersTableSeeder extends Seeder
 
                 //Ciascun ordine ha da 1 a 5 prodotti casuali della sede dell'utente
                 $faker = Faker\Factory::create('it_IT');
-                $nProducts = mt_rand(1,5);
-                for($p=0; $p <= $nProducts; $p++) { 
-                    if ($student->site_id == 1){
+                $nProducts = mt_rand(1, 5);
+                for ($p=0; $p <= $nProducts; $p++) {
+                    if ($student->site_id == 1) {
                         $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
                     } else {
                         $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
-                    }    
+                    }
 
                     $order->products()->attach($product->id, [
                         'quantity' => $faker->numberBetween(1, 5),
