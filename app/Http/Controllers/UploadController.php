@@ -56,6 +56,13 @@ class UploadController extends Controller
 {
     public function store(Request $request)
     {
+
+        // image validation rule => The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).
+
+        $request->validate([
+            'photo' => ['required', 'image']
+        ]);
+
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = $file->getClientOriginalName();//uniqid(). '-'. now()->timestamp.'.'.$file->extension();

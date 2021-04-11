@@ -52,10 +52,10 @@
 <div class="row justify-content-between mb-2">
 
 
-    <div class="col-12 col-md-3">
+    <div class="col-12 col-md-3 d-flex align-items-center">
         <form action="{{ route('cart.choose-products') }}">
-            <div class="input-group  input-group-sm" style="max-width: 400px;">
-                <input name="search_name" type="text" class="form-control" value="{{ $search_name }}">
+            <div class="input-group  input-group-sm">
+                <input name="search_name" type="text" class="form-control" value="{{ $search_name }}" placeholder="Cerca prodotto..">
                 <span class="input-group-append">
                     <a href="{{ route('cart.choose-products') }}" type="submit" class="btn btn-danger btn-flat">
                         <i class="fas fa-times"></i>
