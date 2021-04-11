@@ -108,7 +108,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product = null)
     {
 
         //Imposta la sede del prodotto
@@ -120,21 +120,26 @@ class ProductController extends Controller
         // validare i dati di input
         $request->validate(Product::validationRules());
 
-        $product = Product::create($request->all());
+
+        if ($product) {
+            $product->update($request->all());
+        } else {
+            $product = Product::create($request->all());
+        }
 
         if (request()->photo) {
             $temporaryFile = TemporaryFile::where('folder', $request->photo)->first();
             if ($temporaryFile) {
-                $product->addMedia(
-                    storage_path("app/public/products/tmp/{$request->photo}/{$temporaryFile->filename}")
-                )->toMediaCollection('product_photo');
-                rmdir(storage_path("app/public/products/tmp/{$request->photo}"));
+                $product->clearMediaCollection('product_photo');
+                $tmp_folder = storage_path("app/public/products/tmp/{$request->photo}");
+                $product->addMedia("{$tmp_folder}/{$temporaryFile->filename}")->toMediaCollection('product_photo');
+                rmdir($tmp_folder);
                 $temporaryFile->delete();
             }
         }
 
         return redirect()->route('products.index')
-            ->with('success', 'Prodotto aggiunto.');
+            ->with('success', $product ? 'Prodotto aggiornato' : 'Prodotto aggiunto.');
     }
 
     /**
@@ -172,23 +177,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-
-        //Imposta la sede del prodotto
-        if (!isset($request->site_id)) {
-            $site = auth()->user()->site_id;
-            $request->request->add(['site_id' => $site]);
-        }
-
-        $request->validate(Product::validationRules());
-
-        if (request()->photo) {
-            Storage::move('temp/' . request()->photo, 'img/products/' . request()->photo);
-            $product->update(['photo_path' => request()->photo]);
-        }
-
-        $product->update($request->all());
-        return redirect()->route('products.index')
-            ->with('success', 'Prodotto aggiornato!');
+        return $this->store($request, $product);
     }
 
     /**

@@ -117,10 +117,12 @@
                             </div>
                             @endif
 
+                            @if(!isset($readonly) or !$readonly)
                             <div class="form-group">
                                 <label for="photo_path">Foto prodotto*</label>
                                 <input type="file" id="photo" name="photo">
                             </div>
+                            @endif
                         </div>
 
                     </div>
