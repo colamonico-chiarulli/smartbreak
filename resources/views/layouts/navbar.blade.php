@@ -175,7 +175,7 @@
             @endcan
 
             <li class="nav-item">
-                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }} <small class="text-muted">{{ auth()->user()->role }}</small></a>
+                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }} {{-- <small class="text-muted">{{ auth()->user()->role }}</small>--}}</a>
             </li>
 
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

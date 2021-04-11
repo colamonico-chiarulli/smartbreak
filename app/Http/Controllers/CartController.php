@@ -11,36 +11,36 @@
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
- * SmartBreak is a School Bar food booking web application 
- * developed during the PON course "The AppFactory" 2020-2021 with teachers 
- * & students of "Informatica e Telecomunicazioni" 
+ * SmartBreak is a School Bar food booking web application
+ * developed during the PON course "The AppFactory" 2020-2021 with teachers
+ * & students of "Informatica e Telecomunicazioni"
  * at IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
  * Expert dr. Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * ----------------------------------------------------------------------------
  * SmartBreak is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by
  * the Free Software Foundation
- * 
+ *
  * SmartBreak is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
  * details.
- * You should have received a copy of the GNU Affero General Public License along 
+ * You should have received a copy of the GNU Affero General Public License along
  * with this program; if not, see http://www.gnu.org/licenses or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301 USA.
- * 
+ *
  * The interactive user interfaces in original and modified versions
  * of this program must display Appropriate Legal Notices, as required under
  * Section 5 of the GNU Affero General Public License version 3.
- * 
+ *
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the SmartBreak
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
- * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
+ * is not reasonably feasible for technical reasons, the Appropriate Legal Notices
  * must display the words
  * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
- * 
+ *
  * ------------------------------------------------------------------------------
  */
 
@@ -116,20 +116,20 @@ class CartController extends Controller
         $cart_items = session('cart');
 
         // Controllare che ogni prodotto selezionato abbia una quantità minore o uguale di quella disponibile
-        $unavaiable_products = [];
+        $unavaiable_products_messages = [];
         foreach ($cart_items as $product_id => $product_quantity) {
             $product = Product::find($product_id);
 
             if ($product_quantity > $product->num_items) {
-                $unavaiable_products[] = [$product_id => $product->num_items];
+                $unavaiable_products_messages[] = "Sono presenti solo {$product->num_items} unità del prodotto {$product->name}";
             }
         }
 
         // Restituire all'utente un errore contenente il messaggio: Non ci sono abbastanza unità per questo prodotto.
-        if (count($unavaiable_products) > 0) {
+        if (count($unavaiable_products_messages) > 0) {
             return response()->json([
                 'success' => false,
-                'unavailability_products' => $unavaiable_products
+                'error_msgs' => $unavaiable_products_messages
             ]);
         }
 
