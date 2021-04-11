@@ -138,8 +138,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('products.index')
-            ->with('success', $product ? 'Prodotto aggiornato' : 'Prodotto aggiunto.');
+        return redirect()->route('products.index')->with('success', 'Prodotto salvato');
     }
 
     /**
