@@ -116,20 +116,22 @@ class CartController extends Controller
         $cart_items = session('cart');
 
         // Controllare che ogni prodotto selezionato abbia una quantità minore o uguale di quella disponibile
-        $unavaiable_products_messages = [];
+
+        $over_max_units_messages = [];
         foreach ($cart_items as $product_id => $product_quantity) {
             $product = Product::find($product_id);
 
-            if ($product_quantity > $product->num_items) {
-                $unavaiable_products_messages[] = "Sono presenti solo {$product->num_items} unità del prodotto {$product->name}";
+            $max_units_ordable = min($product->num_items, config('smartbreak.max_units_ordable'));
+
+            if ($product_quantity > $max_units_ordable) {
+                $over_max_units_messages[] = "Non puoi ordare più di <b>{$max_units_ordable}</b> unità del prodotto <b>{$product->name}</b>";
             }
         }
 
-        // Restituire all'utente un errore contenente il messaggio: Non ci sono abbastanza unità per questo prodotto.
-        if (count($unavaiable_products_messages) > 0) {
+        if (count($over_max_units_messages) > 0) {
             return response()->json([
                 'success' => false,
-                'error_msgs' => $unavaiable_products_messages
+                'error_msgs' => $over_max_units_messages
             ]);
         }
 
