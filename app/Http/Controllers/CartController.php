@@ -65,7 +65,7 @@ class CartController extends Controller
                 ->orderBy('name');
         }])->orderBy('name')->get();
 
-        return view('pages.home', compact('categories', 'search_name'));
+        return view('pages.choose-products', compact('categories', 'search_name'));
     }
 
     public function editCart()

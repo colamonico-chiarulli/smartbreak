@@ -1,6 +1,6 @@
 <?php
 /**
- * File:	/resources/views/pages/home.blade.php
+ * File:	/resources/views/pages/choose-products.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
@@ -49,28 +49,32 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-2">
+<div class="row justify-content-between mb-2">
 
-    <form action="{{ route('cart.choose-products') }}">
-        <div class="input-group" style="max-width: 400px;">
-            <input name="search_name" type="text" class="form-control" value="{{ $search_name }}">
-            <span class="input-group-append">
-                <button type="submit" class="btn btn-info btn-flat">
-                    <i class="fas fa-search"></i>
-                </button>
-            </span>
-            <span class="input-group-append">
-                <a href="{{ route('cart.choose-products') }}" type="submit" class="btn btn-danger btn-flat">
-                    <i class="fas fa-times"></i>
-                </a>
-            </span>
-        </div>
-    </form>
+    <div class="col-12 col-md-3">
+        <form action="{{ route('cart.choose-products') }}">
+            <div class="input-group" style="max-width: 400px;">
+                <input name="search_name" type="text" class="form-control" value="{{ $search_name }}">
+                <span class="input-group-append">
+                    <button type="submit" class="btn btn-info btn-flat">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </span>
+                <span class="input-group-append">
+                    <a href="{{ route('cart.choose-products') }}" type="submit" class="btn btn-danger btn-flat">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </span>
+            </div>
+        </form>
+    </div>
 
 
-    <a class="text-danger" href="javascript:;" onclick="emptyCart()">
-        <i class="fa fa-cart-arrow-down"></i> Svuota carrello
-    </a>
+    <div class="col-12 col-md-3 my-3 text-right">
+        <a class="text-danger" href="javascript:;" onclick="emptyCart()">
+            <i class="fa fa-cart-arrow-down"></i> Svuota carrello
+        </a>
+    </div>
 
 </div>
 
