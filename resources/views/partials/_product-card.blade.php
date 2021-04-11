@@ -62,7 +62,7 @@
 
     <div class="product-content d-flex">
         <div class="product-image d-flex align-items-center">
-            <img src="{{ $product->photo_url }}" class="img-fluid" height="">
+            <img src="{{ $product->getFirstMediaUrl('product_photo') }}" class="img-fluid" height="">
         </div>
 
 

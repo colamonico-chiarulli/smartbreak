@@ -98,7 +98,7 @@
                     @endcan
 
                     <td class="text-center">
-                        <img src="{{ asset('img/products/' . $product->photo_path) }}" alt="" height="35px">
+                        <img src="{{ $product->getFirstMediaUrl('product_photo') }}" alt="" height="35px">
                     </td>
                     <td>{{ $product->name }}</td>
                     <td>{{ formatPrice($product->price) }}</td>

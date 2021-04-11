@@ -111,7 +111,7 @@ class FirstMigration extends Migration
             $table->decimal('price', 6, 2);
             $table->integer('num_items');
             $table->integer('default_daily_stock');
-            $table->string('photo_path')->nullable();
+            // $table->string('photo_path')->nullable();
 
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('site_id')->constrained('sites');
