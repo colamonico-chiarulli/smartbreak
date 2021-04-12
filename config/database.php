@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	
- * Modified By: 	
+ * Last Modified: 	April 10th 2021 11:39:26 am
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -104,6 +104,15 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
+                'modes' => [
+                 //'ONLY_FULL_GROUP_BY', // Disable this to allow grouping by one column
+                 'STRICT_TRANS_TABLES',
+                 'NO_ZERO_IN_DATE',
+                 'NO_ZERO_DATE',
+                 'ERROR_FOR_DIVISION_BY_ZERO',
+                 //'NO_AUTO_CREATE_USER',
+                 'NO_ENGINE_SUBSTITUTION'
+             ],
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
