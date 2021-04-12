@@ -11,36 +11,36 @@
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
- * SmartBreak is a School Bar food booking web application 
- * developed during the PON course "The AppFactory" 2020-2021 with teachers 
- * & students of "Informatica e Telecomunicazioni" 
+ * SmartBreak is a School Bar food booking web application
+ * developed during the PON course "The AppFactory" 2020-2021 with teachers
+ * & students of "Informatica e Telecomunicazioni"
  * at IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
  * Expert dr. Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * ----------------------------------------------------------------------------
  * SmartBreak is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by
  * the Free Software Foundation
- * 
+ *
  * SmartBreak is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
  * details.
- * You should have received a copy of the GNU Affero General Public License along 
+ * You should have received a copy of the GNU Affero General Public License along
  * with this program; if not, see http://www.gnu.org/licenses or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301 USA.
- * 
+ *
  * The interactive user interfaces in original and modified versions
  * of this program must display Appropriate Legal Notices, as required under
  * Section 5 of the GNU Affero General Public License version 3.
- * 
+ *
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the SmartBreak
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
- * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
+ * is not reasonably feasible for technical reasons, the Appropriate Legal Notices
  * must display the words
  * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
- * 
+ *
  * ------------------------------------------------------------------------------
  */
 
@@ -50,6 +50,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Product;
 use DB;
 
 class ProductsTableSeeder extends Seeder
@@ -71,8 +72,9 @@ class ProductsTableSeeder extends Seeder
             ['name' => 'Panini'],
         ]);
 
-        //Sede 1
-        $products=array(
+
+        $products = [
+            //Sede 1
           array("name"=>"Ace","description"=>"Brick all'ace","allergens"=>"","price"=>0.50,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"succo_brick_ace.jpg","category_id"=>5,"site_id"=>1),
           array("name"=>"Acqua frizzante","description"=>"Acqua frizzante da 500ml","allergens"=>"","price"=>0.30,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"acqua_frizzante.png","category_id"=>4,"site_id"=>1),
           array("name"=>"Acqua naturale","description"=>"Acqua naturale da 500ml","allergens"=>"","price"=>0.30,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"acqua_naturale.png","category_id"=>4,"site_id"=>1),
@@ -147,13 +149,9 @@ class ProductsTableSeeder extends Seeder
           array("name"=>"Wacko's Ketchup","description"=>"Patatine Wacko's gusto ketchup","allergens"=>"","price"=>0.70,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"wacko_s_ketchup.png","category_id"=>1,"site_id"=>1),
           array("name"=>"Wafer cioccolato","description"=>"Wafer gusto cioccolato","allergens"=>"","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"wafer_cioccolato.png","category_id"=>3,"site_id"=>1),
           array("name"=>"Wafer nocciola","description"=>"Wafer gusto nocciola","allergens"=>"","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"wafer_nocciola.png","category_id"=>3,"site_id"=>1),
-          array("name"=>"Waffle YooHoo cacao","description"=>"Waffle YooHoo gusto cacao","allergens"=>"uova, lattosio","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"waffle_yoohoo_cacao.png","category_id"=>3,"site_id"=>1)
-        );
+          array("name"=>"Waffle YooHoo cacao","description"=>"Waffle YooHoo gusto cacao","allergens"=>"uova, lattosio","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"waffle_yoohoo_cacao.png","category_id"=>3,"site_id"=>1),
 
-        DB::table('products')->insert($products);
-
-        //Sede 2
-        $products2=array(
+          // site2
           array("name"=>"Ace","description"=>"Chiarulli: Brick all'ace","allergens"=>"","price"=>0.50,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"succo_brick_ace.jpg","category_id"=>5,"site_id"=>2),
           array("name"=>"Acqua frizzante","description"=>"Chiarulli: Acqua frizzante da 500ml","allergens"=>"","price"=>0.30,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"acqua_frizzante.png","category_id"=>4,"site_id"=>2),
           array("name"=>"Acqua naturale","description"=>"Chiarulli: Acqua naturale da 500ml","allergens"=>"","price"=>0.30,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"acqua_naturale.png","category_id"=>4,"site_id"=>2),
@@ -229,9 +227,11 @@ class ProductsTableSeeder extends Seeder
           array("name"=>"Wafer cioccolato","description"=>"Chiarulli: Wafer gusto cioccolato","allergens"=>"","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"wafer_cioccolato.png","category_id"=>3,"site_id"=>2),
           array("name"=>"Wafer nocciola","description"=>"Chiarulli: Wafer gusto nocciola","allergens"=>"","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"wafer_nocciola.png","category_id"=>3,"site_id"=>2),
           array("name"=>"Waffle YooHoo cacao","description"=>"Chiarulli: Waffle YooHoo gusto cacao","allergens"=>"uova, lattosio","price"=>0.80,"num_items"=>100,"default_daily_stock"=>50,"photo_path"=>"waffle_yoohoo_cacao.png","category_id"=>3,"site_id"=>2)
-        );
-                
-        DB::table('products')->insert($products2);
+        ];
 
+        foreach ($products as $p) {
+            $product = Product::create(collect($p)->forget('photo_path')->toArray());
+            $product->addMedia(public_path('img/products/'.$p['photo_path']))->preservingOriginal()->toMediaCollection('product_photo');
+        }
     }
 }
