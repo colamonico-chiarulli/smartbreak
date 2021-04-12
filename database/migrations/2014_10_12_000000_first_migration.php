@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 12th 2021 7:57:40 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -63,7 +63,6 @@ class FirstMigration extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('name', 25)->unique();
-            $table->string('color', 10);
             $table->timestamps();
         });
 

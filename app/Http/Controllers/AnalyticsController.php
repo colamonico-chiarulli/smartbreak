@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified:
- * Modified By:
+ * Last Modified: 	April 12th 2021 8:15:44 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ class AnalyticsController extends Controller
             $datasets[] = [
                 'label' => $site->name,
                 'data' => $orders->pluck('total'),
-                'backgroundColor' => $site->color,
+                'backgroundColor' => '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6),
             ];
         }
 

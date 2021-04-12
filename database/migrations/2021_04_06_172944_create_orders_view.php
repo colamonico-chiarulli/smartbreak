@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 7th 2021 12:53:41 pm
+ * Last Modified: 	April 12th 2021 8:10:43 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -103,7 +103,7 @@ class CreateOrdersView extends Migration
     {
         return <<< END
         CREATE OR REPLACE VIEW orders_amount_by_site_day AS 
-        SELECT site_id, DATE_FORMAT(date_day,'%d-%m-%Y') as date_day, SUM(total) as total from orders_amount_by_id 
+        SELECT site_id, date_day, SUM(total) as total from orders_amount_by_id 
                GROUP BY site_id, date_day
                ORDER BY site_id, date_day; 
         END;

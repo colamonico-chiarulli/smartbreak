@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 26th, 2021 6:21pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Last Modified: 	April 12th 2021 7:58:08 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -63,8 +63,8 @@ class ClassesTableSeeder extends Seeder
     public function run()
     {
         DB::table('sites')->insert([
-            ['id' => 1, 'name' => 'Colamonico', 'color' => '#1E88E5'],
-            ['id' => 2, 'name' => 'Chiarulli', 'color' => '#F44336']
+            ['id' => 1, 'name' => 'Colamonico'],
+            ['id' => 2, 'name' => 'Chiarulli']
         ]);
 
         $classes = [

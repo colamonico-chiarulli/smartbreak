@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 12th 2021 7:36:34 pm
+ * Last Modified: 	April 12th 2021 8:16:56 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -61,7 +61,6 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AnalyticsController;
-use App\Http\Controllers\ViewAnalyticsController;
 use App\Http\Controllers\CronController;
 
 use Illuminate\Support\Facades\Auth;
@@ -123,7 +122,6 @@ Route::group(['middleware' => 'auth'], function () {
     // ADMIN AREA
     Route::group(['middleware' => 'can:is-admin'], function () {
         Route::get('analytics', [AnalyticsController::class, 'getAnalyticsPage'])->name('analytics');
-        Route::get('view-analytics', [ViewAnalyticsController::class, 'getAnalyticsPage'])->name('view-analytics');
 
         Route::resource('sites', SiteController::class);
         Route::resource('classes', SchoolclassController::class);
