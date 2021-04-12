@@ -13,8 +13,8 @@ return [
     */
     'middlewares' => [
         'web',
-        'auth',
-        'can:is-admin'
+        //'auth',
+        //'can:is-admin'
     ],
 
     /*
