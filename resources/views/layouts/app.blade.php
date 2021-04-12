@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="layout-top-nav control-sidebar-slide-open sidebar-collapse">
+<body class="layout-top-nav control-sidebar-slide-open sidebar-collapse layout-navbar-fixed">
 
     <div class="wrapper">
 

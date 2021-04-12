@@ -65,6 +65,7 @@
                 $("input.cart-product-items").val(0);
                 $(".cart-product-totals").html(formatPrice(0));
                 $(".cart-total").html(formatPrice(0));
+                $(".cart-num-items").html(0);
             },
         });
     }
@@ -96,6 +97,7 @@
     function reloadTotal() {
         $.get(get_cart_route, function (res) {
             $(".cart-total").html(formatPrice(res.total));
+            $(".cart-num-items").html(res.num_items);
         });
     }
 

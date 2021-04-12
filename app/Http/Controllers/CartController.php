@@ -90,6 +90,7 @@ class CartController extends Controller
 
         return [
             'cart' => session('cart'),
+            'num_items' => collect(session('cart'))->sum(),
             'total' => $products->sum(function ($product) {
                 return $product->price * session('cart.'.$product->id);
             })

@@ -81,28 +81,28 @@
 </div>
 
 
-
+<div id="categories-accordion">
 @foreach($categories as $category)
     @if($category->products->count())
-    <div id="categories-accordion">
-        <div class="card card-default">
-            <div class="card-header">
-                <h4 class="card-title w-100">
-                    <a class="d-block w-100" data-toggle="collapse" href="#category-{{ $category->id }}">
-                        {{ $category->name }} <small class="text-muted">{{ $category->products->count() }} prodotti</small>
-                    </a>
-                </h4>
-            </div>
-            {{-- tab apert: {{ $loop->first ? 'show' : 'collapse' }} --}}
-            <div id="category-{{ $category->id }}" class="collapse" data-parent="#categories-accordion">
-                <div class="card-body">
-                    @each('partials._product-card', $category->products, 'product')
-                </div>
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="card-title w-100">
+                <a class="d-block w-100 collapsed" data-toggle="collapse" href="#category-{{ $category->id }}">
+                    {{ $category->name }} <small class="text-muted">{{ $category->products->count() }} prodotti</small>
+                </a>
+            </h4>
+        </div>
+        {{-- tab apert: {{ $loop->first ? 'show' : 'collapse' }} --}}
+        <div id="category-{{ $category->id }}" class="collapse" data-parent="#categories-accordion">
+            <div class="card-body">
+                @each('partials._product-card', $category->products, 'product')
             </div>
         </div>
     </div>
     @endif
 @endforeach
+</div>
+
 
 <div class="text-center">
     <a class="btn btn-lg btn-success my-4" href="{{ route('cart.checkout') }}">

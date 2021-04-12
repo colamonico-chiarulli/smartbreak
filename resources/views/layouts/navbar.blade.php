@@ -169,9 +169,18 @@
             @can('is-student')
             <li class="nav-item">
                 <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
-                    🛒 &nbsp;<span class="cart-total">{{ formatPrice(0) }}</span>
+                    🛒
+                    <span class="badge badge-primary navbar-badge cart-num-items">0</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
+                    <span class="cart-total">{{ formatPrice(0) }}</span>
+                </a>
+            </li>
+
+
             @endcan
 
             <li class="nav-item">
