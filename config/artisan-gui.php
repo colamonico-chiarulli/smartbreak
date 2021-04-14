@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Tuesday, April 13th 2021, 12:34:54 pm
  * -----
- * Last Modified: 	April 13th 2021 12:36:23 pm
+ * Last Modified: 	April 14th 2021 12:28:13 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -126,17 +126,17 @@ return [
     'commands' => [
         'laravel' => [
             'clear-compiled',
-            'down',
-            'up',
-            'env',
-            'help',
-            'inspire',
-            'list',
-            'notifications:table',
+            //'down',
+            //'up',
+            //'env',
+            //'help',
+            //'inspire',
+            //'list',
+            //'notifications:table',
             'package:discover',
             'schedule:run',
             'schema:dump',
-            'session:table',
+            //'session:table',
             'storage:link',
             'stub:publish',
             'auth:clear-resets',
@@ -148,20 +148,23 @@ return [
         'cache' => [
             'cache:clear',
             'cache:forget',
-            'cache:table',
+            //'cache:table',
             'config:clear',
             'config:cache',
         ],
+        /*
         'database' => [
             'db:seed',
             'db:wipe',
         ],
+        */
         'events' => [
             'event:cache',
             'event:clear',
             'event:generate',
             'event:list',
         ],
+        /*
         'make' => [
             'make:cast',
             'make:channel',
@@ -187,6 +190,7 @@ return [
             'make:seeder',
             'make:test',
         ],
+        
         'migrate' => [
             'migrate',
             'migrate:fresh',
@@ -196,17 +200,18 @@ return [
             'migrate:rollback',
             'migrate:status',
         ],
+        */
         'queue' => [
-            'queue:batches-table',
+            //'queue:batches-table',
             'queue:clear',
             'queue:failed',
-            'queue:failed-table',
+            //'queue:failed-table',
             'queue:flush',
             'queue:forget',
             'queue:restart',
             'queue:retry',
             'queue:retry-batch',
-            'queue:table',
+            //'queue:table',
         ],
         'route' => [
             'route:cache',
