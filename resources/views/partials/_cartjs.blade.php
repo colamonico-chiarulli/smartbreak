@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 11:16pm
  * -----
- * Last Modified:
- * Modified By:
+ * Last Modified: 	April 15th 2021 7:41:22 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -56,6 +56,12 @@
         reloadTotal();
     });
 
+    function emptyCartRefresh(){
+        emptyCart(function(){
+                        window.location.href = '{{ route("cart.choose-products") }}'; 
+        });
+    }
+
     function emptyCart(successCallback) {
         $.ajax({
             url: empty_cart_route,
@@ -75,13 +81,16 @@
         });
     }
 
-    function editCart(product_id, quantity) {
+    function editCart(category_id, product_id, quantity) {
+        const category_item = $("#category-item-" + category_id); 
         const product_items = $("#product-items-" + product_id);
         const product_total = $("#product-total-" + product_id);
 
         const result = parseInt(product_items.val() || 0) + quantity;
+        var tot_category = parseInt(category_item.html() ||0) + quantity;
 
         if (result >= 0 && result <= max_units_ordable) {
+            category_item.html(tot_category);
             product_items.val(result);
             product_total.html(formatPrice(result * products[product_id].price));
 
@@ -89,6 +98,8 @@
                 url: edit_cart_route,
                 method: "PUT",
                 data: {
+                    category_id: category_id,
+                    tot_category: tot_category,
                     product_id: product_id,
                     quantity: result,
                 },
@@ -103,6 +114,10 @@
         $.get(get_cart_route, function (res) {
             $(".cart-total").html(formatPrice(res.total));
             $(".cart-num-items").html(res.num_items);
+            
+            $.each(res.categ, function(key, value) {
+                $("#category-item-" + key).html(value);
+            });
         });
     }
 

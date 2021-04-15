@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 15th 2021 5:59:53 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -79,6 +79,16 @@ class CartController extends Controller
             session()->put($product_index, $product_quantity);
         }
 
+        $category_index = 'categ.'.request()->category_id;
+        $tot_category = request()->tot_category;
+
+        if ($product_quantity == 0) {
+            session()->pull($category_index);
+        } else {
+            session()->put($category_index, $tot_category);
+        }
+
+
         return response()->json($this->getCart());
     }
 
@@ -89,6 +99,7 @@ class CartController extends Controller
         $products = Product::whereIn('id', $product_ids)->get();
 
         return [
+            'categ' =>session('categ'),
             'cart' => session('cart'),
             'num_items' => collect(session('cart'))->sum(),
             'total' => $products->sum(function ($product) {
@@ -100,6 +111,7 @@ class CartController extends Controller
     public function emptyCart()
     {
         session()->pull('cart');
+        session()->pull('categ');
 
         return;
     }

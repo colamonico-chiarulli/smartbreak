@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	April 15th 2021 12:39:45 pm
+ * Last Modified: 	April 15th 2021 7:09:49 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -49,12 +49,15 @@
 
 @section('content')
 
+@foreach (session('categ') as $category=>$value)
+    <span id="category-item-{{ $category }}" style="display:none">{{ $value }}</span>
+@endforeach
 
 @forelse($products as $product)
-@include('partials._product-card', ['product' => $product])
-@empty
-<p class="text-center text-muted">🛒 &nbsp;Il carrello è al momento vuoto. <a href="{{ route('home') }}">Vai alla
-        home</a></p>
+    @include('partials._product-card', ['product' => $product])
+    @empty
+    <p class="text-center text-muted">🛒 &nbsp;Il carrello è al momento vuoto. <a href="{{ route('home') }}">Vai alla
+            home</a></p>
 @endforelse
 
 @if($products->count() > 0)
