@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	March 7th, 2021 9:38pm
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 15th 2021 12:39:45 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -81,7 +81,7 @@
             $.post('{{ route('cart.create-order') }}', function(res){
                 if(res.success){
                     emptyCart(function(){
-                        window.location.href = '{{ route("cart.choose-products") }}?success_msg=Ordine confermato con successo';
+                        window.location.href = '{{ route("cart.choose-products") }}?ck=true';
                     });
                 }else{
                     res.error_msgs.forEach(error_msg => {

@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 7th, 2021 9:38pm
  * -----
- * Last Modified:
- * Modified By:
+ * Last Modified: 	April 15th 2021 12:38:45 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -60,8 +60,8 @@
             toastr.success("{{ Session::get('success') }}");
         @endif
 
-        @if(request()->get('success_msg'))
-            toastr.success("{{ request()->get('success_msg') }}");
+        @if(request()->get('ck'))
+            toastr.success("Ordine confermato con successo");
         @endif
 
 

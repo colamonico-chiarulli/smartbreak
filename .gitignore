@@ -3,4 +3,5 @@ vendor/
 .env.host
 public/temp
 public/img/products
+public/storage
 composer.lock
