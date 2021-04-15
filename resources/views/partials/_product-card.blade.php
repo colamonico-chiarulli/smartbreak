@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 2nd, 2020 11:05pm
  * -----
- * Last Modified: 	April 6th 2021 6:04:10 pm
+ * Last Modified: 	April 15th 2021 4:45:30 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -83,14 +83,14 @@
                     <div class="input-group input-group-sm" style="max-width: 90px;">
                         <span class="input-group-prepend">
                             <button type="button" class="btn btn-primary btn-flat"
-                                    onclick="editCart({{ $product->id }}, -1)"> - </button>
+                                    onclick="editCart({{ $product->category_id}},{{ $product->id }}, -1)"> - </button>
                         </span>
                         <input type="number" class="form-control noarrows text-center cart-product-items"
                                id="product-items-{{ $product->id }}"
                                value="{{ session('cart.'.$product->id) ?? 0 }}" disabled >
                         <span class="input-group-append">
                             <button type="button" class="btn btn-primary btn-flat"
-                                    onclick="editCart({{ $product->id }}, 1)"> + </button>
+                                    onclick="editCart({{ $product->category_id}},{{ $product->id }}, 1)"> + </button>
                         </span>
                     </div>
                     <small>

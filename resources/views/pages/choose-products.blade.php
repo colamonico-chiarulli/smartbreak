@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 15th 2021 7:37:53 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -73,7 +73,7 @@
 
 
     <div class="col-12 col-md-3 my-3 text-right">
-        <a class="text-danger" href="javascript:;" onclick="emptyCart()">
+        <a class="text-danger" href="javascript:;" onclick="emptyCartRefresh()">
             <i class="fa fa-cart-arrow-down"></i> Svuota carrello
         </a>
     </div>
@@ -86,11 +86,14 @@
     @if($category->products->count())
     <div class="card card-default">
         <div class="card-header">
-            <h4 class="card-title w-100">
-                <a class="d-block w-100 collapsed" data-toggle="collapse" href="#category-{{ $category->id }}">
+            <h4 class="card-title w-75">
+                <a class="d-block w-75 collapsed" data-toggle="collapse" href="#category-{{ $category->id }}">
                     {{ $category->name }} <small class="text-muted">{{ $category->products->count() }} prodotti</small>
                 </a>
             </h4>
+            <div class="text-right"> 
+                🛒<span id="category-item-{{ $category->id }}" class="badge badge-info">0</span>
+            </div>
         </div>
         {{-- tab apert: {{ $loop->first ? 'show' : 'collapse' }} --}}
         <div id="category-{{ $category->id }}" class="collapse" data-parent="#categories-accordion">
