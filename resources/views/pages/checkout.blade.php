@@ -80,8 +80,9 @@
 
             $.post('{{ route('cart.create-order') }}', function(res){
                 if(res.success){
-                    emptyCart();
-                    window.location.href = '{{ route("cart.choose-products") }}?success_msg=Ordine confermato con successo';
+                    emptyCart(function(){
+                        window.location.href = '{{ route("cart.choose-products") }}?success_msg=Ordine confermato con successo';
+                    });
                 }else{
                     res.error_msgs.forEach(error_msg => {
                         toastr.error(error_msg);

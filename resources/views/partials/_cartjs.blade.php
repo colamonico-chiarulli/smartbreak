@@ -56,16 +56,21 @@
         reloadTotal();
     });
 
-    function emptyCart() {
+    function emptyCart(successCallback) {
         $.ajax({
             url: empty_cart_route,
             method: "DELETE",
             success: function () {
-                toastr.success("Carrello svuotato con successo");
                 $("input.cart-product-items").val(0);
                 $(".cart-product-totals").html(formatPrice(0));
                 $(".cart-total").html(formatPrice(0));
                 $(".cart-num-items").html(0);
+                if(typeof successCallback !== "undefined"){
+                    successCallback();
+                }else{
+                    toastr.success("Carrello svuotato con successo");
+                }
+
             },
         });
     }
