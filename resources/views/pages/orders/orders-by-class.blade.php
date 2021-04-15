@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Friday, April 9th 2021, 9:19:53 pm
  * -----
- * Last Modified: 	April 10th 2021 11:15:00 am
+ * Last Modified: 	April 15th 2021 1:45:08 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -50,23 +50,24 @@
 
 @section('content')
 
-
+<div id="class-accordion">
 @foreach($orders as $user=>$order)
-
-<div id="accordion">
-    <div class="card">
-        <div class="card-header cursor-pointer" data-toggle="collapse" href="#user-{{$user}}">
-            <h3 class="card-title text-bold" data-card-widget="collapse">{{ $orders[$user][0]->last_name}} {{ $orders[$user][0]->first_name }}</h3>
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title w-75 text-bold"> 
+                <a class="d-block w-75 collapsed" data-toggle="collapse" href="#user-{{$user}}">
+                    {{ $orders[$user][0]->last_name}} {{ $orders[$user][0]->first_name }}
+                </a>
+            </h3>
             <h6 class="text-right"> {{ formatPrice(collect($orders[$user])->sum('total')) }}</h6>
             {{-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
                 </div> --}}
-
         </div>
 
-        <div class="collapse" id="user-{{$user}}">
+        <div id="user-{{$user}}" class="collapse" data-parent="#class-accordion">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">
@@ -112,9 +113,9 @@
         </div>
 
     </div>
+    @endforeach
 </div>
 
-@endforeach
 <div class="text-right">
     <h4>Totale classe: <b>{{ formatPrice(collect($orders)->collapse('total')->sum('total')) }}</h4> 
 </div>

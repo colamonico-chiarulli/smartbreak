@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	April 10th 2021 11:14:43 am
+ * Last Modified: 	April 15th 2021 1:44:33 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -50,13 +50,15 @@
 
 @section('content')
 
-
-@foreach($orders as $date=>$order)
-
-<div id="accordion">
-    <div class="card">
-        <div class="card-header cursor-pointer" data-toggle="collapse" href="#data-{{$date}}">
-            <h3 class="card-title text-bold" data-card-widget="collapse">{{$date}}</h3>
+<div id="student-accordion">
+    @foreach($orders as $date=>$order)
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title w-75 text-bold"> 
+                <a class="d-block w-75 collapsed" data-toggle="collapse" href="#data-{{$date}}">
+                    {{$date}}
+                </a>
+            </h3>
             <h6 class="text-right"> {{ formatPrice(collect($orders[$date])->sum('total')) }}</h6>
 
             {{-- <div class="card-tools">
@@ -64,10 +66,9 @@
                         <i class="fas fa-plus"></i>
                     </button>
                 </div> --}}
-
         </div>
 
-        <div class="collapse" id="data-{{$date}}">
+        <div id="data-{{$date}}" class="collapse" data-parent="#student-accordion">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">
@@ -113,11 +114,12 @@
         </div>
 
     </div>
+    @endforeach
 </div>
 
-@endforeach
+
 <div class="text-right">
-    <h4>Totale ordini: <b>{{ formatPrice(collect($orders)->collapse('total')->sum('total')) }}</h4> 
+    <h4>Totale ordini: <b>{{ formatPrice(collect($orders)->collapse('total')->sum('total')) }}</h4>
 </div>
 
 @endsection
