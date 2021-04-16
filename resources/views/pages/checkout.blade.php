@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	April 15th 2021 7:09:49 pm
+ * Last Modified: 	April 16th 2021 10:39:27 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -48,10 +48,11 @@
 @extends('layouts.app', ['title' => 'Riepilogo ordine'])
 
 @section('content')
-
-@foreach (session('categ') as $category=>$value)
-    <span id="category-item-{{ $category }}" style="display:none">{{ $value }}</span>
-@endforeach
+@if(session('categ') !== NULL)
+    @foreach (session('categ') as $category=>$value)
+        <span id="category-item-{{ $category }}" style="display:none">{{ $value }}</span>
+    @endforeach    
+@endif
 
 @forelse($products as $product)
     @include('partials._product-card', ['product' => $product])
@@ -64,7 +65,7 @@
 <div class="text-right mb-3">
     <h4 class="my-4">Totale carrello: <b class="cart-total"></b></h4>
     <a href="{{ route("cart.choose-products") }}" class="btn btn-primary">
-        <i class="fas fa-arrow-left"></i> Torna alla scelta prodotti
+        <i class="fas fa-arrow-left"></i> Aggiungi altro
     </a>
     <button class="btn btn-success" onclick="createOrder()">
         <i class="fa fa-check"></i> Conferma ordine
