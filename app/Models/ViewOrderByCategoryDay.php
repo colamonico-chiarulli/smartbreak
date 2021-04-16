@@ -1,12 +1,12 @@
 <?php
 /**
- * File:	/app/Http/Controllers/Auth/LoginController.php
+ * File:	/app/Models/ViewOrderByCategoryDay.php
  * @package smartbreak
- * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: 	December 15th, 2020 11:05pm
+ * Created Date: Friday, April 16th 2021, 11:37:56 am
  * -----
- * Last Modified: 	April 16th 2021 4:31:20 pm
+ * Last Modified: 	April 16th 2021 1:41:50 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -47,65 +47,11 @@
 ?>
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Models;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Socialite;
-use App\Models\User;
-use Auth;
+use Illuminate\Database\Eloquent\Model;
 
-class LoginController extends Controller
+class ViewOrderByCategoryDay extends Model
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
-    // Google login for students
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function handleGoogleCallback()
-    {
-        $user = Socialite::driver('google')->stateless()->user();
-
-        $logged_user = User::where('email', $user->email)->first();
-
-        if (!$logged_user) {
-            return redirect()->route('login')->with('error', 'Questo account google istituzionale non esiste');
-        }
-
-        Auth::login($logged_user);
-
-        return redirect($this->redirectTo);
-    }
+    protected $table = 'orders_amount_by_category_day';
 }

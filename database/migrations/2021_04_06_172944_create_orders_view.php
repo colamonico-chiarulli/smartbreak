@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 12th 2021 8:10:43 pm
+ * Last Modified: 	April 16th 2021 1:40:52 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -63,6 +63,7 @@ class CreateOrdersView extends Migration
     {
         DB::statement($this->createView1());
         DB::statement($this->createView2());
+        DB::statement($this->createView3());
     }
 
     /**
@@ -76,7 +77,7 @@ class CreateOrdersView extends Migration
     }
 
     /**
-     * createView.
+     * createView orders_amount_by_id
      *
      * @access	private
      * @return	void
@@ -94,7 +95,7 @@ class CreateOrdersView extends Migration
     }
 
     /**
-     * createView.
+     * createView orders_amount_by_site_day
      *
      * @access	private
      * @return	void
@@ -109,4 +110,24 @@ class CreateOrdersView extends Migration
         END;
     }
 
+    /**
+     * createView orders_amount_by_category_day
+     *
+     * @access	private
+     * @return	void
+     */
+    private function createView3(): string
+    {
+        return <<< END
+        CREATE OR REPLACE VIEW orders_amount_by_category_day AS
+        SELECT products.site_id as site_id, category_id, categories.name as name, DATE(orders.created_at) as date_day,
+               SUM(order_product.quantity * order_product.price) as total
+                      from order_product 
+                      INNER JOIN orders ON order_id=orders.id 
+                      INNER JOIN products ON product_id=products.id
+                      INNER JOIN categories ON products.category_id=categories.id  
+                      GROUP BY site_id, category_id, date_day
+                      ORDER BY site_id, category_id, date_day;
+        END;
+    }
 }

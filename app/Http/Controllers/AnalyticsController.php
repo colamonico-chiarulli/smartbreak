@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 12th 2021 8:15:44 pm
+ * Last Modified: 	April 16th 2021 7:34:26 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -49,17 +49,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\Order;
+use App\Models\ViewOrderByCategoryDay;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\ViewOrderByDay;
 
 class AnalyticsController extends Controller
 {
+    public $sites;
+    public $user_site;
+    
     public function getAnalyticsPage()
     {
-        $sites = Site::all();
+        //recupera la sede dell'utente (Manager) o tutte le sedi (Admin)
+        $this->user_site= auth()->user()->site_id;
+        $this->sites = Site::where('id', 'like', '%'.$this->user_site)->get();
+        
+        $chart["barChart"] = $this->getBarChartDataset();
+        $chart["pieChart"] = $this->getPieChartDataset();
+        
+        // Crea una stringa con i nomi della/e sede/i
+        $user_site=implode(", ", $this->sites->pluck('name')->toArray());
+        
+        return view('pages.analytics.index', compact('chart','user_site'));
+    }
+
+    /**
+     * getBarChartDataset.
+     * 
+     * Prepara il dataset delle vendite per sede, giorno
+     * @access	private
+     * @return	mixed
+     */
+    private function getBarChartDataset(){
 
         $date_from = now()->subDays(7)->toDateString();
         $date_to = now()->addDay()->toDateString();
@@ -67,7 +92,7 @@ class AnalyticsController extends Controller
 
         $datasets = [];
 
-        foreach ($sites as $site) {
+        foreach ($this->sites as $site) {
             $orders = ViewOrderByDay::where('site_id', $site->id)
                 ->whereBetween('date_day', [$date_from, $date_to])
                 ->get();
@@ -81,10 +106,57 @@ class AnalyticsController extends Controller
                 'data' => $orders->pluck('total'),
                 'backgroundColor' => '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6),
             ];
-        }
-
-        //dd($datasets);
-
-        return view('pages.analytics.index', compact('datasets', 'labels'));
+        } 
+            
+        $chart = [
+            "datasets" => $datasets,
+            "labels" => $labels,
+        ];
+        
+        return $chart;
     }
+
+    /**
+     * getPieChartDataset.
+     * 
+     * Prepara il dataset delle vendite per sede, categoria, giorno
+     * @access	private
+     * @return	mixed
+     */
+    private function getPieChartDataset(){
+        $date_from = now()->subDays(7)->toDateString();
+        $date_to = now()->addDay()->toDateString();
+
+        $datasets = [];
+
+        foreach ($this->sites as $site) {
+            $orders = ViewOrderByCategoryDay::where('site_id', $site->id)
+                ->whereBetween('date_day', [$date_from, $date_to])
+                ->groupBy('category_id')
+                ->selectRaw('category_id, name, sum(total) as total')
+                ->get();
+            
+            $labels = $orders->pluck('name');
+            $data=$orders->pluck('total','name')->values();
+            foreach($labels as $item){
+                $colors[]= '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);   
+            }
+            
+            
+            $datasets[] = [
+                'label' => "Colamonico",
+                'data' => $data,
+                'backgroundColor' => $colors,
+            ];
+        }
+        
+        $chart = [
+            "datasets" => $datasets,
+            "labels" => $labels,
+        ];
+        
+        return $chart;
+    }
+
+    
 }

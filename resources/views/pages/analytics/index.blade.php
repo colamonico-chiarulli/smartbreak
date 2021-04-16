@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 7th 2021 11:54:21 am
+ * Last Modified: 	April 16th 2021 7:23:41 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,33 +45,41 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Home page'])
+@extends('layouts.app', ['title' => 'Statistiche ' . $user_site ])
 
 @include('plugins.chartjs')
 
 @section('content')
-    <canvas id="myChart" width="400" height="400"></canvas>
+<div class="row">
+    <div class="col-md-6"><canvas id="barChart" width="400" height="400"></canvas></div>
+    <div class="col-md-6"><canvas id="pieChart" width="400" height="400"></canvas></div>
+</div>
 @endsection
 
 @push('js')
-    <script>
-var ctx = document.getElementById('myChart').getContext('2d');
+<script>
+    //BarChart
+var ctx = document.getElementById('barChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: @json($labels),
-        datasets: @json($datasets)
+        labels: @json($chart["barChart"]["labels"]),
+        datasets: @json($chart["barChart"]["datasets"])
     },
     options: {
         responsive:true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
+        title: {
+                display: true,
+                text: 'Vendite giornaliere'
+        },
         scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
                 }
             }]
-        },
+        },    
         tooltips: {
             callbacks: {
                 label: function (tooltipItems, data) {
@@ -81,5 +89,23 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-    </script>
+
+//PieChart
+var pieCtx = document.getElementById('pieChart').getContext('2d');
+var pieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: @json($chart["pieChart"]["labels"]),
+        datasets: @json($chart["pieChart"]["datasets"])
+    },
+    options: {
+        responsive:true,
+        maintainAspectRatio: true,
+        title: {
+                display: true,
+                text: 'Vendite per Categoria'
+        }
+    }
+});
+</script>
 @endpush
