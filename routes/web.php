@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 16th 2021 6:28:38 pm
+ * Last Modified: 	April 23rd 2021 9:08:13 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -115,7 +115,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::get('analytics', [AnalyticsController::class, 'getAnalyticsPage'])->name('analytics');
-
+        Route::post('analytics-getcharts', [AnalyticsController::class, 'getChartsDataset'])->name('analytics.getcharts');
+    
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
     });

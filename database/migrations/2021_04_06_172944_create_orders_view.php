@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 16th 2021 1:40:52 pm
+ * Last Modified: 	April 23rd 2021 9:43:43 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -86,7 +86,8 @@ class CreateOrdersView extends Migration
     {
         return <<< END
         CREATE OR REPLACE VIEW orders_amount_by_id AS
-        SELECT order_id, SUM(quantity*price) as total, site_id, class_id, DATE(orders.created_at) as date_day 
+        SELECT order_id, SUM(quantity) as num_items, SUM(quantity*price) as total, 
+              site_id, class_id, user_id, DATE(orders.created_at) as date_day 
               from order_product 
               INNER JOIN orders ON order_id=orders.id 
               INNER JOIN users ON user_id=users.id 
@@ -130,4 +131,5 @@ class CreateOrdersView extends Migration
                       ORDER BY site_id, category_id, date_day;
         END;
     }
+
 }

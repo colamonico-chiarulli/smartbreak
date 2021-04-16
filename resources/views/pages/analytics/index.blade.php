@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 16th 2021 7:23:41 pm
+ * Last Modified: 	April 23rd 2021 9:38:17 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -50,28 +50,199 @@
 @include('plugins.chartjs')
 
 @section('content')
-<div class="row">
-    <div class="col-md-6"><canvas id="barChart" width="400" height="400"></canvas></div>
-    <div class="col-md-6"><canvas id="pieChart" width="400" height="400"></canvas></div>
+<div>
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
+            <label class="btn bg-olive">
+                <input type="radio" name="period" value="week" id="option_b1" autocomplete="off" checked=""> Settimana
+            </label>
+            <label class="btn bg-olive active">
+                <input type="radio" name="period" value="month" id="option_b2" autocomplete="off"> Mese
+            </label>
+            <label class="btn bg-olive">
+                <input type="radio" name="period" value="year" id="option_b3" autocomplete="off"> Anno
+            </label>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
+            <label class="btn btn-info">
+                <input type="radio" name="move" id="move_left" value="left" autocomplete="off"><i
+                    class="fas fa-angle-left"></i>
+            </label>
+            <span id="period" class="form-control rounded-0 text-center align-middle font-weight-bold">&nbsp;</span>
+            <label class="btn bg-info">
+                <input type="radio" name="move" id="move_right" value="right" autocomplete="off"><i
+                    class="fas fa-angle-right"></i>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around">
+    <div class="small-box bg-success col col-md-3">
+        <div class="inner">
+            <h4 id="stat1"></h4>
+            @can('is-admin')<p>Utenti</p>@endcan
+            @can('is-manager')<p>Ricavi</p>@endcan
+        </div>
+        <div class="icon">
+            @can('is-admin')<i class="fas fa-users"></i>@endcan
+            @can('is-manager')<i class="fas fa-euro-sign"></i></p>@endcan
+        </div>
+    </div>
+    <div class="small-box bg-info col col-md-3">
+        <div class="inner">
+            <h4 id="stat2"></h4>
+            <p>Ordini</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+    </div>
+    <div class="small-box bg-warning col col-md-3">
+        <div class="inner">
+            <h4 id="stat3"></h4>
+            <p>Prodotti</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-hamburger"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-around">
+    <div class="col-md-5 callout callout-info"><canvas id="barChart" width="400" height="400"></canvas></div>
+    <div class="col-md-5 callout callout-warning"><canvas id="pieChart" width="400" height="400"></canvas></div>
 </div>
 @endsection
 
 @push('js')
 <script>
-    //BarChart
-var ctx = document.getElementById('barChart').getContext('2d');
-var myChart = new Chart(ctx, {
+//global variables
+var formMove = null;
+var formRange = null;
+
+/**
+ * EVENTS
+ */ 
+    
+//On page loaded
+ $(function () {
+    getCharts();
+});
+
+//Button period pressed
+//$("input[name='period']").change(updateCharts);
+$("input[name='period']").change(getCharts);
+
+//Button move pressed 
+$("input[name='move']").click(move);
+
+/**
+ * move
+ * actions on left-right arrow
+ */ 
+function move(){
+    formMove = $('input[name="move"]:checked').val();
+    getCharts();
+    formMove = null;
+}
+
+{{-- getChart ADMIN --}}
+@can('is-admin')
+function getCharts(){
+var formPeriod = $('input[name="period"]:checked').val(); 
+
+$.ajax({
+            url: '{{ route("analytics.getcharts") }}',
+            method: "POST",
+            data: {
+                period: formPeriod,
+                move: formMove,
+                range: formRange,
+            },
+            success: function name(result) {
+                formRange = result.range;
+                console.log(result);
+                if (result.barChart.datasets[0].data.length !== 0){
+                    barChart.data.labels=result.barChart.labels;
+                    barChart.data.datasets=result.barChart.datasets;
+                    $("#period").html(result.range['label']);
+                    barChart.options.title.text="Ordini per sede";
+                    barChart.update();
+                }
+                if (result.pieChart.datasets[0].data.length !== 0){
+                    pieChart.data=result.pieChart;
+                    pieChart.options.title.text="Ordini per sede";
+                    pieChart.update();
+                }
+                if (result.stats.length !== 0){
+                    $("#stat1").html(result.stats.users);
+                    $("#stat2").html(result.stats.orders);
+                    $("#stat3").html(result.stats.products);
+                }  
+            }
+        });
+}    
+@endcan
+
+
+{{-- getChart MANAGER --}}
+@can('is-manager')
+function getCharts(){
+var formPeriod = $('input[name="period"]:checked').val(); 
+
+$.ajax({
+            url: '{{ route("analytics.getcharts") }}',
+            method: "POST",
+            data: {
+                period: formPeriod,
+                move: formMove,
+                range: formRange,
+            },
+            success: function name(result) {
+                formRange = result.range;
+                console.log(result);
+                if (result.barChart.datasets[0].data.length !== 0){
+                    barChart.data=result.barChart;
+                    barChart.options.title.text="Ricavi";
+                    $("#period").html(result.range['label']);
+                    barChart.update();
+                }
+                if (result.pieChart.datasets[0].data.length !== 0){
+                    pieChart.data=result.pieChart;
+                    pieChart.options.title.text="Ricavi per Categorie";
+                    pieChart.update();
+                }
+                if (result.stats.length !== 0){
+                    $("#stat1").html(formatPrice(result.stats.income));
+                    $("#stat2").html(result.stats.orders);
+                    $("#stat3").html(result.stats.products);
+                }    
+            }
+        });
+}    
+@endcan
+
+
+
+//BarChart
+var barCtx = document.getElementById('barChart').getContext('2d');
+var barChart = new Chart(barCtx, {
     type: 'bar',
     data: {
-        labels: @json($chart["barChart"]["labels"]),
-        datasets: @json($chart["barChart"]["datasets"])
+        labels: [],
+        datasets: [],
     },
+
+    
     options: {
         responsive:true,
         maintainAspectRatio: true,
         title: {
                 display: true,
-                text: 'Vendite giornaliere'
+                text: ''
         },
         scales: {
             yAxes: [{
@@ -80,6 +251,7 @@ var myChart = new Chart(ctx, {
                 }
             }]
         },    
+@can('is-manager') {{-- Format Price if MANAGER --}}   
         tooltips: {
             callbacks: {
                 label: function (tooltipItems, data) {
@@ -87,25 +259,37 @@ var myChart = new Chart(ctx, {
                 }
             }
         }
+@endcan        
     }
 });
 
 //PieChart
 var pieCtx = document.getElementById('pieChart').getContext('2d');
 var pieChart = new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-        labels: @json($chart["pieChart"]["labels"]),
-        datasets: @json($chart["pieChart"]["datasets"])
-    },
+    type: 'doughnut',
+    data: {},
     options: {
         responsive:true,
         maintainAspectRatio: true,
         title: {
                 display: true,
-                text: 'Vendite per Categoria'
+                text: ''
+        },
+@can('is-manager') {{-- Format Price if MANAGER--}}   
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItem, data) {
+                    //get the concerned dataset
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    //get the current items value
+                    var currentValue = dataset.data[tooltipItem.index];
+                    return data.labels[tooltipItem.index] + ": " + formatPrice(currentValue);
+                }
+            }
         }
+@endcan
     }
 });
+
 </script>
 @endpush

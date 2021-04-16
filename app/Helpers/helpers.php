@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	March 13th, 2021 7:04pm
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 20th 2021 7:33:43 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -50,6 +50,14 @@
 function formatPrice($amount)
 {
     return number_format($amount, 2, ',', '.').' €';
+}
+
+function formatShortDate($date)
+{
+    return
+        $date instanceof Carbon\Carbon ?
+        $date->format('d/m/Y') :
+        Carbon\Carbon::parse($date)->format('d-M');
 }
 
 function formatDate($date)

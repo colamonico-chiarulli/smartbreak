@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 27th, 2021 7:17pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Last Modified: 	April 19th 2021 5:04:54 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -115,6 +115,16 @@ class User extends Authenticatable
         return $this->belongsTo(Site::class, 'site_id');
     }
 
+    public function mySiteName()
+    {
+        $user= auth()->user();
+        if ($user->role == 'ADMIN'){
+            return Site::orderBy('id','asc')->pluck('name')->implode(", ");    
+        } else {
+            return $user->site->name;
+        }
+    }
+    
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
