@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // STUDENT AREA
     Route::group(['middleware' => 'can:is-student'], function () {
-        Route::group(['prefix' => 'cart'], function () {
+        Route::group(['prefix' => 'cart', 'middleware' => 'orders.timerange_check'], function () {
             Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
             Route::put('edit', [CartController::class, 'editCart'])->name('cart.edit');
             Route::get('get', [CartController::class, 'getCart'])->name('cart.get');
@@ -115,7 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::get('analytics', [AnalyticsController::class, 'getAnalyticsPage'])->name('analytics');
-        
+
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
     });
