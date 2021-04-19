@@ -126,6 +126,7 @@
                                         Ricordami
                                     </label>
                                 </div>
+
                             </div>
                         </div>
 
@@ -134,14 +135,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
-                                {{--
-                                                @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
+                                @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Password dimenticata?
                                 </a>
                                 @endif
-                                --}}
                             </div>
                         </div>
                     </form>
