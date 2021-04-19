@@ -54,7 +54,7 @@ return [
 
 
     'orders_timerange' => [
-        'enabled' => env('ORDERS_TIMERANGE_CHECK_ENABLED', false),
+        'enabled' => env('ORDERS_TIMERANGE_CHECK_ENABLED', true),
         // example: orders allowed between 7:00 and 9:59
         'from' => 7,
         'to' => 10

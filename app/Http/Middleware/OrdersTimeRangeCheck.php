@@ -52,6 +52,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Gate;
 
 class OrdersTimeRangeCheck
 {
@@ -71,6 +72,7 @@ class OrdersTimeRangeCheck
 
         if(
             $time_range['enabled'] &&
+            Gate::allows('is-student') &&
             ($current_hour <= $time_range['from'] || $current_hour >= $time_range['to'])
         ){
             abort_if($request->ajax(), 403);
