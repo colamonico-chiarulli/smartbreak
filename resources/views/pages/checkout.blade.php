@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	April 16th 2021 10:39:27 am
+ * Last Modified: 	April 19th 2021 1:12:41 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -48,6 +48,11 @@
 @extends('layouts.app', ['title' => 'Riepilogo ordine'])
 
 @section('content')
+<div class="col-12 col-md-3 my-3 text-right">
+    <a class="text-danger" href="javascript:;" onclick="emptyCartRefresh()">
+        <i class="fa fa-cart-arrow-down"></i> Svuota carrello
+    </a>
+</div>
 @if(session('categ') !== NULL)
     @foreach (session('categ') as $category=>$value)
         <span id="category-item-{{ $category }}" style="display:none">{{ $value }}</span>

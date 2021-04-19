@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	April 15th 2021 5:59:53 pm
+ * Last Modified: 	April 19th 2021 1:50:04 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -81,13 +81,7 @@ class CartController extends Controller
 
         $category_index = 'categ.'.request()->category_id;
         $tot_category = request()->tot_category;
-
-        if ($product_quantity == 0) {
-            session()->pull($category_index);
-        } else {
-            session()->put($category_index, $tot_category);
-        }
-
+        session()->put($category_index, $tot_category);
 
         return response()->json($this->getCart());
     }

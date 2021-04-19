@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 11:16pm
  * -----
- * Last Modified: 	April 15th 2021 7:41:22 pm
+ * Last Modified: 	April 19th 2021 1:30:00 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -87,10 +87,11 @@
         const product_total = $("#product-total-" + product_id);
 
         const result = parseInt(product_items.val() || 0) + quantity;
-        var tot_category = parseInt(category_item.html() ||0) + quantity;
+        const tot_category = parseInt(category_item.text() ||0) + quantity;
 
+        
         if (result >= 0 && result <= max_units_ordable) {
-            category_item.html(tot_category);
+            category_item.text(tot_category);
             product_items.val(result);
             product_total.html(formatPrice(result * products[product_id].price));
 
@@ -116,7 +117,7 @@
             $(".cart-num-items").html(res.num_items);
             
             $.each(res.categ, function(key, value) {
-                $("#category-item-" + key).html(value);
+                $("#category-item-" + key).text(value);
             });
         });
     }
