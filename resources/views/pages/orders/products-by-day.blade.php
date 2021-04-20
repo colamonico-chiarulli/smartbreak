@@ -54,7 +54,7 @@
         <div class="form-group">
             <label for="date">Visualizza gli ordini della data:</label>
             <div class="input-group">
-                <input type="date" class="form-control" id="date" placeholder="Seleziona una data" value="{{ $date }}">
+                <input type="date" class="form-control" id="date" placeholder="Seleziona una data" value="{{ $date }}" max="{{ date('Y-m-d') }}">
                 <span class="input-group-append">
                     <a
                        href="javascript:;"
