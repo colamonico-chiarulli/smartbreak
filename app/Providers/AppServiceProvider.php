@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	January 23rd, 2021 9:12pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Last Modified: 	April 21st 2021 7:16:36 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -51,6 +51,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -71,7 +72,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Latravel pagination with Boostrap
+        // Laravel pagination with Boostrap
         Paginator::useBootstrap();
+        
+        //Set locale for Carbon
+        Carbon::setLocale(config('app.locale'));
     }
 }
