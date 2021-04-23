@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	March 29th, 2021 7:03pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Last Modified: 	April 23rd 2021 12:34:52 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -70,27 +70,27 @@ class OrdersTableSeeder extends Seeder
 
         //Per ogni studente
         foreach ($students as $student) {
-            // Crea da 1 a 10 Ordini
-            $nOrders = mt_rand(1, 10);
+            // Crea da 10 a 100 Ordini negli ultimi 6 mesi
+            $nOrders = mt_rand(50, 100);
             for ($i=0; $i < $nOrders; $i++) {
-                $dateTime=$faker->dateTimeBetween('-10 day', 'now', 'Europe/Rome');
+                $dateTime=$faker->dateTimeBetween('-6 month', 'now', 'Europe/Rome');
                 $order = $student->orders()->create([
                     'created_at' => $dateTime,
                     'updated_at' => $dateTime,
                 ]);
 
-                //Ciascun ordine ha da 1 a 5 prodotti casuali della sede dell'utente
+                //Ciascun ordine ha da 1 a 3 prodotti casuali della sede dell'utente
                 $faker = Faker\Factory::create('it_IT');
-                $nProducts = mt_rand(1, 5);
+                $nProducts = mt_rand(1, 3);
                 for ($p=0; $p <= $nProducts; $p++) {
                     if ($student->site_id == 1) {
                         $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
                     } else {
                         $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
                     }
-
+                    //quantità da 1 a 2
                     $order->products()->attach($product->id, [
-                        'quantity' => $faker->numberBetween(1, 5),
+                        'quantity' => $faker->numberBetween(1, 2),
                         'price' => $product->price
                     ]);
                 }
