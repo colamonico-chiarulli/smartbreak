@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:18:58 am
  * -----
- * Last Modified: 	April 7th 2021 10:29:17 am
+ * Last Modified: 	April 23rd 2021 11:13:55 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -54,12 +54,5 @@ use Illuminate\Database\Eloquent\Model;
 class ViewOrderByDay extends Model
 {
     protected $table = 'orders_amount_by_site_day';
-
-    // relationships
-
-    public function site()
-    {
-        return $this->belongsTo(Site::class, 'site_id');
-    }
 
 }

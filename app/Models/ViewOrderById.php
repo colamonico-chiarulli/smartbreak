@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:18:58 am
  * -----
- * Last Modified: 	April 7th 2021 10:22:26 am
+ * Last Modified: 	April 23rd 2021 11:13:44 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -55,15 +55,4 @@ class ViewOrderById extends Model
 {
     protected $table = 'orders_amount_by_id';
 
-    // relationships
-
-    public function site()
-    {
-        return $this->belongsTo(Site::class, 'site_id');
-    }
-
-    public function class()
-    {
-        return $this->belongsTo(SchoolClass::class, 'class_id');
-    }
 }
