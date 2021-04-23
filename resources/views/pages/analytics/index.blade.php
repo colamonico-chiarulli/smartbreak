@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 12:19:10 pm
+ * Last Modified: 	April 23rd 2021 1:51:35 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -124,7 +124,7 @@
 <script>
 //global variables
 var formMove = null;
-var formRange = null;
+var formRange = [];
 
 /**
  * EVENTS
@@ -137,10 +137,20 @@ var formRange = null;
 
 //Button period pressed
 //$("input[name='period']").change(updateCharts);
-$("input[name='period']").change(getCharts);
+$("input[name='period']").change(changePeriod);
 
 //Button move pressed 
 $("input[name='move']").click(move);
+
+/**
+ * changePeriod
+ */
+function changePeriod(){
+    var today = new Date();
+    formRange['range']=today.toString();
+    getCharts();
+}
+
 
 /**
  * move
