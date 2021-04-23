@@ -7,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 12:11:41 pm
+ * Last Modified: 	April 23rd 2021 1:24:59 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -422,7 +422,7 @@ class AnalyticsController extends Controller
 
         switch ($period) {
             case 'year':
-                $orders = ViewOrderByUser::where('user_id', $user_id)
+                $orders = ViewOrderById::where('user_id', $user_id)
                     ->whereBetween('date_day', [$range['from'], $range['to']])
                     ->selectRaw('User_id, MONTH(date_day) as month, sum(total) as total')
                     ->groupBy('month')
@@ -434,7 +434,7 @@ class AnalyticsController extends Controller
 
             case 'month':
             case 'week':
-                $orders = ViewOrderByUser::where('user_id', $user_id)
+                $orders = ViewOrderById::where('user_id', $user_id)
                     ->whereBetween('date_day', [$range['from'], $range['to']])
                     ->get();
                 $labels = $orders->pluck('date_day')->transform(function ($date) {
@@ -471,9 +471,10 @@ class AnalyticsController extends Controller
         $user_id = auth()->user()->id;
 
         $orders = ViewOrderByUser::where('user_id', $user_id)
+            ->join('categories', 'category_id', '=', 'categories.id')
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->groupBy('category_id')
-            ->selectRaw('category_id, name, sum(total) as total')
+            ->selectRaw('name, sum(total) as total')
             ->orderBy('name')
             ->get();
 
@@ -505,10 +506,10 @@ class AnalyticsController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $expenses = ViewOrderByUser::where('user_id', $user_id)
+        $expenses = ViewOrderById::where('user_id', $user_id)
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->sum('total');
-        $num_orders = ViewOrderByUser::where('user_id', $user_id)
+        $num_orders = ViewOrderById::where('user_id', $user_id)
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->count();
         $num_products = ViewOrderById::where('user_id', $user_id)
