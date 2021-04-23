@@ -7,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 9:41:32 am
+ * Last Modified: 	April 23rd 2021 10:45:46 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\DB;
 class AnalyticsController extends Controller
 {
     const COLORS = [
-        "#32936f", "#264653", "#93032e", "#e83f6f", "#ffbf00", "#2274a5", "#510d0a", "#717ec3", "#296eb4", "#020122", "#08415c", 
+        "#32936f", "#264653", "#93032e", "#e83f6f", "#ffbf00", "#2274a5", "#510d0a", "#717ec3", "#296eb4", "#020122", "#08415c",
         "#8eedf7", "#068d9d", "#043565", "#f4d35e", "#95d7ae", "#f4f4f9", "#94849b", "#eb6534", "#99d17b", "#d4f4dd", "#eb6534"
     ];
     //Random Color
@@ -102,24 +102,24 @@ class AnalyticsController extends Controller
         $period = $request->input('period');
 
         $user_site = auth()->user()->site_id;
-        $role=auth()->user()->role;
+        $role = auth()->user()->role;
 
         switch ($role) {
             case 'ADMIN':
                 $result['barChart'] = $this->getAdminBarChart($range, $period);
-                $result['pieChart'] = $this->getPieChartAdminDataset($range);
+                $result['pieChart'] = $this->getAdminPieChartDataset($range);
                 $result['stats'] = $this->getAdminStats($range);
                 break;
             case 'MANAGER':
-                $result['barChart'] = $this->getBarChartIncomeDataset($user_site, $range, $period);
-                $result['pieChart'] = $this->getPieChartIncomeDataset($user_site, $range);
+                $result['barChart'] = $this->getManagerBarChartDataset($user_site, $range, $period);
+                $result['pieChart'] = $this->getManagerPieChartDataset($user_site, $range);
                 $result['stats'] = $this->getManagerStats($user_site, $range);
                 break;
             case 'STUDENT':
-                # code...
+
                 break;
-        } 
-        
+        }
+
         return $result;
     }
 
@@ -168,13 +168,13 @@ class AnalyticsController extends Controller
                 $range['label'] = 'Dal ' . formatShortDate($range['from']) . ' al ' . formatShortDate($range['to']);
                 break;
         }
-                    
+
         return $range;
     }
 
 
     /**
-     * getBarChartIncomeDataset.
+     * getManagerBarChartDataset.
      * Prepara il dataset del ricavato vendite per sede, periodo (settimana, mese, anno)
      * per un grafico a barre (Manager)
      *
@@ -183,13 +183,17 @@ class AnalyticsController extends Controller
      * @param	mixed	$period   	
      * @return	array
      */
-    private function getBarChartIncomeDataset($user_site, $range, $period)
+    private function getManagerBarChartDataset($user_site, $range, $period)
     {
         $labels = [];
 
         switch ($period) {
             case 'year':
-                $orders = $this->getYearIncome($user_site, $range);
+                $orders = ViewOrderByDay::where('site_id', $user_site)
+                    ->whereBetween('date_day', [$range['from'], $range['to']])
+                    ->selectRaw('site_id, MONTH(date_day) as month, sum(total) as total')
+                    ->groupBy('month')
+                    ->get();;
                 foreach ($orders->pluck('month') as $month) {
                     $labels[] = self::MONTH[--$month];
                 }
@@ -197,7 +201,9 @@ class AnalyticsController extends Controller
 
             case 'month':
             case 'week':
-                $orders = $this->getPeriodIncome($user_site, $range);
+                $orders = ViewOrderByDay::where('site_id', $user_site)
+                    ->whereBetween('date_day', [$range['from'], $range['to']])
+                    ->get();
                 $labels = $orders->pluck('date_day')->transform(function ($date) {
                     return formatShortDate($date);
                 });
@@ -216,43 +222,9 @@ class AnalyticsController extends Controller
         ];
     }
 
-    /**
-     * getYearIncome.
-     * 
-     * Restituisce il ricavo annuo in base alla sede dell'utente
-     *  
-     * @access	private
-     * @param	mixed	$user_site	
-     * @param	mixed	$range    	
-     * @return	mixed
-     */
-    private function getYearIncome($user_site, $range)
-    {
-        return ViewOrderByDay::where('site_id', $user_site)
-            ->whereBetween('date_day', [$range['from'], $range['to']])
-            ->selectRaw('site_id, MONTH(date_day) as month, sum(total) as total')
-            ->groupBy('month')
-            ->get();
-    }
 
     /**
-     * getPeriodIncome.
-     * 
-     * Restituisce il ricavo del periodo indicato nella sede dell'utente
-     * @access	private
-     * @param	mixed	$user_site	
-     * @param	array	$range    	
-     * @return	mixed
-     */
-    private function getPeriodIncome($user_site, $range)
-    {
-        return ViewOrderByDay::where('site_id', $user_site)
-            ->whereBetween('date_day', [$range['from'], $range['to']])
-            ->get();
-    }
-
-    /**
-     * getPieChartIncomeDataset.
+     * getManagerPieChartDataset.
      * Prepara il dataset delle vendite per sede, categoria, periodo
      * per un grafico a torta o ciambella
      *
@@ -261,7 +233,7 @@ class AnalyticsController extends Controller
      * @param	mixed	$range    	
      * @return	array
      */
-    private function getPieChartIncomeDataset($user_site, $range)
+    private function getManagerPieChartDataset($user_site, $range)
     {
         $orders = ViewOrderByCategoryDay::where('site_id', $user_site)
             ->whereBetween('date_day', [$range['from'], $range['to']])
@@ -298,20 +270,20 @@ class AnalyticsController extends Controller
     {
         $income = ViewOrderById::where('site_id', $user_site)
             ->whereBetween('date_day', [$range['from'], $range['to']])
-            ->selectRaw('sum(total) as total')
-            ->get();
+            ->sum('total');
         $num_orders = ViewOrderById::where('site_id', $user_site)
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->count();
         $num_products = ViewOrderById::where('site_id', $user_site)
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->sum('num_items');
-
-        return [
-            'income' => $income->pluck('total')->values(),
-            'orders' => $num_orders,
-            'products' => $num_products,
-        ];
+        if ($income) {
+            return [
+                'income' => $income,
+                'orders' => $num_orders,
+                'products' => $num_products,
+            ];
+        }
     }
     /**
      * getAdminBarChart
@@ -329,34 +301,33 @@ class AnalyticsController extends Controller
             switch ($period) {
                 case 'year':
                     $orders = ViewOrderById::where('site_id', $site->id)
-                    ->whereBetween('date_day', [$range['from'], $range['to']])
-                    ->selectRaw('MONTH(date_day) as month, count(order_id) as orders')
-                    ->groupBy('month');
+                        ->whereBetween('date_day', [$range['from'], $range['to']])
+                        ->selectRaw('MONTH(date_day) as month, count(order_id) as orders')
+                        ->groupBy('month');
                     foreach ($orders->pluck('month') as $month) {
                         $labels[] = self::MONTH[--$month];
                     }
                     break;
-    
+
                 case 'month':
                 case 'week':
                     $orders = ViewOrderById::where('site_id', $site->id)
-                    ->whereBetween('date_day', [$range['from'], $range['to']])
-                    ->selectRaw('date_day, count(order_id) as orders')
-                    ->groupBy('date_day');
-                    
+                        ->whereBetween('date_day', [$range['from'], $range['to']])
+                        ->selectRaw('date_day, count(order_id) as orders')
+                        ->groupBy('date_day');
+
                     $labels = $orders->pluck('date_day')->transform(function ($date) {
                         return formatShortDate($date);
                     });
                     break;
             }
 
-            
-            $datasets [] = [
+
+            $datasets[] = [
                 'label' => $site->name,
                 'data' => $orders->pluck('orders'),
                 'backgroundColor' => self::COLORS[--$site->id],
             ];
-
         }
 
 
@@ -367,7 +338,7 @@ class AnalyticsController extends Controller
     }
 
     /**
-     * getPieChartAdminDataset.
+     * getAdminPieChartDataset.
      * Prepara il dataset degli ordini per sede, categoria, periodo
      * per un grafico a torta o ciambella
      *
@@ -376,19 +347,19 @@ class AnalyticsController extends Controller
      * @param	mixed	$range    	
      * @return	array
      */
-    private function getPieChartAdminDataset($range)
+    private function getAdminPieChartDataset($range)
     {
         $orders = DB::table('orders_amount_by_id')
             ->join('sites', 'site_id', '=', 'sites.id')
             ->whereBetween('date_day', [$range['from'], $range['to']])
             ->groupBy('site_id')
-            ->selectRaw('site_id, sites.name as site_name ,count(order_id) as orders')  
-            ->orderBy('site_id')          
+            ->selectRaw('site_id, sites.name as site_name ,count(order_id) as orders')
+            ->orderBy('site_id')
             ->get();
 
         $labels = $orders->pluck('site_name');
         $data = $orders->pluck('orders', 'site_name')->values();
-        $colors = array_slice(self::COLORS, 0, count($labels));  
+        $colors = array_slice(self::COLORS, 0, count($labels));
 
         $datasets[] = [
             'data' => $data,
@@ -419,11 +390,12 @@ class AnalyticsController extends Controller
         $num_users = ViewOrderById::whereBetween('date_day', [$range['from'], $range['to']])
             ->distinct('user_id')
             ->count('user_id');
-        return [
-            'orders' => $num_orders,
-            'products' => $num_products,
-            'users' => $num_users,
-        ];
+        if ($num_orders) {
+            return [
+                'orders' => $num_orders,
+                'products' => $num_products,
+                'users' => $num_users,
+            ];
+        }
     }
-
 }

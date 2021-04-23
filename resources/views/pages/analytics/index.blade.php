@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 9:38:17 am
+ * Last Modified: 	April 23rd 2021 10:38:25 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -163,21 +163,21 @@ $.ajax({
                 range: formRange,
             },
             success: function name(result) {
-                formRange = result.range;
-                console.log(result);
+                
                 if (result.barChart.datasets[0].data.length !== 0){
                     barChart.data.labels=result.barChart.labels;
                     barChart.data.datasets=result.barChart.datasets;
                     $("#period").html(result.range['label']);
                     barChart.options.title.text="Ordini per sede";
                     barChart.update();
+                    formRange = result.range;
                 }
                 if (result.pieChart.datasets[0].data.length !== 0){
                     pieChart.data=result.pieChart;
                     pieChart.options.title.text="Ordini per sede";
                     pieChart.update();
                 }
-                if (result.stats.length !== 0){
+                if (result.stats.users !==null){
                     $("#stat1").html(result.stats.users);
                     $("#stat2").html(result.stats.orders);
                     $("#stat3").html(result.stats.products);
@@ -202,20 +202,20 @@ $.ajax({
                 range: formRange,
             },
             success: function name(result) {
-                formRange = result.range;
-                console.log(result);
                 if (result.barChart.datasets[0].data.length !== 0){
                     barChart.data=result.barChart;
                     barChart.options.title.text="Ricavi";
                     $("#period").html(result.range['label']);
                     barChart.update();
+                    formRange = result.range;
                 }
                 if (result.pieChart.datasets[0].data.length !== 0){
                     pieChart.data=result.pieChart;
-                    pieChart.options.title.text="Ricavi per Categorie";
+                    pieChart.options.title.text="Ricavi per Categoria";
                     pieChart.update();
                 }
-                if (result.stats.length !== 0){
+                console.log(result.stats);
+                if (result.stats.income !==null){
                     $("#stat1").html(formatPrice(result.stats.income));
                     $("#stat2").html(result.stats.orders);
                     $("#stat3").html(result.stats.products);
