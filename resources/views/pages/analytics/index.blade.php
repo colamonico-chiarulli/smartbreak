@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 10:38:25 am
+ * Last Modified: 	April 23rd 2021 12:19:10 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -54,10 +54,12 @@
     <div class="row d-flex justify-content-center mb-3">
         <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
             <label class="btn bg-olive">
-                <input type="radio" name="period" value="week" id="option_b1" autocomplete="off" checked=""> Settimana
+                <input type="radio" name="period" value="week" id="option_b1" autocomplete="off" 
+                @cannot('is-student')checked=""@endcannot> Settimana
             </label>
             <label class="btn bg-olive active">
-                <input type="radio" name="period" value="month" id="option_b2" autocomplete="off"> Mese
+                <input type="radio" name="period" value="month" id="option_b2" autocomplete="off"
+                @can('is-student')checked=""@endcan> Mese
             </label>
             <label class="btn bg-olive">
                 <input type="radio" name="period" value="year" id="option_b3" autocomplete="off"> Anno
@@ -85,10 +87,11 @@
             <h4 id="stat1"></h4>
             @can('is-admin')<p>Utenti</p>@endcan
             @can('is-manager')<p>Ricavi</p>@endcan
+            @can('is-student')<p>Hai speso</p>@endcan
         </div>
         <div class="icon">
-            @can('is-admin')<i class="fas fa-users"></i>@endcan
-            @can('is-manager')<i class="fas fa-euro-sign"></i></p>@endcan
+            @can('is-admin')<i class="fas fa-users fa-lg"></i>@endcan
+            @cannot('is-admin')<i class="fas fa-euro-sign"></i></p>@endcannot
         </div>
     </div>
     <div class="small-box bg-info col col-md-3">
@@ -163,7 +166,6 @@ $.ajax({
                 range: formRange,
             },
             success: function name(result) {
-                
                 if (result.barChart.datasets[0].data.length !== 0){
                     barChart.data.labels=result.barChart.labels;
                     barChart.data.datasets=result.barChart.datasets;
@@ -214,7 +216,6 @@ $.ajax({
                     pieChart.options.title.text="Ricavi per Categoria";
                     pieChart.update();
                 }
-                console.log(result.stats);
                 if (result.stats.income !==null){
                     $("#stat1").html(formatPrice(result.stats.income));
                     $("#stat2").html(result.stats.orders);
@@ -225,7 +226,41 @@ $.ajax({
 }    
 @endcan
 
+{{-- getChart STUDENT --}}
+@can('is-student')
+function getCharts(){
+var formPeriod = $('input[name="period"]:checked').val(); 
 
+$.ajax({
+            url: '{{ route("analytics.getcharts") }}',
+            method: "POST",
+            data: {
+                period: formPeriod,
+                move: formMove,
+                range: formRange,
+            },
+            success: function name(result) {
+                if (result.barChart.datasets[0].data.length !== 0){
+                    barChart.data=result.barChart;
+                    barChart.options.title.text="Le tue spese";
+                    $("#period").html(result.range['label']);
+                    barChart.update();
+                    formRange = result.range;
+                }
+                if (result.pieChart.datasets[0].data.length !== 0){
+                    pieChart.data=result.pieChart;
+                    pieChart.options.title.text="Spese per Categoria";
+                    pieChart.update();
+                }
+                if (result.stats){
+                    $("#stat1").html(formatPrice(result.stats.expenses));
+                    $("#stat2").html(result.stats.orders);
+                    $("#stat3").html(result.stats.products);
+                }    
+            }
+        });
+}    
+@endcan
 
 //BarChart
 var barCtx = document.getElementById('barChart').getContext('2d');
@@ -235,8 +270,6 @@ var barChart = new Chart(barCtx, {
         labels: [],
         datasets: [],
     },
-
-    
     options: {
         responsive:true,
         maintainAspectRatio: true,
@@ -251,7 +284,7 @@ var barChart = new Chart(barCtx, {
                 }
             }]
         },    
-@can('is-manager') {{-- Format Price if MANAGER --}}   
+@cannot('is-admin') {{-- Format Price if MANAGER or STUDENT --}}   
         tooltips: {
             callbacks: {
                 label: function (tooltipItems, data) {
@@ -259,7 +292,7 @@ var barChart = new Chart(barCtx, {
                 }
             }
         }
-@endcan        
+@endcannot     
     }
 });
 
@@ -275,7 +308,7 @@ var pieChart = new Chart(pieCtx, {
                 display: true,
                 text: ''
         },
-@can('is-manager') {{-- Format Price if MANAGER--}}   
+@cannot('is-admin') {{-- Format Price if MANAGER or STUDENT--}}   
         tooltips: {
             callbacks: {
                 label: function (tooltipItem, data) {
@@ -287,7 +320,7 @@ var pieChart = new Chart(pieCtx, {
                 }
             }
         }
-@endcan
+@endcannot
     }
 });
 

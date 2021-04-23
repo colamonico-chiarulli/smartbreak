@@ -7,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 10:45:46 am
+ * Last Modified: 	April 23rd 2021 12:11:41 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -53,10 +53,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\ViewOrderByCategoryDay;
-use Illuminate\Database\Eloquent\Builder;
 use App\Models\ViewOrderByDay;
 use App\Models\ViewOrderById;
-use Barryvdh\Debugbar\Twig\Extension\Dump;
+use App\Models\ViewOrderByUser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -81,8 +80,12 @@ class AnalyticsController extends Controller
      */
     public function getAnalyticsPage()
     {
-        // Crea una stringa con i nomi della/e sede/i
-        $user_site = auth()->user()->mySiteName();
+        // Crea una stringa con i nomi della/e sede/i o con il nome utente
+        if (auth()->user()->role == "STUDENT") {
+            $user_site = auth()->user()->first_name;
+        } else {
+            $user_site = auth()->user()->mySiteName();
+        }
         return view('pages.analytics.index', compact('user_site'));
     }
 
@@ -116,7 +119,9 @@ class AnalyticsController extends Controller
                 $result['stats'] = $this->getManagerStats($user_site, $range);
                 break;
             case 'STUDENT':
-
+                $result['barChart'] = $this->getStudentBarChartDataset($range, $period);
+                $result['pieChart'] = $this->getStudentPieChartDataset($range);
+                $result['stats'] = $this->getStudentStats($range);
                 break;
         }
 
@@ -285,6 +290,7 @@ class AnalyticsController extends Controller
             ];
         }
     }
+
     /**
      * getAdminBarChart
      * Prepara le statistiche per l'admin
@@ -395,6 +401,124 @@ class AnalyticsController extends Controller
                 'orders' => $num_orders,
                 'products' => $num_products,
                 'users' => $num_users,
+            ];
+        }
+    }
+
+    /**
+     * getStudentBarChartDataset.
+     * Prepara il dataset delle spese per utente, periodo (settimana, mese, anno)
+     * per un grafico a barre (Student)
+     *
+     * @param	mixed	$user_site	
+     * @param	mixed	$range    	
+     * @param	mixed	$period   	
+     * @return	array
+     */
+    private function getStudentBarChartDataset($range, $period)
+    {
+        $user_id = auth()->user()->id;
+        $labels = [];
+
+        switch ($period) {
+            case 'year':
+                $orders = ViewOrderByUser::where('user_id', $user_id)
+                    ->whereBetween('date_day', [$range['from'], $range['to']])
+                    ->selectRaw('User_id, MONTH(date_day) as month, sum(total) as total')
+                    ->groupBy('month')
+                    ->get();;
+                foreach ($orders->pluck('month') as $month) {
+                    $labels[] = self::MONTH[--$month];
+                }
+                break;
+
+            case 'month':
+            case 'week':
+                $orders = ViewOrderByUser::where('user_id', $user_id)
+                    ->whereBetween('date_day', [$range['from'], $range['to']])
+                    ->get();
+                $labels = $orders->pluck('date_day')->transform(function ($date) {
+                    return formatShortDate($date);
+                });
+                break;
+        }
+
+        $datasets = [
+            'label' => $range['label'],
+            'data' => $orders->pluck('total'),
+            'backgroundColor' => self::COLORS[0],
+        ];
+
+        return [
+            "labels" => $labels,
+            "datasets" => [$datasets],
+        ];
+    }
+
+
+    /**
+     * getStudentPieChartDataset.
+     * Prepara il dataset delle spese per categoria, periodo
+     * per un grafico a torta o ciambella (Student)
+     *
+     * @access	public
+     * @param	mixed	$user_site	
+     * @param	mixed	$range    	
+     * @return	array
+     */
+    private function getStudentPieChartDataset($range)
+    {
+        $user_id = auth()->user()->id;
+
+        $orders = ViewOrderByUser::where('user_id', $user_id)
+            ->whereBetween('date_day', [$range['from'], $range['to']])
+            ->groupBy('category_id')
+            ->selectRaw('category_id, name, sum(total) as total')
+            ->orderBy('name')
+            ->get();
+
+        $labels = $orders->pluck('name');
+        $data = $orders->pluck('total', 'name')->values();
+        $colors = array_slice(self::COLORS, 0, count($labels));
+
+        $datasets[] = [
+            'data' => $data,
+            'backgroundColor' => $colors,
+        ];
+
+        return [
+            "labels" => $labels,
+            "datasets" => $datasets,
+        ];
+    }
+
+    /**
+     * getStudentStats
+     * Prepara le statistiche per il MANAGER
+     *
+     * @access	private
+     * @param	mixed	$user_site	
+     * @param	mixed	$range    	
+     * @return	array
+     */
+    private function getStudentStats($range)
+    {
+        $user_id = auth()->user()->id;
+
+        $expenses = ViewOrderByUser::where('user_id', $user_id)
+            ->whereBetween('date_day', [$range['from'], $range['to']])
+            ->sum('total');
+        $num_orders = ViewOrderByUser::where('user_id', $user_id)
+            ->whereBetween('date_day', [$range['from'], $range['to']])
+            ->count();
+        $num_products = ViewOrderById::where('user_id', $user_id)
+            ->whereBetween('date_day', [$range['from'], $range['to']])
+            ->sum('num_items');
+        if ($expenses) {
+            return [
+                'expenses' => $expenses,
+                'orders' => $num_orders,
+                'products' => $num_products,
             ];
         }
     }

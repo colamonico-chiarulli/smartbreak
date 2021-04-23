@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 16th 2021 7:37:19 pm
+ * Last Modified: 	April 23rd 2021 12:07:27 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -200,7 +200,16 @@
                         </p>
                     </a>
                 </li>
-
+                
+                <li class="nav-item">
+                    <a href="{{ route('analytics') }}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>
+                            Statistiche
+                        </p>
+                    </a>
+                </li>
+                
                 @endcan
                 <li class="nav-item">
                     <hr>

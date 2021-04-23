@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 23rd 2021 9:43:43 am
+ * Last Modified: 	April 23rd 2021 11:12:04 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -132,4 +132,18 @@ class CreateOrdersView extends Migration
         END;
     }
 
+    private function createView4(): string
+    {
+        return <<< END
+        CREATE OR REPLACE VIEW orders_amount_by_user AS
+        SELECT user_id, category_id, categories.name as name, DATE(orders.created_at) as date_day,
+               SUM(order_product.quantity * order_product.price) as total
+                      from order_product 
+                      INNER JOIN orders ON order_id=orders.id 
+                      INNER JOIN products ON product_id=products.id
+                      INNER JOIN categories ON products.category_id=categories.id  
+                      GROUP BY user_id, category_id, date_day
+                      ORDER BY user_id, category_id, date_day;
+        END;
+    }
 }
