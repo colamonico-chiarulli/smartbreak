@@ -7,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 1:24:59 pm
+ * Last Modified: 	April 24th 2021 6:35:17 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -73,6 +73,7 @@ class AnalyticsController extends Controller
      * getAnalyticsPage.
      * 
      * Chiamata al caricamento della pagina
+     * Prepara i dati solo dei tre box info
      * i grafici saranno richiamati  via Ajax onLoad e al cambio parametri
      * 
      * @access	public
@@ -82,11 +83,30 @@ class AnalyticsController extends Controller
     {
         // Crea una stringa con i nomi della/e sede/i o con il nome utente
         if (auth()->user()->role == "STUDENT") {
-            $user_site = auth()->user()->first_name;
+            $title = auth()->user()->first_name;
         } else {
-            $user_site = auth()->user()->mySiteName();
+            $title = auth()->user()->mySiteName();
         }
-        return view('pages.analytics.index', compact('user_site'));
+        
+        //Al primo caricamento visualizza solo i box statistici
+        $role = auth()->user()->role;
+        switch ($role) {
+            case 'ADMIN':
+                $range = $this->getRange();
+                $stats = $this->getAdminStats($range);
+                break;
+            case 'MANAGER':
+                $range = $this->getRange();
+                $user_site = auth()->user()->site_id;
+                $stats = $this->getManagerStats($user_site, $range);
+                break;
+            case 'STUDENT':
+                $range = $this->getRange('month');
+                $stats = $this->getStudentStats($range);
+                break;
+        }
+        
+        return view('pages.analytics.index', compact('title','stats','range'));
     }
 
     /**
@@ -100,7 +120,11 @@ class AnalyticsController extends Controller
      */
     public function getChartsDataset(Request $request)
     {
-        $range = $this->getRange($request);
+        $period = $request->input('period');
+        $move = $request->input('move');
+        $prevRange = $request->input('range');
+
+        $range = $this->getRange($period,$move,$prevRange);
         $result['range'] = $range;
         $period = $request->input('period');
 
@@ -111,17 +135,18 @@ class AnalyticsController extends Controller
             case 'ADMIN':
                 $result['barChart'] = $this->getAdminBarChart($range, $period);
                 $result['pieChart'] = $this->getAdminPieChartDataset($range);
-                $result['stats'] = $this->getAdminStats($range);
+                //se la pagina è stata già caricata aggiorna anche le statistiche
+                if($prevRange) $result['stats'] = $this->getAdminStats($range); 
                 break;
             case 'MANAGER':
                 $result['barChart'] = $this->getManagerBarChartDataset($user_site, $range, $period);
                 $result['pieChart'] = $this->getManagerPieChartDataset($user_site, $range);
-                $result['stats'] = $this->getManagerStats($user_site, $range);
+                if($prevRange) $result['stats'] = $this->getManagerStats($user_site, $range);
                 break;
             case 'STUDENT':
                 $result['barChart'] = $this->getStudentBarChartDataset($range, $period);
                 $result['pieChart'] = $this->getStudentPieChartDataset($range);
-                $result['stats'] = $this->getStudentStats($range);
+                if($prevRange) $result['stats'] = $this->getStudentStats($range);
                 break;
         }
 
@@ -131,21 +156,18 @@ class AnalyticsController extends Controller
 
     /**
      * getRange.
-     * 
      * Prepara il range dei grafici (data-inizio e data-fine)
      * in base alle scelte dell'utente (settimana-mese-anno)
      * indietro nel tempo <- move -> avanti nel tempo
-     * 
+     *
      * @access	private
-     * @param	request	$request	
+     * @param	mixed	$period "week", "month", "year"   	
+     * @param	mixed	$move   "left", "right" (time shift)     	
+     * @param	mixed	$prevRange (previous range)	
      * @return	mixed
      */
-    private function getRange(Request $request)
+    private function getRange($period = "week", $move = null, $prevRange = null)
     {
-        $period = $request->input('period');
-        $move = $request->input('move');
-        $prevRange = $request->input('range');
-
         $start = ($move == null) ? $start = today() : new Carbon($prevRange['from']);
 
         $range = [];
@@ -224,6 +246,7 @@ class AnalyticsController extends Controller
         return [
             "labels" => $labels,
             "datasets" => [$datasets],
+            "title"=> "Ricavi",
         ];
     }
 
@@ -257,6 +280,7 @@ class AnalyticsController extends Controller
         ];
 
         return [
+            "title"=> "Ricavi per Categoria",
             "labels" => $labels,
             "datasets" => $datasets,
         ];
@@ -284,9 +308,9 @@ class AnalyticsController extends Controller
             ->sum('num_items');
         if ($income) {
             return [
-                'income' => $income,
-                'orders' => $num_orders,
-                'products' => $num_products,
+                'box1' => formatPrice($income),
+                'box2' => number_format($num_orders, 0, ',', '.'),
+                'box3' => number_format($num_products, 0, ',', '.'),
             ];
         }
     }
@@ -302,6 +326,8 @@ class AnalyticsController extends Controller
     private function getAdminBarChart($range, $period)
     {
         $sites = Site::all();
+        $labels=[];
+        
         foreach ($sites as $site) {
 
             switch ($period) {
@@ -338,6 +364,7 @@ class AnalyticsController extends Controller
 
 
         return [
+            "title"=> "Ordini per sede",
             "labels" => $labels,
             "datasets" => $datasets,
         ];
@@ -373,6 +400,7 @@ class AnalyticsController extends Controller
         ];
 
         return [
+            "title"=> "Ordini per sede",
             "labels" => $labels,
             "datasets" => $datasets,
         ];
@@ -398,9 +426,9 @@ class AnalyticsController extends Controller
             ->count('user_id');
         if ($num_orders) {
             return [
-                'orders' => $num_orders,
-                'products' => $num_products,
-                'users' => $num_users,
+                'box1' => number_format($num_users,  0,',', '.'),
+                'box2' => number_format($num_orders, 0, ',', '.'),
+                'box3' => number_format($num_products, 0, ',', '.'),
             ];
         }
     }
@@ -450,6 +478,7 @@ class AnalyticsController extends Controller
         ];
 
         return [
+            "title"=> "Le tue spese", 
             "labels" => $labels,
             "datasets" => [$datasets],
         ];
@@ -488,6 +517,7 @@ class AnalyticsController extends Controller
         ];
 
         return [
+            "title"=> "Spese per Categoria", 
             "labels" => $labels,
             "datasets" => $datasets,
         ];
@@ -517,9 +547,9 @@ class AnalyticsController extends Controller
             ->sum('num_items');
         if ($expenses) {
             return [
-                'expenses' => $expenses,
-                'orders' => $num_orders,
-                'products' => $num_products,
+                'box1' => formatPrice($expenses),
+                'box2' => number_format($num_orders, 0, ',', '.'),
+                'box3' => number_format($num_products, 0, ',', '.'),
             ];
         }
     }

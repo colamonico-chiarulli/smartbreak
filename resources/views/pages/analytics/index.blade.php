@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 23rd 2021 1:51:35 pm
+ * Last Modified: 	April 24th 2021 3:18:23 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,9 +45,10 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Statistiche ' . $user_site ])
+@extends('layouts.app', ['title' => 'Statistiche ' . $title ])
 
 @include('plugins.chartjs')
+@include('plugins.toastr')
 
 @section('content')
 <div>
@@ -73,7 +74,9 @@
                 <input type="radio" name="move" id="move_left" value="left" autocomplete="off"><i
                     class="fas fa-angle-left"></i>
             </label>
-            <span id="period" class="form-control rounded-0 text-center align-middle font-weight-bold">&nbsp;</span>
+            <span id="period" class="form-control rounded-0 text-center align-middle font-weight-bold">
+                {{$range['label']}}
+            </span>
             <label class="btn bg-info">
                 <input type="radio" name="move" id="move_right" value="right" autocomplete="off"><i
                     class="fas fa-angle-right"></i>
@@ -84,7 +87,7 @@
 <div class="row justify-content-around">
     <div class="small-box bg-success col col-md-3">
         <div class="inner">
-            <h4 id="stat1"></h4>
+            <h4 id="stat1">{{$stats['box1']}}</h4>
             @can('is-admin')<p>Utenti</p>@endcan
             @can('is-manager')<p>Ricavi</p>@endcan
             @can('is-student')<p>Hai speso</p>@endcan
@@ -96,7 +99,7 @@
     </div>
     <div class="small-box bg-info col col-md-3">
         <div class="inner">
-            <h4 id="stat2"></h4>
+            <h4 id="stat2">{{$stats['box2']}}</h4>
             <p>Ordini</p>
         </div>
         <div class="icon">
@@ -105,7 +108,7 @@
     </div>
     <div class="small-box bg-warning col col-md-3">
         <div class="inner">
-            <h4 id="stat3"></h4>
+            <h4 id="stat3">{{$stats['box3']}}</h4>
             <p>Prodotti</p>
         </div>
         <div class="icon">
@@ -147,7 +150,7 @@ $("input[name='move']").click(move);
  */
 function changePeriod(){
     var today = new Date();
-    formRange['range']=today.toString();
+    formRange['from']=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     getCharts();
 }
 
@@ -162,8 +165,6 @@ function move(){
     formMove = null;
 }
 
-{{-- getChart ADMIN --}}
-@can('is-admin')
 function getCharts(){
 var formPeriod = $('input[name="period"]:checked').val(); 
 
@@ -180,97 +181,26 @@ $.ajax({
                     barChart.data.labels=result.barChart.labels;
                     barChart.data.datasets=result.barChart.datasets;
                     $("#period").html(result.range['label']);
-                    barChart.options.title.text="Ordini per sede";
+                    barChart.options.title.text=result.barChart.title;
                     barChart.update();
                     formRange = result.range;
+                } else {
+                    toastr.options.timeOut = 2000;
+                    toastr.info("Non ci sono dati per il periodo scelto");
                 }
                 if (result.pieChart.datasets[0].data.length !== 0){
                     pieChart.data=result.pieChart;
-                    pieChart.options.title.text="Ordini per sede";
+                    pieChart.options.title.text=result.pieChart.title;
                     pieChart.update();
                 }
-                if (result.stats.users !==null){
-                    $("#stat1").html(result.stats.users);
-                    $("#stat2").html(result.stats.orders);
-                    $("#stat3").html(result.stats.products);
+                if (result.stats){
+                    $("#stat1").html(result.stats.box1);
+                    $("#stat2").html(result.stats.box2);
+                    $("#stat3").html(result.stats.box3);
                 }  
             }
         });
 }    
-@endcan
-
-
-{{-- getChart MANAGER --}}
-@can('is-manager')
-function getCharts(){
-var formPeriod = $('input[name="period"]:checked').val(); 
-
-$.ajax({
-            url: '{{ route("analytics.getcharts") }}',
-            method: "POST",
-            data: {
-                period: formPeriod,
-                move: formMove,
-                range: formRange,
-            },
-            success: function name(result) {
-                if (result.barChart.datasets[0].data.length !== 0){
-                    barChart.data=result.barChart;
-                    barChart.options.title.text="Ricavi";
-                    $("#period").html(result.range['label']);
-                    barChart.update();
-                    formRange = result.range;
-                }
-                if (result.pieChart.datasets[0].data.length !== 0){
-                    pieChart.data=result.pieChart;
-                    pieChart.options.title.text="Ricavi per Categoria";
-                    pieChart.update();
-                }
-                if (result.stats.income !==null){
-                    $("#stat1").html(formatPrice(result.stats.income));
-                    $("#stat2").html(result.stats.orders);
-                    $("#stat3").html(result.stats.products);
-                }    
-            }
-        });
-}    
-@endcan
-
-{{-- getChart STUDENT --}}
-@can('is-student')
-function getCharts(){
-var formPeriod = $('input[name="period"]:checked').val(); 
-
-$.ajax({
-            url: '{{ route("analytics.getcharts") }}',
-            method: "POST",
-            data: {
-                period: formPeriod,
-                move: formMove,
-                range: formRange,
-            },
-            success: function name(result) {
-                if (result.barChart.datasets[0].data.length !== 0){
-                    barChart.data=result.barChart;
-                    barChart.options.title.text="Le tue spese";
-                    $("#period").html(result.range['label']);
-                    barChart.update();
-                    formRange = result.range;
-                }
-                if (result.pieChart.datasets[0].data.length !== 0){
-                    pieChart.data=result.pieChart;
-                    pieChart.options.title.text="Spese per Categoria";
-                    pieChart.update();
-                }
-                if (result.stats){
-                    $("#stat1").html(formatPrice(result.stats.expenses));
-                    $("#stat2").html(result.stats.orders);
-                    $("#stat3").html(result.stats.products);
-                }    
-            }
-        });
-}    
-@endcan
 
 //BarChart
 var barCtx = document.getElementById('barChart').getContext('2d');
