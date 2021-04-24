@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 23rd 2021 12:07:27 pm
+ * Last Modified: 	April 24th 2021 11:37:30 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -50,7 +50,9 @@
     <!-- Brand Logo - hide sidebar button-->
     <a data-widget="pushmenu" href="#" role="button" class="brand-link">
         <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-width: 80%;">
-        {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
+        <i class="far fa-window-close"></i>
+    </a>
+    {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -136,48 +138,44 @@
 
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                        <i class="nav-icon fas fa-th"></i>
                         <p>
                             Prodotti
                         </p>
                     </a>
                 </li>
-
-
+                
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                    <hr>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="{{ route('orders.by-day') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Ordini
-                            <i class="right fas fa-angle-left"></i>
+                            Ordini per classe
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('orders.by-day') }}" class="nav-link">
-                                <p>
-                                    Per classe
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('products.by-day') }}" class="nav-link">
-                                <p>
-                                    Per prodotto
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <li class="nav-item">
-                        <a href="{{ route('analytics') }}" class="nav-link">
-                            <i class="nav-icon fas fa-chart-bar"></i>
-                            <p>
-                                Statistiche
-                            </p>
-                        </a>
-                    </li>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('products.by-day') }}" class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Ordini per prodotto
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('analytics') }}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>
+                            Statistiche
+                        </p>
+                    </a>
+                </li>
+
 
                 @endcanany
 
@@ -194,13 +192,13 @@
 
                 <li class="nav-item">
                     <a href="{{ route('orders.today-by-class') }}" class="nav-link">
-                        <i class="nav-icon fas fa-hamburger"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Ordine della mia classe
                         </p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('analytics') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-bar"></i>
@@ -209,18 +207,20 @@
                         </p>
                     </a>
                 </li>
-                
+
                 @endcan
                 <li class="nav-item">
                     <hr>
                 </li>
-
                 <li class="nav-item">
-                <a data-widget="pushmenu" href="#" role="button" class="nav-link">
-                    <i class="nav-icon fas fa-window-close"></i>
-                    <p>Chiudi</p>
-                </a>
-            </li>
+                    <a href="javascript:;"  onclick="document.getElementById('logout-form').submit();" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Esci
+                        </p>
+                    </a>
+                </li>
+                
 
             </ul>
         </nav>
