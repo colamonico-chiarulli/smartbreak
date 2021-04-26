@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 26th 2021 4:00:06 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ class HomeController extends Controller
     public function index()
     {
         if (Gate::check('is-manager')) {
-            $route = 'orders.by-day';
+            $route = 'products.by-day';
         } elseif (Gate::check('is-student')) {
             $route = 'cart.choose-products';
         } elseif (Gate::check('is-admin')) {
