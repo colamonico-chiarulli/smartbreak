@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 21st 2021 9:56:18 am
+ * Last Modified: 	April 26th 2021 6:34:05 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="layout-top-nav layout-navbar-fixed control-sidebar-slide-open sidebar-collapse">
+<body class="layout-top-nav layout-navbar-fixed layout-fixed control-sidebar-slide-open sidebar-collapse">
 
     <div class="wrapper">
 
