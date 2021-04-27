@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	April 12th 2021 7:48:30 pm
+ * Last Modified: 	April 27th 2021 1:06:23 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -184,11 +184,10 @@ class OrderController extends Controller
     {
         $user_id = auth()->user()->id;
         
-        //recupara gli ordini dell'utente per data e prodotto
-        $orders = DB::table('orders')
-                ->join('order_product', 'id', '=', 'order_id')
+        //recupera gli ordini dell'utente per data e prodotto
+        $orders = Order::join('order_product', 'id', '=', 'order_id')
                 ->join('products', 'product_id', '=', 'products.id')
-                ->select(DB::raw('DATE_FORMAT(DATE(orders.created_at), "%d-%m%-%Y") as date_order'),
+                ->select(DB::raw('DATE(orders.created_at) as date_order'),
                         'products.id', 'products.name as name', 
                          DB::raw('SUM(quantity) as quantity'),
                          DB::raw('SUM(order_product.price * order_product.quantity) as total')
@@ -196,12 +195,12 @@ class OrderController extends Controller
                 ->where('user_id', $user_id)
                 ->groupBy('date_order','products.id')
                 ->orderBy('date_order', 'desc')
-                ->get();
+                ->paginate(30);
         
         //raggruppa gli ordini per data
-        $orders=$orders->groupBy('date_order');
-                       
-        return view('pages.orders.orders-by-student', compact('orders'));
+        $orders_by_day=$orders->groupBy('date_order');
+        
+        return view('pages.orders.orders-by-student', compact('orders','orders_by_day'));
     }
 }
 

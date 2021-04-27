@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	April 15th 2021 1:44:33 pm
+ * Last Modified: 	April 27th 2021 1:05:22 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -51,15 +51,15 @@
 @section('content')
 
 <div id="student-accordion">
-    @foreach($orders as $date=>$order)
+    @foreach($orders_by_day as $date=>$order)
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title w-75 text-bold"> 
                 <a class="d-block w-75 collapsed" data-toggle="collapse" href="#data-{{$date}}">
-                    {{$date}}
+                    {{formatDate($date)}}
                 </a>
             </h3>
-            <h6 class="text-right"> {{ formatPrice(collect($orders[$date])->sum('total')) }}</h6>
+            <h6 class="text-right"> {{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</h6>
 
             {{-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -83,7 +83,7 @@
 
                     <tbody>
 
-                        @foreach($orders[$date] as $product)
+                        @foreach($orders_by_day[$date] as $product)
                         <tr>
                             <td>{{ $product->name }}</td>
 
@@ -102,7 +102,7 @@
                     <tfoot>
                         <tr class="table-primary">
                             <td class="text-right" colspan="3">
-                                Totale: <b>{{ formatPrice(collect($orders[$date])->sum('total')) }}</b>
+                                Totale: <b>{{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</b>
                             </td>
                         </tr>
                     </tfoot>
@@ -119,7 +119,10 @@
 
 
 <div class="text-right">
-    <h4>Totale ordini: <b>{{ formatPrice(collect($orders)->collapse('total')->sum('total')) }}</h4>
+    <h4>Totale ordini: <b>{{ formatPrice(collect($orders_by_day)->collapse('total')->sum('total')) }}</h4>
 </div>
 
+<div class="w-100 pl-2">
+    {!! $orders->links() !!}
+</div>
 @endsection
