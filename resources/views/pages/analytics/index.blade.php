@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 24th 2021 3:18:23 pm
+ * Last Modified: 	April 29th 2021 7:55:36 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -51,16 +51,17 @@
 @include('plugins.toastr')
 
 @section('content')
+<div id="loader" class="spinner"></div>
 <div>
     <div class="row d-flex justify-content-center mb-3">
         <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
             <label class="btn bg-olive">
-                <input type="radio" name="period" value="week" id="option_b1" autocomplete="off" 
-                @cannot('is-student')checked=""@endcannot> Settimana
+                <input type="radio" name="period" value="week" id="option_b1" autocomplete="off"
+                    @cannot('is-student')checked="" @endcannot> Settimana
             </label>
             <label class="btn bg-olive active">
                 <input type="radio" name="period" value="month" id="option_b2" autocomplete="off"
-                @can('is-student')checked=""@endcan> Mese
+                    @can('is-student')checked="" @endcan> Mese
             </label>
             <label class="btn bg-olive">
                 <input type="radio" name="period" value="year" id="option_b3" autocomplete="off"> Anno
@@ -125,7 +126,7 @@
 
 @push('js')
 <script>
-//global variables
+    //global variables
 var formMove = null;
 var formRange = [];
 
@@ -176,6 +177,9 @@ $.ajax({
                 move: formMove,
                 range: formRange,
             },
+            beforeSend: function(){
+                $('#loader').addClass('spinner');
+            },
             success: function name(result) {
                 if (result.barChart.datasets[0].data.length !== 0){
                     barChart.data.labels=result.barChart.labels;
@@ -198,6 +202,9 @@ $.ajax({
                     $("#stat2").html(result.stats.box2);
                     $("#stat3").html(result.stats.box3);
                 }  
+            },
+            complete:function(data){
+                $('#loader').removeClass('spinner');
             }
         });
 }    
