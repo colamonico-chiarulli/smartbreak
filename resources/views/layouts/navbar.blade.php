@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 30th 2021 1:43:00 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -55,9 +55,11 @@
         </ul>
         <h6>
             <a href="{{ url('/') }}" class="navbar-brand">
-                <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
+                <img class="d-none d-sm-inline" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
+                <!-- Image on extra small screen -->
+                <img  class="ml-2 d-sm-none" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 21px;  vertical-align: text-bottom;">
             </a>
-            <small class="text-muted">{{ config('app.version') }}</small>
+            <small class="text-muted d-none d-md-inline">{{ config('app.version') }}</small>
         </h6>
     {{-- BUTTTON NAVBAR
         @auth
@@ -141,7 +143,7 @@
                         <!-- End Level two -->
                     </ul>
                 </li>
-                --}}
+                
             </ul>
 
             <!-- SEARCH FORM
@@ -161,6 +163,7 @@
     <!-- END NAVBAR
         </div>
     -->
+    --}}
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
@@ -183,15 +186,15 @@
 
             @endcan
 
-            <li class="nav-item">
+            <li class="nav-item d-none d-md-block">
                 <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }} {{-- <small class="text-muted">{{ auth()->user()->role }}</small>--}}</a>
             </li>
-
+                              
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
-            <li class="nav-item">
+            <li class="nav-item d-none d-md-block">
                 <a class="nav-link text-dark" href="javascript:;"
                    onclick="document.getElementById('logout-form').submit();">
                     Esci
