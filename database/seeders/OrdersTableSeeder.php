@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	April 23rd 2021 12:34:52 pm
+ * Last Modified: 	April 30th 2021 11:12:25 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -70,10 +70,10 @@ class OrdersTableSeeder extends Seeder
 
         //Per ogni studente
         foreach ($students as $student) {
-            // Crea da 10 a 100 Ordini negli ultimi 6 mesi
-            $nOrders = mt_rand(50, 100);
+            // Crea da 10 a 50 Ordini negli ultimi 2 mesi
+            $nOrders = mt_rand(10, 50);
             for ($i=0; $i < $nOrders; $i++) {
-                $dateTime=$faker->dateTimeBetween('-6 month', 'now', 'Europe/Rome');
+                $dateTime=$faker->dateTimeBetween('-2 month', 'now', 'Europe/Rome');
                 $order = $student->orders()->create([
                     'created_at' => $dateTime,
                     'updated_at' => $dateTime,
