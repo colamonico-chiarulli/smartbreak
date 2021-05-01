@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 15th, 2021 5:15pm
  * -----
- * Last Modified: 	
- * Modified By: 	
+ * Last Modified: 	April 30th 2021 8:09:38 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -54,12 +54,12 @@
         <div class="form-group">
             <label for="date">Visualizza gli ordini della data:</label>
             <div class="input-group">
-                <input type="date" class="form-control" id="date" placeholder="Seleziona una data" value="{{ $date }}" max="{{ date('Y-m-d') }}">
+                <input type="date" class="form-control" id="date" placeholder="Seleziona una data" value="{{ $date }}"
+                    max="{{ date('Y-m-d') }}">
                 <span class="input-group-append">
-                    <a
-                       href="javascript:;"
-                       onclick="location.href = '{{ route('orders.by-day') }}/'+document.getElementById('date').value"
-                       class="btn btn-primary btn-flat" data-toggle="tooltip" title="Cerca ordini per data">
+                    <a href="javascript:;"
+                        onclick="location.href = '{{ route('orders.by-day') }}/'+document.getElementById('date').value"
+                        class="btn btn-primary btn-flat" data-toggle="tooltip" title="Cerca ordini per data">
                         <i class="fas fa-search"></i>
                     </a>
                 </span>
@@ -73,8 +73,12 @@
 
 <div id="accordion">
     <div class="card">
-        <div class="card-header cursor-pointer" data-toggle="collapse" href="#class-{{ $class['class']->id }}">
-            <h3 class="card-title text-bold" data-card-widget="collapse">{{ $class['class']->name }}</h3>
+        <div class="card-header cursor-pointer" data-toggle="collapse" href="#class-{{ $class['class']->id }}" >
+            <h3 class="card-title text-bold" data-card-widget="collapse">
+                <i id="status-{{ $class['class']->id }}" class="far fa-check-square d-none" title=""></i>
+                &nbsp;{{ $class['class']->name }}
+            </h3>
+            
 
             {{-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -128,7 +132,12 @@
 
             </div>
             <div class="card-footer">
-                <button class="btn btn-success" data-card-widget="collapse" data-toggle="collapse" href="#class-{{ $class['class']->id }}">Ordine preparato</button>
+                <button class="btn btn-success" data-card-widget="collapse" data-toggle="collapse"
+                    href="#class-{{ $class['class']->id }}"
+                    onclick="setOrderStatus({{ $class['class']->id }},'READY')">Ordine preparato</button>
+                <button class="btn btn-warning" data-card-widget="collapse" data-toggle="collapse"
+                    href="#class-{{ $class['class']->id }}"
+                    onclick="setOrderStatus({{ $class['class']->id }},'INCOMPLETE')">Preparato ma incompleto</button>
             </div>
 
         </div>
@@ -139,3 +148,31 @@
 @endforeach
 
 @endsection
+
+@push('js')
+<script>
+    function setOrderStatus(class_id, status){
+
+$.ajax({
+            url: '{{ route("orders.set-status") }}',
+            method: "GET",
+            data: {
+                class_id,
+                status,
+            },
+            success: function name(result) {
+                    if (status == "READY"){
+                        $("#status-"+class_id).removeClass('text-warning');                        
+                        $("#status-"+class_id).addClass('text-success d-inline');
+                        $("#status-"+class_id).attr('title', 'Ordine preparato');
+                    } else {
+                        $("#status-"+class_id).removeClass('text-success');                        
+                        $("#status-"+class_id).addClass('text-warning d-inline');
+                        $("#status-"+class_id).attr('title', 'Preparato ma incompleto');
+                    }    
+            },
+        });
+}    
+
+</script>
+@endpush

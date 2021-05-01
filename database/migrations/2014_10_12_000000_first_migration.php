@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 12th 2021 7:57:40 pm
+ * Last Modified: 	April 30th 2021 5:32:34 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -121,6 +121,7 @@ class FirstMigration extends Migration
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->enum('status', ['CONFIRMED', 'READY', 'INCOMPLETE'])->default('CONFIRMED');
             $table->foreignId('user_id')->constrained('users');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');

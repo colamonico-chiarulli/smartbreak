@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 11th, 2021 5:00pm
  * -----
- * Last Modified: 	March 30th, 2021 10:54am
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	April 30th 2021 5:21:33 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -54,6 +54,8 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
+
+    protected $guarded = ['id'];
 
     public function getTotalAttribute()
     {

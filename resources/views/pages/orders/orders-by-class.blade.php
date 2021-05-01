@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Friday, April 9th 2021, 9:19:53 pm
  * -----
- * Last Modified: 	April 15th 2021 1:45:08 pm
+ * Last Modified: 	April 30th 2021 9:21:27 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -49,6 +49,13 @@
 @extends('layouts.app', ['title' => 'Ordini della Classe '. $class_name])
 
 @section('content')
+
+@isset($status[0])
+    <h3>
+    @if ($status[0]=="READY") <span class="badge badge-success d-block">Ordine pronto</span>@endif
+    @if ($status[0]=="INCOMPLETE") <span class="badge badge-warning d-block">Ordine pronto ma incompleto</span>@endif
+    </h3>
+@endisset
 
 <div id="class-accordion">
 @foreach($orders as $user=>$order)

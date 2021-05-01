@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	April 27th 2021 1:05:22 pm
+ * Last Modified: 	May 1st 2021 8:55:25 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -54,8 +54,8 @@
     @foreach($orders_by_day as $date=>$order)
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title w-75 text-bold"> 
-                <a class="d-block w-75 collapsed" data-toggle="collapse" href="#data-{{$date}}">
+            <h3 class="card-title w-75 text-bold">
+                <a class="d-block w-75 collapsed " data-toggle="collapse" href="#data-{{$date}}">
                     {{formatDate($date)}}
                 </a>
             </h3>
@@ -66,9 +66,17 @@
                         <i class="fas fa-plus"></i>
                     </button>
                 </div> --}}
+            <div class="row">
+                @if ($date == date('Y-m-d'))
+                    @isset($status[0])
+                        @if ($status[0]=="READY") <span class="badge badge-success d-block">Ordine pronto</span>@endif
+                        @if ($status[0]=="INCOMPLETE") <span class="badge badge-warning d-block">Ordine pronto ma incompleto</span>@endif
+                    @endisset
+                @endif
+            </div>
         </div>
 
-        <div id="data-{{$date}}" class="collapse" data-parent="#student-accordion">
+        <div id="data-{{$date}}" class="collapse {!! $date == date('Y-m-d') ? 'show': '' !!} " data-parent="#student-accordion">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">
