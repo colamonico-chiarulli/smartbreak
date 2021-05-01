@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:12:15 am
  * -----
- * Last Modified: 	April 23rd 2021 1:17:04 pm
+ * Last Modified: 	April 30th 2021 4:00:42 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -64,6 +64,7 @@ class CreateOrdersView extends Migration
         DB::statement($this->createView1());
         DB::statement($this->createView2());
         DB::statement($this->createView3());
+        DB::statement($this->createView4());
     }
 
     /**
