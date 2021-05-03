@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 15th, 2021 5:15pm
  * -----
- * Last Modified: 	
- * Modified By: 	
+ * Last Modified: 	May 3rd 2021 1:25:05 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -93,27 +93,27 @@
 
                     @foreach($products as $product)
                     <tr>
-                        <td>{{ $product['product']['name'] }}</td>
+                        <td>{{ $product->name }}</td>
 
                         <td>
-                            {{ formatPrice($product['product']['price']) }}
+                            {{ formatPrice($product->price) }}
                         </td>
 
                         <td class="text-right">
                             <span class="badge badge-primary">
-                                {{ $product['quantity'] }}
+                                {{ $product->quantity }}
                             </span>
                         </td>
 
                         <td class="text-right">
-                            {{ $product['product']['num_items'] }}
+                            {{ $product->num_items }}
                         </td>
 
                         <td class="text-right">
-                            {{ $product['product']['default_daily_stock'] }}
+                            {{ $product->default_daily_stock }}
                         </td>
 
-                        <td class="text-right">{{ formatPrice($product['price']) }}</td>
+                        <td class="text-right">{{ formatPrice($product->total) }}</td>
                     </tr>
                     @endforeach
 
@@ -122,7 +122,7 @@
                 <tfoot>
                     <tr class="table-primary">
                         <td class="text-right" colspan="6">
-                            Totale: <b>{{ formatPrice(collect($products)->sum('price')) }}</b>
+                            Totale: <b>{{ formatPrice(collect($products)->sum('total')) }}</b>
                         </td>
                     </tr>
                 </tfoot>

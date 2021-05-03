@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 15th, 2021 5:15pm
  * -----
- * Last Modified: 	April 30th 2021 8:09:38 pm
+ * Last Modified: 	May 3rd 2021 1:00:28 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -69,16 +69,23 @@
 </div>
 
 
-@foreach($classes as $class)
+@foreach($classes as $class_id => $class)
 
 <div id="accordion">
     <div class="card">
-        <div class="card-header cursor-pointer" data-toggle="collapse" href="#class-{{ $class['class']->id }}" >
+        <div class="card-header cursor-pointer {{ $class[0]->status != "CONFIRMED" ? "collapsed" : "" }}" 
+            data-toggle="collapse" href="#class-{{ $class_id }}" >
             <h3 class="card-title text-bold" data-card-widget="collapse">
-                <i id="status-{{ $class['class']->id }}" class="far fa-check-square d-none" title=""></i>
-                &nbsp;{{ $class['class']->name }}
+                <i id="status-{{ $class_id }}" 
+                class="far fa-check-square 
+                    {{ $class[0]->status == "CONFIRMED" ? "d-none" : "" }} 
+                    {{ $class[0]->status == "READY" ? 'text-success d-inline' : "" }}
+                    {{ $class[0]->status == "INCOMPLETE" ? 'text-warning d-inline' : "" }}
+                    "
+                title="{{ $class[0]->status == "READY" ? 'Ordine preparato' : "" }}{{ $class[0]->status == "INCOMPLETE" ? 'Preparato ma incompleto' : "" }}"></i>
+                &nbsp;{{ $class[0]->class_name }}
             </h3>
-            
+            <h6 class="text-right"> {{ formatPrice(collect($class)->sum('total')) }}</h6>
 
             {{-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -88,7 +95,7 @@
 
         </div>
 
-        <div class="show" id="class-{{ $class['class']->id }}">
+        <div class="{{ $class[0]->status == "CONFIRMED" ? "show" : "collapse" }}" id="class-{{ $class_id }}">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">
@@ -103,17 +110,17 @@
 
                     <tbody>
 
-                        @foreach($class['products'] as $product)
+                        @foreach($class as $product)
                         <tr>
-                            <td>{{ $product['product']['name'] }}</td>
+                            <td>{{ $product->name }}</td>
 
                             <td class="text-right">
                                 <span class="badge badge-primary">
-                                    {{ $product['quantity'] }}
+                                    {{ $product->quantity }}
                                 </span>
                             </td>
 
-                            <td class="text-right">{{ formatPrice($product['price']) }}</td>
+                            <td class="text-right">{{ formatPrice($product->total) }}</td>
                         </tr>
                         @endforeach
 
@@ -122,7 +129,7 @@
                     <tfoot>
                         <tr class="table-primary">
                             <td class="text-right" colspan="3">
-                                Totale: <b>{{ formatPrice(collect($class['products'])->sum('price')) }}</b>
+                                Totale: <b>{{ formatPrice(collect($class)->sum('total')) }}</b>
                             </td>
                         </tr>
                     </tfoot>
@@ -133,11 +140,11 @@
             </div>
             <div class="card-footer">
                 <button class="btn btn-success" data-card-widget="collapse" data-toggle="collapse"
-                    href="#class-{{ $class['class']->id }}"
-                    onclick="setOrderStatus({{ $class['class']->id }},'READY')">Ordine preparato</button>
+                    href="#class-{{ $class_id }}"
+                    onclick="setOrderStatus({{ $class_id }},'READY')">Ordine preparato</button>
                 <button class="btn btn-warning" data-card-widget="collapse" data-toggle="collapse"
-                    href="#class-{{ $class['class']->id }}"
-                    onclick="setOrderStatus({{ $class['class']->id }},'INCOMPLETE')">Preparato ma incompleto</button>
+                    href="#class-{{ $class_id }}"
+                    onclick="setOrderStatus({{ $class_id }},'INCOMPLETE')">Preparato ma incompleto</button>
             </div>
 
         </div>
@@ -146,6 +153,9 @@
 </div>
 
 @endforeach
+<div class="text-right">
+    <h4>Totale ordini: <b>{{ formatPrice(collect($classes)->collapse('total')->sum('total')) }}</h4>
+</div>
 
 @endsection
 

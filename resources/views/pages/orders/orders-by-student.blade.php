@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	May 1st 2021 8:55:25 am
+ * Last Modified: 	May 3rd 2021 12:36:42 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div id="data-{{$date}}" class="collapse {!! $date == date('Y-m-d') ? 'show': '' !!} " data-parent="#student-accordion">
+        <div id="data-{{$date}}" class="collapse {{ $date == date('Y-m-d') ? 'show': '' }} " data-parent="#student-accordion">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">

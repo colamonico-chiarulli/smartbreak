@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	May 1st 2021 9:09:10 am
+ * Last Modified: 	May 3rd 2021 1:29:07 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -70,14 +70,37 @@ class OrderController extends Controller
      */
     public function getOrdersByDay($date = null)
     {
-        $date = $date ?: now()->toDateString();
-
-        // Prendo tutti gli ordini di oggi
-        $classes = $this->getOrders(null, $date);
+       $date = $date ?: now()->toDateString();
+       $site_id = auth()->user()->site->id;
+        
+       $orders = DB::table('orders')
+               ->join('order_product', 'id', '=', 'order_id')
+               ->join('products', 'product_id', '=', 'products.id')
+               ->join('users', 'user_id', '=', 'users.id')
+               ->join('classes', 'class_id', '=', 'classes.id')
+               ->select('class_id', 'status',
+                        DB::raw('CONCAT(year,course,"-", section) as class_name'),
+                        'products.id', 'products.name',
+                        DB::raw('SUM(quantity) as quantity'),
+                        DB::raw('SUM(order_product.price * order_product.quantity) as total')
+                        )
+               ->where('users.site_id', $site_id)
+               ->whereDate('orders.created_at', $date)
+               ->groupBy('class_id', 'product_id')
+               ->get(); 
+ 
+        //Ordina per classe e prodotto
+        $orders = $orders->SortBy([
+            ['class_name','asc'],
+            ['name','asc']
+        ]);
+        
+        //Raggruppa gli ordini per classe
+        $classes=$orders->groupBy('class_id')->toArray();
 
         return view('pages.orders.orders-by-day', compact('classes', 'date'));
     }
-
+    
     /**
      *  getProductsByDay
      *  Prepara la vista Ordini per Prodotto
@@ -91,6 +114,41 @@ class OrderController extends Controller
     public function getProductsByDay($date = null)
     {
         $date = $date ?: now()->toDateString();
+        $site_id = auth()->user()->site->id;
+
+        // Prendo tutti gli ordini di oggi
+        $products = DB::table('orders')
+        ->join('order_product', 'id', '=', 'order_id')
+        ->join('products', 'product_id', '=', 'products.id')
+        ->join('users', 'user_id', '=', 'users.id')
+        ->select('products.id', 'products.name', 'order_product.price', 'num_items', 'default_daily_stock',
+                 DB::raw('SUM(quantity) as quantity'),
+                 DB::raw('SUM(order_product.price * order_product.quantity) as total')
+                 )
+        ->where('users.site_id', $site_id)
+        ->whereDate('orders.created_at', $date)
+        ->groupBy('product_id')
+        ->orderBy('name', 'asc')
+        ->get(); 
+
+        
+        //dd($products);        
+
+        return view('pages.orders.products-by-day', compact('products', 'date'));
+    }
+    
+    /**
+     *  getProductsByDay OLD VERSION UNUSED 
+     *  Prepara la vista Ordini per Prodotto
+     *  By Giovanni Ciriello 
+     * 
+     *  CALLED BY BAR MANAGER
+     */
+    /*
+    public function getProductsByDay($date = null)
+    {
+        $date = $date ?: now()->toDateString();
+        $site_id = auth()->user()->site->id;
 
         // Prendo tutti gli ordini di oggi
         $products = Order::with('products')
@@ -111,22 +169,19 @@ class OrderController extends Controller
 
         return view('pages.orders.products-by-day', compact('products', 'date'));
     }
+    */
 
 
     /**
-     * getOrders.
+     * getOrders OLD VERSION UNUSED 
      * 
      * Recupera gli ordini di una classe in un giorno
-     *  
-     * @access	private
-     * @param	mixed	$class_id	Default: null
-     * @param	mixed	$date    	
-     * @return	mixed
+     * By Giovanni Ciriello 
      */
+    /*
     private function getOrders($class_id = null, $date)
     {
-        $data = Order::with('products')
-                ->whereDate('orders.created_at', $date);
+        $data = Order::with('products', 'user')->whereDate('created_at', $date);
 
         if ($class_id) {
             $data->whereHas('user', function (Builder $query) use ($class_id) {
@@ -154,9 +209,10 @@ class OrderController extends Controller
                         })->values()
                 ];
             })->values();
-
         return $data;
     }
+    */
+
 
     
     /**
@@ -221,7 +277,8 @@ class OrderController extends Controller
         $user_id = auth()->user()->id;
         
         //recupera gli ordini dell'utente per data e prodotto
-        $orders = Order::join('order_product', 'id', '=', 'order_id')
+        $orders = DB::table('orders')
+                ->join('order_product', 'id', '=', 'order_id')
                 ->join('products', 'product_id', '=', 'products.id')
                 ->select(DB::raw('DATE(orders.created_at) as date_order'),
                         'products.id', 'products.name as name',
