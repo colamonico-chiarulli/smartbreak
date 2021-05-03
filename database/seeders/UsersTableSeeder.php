@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	March 29th, 2021 7:03pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Last Modified: 	May 3rd 2021 11:22:46 am
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => $faker->firstName(),
             'last_name' => $faker->lastName(),
             'role' => 'MANAGER',
-            'class_id' => $classes->random()->id,
+            'class_id' => null,
             'site_id' => 2,
         ]);
 
@@ -106,7 +106,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => $faker->firstName(),
             'last_name' => $faker->lastName(),
             'role' => 'STUDENT',
-            'class_id' => $classes->random()->id,
+            'class_id' => 12, //1INF-A
             'site_id' => 1,
         ]);
 
