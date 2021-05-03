@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 29th 2021 7:55:36 pm
+ * Last Modified: 	May 3rd 2021 4:47:22 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -88,7 +88,7 @@
 <div class="row justify-content-around">
     <div class="small-box bg-success col col-md-3">
         <div class="inner">
-            <h4 id="stat1">{{$stats['box1']}}</h4>
+            <h4 id="stat1">{{ $stats['box1'] ?? "" }}</h4>
             @can('is-admin')<p>Utenti</p>@endcan
             @can('is-manager')<p>Ricavi</p>@endcan
             @can('is-student')<p>Hai speso</p>@endcan
@@ -100,7 +100,7 @@
     </div>
     <div class="small-box bg-info col col-md-3">
         <div class="inner">
-            <h4 id="stat2">{{$stats['box2']}}</h4>
+            <h4 id="stat2">{{ $stats['box2']  ?? "" }}</h4>
             <p>Ordini</p>
         </div>
         <div class="icon">
@@ -109,7 +109,7 @@
     </div>
     <div class="small-box bg-warning col col-md-3">
         <div class="inner">
-            <h4 id="stat3">{{$stats['box3']}}</h4>
+            <h4 id="stat3">{{ $stats['box3'] ?? "" }}</h4>
             <p>Prodotti</p>
         </div>
         <div class="icon">

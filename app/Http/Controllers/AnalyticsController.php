@@ -7,7 +7,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	April 24th 2021 6:35:17 pm
+ * Last Modified: 	May 3rd 2021 4:20:23 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -464,6 +464,9 @@ class AnalyticsController extends Controller
             case 'week':
                 $orders = ViewOrderById::where('user_id', $user_id)
                     ->whereBetween('date_day', [$range['from'], $range['to']])
+                    ->selectRaw('User_id, date_day, sum(total) as total')
+                    ->groupBy('date_day')
+                    ->orderBy('date_day')
                     ->get();
                 $labels = $orders->pluck('date_day')->transform(function ($date) {
                     return formatShortDate($date);
