@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	April 19th 2021 1:50:04 pm
+ * Last Modified: 	May 3rd 2021 7:14:45 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -65,7 +65,7 @@ class CartController extends Controller
                 ->orderBy('name');
         }])->orderBy('name')->get();
 
-        return view('pages.choose-products', compact('categories', 'search_name'));
+        return view('pages.cart.choose-products', compact('categories', 'search_name'));
     }
 
     public function editCart()
@@ -115,7 +115,7 @@ class CartController extends Controller
         $product_ids = collect(session()->get('cart'))->keys();
         $products = Product::whereIn('id', $product_ids)->get();
 
-        return view("pages.checkout", compact('products'));
+        return view("pages.cart.checkout", compact('products'));
     }
 
     public function createOrder()

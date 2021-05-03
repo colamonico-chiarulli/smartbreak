@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 30th 2021 1:40:40 pm
+ * Last Modified: 	May 3rd 2021 6:59:07 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -52,6 +52,7 @@
         <img src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-width: 80%;">
         <i class="far fa-window-close"></i>
     </a>
+    
     {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
     </a>
     <!-- Sidebar -->
@@ -152,7 +153,9 @@
                 <li class="nav-item">
                     <hr>
                 </li>
+                @endcanany
                 
+                @can('is-manager')
                 <li class="nav-item">
                     <a href="{{ route('orders.by-day') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -170,7 +173,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
 
+                @canany(['is-manager', 'is-admin'])
                 <li class="nav-item">
                     <a href="{{ route('analytics') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-bar"></i>
@@ -184,7 +189,16 @@
                 @endcanany
 
                 @can('is-student')
-
+                
+                <li class="nav-item">
+                    <a href="{{ route('cart.choose-products') }} " class="nav-link">
+                        <i class="nav-icon fas fa-hamburger"></i>
+                        <p>
+                            Fai un ordine
+                        </p>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a href="{{ route('orders.by-student') }} " class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
@@ -198,7 +212,7 @@
                     <a href="{{ route('orders.today-by-class') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Ordine della mia classe
+                            Ordini della mia classe
                         </p>
                     </a>
                 </li>

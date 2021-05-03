@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	
- * Modified By: 	
+ * Last Modified: 	May 3rd 2021 8:08:40 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -48,11 +48,10 @@
 <!-- Main Footer -->
 <footer class="main-footer">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-        Made by IISS Colamonico Chiarulli
+    <div class="float-right d-sm-inline">
+        <a href="/privacy" title="Privacy Policy">Privacy</a>&nbsp;
+        <a href="/credits" title="Credits">Credits</a>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; {{ date('Y') }} <a target="_blank" href="http://www.colamonicochiarulli.it/"> IISS
-            Colamonico
-            Chiarulli</a>.</strong>
+    <strong>&copy; {{ date('Y') }} <a target="_blank" href="http://www.colamonicochiarulli.it/"> IISS Colamonico Chiarulli</a></strong>
 </footer>

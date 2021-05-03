@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 15th 2021 7:37:53 pm
+ * Last Modified: 	May 3rd 2021 6:40:25 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -45,7 +45,7 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Home page'])
+@extends('layouts.app', ['title' => 'Fai un ordine'])
 
 @section('content')
 

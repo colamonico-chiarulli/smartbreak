@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 30th 2021 4:27:12 pm
+ * Last Modified: 	May 3rd 2021 7:30:01 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -84,6 +84,10 @@ Route::any('register', function () {
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/redirect', [LoginController::class, 'handleGoogleCallback']);
+
+Route::get('/privacy', function(){ return view('pages.static.privacy'); });
+Route::get('/credits', function(){ return view('pages.static.credits'); });
+
 
 Route::get('notification', [HomeController::class, 'notification']);
 
