@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, May 3rd 2021, 7:23:41 pm
  * -----
- * Last Modified: 	May 3rd 2021 8:03:07 pm
+ * Last Modified: 	May 4th 2021 3:59:48 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -51,7 +51,7 @@
 <h2>SmartBreak</h2>
 <p>
 è un'applicazione web per la gestione delle ordinazioni al Bar della scuola
-sviluppata durante il corso PON "The AppFactory" tra dicembre 2020 e aprile 2021, con insegnanti e studenti dell'indirizzo "Informatica e Telecomunicazioni" 
+sviluppata durante il corso <a target="_blank" href="https://www.colamonicochiarulli.it/didattica/area-comune/pon-fesr/pon-2014-2020/pon-app-factory-risultati.html"><strong>PON "The AppFactory"</strong></a> tra dicembre 2020 e aprile 2021, con insegnanti e studenti dell'indirizzo "Informatica e Telecomunicazioni" 
 presso l'IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
 Esperto dr. <a target="_blank" href="https://giovanniciriello.github.io/">Giovanni Ciriello</a> - giovanni.ciriello.5@gmail.com
 </p>
@@ -80,7 +80,12 @@ is not reasonably feasible for technical reasons, the Appropriate Legal Notices
 must display the words
 "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - {{ date('Y')}}".
 </p>
-
+<h2>Codice sorgente</h2>
+<p>
+Per lo sviluppo di dell'applicazione si è utilizzato il  framework PHP <a href="https://laravel.com/" target="_blank">Laravel</a>.<br>
+Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da <br>
+<a href="https://github.com/colamonico-chiarulli/smartbreak" target="_blank">https://github.com/colamonico-chiarulli/smartbreak</a>
+</p>
 <h2>Sviluppatori</h2>
 <ul>
    <li>Giovanni Ciriello - giovanni.ciriello.5@gmail.com</li> 
@@ -92,5 +97,17 @@ must display the words
 <li>Fabio Caccavone - fabio.caccavone.inf@colamonicochiarulli.it</li> 
 <li>Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.it</li> 
 <li>Nicola Sergio - nicola.sergio.inf@colamonicochiarulli.it</li> 
+</ul>
+
+<h2>Alunni del corso PON</h2>
+<p>
+Caccavone Fabio,Capotorti Antonio, Chimienti Marco, Cosmo	Alessandro, Cruciata	Francesco Giovanni, Dellaccio Gabriel, Gigante Filippo,
+Giorgio Giuseppe, Iacovelli Marco, Ladisa Fabio, Liantonio Francesco, Pavone Alessia, Perniola	Antonella, Pontrelli Michele, Santorsola Gianluigi, 
+Scianatico Donato, Sergio Nicola, Serrone Vito, Simonetti Cosimo, Vitolla Chiara
+</p>
+<h2>Tutor</h2>
+<ul>
+   <li>prof. Andriano Rino</li>
+   <li>prof.ssa Santamaria Irene</li>
 </ul>
 @endsection
