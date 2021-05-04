@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 16th 2021 4:31:20 pm
+ * Last Modified: 	May 4th 2021 4:38:15 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -97,6 +97,7 @@ class LoginController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->stateless()->user();
+        
 
         $logged_user = User::where('email', $user->email)->first();
 
@@ -104,6 +105,13 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'Questo account google istituzionale non esiste');
         }
 
+        //se è cambiato l'avatar lo prende da google
+        $avatar=$user->getAvatar();
+        if($logged_user->google_avatar != $avatar){
+            $logged_user->google_avatar  = $avatar;
+            $logged_user->save();
+        }
+        
         Auth::login($logged_user);
 
         return redirect($this->redirectTo);

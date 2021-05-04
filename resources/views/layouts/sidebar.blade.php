@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 3rd 2021 8:22:39 pm
+ * Last Modified: 	May 4th 2021 5:30:22 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -60,14 +60,19 @@
     @auth
         <!-- Sidebar user panel -->
         <div class="user-panel mt-3 mb-3 d-flex d-block d-md-none">
-        {{--
-            <div class="image">
-                <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-        --}}    
-            <div class="info ml-3">
-                👋 &nbsp;{{ auth()->user()->first_name }}
-            </div>
+        
+            @if(auth()->user()->google_avatar != null)
+                <div class="image">
+                    <img src="{{auth()->user()->google_avatar ?? ""}}" class="img-circle elevation-1" alt="User Image">
+                </div>
+                <div class="info ml-3">
+                    {{ auth()->user()->first_name }}
+                </div>            
+            @else
+                <div class="info ml-3">
+                    👋 &nbsp;{{ auth()->user()->first_name }}
+                </div>
+            @endif
         </div>
     @endauth
 

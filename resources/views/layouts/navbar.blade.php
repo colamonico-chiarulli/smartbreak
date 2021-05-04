@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	April 30th 2021 1:43:00 pm
+ * Last Modified: 	May 4th 2021 5:35:49 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -183,11 +183,17 @@
                 </a>
             </li>
 
-
             @endcan
 
             <li class="nav-item d-none d-md-block">
-                <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }} {{-- <small class="text-muted">{{ auth()->user()->role }}</small>--}}</a>
+                @if(auth()->user()->google_avatar != null)
+                   <a class="nav-link text-dark"> 
+                      <img width="28px" style="text-align: left;" src="{{auth()->user()->google_avatar}}" class="img-circle elevation-1" alt="User Image">
+                    {{ auth()->user()->first_name }}
+                    </a> 
+                @else
+                    <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
+                @endif    
             </li>
                               
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
