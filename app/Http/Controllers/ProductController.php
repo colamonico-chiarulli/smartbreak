@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 11th, 2021 5:00pm
  * -----
- * Last Modified: 	Thursday, 1st April 2021 5:42:54 pm
- * Modified By: 	Giovanni Ciriello
+ * Last Modified: 	May 6th 2021 8:25:54 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -190,5 +190,37 @@ class ProductController extends Controller
         $product->delete();
 
         return $product;
+    }
+
+    /**
+     * getStocks
+     * 
+     * Prepara la vista con Categorie->prodotti per la modifica delle giacenze
+     *
+     * @access	public
+     * @return	void
+     */
+    public function getStocks(){
+        //recupera site_id dell'utente
+        $site = auth()->user()->site_id;
+
+        $categories = Category::with(['products' => function ($query) use ($site) {
+            $query->where('site_id', $site)
+                ->orderBy('name');
+        }])->orderBy('name')->get();
+
+        //dd($products);    
+        return view('pages.products.edit-stock', compact('categories'));
+    }
+
+    public function setStocks(Request $request)
+    {
+        $id=$request->input('id');
+
+        if($product=Product::find($id)){
+            $product->num_items=$request->input('num_items');
+            $product->default_daily_stock=$request->input('default_daily_stock');
+            $product->save();
+        }     
     }
 }

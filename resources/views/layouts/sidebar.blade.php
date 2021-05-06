@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 4th 2021 5:30:22 pm
+ * Last Modified: 	May 6th 2021 7:38:06 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -154,6 +154,17 @@
                         </p>
                     </a>
                 </li>
+
+                @can('is-manager')
+                <li class="nav-item">
+                    <a href="{{ route('products.stocks') }}" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Modifica giacenze
+                        </p>
+                    </a>
+                </li>
+                @endcan
                 
                 <li class="nav-item">
                     <hr>

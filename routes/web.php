@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 3rd 2021 7:30:01 pm
+ * Last Modified: 	May 6th 2021 6:55:30 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -120,11 +120,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'can:is-admin-or-manager'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
-
     
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
         Route::get('orders-set-status', [OrderController::class, 'setOrderStatus'])->name('orders.set-status');
+        Route::get('products-stocks', [ProductController::class, 'getStocks'])->name('products.stocks');
+        Route::post('set-stocks', [ProductController::class, 'setStocks'])->name('products.set-stocks');
     });
 
     // ADMIN AREA
