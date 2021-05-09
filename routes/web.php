@@ -65,6 +65,9 @@ use App\Http\Controllers\CronController;
 
 use Illuminate\Support\Facades\Auth;
 
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use RuntimeException;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -120,7 +123,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'can:is-admin-or-manager'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
-    
+
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');
         Route::get('orders-set-status', [OrderController::class, 'setOrderStatus'])->name('orders.set-status');
@@ -136,3 +139,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('students', StudentController::class);
     });
 });
+
+/*
+Route::get('test-error', function(){
+    Bugsnag::notifyException(new RuntimeException("Test error"));
+});
+*/
