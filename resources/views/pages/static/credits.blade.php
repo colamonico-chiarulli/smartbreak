@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, May 3rd 2021, 7:23:41 pm
  * -----
- * Last Modified: 	May 4th 2021 3:59:48 pm
+ * Last Modified: 	May 9th 2021 4:46:11 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -90,6 +90,11 @@ Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da 
 <ul>
    <li>Giovanni Ciriello - giovanni.ciriello.5@gmail.com</li> 
    <li>Rino Andriano - andriano@colamonicochiarulli.it</li> 
+</ul>
+
+<h2>Manutenzione - Contributi</h2>
+<ul>
+   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.it</li>
 </ul>
 
 <h2>Beta tester e documentazione</h2>
