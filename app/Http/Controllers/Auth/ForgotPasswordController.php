@@ -55,6 +55,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use Gate;
 
 class ForgotPasswordController extends Controller
 {
@@ -82,7 +83,9 @@ class ForgotPasswordController extends Controller
 
         $this->validateEmail($request);
 
-        if(User::where('email', $request->email)->first()->role === 'STUDENT'){
+        $user = User::where('email', $request->email)->first();
+
+        if($user && Gate::forUser($user)->allows('is-student')){
             throw ValidationException::withMessages([
                 'email' => ['Non sei abilitato a resettare la password'],
             ]);
