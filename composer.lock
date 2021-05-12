@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aad44bf315d8e25ef284d679ad7dd68c",
+    "content-hash": "4a4c854a777bde9208c8065887c2c48d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1186,48 +1186,6 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.8.2"
             },
             "time": "2021-04-26T09:17:50+00:00"
-        },
-        {
-            "name": "infureal/artisan-gui",
-            "version": "2.0.0@beta",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/inFureal/artisan-gui.git",
-                "reference": "7ec78e73b5a8371ba407da626c97cb55809540ac"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/inFureal/artisan-gui/zipball/7ec78e73b5a8371ba407da626c97cb55809540ac",
-                "reference": "7ec78e73b5a8371ba407da626c97cb55809540ac",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^8.0",
-                "php": "^7.3|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Infureal\\Providers\\GuiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Infureal\\": "./src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Beautiful package for [laravel:artisan] gui for cool kids.",
-            "support": {
-                "issues": "https://github.com/inFureal/artisan-gui/issues",
-                "source": "https://github.com/inFureal/artisan-gui/tree/2.0.0@beta"
-            },
-            "time": "2021-01-23T10:10:25+00:00"
         },
         {
             "name": "intervention/image",
@@ -8653,9 +8611,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "infureal/artisan-gui": 10
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

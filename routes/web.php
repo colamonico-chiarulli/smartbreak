@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 12th 2021 5:25:55 pm
+ * Last Modified: 	May 12th 2021 6:40:05 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -64,6 +64,7 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CronController;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 //use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 //use RuntimeException;
@@ -137,6 +138,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('classes', SchoolclassController::class);
         Route::resource('users', UserController::class);
         Route::resource('students', StudentController::class);
+        Route::get('optimize', function() {
+            $exitCode = Artisan::call('optimize:clear');
+            return 'Cache cleared ' . $exitCode;
+        });
     });
 });
 
