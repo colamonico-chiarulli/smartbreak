@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, May 3rd 2021, 7:23:35 pm
  * -----
- * Last Modified: 	May 3rd 2021 7:38:16 pm
+ * Last Modified: 	May 18th 2021 4:55:01 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -66,9 +66,6 @@
         Italia.</strong> Per eventuali richieste o domande relative all’informativa sull’uso dei cookie o
     all’informativa sulla privacy, contattate il Titolare del trattamento o il Responsabile della protezione dei
     dati<em><strong>.</strong></em></p>
-<p>Il <strong>Responsabile della Protezione dei Dati</strong> (RPD o DPO secondo l’acronimo inglese) è:</p>
-<p><strong>Francesco Vicenti</strong><br />email: francesco[at]vicenti.it <em>(Sostituire [at] con @)</em><br />cell:
-    +39 3276146219</p>
 <p>È possibile rivolgersi al <em>Titolare del trattamento</em> per chiedere eventuali chiarimenti in materia di tutela
     dei dati personali, e per l’esercizio dei diritti previsti dal GDPR nel successivo paragrafo della presente
     informativa, utilizzando i seguenti recapiti:</p>

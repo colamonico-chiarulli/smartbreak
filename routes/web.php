@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 12th 2021 6:40:05 pm
+ * Last Modified: 	May 18th 2021 5:00:11 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -138,6 +138,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('classes', SchoolclassController::class);
         Route::resource('users', UserController::class);
         Route::resource('students', StudentController::class);
+        Route::get('import-students', [UserController::class, 'importStudentView'])->name('users.import');;
+        Route::post('import-students-csv', [UserController::class, 'importStudentCSV'])->name('users.import-csv');
+        Route::get('import-classes', [SchoolClassController::class, 'importSchoolClassView'])->name('classes.import');;
+        Route::post('import-classes-csv', [SchoolClassController::class, 'importSchoolClassCSV'])->name('classes.import-csv');
+        
         Route::get('optimize', function() {
             $exitCode = Artisan::call('optimize:clear');
             return 'Cache cleared ' . $exitCode;

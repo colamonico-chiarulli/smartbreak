@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 18th, 2021 7:30pm
  * -----
- * Last Modified: 	March 27th, 2021 7:17pm
+ * Last Modified: 	May 18th 2021 5:52:19 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -52,6 +52,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SchoolClass;
 use App\Models\Site;
+use App\Imports\SchoolClassImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class SchoolClassController extends Controller
@@ -157,5 +159,31 @@ class SchoolClassController extends Controller
         $class->delete();
 
         return $class;
+    }
+
+    /**
+     * importSchoolClassView.
+     * 
+     * Visualizza la pagina per la selezione del file students.CSV
+     * @access	public
+     * @return	mixed
+     */
+    public function importSchoolClassView()
+    {
+       return view('pages.classes.import');
+    }
+    
+    /**
+     * importSchoolClassCSV.
+     *  
+     * Importa gli utenti dal file CSV caricato
+     * 
+     * @access	public
+     * @return	mixed
+     */
+    public function importSchoolClassCSV() 
+    {       
+        Excel::import(new SchoolClassImport,request()->file('file'));
+        return back()->with('success', 'Importazione classi completata');
     }
 }

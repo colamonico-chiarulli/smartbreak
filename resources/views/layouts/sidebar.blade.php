@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 6th 2021 7:38:06 pm
+ * Last Modified: 	May 18th 2021 6:04:53 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -105,6 +105,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('classes.import') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Importa Classi CSV
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('classes.index') }}" class="nav-link">
@@ -132,8 +140,34 @@
                         </p>
                     </a>
                 </li>
-
-                @endcan
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file-upload"></i>
+                      <p>
+                        Importa CSV
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: block;">
+                      <li class="nav-item">
+                        <a href="{{ route('classes.import') }}" class="nav-link">
+                            <i class="nav-icon fas fa-upload"></i>
+                            <p>
+                                Classi
+                            </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('users.import') }}" class="nav-link">
+                            <i class="nav-icon fas fa-upload"></i>
+                            <p>
+                                Studenti
+                            </p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan 
 
                 @canany(['is-manager', 'is-admin'])
 
