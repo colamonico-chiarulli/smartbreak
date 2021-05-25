@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 18th 2021 5:00:11 pm
+ * Last Modified: 	May 25th 2021 7:05:47 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -91,6 +91,7 @@ Route::get('/login/google/redirect', [LoginController::class, 'handleGoogleCallb
 
 Route::get('/privacy', function(){ return view('pages.static.privacy'); });
 Route::get('/credits', function(){ return view('pages.static.credits'); });
+Route::get('/landing', function(){ return view('pages.homepage.index'); });
 
 
 Route::get('notification', [HomeController::class, 'notification']);
