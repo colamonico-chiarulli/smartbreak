@@ -2,12 +2,12 @@
 /**
  * File:	/app/Models/ViewOrderById.php
  * @package smartbreak
- * @author  Rino Andriano <andriano@colamonicochiarulli.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Wednesday, April 7th 2021, 10:18:58 am
  * -----
  * Last Modified: 	April 23rd 2021 11:13:44 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
  * 
  * ------------------------------------------------------------------------------
  */

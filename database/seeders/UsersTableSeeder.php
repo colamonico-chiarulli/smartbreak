@@ -7,7 +7,7 @@
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
  * Last Modified: 	May 3rd 2021 11:22:46 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
  *
  * ------------------------------------------------------------------------------
  */
@@ -126,30 +126,30 @@ class UsersTableSeeder extends Seeder
         }
 
         $students = array(
-            array("first_name" => "Fabio", "last_name" => "Caccavone", "email" => "fabio.caccavone.inf@colamonicochiarulli.it", "password" => "kf7uYBel4NMz2Lq9", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Enzo", "last_name" => "Giorgio", "email" => "enzo.giorgio.inf@colamonicochiarulli.it", "password" => "vEf5tkaCdwm9soSn", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Giuseppe", "last_name" => "Giorgio", "email" => "giuseppe.giorgio.inf@colamonicochiarulli.it", "password" => "j82ZsFeTNAUa3SJx", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Alessia", "last_name" => "Pavone", "email" => "alessia.pavone.inf@colamonicochiarulli.it", "password" => "J86IpeAh24vPjgrM", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Antonella", "last_name" => "Perniola", "email" => "antonella.perniola.inf@colamonicochiarulli.it", "password" => "wK2aQbSuH0cGi3Tf", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Nicola", "last_name" => "Sergio", "email" => "nicola.sergio.inf@colamonicochiarulli.it", "password" => "XS69yRaZV5Px7WNt", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Chiara", "last_name" => "Vitolla", "email" => "chiara.vitolla.inf@colamonicochiarulli.it", "password" => "wGfoYrCNseI4UhEg", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
-            array("first_name" => "Antonio", "last_name" => "Capotorti", "email" => "antonio.capotorti.inf@colamonicochiarulli.it", "password" => "yfwcEzt8J9nI5kgF", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
-            array("first_name" => "Alessandro", "last_name" => "Cosmo", "email" => "alessandro.cosmo.inf@colamonicochiarulli.it", "password" => "qUaA4u1NDHQzdMYP", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
-            array("first_name" => "Fabio", "last_name" => "Ladisa", "email" => "fabio.ladisa.inf@colamonicochiarulli.it", "password" => "k3EnsbPuUCY4vGc7", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
-            array("first_name" => "Francesco", "last_name" => "Liantonio", "email" => "francesco.liantonio.inf@colamonicochiarulli.it", "password" => "YGDCWHB70kSzeItA", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
-            array("first_name" => "Vito", "last_name" => "Serrone", "email" => "vito.serrone.inf@colamonicochiarulli.it", "password" => "cPkeaE1R8Xu2ALHm", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
-            array("first_name" => "Filippo", "last_name" => "Gigante", "email" => "filippo.gigante.inf@colamonicochiarulli.it", "password" => "JhPOqx8cFDraH9y1", "role" => "STUDENT", "class_id" => 33, "site_id" => 1),
-            array("first_name" => "Donato", "last_name" => "Scianatico", "email" => "donato.scianatico.inf@colamonicochiarulli.it", "password" => "qyeEmLwg0XtvC6OJ", "role" => "STUDENT", "class_id" => 33, "site_id" => 1),
-            array("first_name" => "Marco", "last_name" => "Iacovelli", "email" => "marco.iacovelli.inf@colamonicochiarulli.it", "password" => "zwNGZUlIax3At8DY", "role" => "STUDENT", "class_id" => 34, "site_id" => 1),
-            array("first_name" => "Michele", "last_name" => "Pontrelli", "email" => "michele.pontrelli.inf@colamonicochiarulli.it", "password" => "BH3TAUGcW0JhjVMC", "role" => "STUDENT", "class_id" => 34, "site_id" => 1),
-            array("first_name" => "Marco", "last_name" => "Chimienti", "email" => "marco.chimienti.inf@colamonicochiarulli.it", "password" => "X8Qsnmy5gIoUNR3B", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
-            array("first_name" => "Francesco Giovanni", "last_name" => "Cruciata", "email" => "francesco.cruciata.inf@colamonicochiarulli.it", "password" => "dBrcyU4zR8jNgf2p", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
-            array("first_name" => "Gabriel", "last_name" => "Dellaccio", "email" => "gabriel.dellaccio.inf@colamonicochiarulli.it", "password" => "rgHUeukp6bxv0KXL", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
-            array("first_name" => "Gianluigi", "last_name" => "Santorsola", "email" => "gianluigi.santorsola.inf@colamonicochiarulli.it", "password" => "Kw7pEB9OA4FXNajs", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
-            array("first_name" => "Cosimo", "last_name" => "Simonetti", "email" => "cosimo.simonetti.inf@colamonicochiarulli.it", "password" => "tzTK2dPENuyoG31D", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
-            array("first_name" => "Rino", "last_name" => "Andriano", "email" => "andriano@colamonicochiarulli.it", "password" => "w9SpUsd847amtDBe", "role" => "STUDENT", "class_id" => 2, "site_id" => 1),
-            array("first_name" => "Irene", "last_name" => "Santamaria", "email" => "i.santamaria@colamonicochiarulli.it", "password" => "fYqGhJ6AljywZb0v", "role" => "STUDENT", "class_id" => 2, "site_id" => 1),
-            array("first_name" => "Giovanni", "last_name" => "Ciriello", "email" => "g.ciriello.pon@colamonicochiarulli.it", "password" => "V8uPDWEvQi1dJqoC", "role" => "STUDENT", "class_id" => 2, "site_id" => 1)
+            array("first_name" => "Fabio", "last_name" => "Caccavone", "email" => "fabio.caccavone.inf@colamonicochiarulli.edu.it", "password" => "kf7uYBel4NMz2Lq9", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Enzo", "last_name" => "Giorgio", "email" => "enzo.giorgio.inf@colamonicochiarulli.edu.it", "password" => "vEf5tkaCdwm9soSn", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Giuseppe", "last_name" => "Giorgio", "email" => "giuseppe.giorgio.inf@colamonicochiarulli.edu.it", "password" => "j82ZsFeTNAUa3SJx", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Alessia", "last_name" => "Pavone", "email" => "alessia.pavone.inf@colamonicochiarulli.edu.it", "password" => "J86IpeAh24vPjgrM", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Antonella", "last_name" => "Perniola", "email" => "antonella.perniola.inf@colamonicochiarulli.edu.it", "password" => "wK2aQbSuH0cGi3Tf", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Nicola", "last_name" => "Sergio", "email" => "nicola.sergio.inf@colamonicochiarulli.edu.it", "password" => "XS69yRaZV5Px7WNt", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Chiara", "last_name" => "Vitolla", "email" => "chiara.vitolla.inf@colamonicochiarulli.edu.it", "password" => "wGfoYrCNseI4UhEg", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
+            array("first_name" => "Antonio", "last_name" => "Capotorti", "email" => "antonio.capotorti.inf@colamonicochiarulli.edu.it", "password" => "yfwcEzt8J9nI5kgF", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
+            array("first_name" => "Alessandro", "last_name" => "Cosmo", "email" => "alessandro.cosmo.inf@colamonicochiarulli.edu.it", "password" => "qUaA4u1NDHQzdMYP", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
+            array("first_name" => "Fabio", "last_name" => "Ladisa", "email" => "fabio.ladisa.inf@colamonicochiarulli.edu.it", "password" => "k3EnsbPuUCY4vGc7", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
+            array("first_name" => "Francesco", "last_name" => "Liantonio", "email" => "francesco.liantonio.inf@colamonicochiarulli.edu.it", "password" => "YGDCWHB70kSzeItA", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
+            array("first_name" => "Vito", "last_name" => "Serrone", "email" => "vito.serrone.inf@colamonicochiarulli.edu.it", "password" => "cPkeaE1R8Xu2ALHm", "role" => "STUDENT", "class_id" => 22, "site_id" => 1),
+            array("first_name" => "Filippo", "last_name" => "Gigante", "email" => "filippo.gigante.inf@colamonicochiarulli.edu.it", "password" => "JhPOqx8cFDraH9y1", "role" => "STUDENT", "class_id" => 33, "site_id" => 1),
+            array("first_name" => "Donato", "last_name" => "Scianatico", "email" => "donato.scianatico.inf@colamonicochiarulli.edu.it", "password" => "qyeEmLwg0XtvC6OJ", "role" => "STUDENT", "class_id" => 33, "site_id" => 1),
+            array("first_name" => "Marco", "last_name" => "Iacovelli", "email" => "marco.iacovelli.inf@colamonicochiarulli.edu.it", "password" => "zwNGZUlIax3At8DY", "role" => "STUDENT", "class_id" => 34, "site_id" => 1),
+            array("first_name" => "Michele", "last_name" => "Pontrelli", "email" => "michele.pontrelli.inf@colamonicochiarulli.edu.it", "password" => "BH3TAUGcW0JhjVMC", "role" => "STUDENT", "class_id" => 34, "site_id" => 1),
+            array("first_name" => "Marco", "last_name" => "Chimienti", "email" => "marco.chimienti.inf@colamonicochiarulli.edu.it", "password" => "X8Qsnmy5gIoUNR3B", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
+            array("first_name" => "Francesco Giovanni", "last_name" => "Cruciata", "email" => "francesco.cruciata.inf@colamonicochiarulli.edu.it", "password" => "dBrcyU4zR8jNgf2p", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
+            array("first_name" => "Gabriel", "last_name" => "Dellaccio", "email" => "gabriel.dellaccio.inf@colamonicochiarulli.edu.it", "password" => "rgHUeukp6bxv0KXL", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
+            array("first_name" => "Gianluigi", "last_name" => "Santorsola", "email" => "gianluigi.santorsola.inf@colamonicochiarulli.edu.it", "password" => "Kw7pEB9OA4FXNajs", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
+            array("first_name" => "Cosimo", "last_name" => "Simonetti", "email" => "cosimo.simonetti.inf@colamonicochiarulli.edu.it", "password" => "tzTK2dPENuyoG31D", "role" => "STUDENT", "class_id" => 47, "site_id" => 1),
+            array("first_name" => "Rino", "last_name" => "Andriano", "email" => "andriano@colamonicochiarulli.edu.it", "password" => "w9SpUsd847amtDBe", "role" => "STUDENT", "class_id" => 2, "site_id" => 1),
+            array("first_name" => "Irene", "last_name" => "Santamaria", "email" => "i.santamaria@colamonicochiarulli.edu.it", "password" => "fYqGhJ6AljywZb0v", "role" => "STUDENT", "class_id" => 2, "site_id" => 1),
+            array("first_name" => "Giovanni", "last_name" => "Ciriello", "email" => "g.ciriello.pon@colamonicochiarulli.edu.it", "password" => "V8uPDWEvQi1dJqoC", "role" => "STUDENT", "class_id" => 2, "site_id" => 1)
         );
 
         DB::table('users')->insert($students);

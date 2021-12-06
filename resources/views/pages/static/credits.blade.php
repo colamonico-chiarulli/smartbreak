@@ -2,12 +2,12 @@
 /**
  * File:	/resources/views/pages/static/credits.blade.php
  * @package smartbreak
- * @author  Rino Andriano <andriano@colamonicochiarulli.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, May 3rd 2021, 7:23:41 pm
  * -----
  * Last Modified: 	May 9th 2021 4:46:11 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
  * 
  * ------------------------------------------------------------------------------
  */
@@ -51,7 +51,7 @@
 <h2>SmartBreak</h2>
 <p>
 è un'applicazione web per la gestione delle ordinazioni al Bar della scuola
-sviluppata durante il corso <a target="_blank" href="https://www.colamonicochiarulli.it/didattica/area-comune/pon-fesr/pon-2014-2020/pon-app-factory-risultati.html"><strong>PON "The AppFactory"</strong></a> tra dicembre 2020 e aprile 2021, con insegnanti e studenti dell'indirizzo "Informatica e Telecomunicazioni" 
+sviluppata durante il corso <a target="_blank" href="https://www.colamonicochiarulli.edu.it/didattica/area-comune/pon-fesr/pon-2014-2020/pon-app-factory-risultati.html"><strong>PON "The AppFactory"</strong></a> tra dicembre 2020 e aprile 2021, con insegnanti e studenti dell'indirizzo "Informatica e Telecomunicazioni" 
 presso l'IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
 Esperto dr. <a target="_blank" href="https://giovanniciriello.github.io/">Giovanni Ciriello</a> - giovanni.ciriello.5@gmail.com
 </p>
@@ -78,7 +78,7 @@ these Appropriate Legal Notices must retain the display of the SmartBreak
 logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
 is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
 must display the words
-"(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - {{ date('Y')}}".
+"(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - {{ date('Y')}}".
 </p>
 <h2>Codice sorgente</h2>
 <p>
@@ -89,19 +89,19 @@ Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da 
 <h2>Sviluppatori</h2>
 <ul>
    <li>Giovanni Ciriello - giovanni.ciriello.5@gmail.com</li> 
-   <li>Rino Andriano - andriano@colamonicochiarulli.it</li> 
+   <li>Rino Andriano - andriano@colamonicochiarulli.edu.it</li> 
 </ul>
 
 <h2>Manutenzione - Contributi</h2>
 <ul>
-   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.it</li>
+   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li>
 </ul>
 
 <h2>Beta tester e documentazione</h2>
 <ul>
-<li>Fabio Caccavone - fabio.caccavone.inf@colamonicochiarulli.it</li> 
-<li>Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.it</li> 
-<li>Nicola Sergio - nicola.sergio.inf@colamonicochiarulli.it</li> 
+<li>Fabio Caccavone - fabio.caccavone.inf@colamonicochiarulli.edu.it</li> 
+<li>Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li> 
+<li>Nicola Sergio - nicola.sergio.inf@colamonicochiarulli.edu.it</li> 
 </ul>
 
 <h2>Alunni del corso PON</h2>
