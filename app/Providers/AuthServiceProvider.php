@@ -7,7 +7,7 @@
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
  * Last Modified: 	March 18th, 2021 7:30pm
- * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.it>
+ * Modified By: 	Andriano Rino <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
  * 
  * ------------------------------------------------------------------------------
  */

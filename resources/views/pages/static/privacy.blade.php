@@ -2,12 +2,12 @@
 /**
  * File:	/resources/views/pages/static/privacy.blade.php
  * @package smartbreak
- * @author  Rino Andriano <andriano@colamonicochiarulli.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, May 3rd 2021, 7:23:35 pm
  * -----
  * Last Modified: 	May 18th 2021 4:55:01 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
  * 
  * ------------------------------------------------------------------------------
  */
@@ -49,16 +49,16 @@
 
 @section('content')
 <h4><a name="privacy"></a>1. Informativa sulla Privacy per il trattamento dei dati personali</h4>
-<p>In questa pagina sono descritte le modalità di gestione del sito www.colamonicochiarulli.it in riferimento al
+<p>In questa pagina sono descritte le modalità di gestione del sito www.colamonicochiarulli.edu.it in riferimento al
     trattamento dei dati personali degli utenti che lo consultano. Si tratta di un’informativa che è resa ai sensi
     dell’articolo 13 del <a href="http://www.camera.it/parlam/leggi/deleghe/Testi/03196dl.htm" target="_blank"
         rel="noopener">D.lgs. n. 196/2003</a> (“<strong>Codice Privacy</strong>”) nonché ai sensi dell’articolo 13 del
     <strong>Regolamento UE 2016/679</strong> (noto come&nbsp;<strong>GDPR</strong>, <em>General Data Protection
         Regulation</em>) relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali
     (di seguito, per brevità “Regolamento” o “GDPR”) a coloro che interagiscono con i servizi web del presente portale
-    accessibili per via telematica a partire dall’indirizzo www.colamonicochiarulli.it, corrispondente alla pagina
+    accessibili per via telematica a partire dall’indirizzo www.colamonicochiarulli.edu.it, corrispondente alla pagina
     iniziale del sito dell'IISS "C. Colamonico - N. Chiarulli". L’informativa è resa solo per il nuovo sito
-    www.colamonicochiarulli.it e non anche per altri siti web eventualmente consultati dall’utente tramite link.</p>
+    www.colamonicochiarulli.edu.it e non anche per altri siti web eventualmente consultati dall’utente tramite link.</p>
 <p><strong>Titolare del trattamento e responsabile della protezione dei dati<br /> </strong>A seguito della
     consultazione di questo sito possono essere trattati dati relativi a persone identificate o identificabili. Il
     titolare del trattamento dei dati è: <strong>il Dirigente Scolastico dell'IISS "C. Colamonico - N. Chiarulli",
@@ -71,7 +71,7 @@
     informativa, utilizzando i seguenti recapiti:</p>
 <ul>
     <li><strong>Dirigente Scolastico, IISS "C. Colamonico - N. Chiarulli"</strong> –&nbsp;Via C. Colamonico, 5 - 70021 -
-        Acquaviva delle Fonti (BA), Italia.<br />Tel. +39 080.761380<br />email: preside[at]colamonicochiarulli.it<em>
+        Acquaviva delle Fonti (BA), Italia.<br />Tel. +39 080.761380<br />email: preside[at]colamonicochiarulli.edu.it<em>
             (Sostituire [at] con @)</em></li>
 </ul>
 <p><strong>Diritti dell’interessato</strong></p>
