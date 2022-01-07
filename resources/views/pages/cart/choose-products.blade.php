@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	/resources/views/pages/choose-products.blade.php
+ * File:	/resources/views/pages/cart/choose-products.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 3rd 2021 6:40:25 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 7th 2022 8:45:26 am
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -100,6 +100,7 @@
             <div class="card-body">
                 @each('partials._product-card', $category->products, 'product')
             </div>
+            <div class="card-body mt-0 pt-0 small text-muted">Le immagini sono inserite a scopo illustrativo e potrebbero non corrispondere al prodotto</div>
         </div>
     </div>
     @endif
