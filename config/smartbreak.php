@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Tuesday, April 12th 2021, 12:39:38 pm
  * -----
- * Last Modified: 	April 13th 2021 12:40:10 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 10th 2022 5:33:22 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -55,8 +55,8 @@ return [
 
     'orders_timerange' => [
         'enabled' => env('ORDERS_TIMERANGE_CHECK_ENABLED', true),
-        // example: orders allowed between 7:00 and 9:59
-        'from' => 7,
-        'to' => 10
+        // example: orders allowed between 7:00 and 9:10
+        'from' => "07:00:00",
+        'to' => "09:10:00"
     ]
 ];

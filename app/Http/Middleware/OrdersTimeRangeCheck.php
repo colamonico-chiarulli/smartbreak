@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, April 19th 2021, 6:21:58 pm
  * -----
- * Last Modified: 	April 19th 2021 6:22:13 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 10th 2022 5:33:08 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -54,6 +54,12 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Gate;
 
+/**
+ * OrdersTimeRangeCheck.
+ * 
+ * Allow access to student-cart only in a time-range
+ * Check if current time is in time-range defined in config/smartbreak.php
+ */
 class OrdersTimeRangeCheck
 {
     /**
@@ -67,8 +73,7 @@ class OrdersTimeRangeCheck
     {
 
         $time_range = config('smartbreak.orders_timerange');
-        $current_hour = now()->hour;
-        //$current_hour = 9;
+        $current_hour = now()->toTimeString(); //hh:mm:ss
 
         if(
             $time_range['enabled'] &&
