@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	May 3rd 2021 7:14:45 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 13th 2022 5:07:22 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -53,6 +53,16 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
+/**
+ * CartController.
+ *
+ * @author	Giovanni Ciriello
+ * @since	v0.0.1
+ * @version	v1.0.1	Thursday, January 13th, 2022. - Rino Andriano
+ *          BUG Fixed - Cart must have only products with num_items > 0
+ * @see		Controller
+ * @global
+ */
 class CartController extends Controller
 {
     public function chooseProducts()
@@ -62,6 +72,7 @@ class CartController extends Controller
         $categories = Category::with(['products' => function ($query) use ($search_name) {
             $query->where('site_id', auth()->user()->site_id)
                 ->where('name', 'like', '%'.$search_name.'%')
+                ->where('num_items','>',0)
                 ->orderBy('name');
         }])->orderBy('name')->get();
 
