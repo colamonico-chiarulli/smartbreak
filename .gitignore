@@ -1,6 +1,7 @@
 vendor/
 .env
 .env.host
+.env.testing
 public/temp
 public/img/products
 public/storage

@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	January 22nd 2022 3:24:22 pm
+ * Last Modified: 	January 23rd 2022 9:16:24 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -91,7 +91,8 @@ class LoginController extends Controller
     // Google login for students
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        //return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->with(["prompt" => "select_account"])->redirect();
     }
 
     public function handleGoogleCallback()
