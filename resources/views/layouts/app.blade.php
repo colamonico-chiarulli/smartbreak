@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 26th 2021 6:34:05 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 26th 2022 9:12:56 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -71,21 +71,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Custom css -->
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
-    <!-- favicon -->
-    <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     @stack('css')
 
     <!-- alpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
+    <!-- favicon -->
     <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
 
     @laravelPWA
-
 </head>
 
 <body class="layout-top-nav layout-navbar-fixed layout-fixed control-sidebar-slide-open sidebar-collapse">

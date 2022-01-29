@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	May 4th 2021 5:35:49 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	January 29th 2022 6:43:55 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -54,7 +54,7 @@
             </li>
         </ul>
         <h6>
-            <a href="{{ url('/') }}" class="navbar-brand">
+            <a href="{{ url('/home') }}" class="navbar-brand">
                 <img class="d-none d-sm-inline" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
                 <!-- Image on extra small screen -->
                 <img  class="ml-2 d-sm-none" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 21px;  vertical-align: text-bottom;">

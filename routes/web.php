@@ -91,14 +91,14 @@ Route::get('/login/google/redirect', [LoginController::class, 'handleGoogleCallb
 
 Route::get('/privacy', function(){ return view('pages.static.privacy'); });
 Route::get('/credits', function(){ return view('pages.static.credits'); });
-
+Route::get('/', function(){ return view('pages.homepage.index'); });
 
 Route::get('notification', [HomeController::class, 'notification']);
 
 Route::get('reset-num-items-products', [CronController::class, 'resetNumItemsProducts']);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::post('upload-file', [UploadController::class, 'store']);
     Route::delete('upload-file', [UploadController::class, 'delete']);
