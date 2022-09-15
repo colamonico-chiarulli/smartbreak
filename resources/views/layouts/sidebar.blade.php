@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 18th 2021 6:08:42 pm
+ * Last Modified: 	February 18th 2022 11:00:00 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -54,7 +54,7 @@
     </a>
     
     {{-- <span class="brand-text font-weight-light">AdminLTE 3</span> --}}
-    </a>
+    
     <!-- Sidebar -->
     <div class="sidebar">
     @auth

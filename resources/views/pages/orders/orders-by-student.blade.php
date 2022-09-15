@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	May 3rd 2021 12:36:42 pm
+ * Last Modified: 	February 18th 2022 10:30:53 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -127,7 +127,7 @@
 
 
 <div class="text-right">
-    <h4>Totale ordini: <b>{{ formatPrice(collect($orders_by_day)->collapse('total')->sum('total')) }}</h4>
+    <h4>Totale ordini: <b>{{ formatPrice(collect($orders_by_day)->collapse('total')->sum('total')) }}</b></h4>
 </div>
 
 <div class="w-100 pl-2">

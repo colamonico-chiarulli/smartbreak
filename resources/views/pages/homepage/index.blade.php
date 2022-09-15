@@ -57,7 +57,10 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Favicons -->
+  <!-- Google Analytics -->
+  @includeIf('partials._gtag')
+
+    <!-- Favicons -->
   <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
 
   <!-- Google Fonts -->
