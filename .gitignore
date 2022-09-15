@@ -5,5 +5,4 @@
 public/temp
 public/img/products
 public/storage
-/resources/views/partials/_gtag.php
 composer.lock
