@@ -1,12 +1,12 @@
 <?php
 /**
- * File:	/resources/views/pages/checkout.blade.php
+ * File:	/resources/views/pages/cart/checkout.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 5:49pm
  * -----
- * Last Modified: 	April 19th 2021 1:12:41 pm
+ * Last Modified: 	September 27th 2022 5:25:09 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -85,7 +85,8 @@
     @include('partials._cartjs', ['products' => $products->keyBy('id')])
 
     <script>
-        function createOrder(){
+        //Fix compulsive click on Button Confirm Order
+        createOrder = _.debounce(function(){
 
             $.post('{{ route('cart.create-order') }}', function(res){
                 if(res.success){
@@ -98,7 +99,7 @@
                     })
                 }
             });
-        }
+        }, 1000);
     </script>
 
 @endpush
