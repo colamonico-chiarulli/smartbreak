@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Tuesday, April 12th 2021, 12:39:38 pm
  * -----
- * Last Modified: 	January 12th 2022 4:26:13 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Last Modified: 	September 26th 2022 1:10:42 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -48,7 +48,8 @@
 <?php
 
 return [
-    'max_units_ordable' => 10,
+    // Max items orderable for each product
+    'max_units_ordable' => 5,
 
     'security_token' => env('SECURITY_CRON_TOKEN', 'afeff6005ab6ad9cd32b0b38492fcfd2'),
 
