@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	February 18th 2022 10:30:53 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 19th 2022 3:39:52 pm
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -58,6 +58,8 @@
                 <a class="d-block w-75 collapsed " data-toggle="collapse" href="#data-{{$date}}">
                     {{formatDate($date)}}
                 </a>
+
+
             </h3>
             <h6 class="text-right"> {{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</h6>
 
@@ -102,6 +104,8 @@
                             </td>
 
                             <td class="text-right">{{ formatPrice($product->total) }}</td>
+
+
                         </tr>
                         @endforeach
 
@@ -109,10 +113,25 @@
 
                     <tfoot>
                         <tr class="table-primary">
-                            <td class="text-right" colspan="3">
+
+                            <td class="text-right" colspan="2">
+                                
+                            @if ($date == date('Y-m-d'))
+
+                            <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('cart.delete-order') }}')">
+                                <i class=" fas fa-trash"></i> Cancella ordine
+                            </button>
+
+                            @endif
+
+                            </td>
+
+                            <td class="text-right">
                                 Totale: <b>{{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</b>
                             </td>
+
                         </tr>
+
                     </tfoot>
 
 
@@ -133,4 +152,34 @@
 <div class="w-100 pl-2">
     {!! $orders->links() !!}
 </div>
+
+<script>
+    function deleteOrder(url){
+
+        Swal.fire({
+            title: 'Sei sicuro di voler cancellare l\'ordine?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Conferma',
+            cancelButtonText: 'Annulla'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url,
+                    method: 'DELETE',
+                    success: (deletedOrder) => {
+                        //Redirect integrato con Ajax, non tramite controller
+                        location.href = "student-orders?del=true";
+                        $('#row-'+deletedOrder.id).remove();
+                    },
+                    error: (error) => {
+                        toastr.error('Impossibile cancellare questo ordine');
+                    }
+                })
+            }
+        });
+    }
+</script>
 @endsection

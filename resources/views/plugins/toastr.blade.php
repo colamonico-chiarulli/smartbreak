@@ -6,8 +6,16 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 7th, 2021 9:38pm
  * -----
- * Last Modified: 	April 15th 2021 12:38:45 pm
+ * Last Modified: 	November 4th 2022 6:30:04 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-10-20	G. Giorgio	    1.1 deleteOrder message
+ * 2021-04-15	R. Andriano	    Fix: Hided Emplty message from URL
+ * 2021-04-11	G. Ciriello	    improvements
+ * 2021-03-21   G. Ciriello	    First release
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -62,6 +70,11 @@
 
         @if(request()->get('ck'))
             toastr.success("Ordine confermato con successo");
+        @endif
+
+        {{-- Messaggio da mostrare con Ajax alla cancellazione dell'ordine, a seguito del redirect --}}
+        @if(request()->get('del'))
+            toastr.success("Ordine cancellato con successo");
         @endif
 
 

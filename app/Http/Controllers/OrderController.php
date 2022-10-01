@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	May 3rd 2021 1:29:07 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 19th 2022 3:40:08 pm
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -50,6 +50,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -320,6 +321,48 @@ class OrderController extends Controller
                 ->whereDate('orders.created_at', date('Y-m-d'))
                 ->update(['status' => $status]);
         }       
+    }
+
+
+    /**
+     * Cancella gli ordini del giorno di un utente
+     */
+    public function deleteOrder()
+    {
+        $date = date('Y-m-d');
+        $user = auth()->user()->id;
+        
+        //ottengo i prodotti ordinati
+        $order_product = DB::table('order_product')
+            ->join('orders', 'order_id', '=', 'orders.id')
+            ->where('user_id', $user)
+            ->whereDate('orders.created_at', $date)
+            ->get();
+        
+        //per ogni prodotto ordinato ripristino la giacenza
+        foreach ($order_product as $item){
+            $product = Product::find($item->product_id);
+            //$product->num_items = $product->num_items + $item->quantity;
+            //$product->save();
+            $product->increment('num_items', $item->quantity);
+        }
+
+
+        //cancella tutti i prodotti ordinati del giorno e dell'utente 
+        $order_product = DB::table('order_product')
+            ->join('orders', 'order_id', '=', 'orders.id')
+            ->where('user_id', $user)
+            ->whereDate('orders.created_at', $date)
+            ->delete();
+
+        //cancella tutti gli ordini del giorno e dell'utente
+        $orders = Order::where('user_id', $user)
+                ->whereDate('created_at', $date)
+                ->delete();
+        
+        // Call Orders-By-Student Page
+        //$this->getOrdersByStudent();
+        //Redirect tramite Ajax
     }
     
 }

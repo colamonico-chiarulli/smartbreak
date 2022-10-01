@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 18th 2021 5:00:11 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 19th 2022 3:20:10 pm
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -114,6 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
             Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
+            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('cart.delete-order');
         });
 
         Route::get('student-orders', [OrderController::class, 'getOrdersByStudent'])->name('orders.by-student');
