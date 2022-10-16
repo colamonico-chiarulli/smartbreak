@@ -1,13 +1,22 @@
 <?php
 /**
- * File:	/resources/views/layouts/app.blade.php
+ * File:	\resources\views\layouts\app.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	September 15th 2022 5:43:01 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 20th 2022 6:55:29 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-10-20	F. Caccavone    1.1 Fix: Hided sidebar for guest users (login page)
+ * 2021-05-04   R. Andriano     Fixed sidebar (no-scroll)
+ * 2021-04-12	G. Ciriello     Improvements
+ * 2021-01-31	G. Ciriello     Various update on layout and views	
+ * 2020-12-15	G. Ciriello	    First release
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -85,8 +94,9 @@
 
         @include('layouts.navbar')
 
-
-        @include('layouts.sidebar')
+        @auth
+            @include('layouts.sidebar')
+        @endauth
 
 
         <div class="content-wrapper">
