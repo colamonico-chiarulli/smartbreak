@@ -6,8 +6,15 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 21st 2021 7:16:36 pm
+ * Last Modified: 	November 4th 2022 11:53:06 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-10-20	Rino Andriano	1.1 New Function timecheck($date) for Blade
+ * 2022-10-20	Rino Andriano	Set default Carbon locale value
+ * 2022-12-15	G. Ciriello     First Release
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +46,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2022".
  * 
  * ------------------------------------------------------------------------------
  */
@@ -52,6 +59,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,8 +82,25 @@ class AppServiceProvider extends ServiceProvider
     {
         // Laravel pagination with Boostrap
         Paginator::useBootstrap();
-        
+
         //Set locale for Carbon
         Carbon::setLocale(config('app.locale'));
+    
+        // Blade custom if: 
+        // return true when date is today, time-range enabled and time in timerange-orders
+        Blade::if('timecheck', function ($date) {
+            $time_range = config('smartbreak.orders_timerange');
+            $current_hour = now()->toTimeString(); //hh:mm:ss
+            
+            if($date == date('Y-m-d')) {
+                if (!$time_range['enabled']){
+                    return true;
+                } elseif ($current_hour >= $time_range['from'] && $current_hour <= $time_range['to']){
+                        return true;
+                    } else {
+                        return false;            
+                    }
+            }
+        });
     }
 }

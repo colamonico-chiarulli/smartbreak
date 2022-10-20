@@ -6,8 +6,15 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	October 19th 2022 3:39:52 pm
- * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 20th 2022 7:55:10 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-10-20	G. Giorgio	    1.1 Feat: delete user today orders
+ * 2021-05-21	R. Andriano     Added order status message	
+ * 2021-04-10	R. Andriano	    First release (Order by class OrderByStudent)
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,7 +46,7 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2022".
  * 
  * ------------------------------------------------------------------------------
  */
@@ -69,6 +76,7 @@
                     </button>
                 </div> --}}
             <div class="row">
+                
                 @if ($date == date('Y-m-d'))
                     @isset($status[0])
                         @if ($status[0]=="READY") <span class="badge badge-success d-block">Ordine pronto</span>@endif
@@ -104,8 +112,6 @@
                             </td>
 
                             <td class="text-right">{{ formatPrice($product->total) }}</td>
-
-
                         </tr>
                         @endforeach
 
@@ -115,31 +121,22 @@
                         <tr class="table-primary">
 
                             <td class="text-right" colspan="2">
-                                
-                            @if ($date == date('Y-m-d'))
-
-                            <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('cart.delete-order') }}')">
-                                <i class=" fas fa-trash"></i> Cancella ordine
-                            </button>
-
-                            @endif
-
+                            {{-- Visualizza il punsante cancella solo nella data odierna e nel time-range dell'ordine --}}
+                            @timecheck($date)  
+                                <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('cart.delete-order') }}')">
+                                    <i class=" fas fa-trash"></i> Cancella ordine
+                                </button>
+                            @endtimecheck
                             </td>
 
                             <td class="text-right">
                                 Totale: <b>{{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</b>
                             </td>
-
                         </tr>
-
                     </tfoot>
-
-
                 </table>
-
             </div>
         </div>
-
     </div>
     @endforeach
 </div>
