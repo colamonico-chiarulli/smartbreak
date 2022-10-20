@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	October 20th 2022 8:22:34 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 21st 2022 12:02:30 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -134,7 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
             Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
-            Route::delete('order-delete' , [OrderController::class, 'deleteOrder']);
+            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');;
         });
 
         Route::get('student-orders', [OrderController::class, 'getOrdersByStudent'])->name('orders.by-student');

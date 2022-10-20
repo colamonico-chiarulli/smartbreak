@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	October 20th 2022 8:48:17 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 21st 2022 12:03:03 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -371,9 +371,6 @@ class OrderController extends Controller
                 ->whereDate('created_at', $date)
                 ->delete();
         
-        // Call Orders-By-Student Page
-        //$this->getOrdersByStudent();
-        //Redirect tramite Ajax
     }
     
 }

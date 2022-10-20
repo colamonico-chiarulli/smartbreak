@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	October 20th 2022 7:55:10 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	October 21st 2022 12:01:31 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -120,10 +120,10 @@
                     <tfoot>
                         <tr class="table-primary">
 
-                            <td class="text-right" colspan="2">
+                            <td class="text-left" colspan="2">
                             {{-- Visualizza il punsante cancella solo nella data odierna e nel time-range dell'ordine --}}
-                            @timecheck($date)  
-                                <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('cart.delete-order') }}')">
+                            @timecheck($date)
+                                <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('order.delete') }}')">
                                     <i class=" fas fa-trash"></i> Cancella ordine
                                 </button>
                             @endtimecheck
@@ -167,9 +167,7 @@
                     url,
                     method: 'DELETE',
                     success: (deletedOrder) => {
-                        //Redirect integrato con Ajax, non tramite controller
                         location.href = "student-orders?del=true";
-                        $('#row-'+deletedOrder.id).remove();
                     },
                     error: (error) => {
                         toastr.error('Impossibile cancellare questo ordine');
