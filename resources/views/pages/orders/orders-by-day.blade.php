@@ -2,12 +2,22 @@
 /**
  * File:	/resources/views/pages/orders/orders-by-day.blade.php
  * @package smartbreak
- * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
- * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: 	March 15th, 2021 5:15pm
+ * @author  Costantino Tassielli <costantino.tassielli.inf@colamonicochiarulli.edu.it>
+ * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
+ * Created Date: Saturday, November 5th 2022, 11:54:33 am
  * -----
- * Last Modified: 	May 3rd 2021 1:00:28 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 5th 2022 11:56:12 am
+ * Modified By: 	Costantino Tassielli <costantino.tassielli.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-05	C.Tassielli     1.1 Total Items in classroom footer
+ *              A. Liuzzi       
+ * 2022-05-03   R. Andriano     Fix: Filtered site manager in orders list
+ * 2022-11-09	R. Andriano	    Order Status
+ * 2021-04-20	G. Giorgio      Set today limit to selectable date
+ * 2021-03-15	G. Ciriello     First release	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -39,11 +49,10 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2022".
  * 
  * ------------------------------------------------------------------------------
  */
-
 ?>
 @extends('layouts.app', ['title' => 'Ordini del giorno '. formatDate($date)])
 
@@ -128,12 +137,18 @@
 
                     <tfoot>
                         <tr class="table-primary">
-                            <td class="text-right" colspan="3">
+                            <td class="text-right" colspan="2">
+                                Pezzi: <b>{{ (collect($class)->sum('quantity')) }}</b>
+                            </td>
+                            <td class="text-right">
                                 Totale: <b>{{ formatPrice(collect($class)->sum('total')) }}</b>
                             </td>
                         </tr>
-                    </tfoot>
+                  
+                        <tr class="table-secondary">
 
+                        </tr>
+                    </tfoot>
 
                 </table>
 
