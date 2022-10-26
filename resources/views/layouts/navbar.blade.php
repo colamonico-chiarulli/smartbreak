@@ -6,12 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	November 4th 2022 10:50:22 pm
- * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 5th 2022 12:30:41 pm
+ * Modified By: 	Nicola Sergio <nicola.sergio@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-11-05	N. Sergio	    1.1 Fix: Set users/guest link for Smartbreak-logo
  * 2022-11-04	G. Giorgio	    1.1 Fix: Hide cart icon out of orders time-range
  * 2021-05-04   R. Andriano     Fix navbar for extra small device / added google avatar
  * 2021-04-12	G. Ciriello     Improvements
@@ -64,7 +65,14 @@
             </li>
         </ul>
         <h6>
+            {{-- Check about home page route--}}
+            @auth
             <a href="{{ url('/home') }}" class="navbar-brand">
+            @endauth
+
+            @guest
+            <a href="{{ url('/') }}" class="navbar-brand">
+            @endguest
                 <img class="d-none d-sm-inline" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 35px; vertical-align: text-bottom;">
                 <!-- Image on extra small screen -->
                 <img  class="ml-2 d-sm-none" src="{{ asset('img/logos/logo.svg') }}" alt="SmartBreak logo" style="max-height: 21px;  vertical-align: text-bottom;">
@@ -153,7 +161,7 @@
                         <!-- End Level two -->
                     </ul>
                 </li>
-                
+
             </ul>
 
             <!-- SEARCH FORM
@@ -200,15 +208,15 @@
 
             <li class="nav-item d-none d-md-block">
                 @if(auth()->user()->google_avatar != null)
-                   <a class="nav-link text-dark"> 
+                   <a class="nav-link text-dark">
                       <img width="28px" style="text-align: left;" src="{{auth()->user()->google_avatar}}" class="img-circle elevation-1" alt="User Image">
                     {{ auth()->user()->first_name }}
-                    </a> 
+                    </a>
                 @else
                     <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
-                @endif    
+                @endif
             </li>
-                              
+
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
