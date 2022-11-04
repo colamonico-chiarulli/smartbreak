@@ -6,9 +6,19 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	January 29th 2022 6:43:55 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Last Modified: 	November 4th 2022 10:50:22 pm
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-04	G. Giorgio	    1.1 Fix: Hide cart icon out of orders time-range
+ * 2021-05-04   R. Andriano     Fix navbar for extra small device / added google avatar
+ * 2021-04-12	G. Ciriello     Improvements
+ * 2021-01-31	G. Ciriello     Various update on layout and views	
+ * 2020-12-20	G. Ciriello	    First release
+ * -----
+ * 
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
  * SmartBreak is a School Bar food booking web application
@@ -169,21 +179,24 @@
 
             @auth
 
-            @can('is-student')
-            <li class="nav-item">
-                <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
-                    🛒
-                    <span class="badge badge-primary navbar-badge cart-num-items">0</span>
-                </a>
-            </li>
+            {{-- Visualizza il pulsante carrello e totale solo nel time-range --}}
+            @timecheck
+                @can('is-student')
 
-            <li class="nav-item">
-                <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
-                    <span class="cart-total">{{ formatPrice(0) }}</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
+                        🛒
+                        <span class="badge badge-primary navbar-badge cart-num-items">0</span>
+                    </a>
+                </li>
 
-            @endcan
+                <li class="nav-item">
+                    <a href="{{ route('cart.checkout') }}" class="nav-link text-dark">
+                        <span class="cart-total">{{ formatPrice(0) }}</span>
+                    </a>
+                </li>
+                @endcan
+            @endtimecheck
 
             <li class="nav-item d-none d-md-block">
                 @if(auth()->user()->google_avatar != null)
