@@ -6,12 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	October 21st 2022 12:02:30 am
- * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 9th 2022 09:39:29 pm
+ * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-11-09	G. Losurdo      1.1 Price-list / Place an order feature	
  * 2022-10-20	G. Giorgio      Delete today orders for students
  * 2021-05-18	R. Andriano     Landing page
  * 2021-05-18	R. Andriano     Import CSV SchoolCasses & Students
@@ -128,7 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
     // STUDENT AREA
     Route::group(['middleware' => 'can:is-student'], function () {
         Route::group(['prefix' => 'cart', 'middleware' => 'orders.timerange_check'], function () {
-            Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
+    
             Route::put('edit', [CartController::class, 'editCart'])->name('cart.edit');
             Route::get('get', [CartController::class, 'getCart'])->name('cart.get');
             Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
@@ -136,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
             Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');;
         });
-
+        Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
         Route::get('student-orders', [OrderController::class, 'getOrdersByStudent'])->name('orders.by-student');
         Route::get('class-orders', [OrderController::class, 'getOrdersOfTodayByClass'])->name('orders.today-by-class');
     });

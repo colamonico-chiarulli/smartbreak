@@ -6,8 +6,21 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 2nd, 2020 11:05pm
  * -----
- * Last Modified: 	April 15th 2021 4:45:30 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 9th 2022 09:39:29 pm
+ * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-09	G. Losurdo      1.1 Price-list / Place an order feature
+ * 2021-04-21	R. Andriano     Total items by category in choose-products	
+ * 2021-04-11	G. Ciriello     Media library photo refactoring
+ * 2021-04-06   R. Andriano     Fix and Improvements
+ * 2021-02-14	G. Ciriello     Cart improvements
+ * 2021-02-06	G. Ciriello     Improvements on cart UX
+ * 2021-02-06	G. Ciriello     Improvements on cart UX
+ * 2021-01-09	G. Ciriello     Ui imrovements
+ * 2020-12-20	G. Ciriello     Product View	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -78,7 +91,7 @@
                         {{ $product->formatted_price }}
                     </span>
                 </p>
-
+                @timecheck
                 <div class="text-right">
                     <div class="input-group input-group-sm" style="max-width: 90px;">
                         <span class="input-group-prepend">
@@ -100,6 +113,7 @@
                         </b>
                     </small>
                 </div>
+                @endtimecheck
             </div>
 
             @if($product->num_items < 2)

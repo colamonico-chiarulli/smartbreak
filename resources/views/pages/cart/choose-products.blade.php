@@ -6,8 +6,20 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	January 7th 2022 8:45:26 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Last Modified: 	November 9th 2022 09:39:29 pm
+ * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
+ * 2022-01-07	R. Andriano	    Add images disclaimer text
+ * 2021-04-15	R. Andriano	    New: Total items by category in choose-products
+ * 2021-04-11	G. Ciriello     Product search
+ * 2021-01-24	R. Andriano     Added toastr notification
+ * 2021-01-09	G. Ciriello     ui improvements in product card
+ * 2020-12-21	G. Ciriello     Product view
+ * 2020-12-15	G. Ciriello     Init project	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -45,7 +57,8 @@
  */
 
 ?>
-@extends('layouts.app', ['title' => 'Fai un ordine'])
+
+@extends('layouts.app', ['title' => $title])
 
 @section('content')
 
@@ -71,13 +84,13 @@
         </form>
     </div>
 
-
+@timecheck
     <div class="col-12 col-md-3 my-3 text-right">
         <a class="text-danger" href="javascript:;" onclick="emptyCartRefresh()">
             <i class="fa fa-cart-arrow-down"></i> Svuota carrello
         </a>
     </div>
-
+@endtimecheck
 </div>
 
 
@@ -91,9 +104,11 @@
                     {{ $category->name }} <small class="text-muted">{{ $category->products->count() }} prodotti</small>
                 </a>
             </h4>
-            <div class="text-right"> 
-                🛒<span id="category-item-{{ $category->id }}" class="badge badge-info">0</span>
-            </div>
+            @timecheck
+                <div class="text-right"> 
+                    🛒<span id="category-item-{{ $category->id }}" class="badge badge-info">0</span>
+                </div>
+            @endtimecheck
         </div>
         {{-- tab apert: {{ $loop->first ? 'show' : 'collapse' }} --}}
         <div id="category-{{ $category->id }}" class="collapse" data-parent="#categories-accordion">
@@ -107,13 +122,13 @@
 @endforeach
 </div>
 
-
+@timecheck
 <div class="text-center">
     <a class="btn btn-lg btn-success my-4" href="{{ route('cart.checkout') }}">
         <i class="fa fa-shopping-cart"></i> Vai al riepilogo
     </a>
 </div>
-
+@endtimecheck
 
 @endsection
 

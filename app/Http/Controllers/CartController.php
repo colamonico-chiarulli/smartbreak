@@ -6,8 +6,20 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	January 13th 2022 5:07:22 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Last Modified: 	November 11th 2022 09:39:05 pm
+ * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
+ * 2022-01-13	R. Andriano	    Fix: Cart now list only products with stock > 0
+ * 2021-04-19	R. Andriano	    fix : cart-category checkout
+ * 2021-04-15	R. Andriano     New: Total items by category in choose-products
+ * 2021-04-11	G. Ciriello     improvements and bug/fix
+ * 2021-02-15	G. Ciriello     improvements on CartController
+ * 2021-02-14	G. Ciriello     automatic reload of product totals in home
+ * 2021-02-06	G. Ciriello     cartController and javascript logic for cart	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -65,7 +77,7 @@ use App\Models\Category;
  */
 class CartController extends Controller
 {
-    public function chooseProducts()
+    public function chooseProducts(Request $request)
     {
         $search_name = request()->search_name;
 
@@ -76,7 +88,17 @@ class CartController extends Controller
                 ->orderBy('name');
         }])->orderBy('name')->get();
 
-        return view('pages.cart.choose-products', compact('categories', 'search_name'));
+        //out of Order Time - show an info toastr
+        if (isOrderTime()){
+            $title="Fai un ordine";
+        } else {
+            $title='Listino prodotti';
+            $time_range = config('smartbreak.orders_timerange');
+            $request->session()->flash('info', 'Puoi fare un ordine dalle '
+                . $time_range['from'] . ' alle ' . $time_range['to']
+            );
+        }
+        return view('pages.cart.choose-products', compact('categories', 'search_name', 'title'));
     }
 
     public function editCart()

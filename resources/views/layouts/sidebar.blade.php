@@ -6,8 +6,20 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	February 18th 2022 11:00:00 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 9th 2022 09:39:29 pm
+ * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
+ * 2021-05-21	R. Andriano	    fix: automatic active item in sidebar
+ * 2021-04-21	R. Andriano	    Fixed navbar for extra-small device
+ * 2021-04-24	R. Andriano     Improved sidebar (icons an layout)
+ * 2021-03-27	R. Andriano     Fix: sidebar (show-hide)
+ * 2021-03-19	R. Andriano     Admins links
+ * 2021-03-15	G. Ciriello     Manager links
+ * 2020-12-15	G. Ciriello     Init project	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -236,7 +248,11 @@
                     <a href="{{ route('cart.choose-products') }} " class="nav-link">
                         <i class="nav-icon fas fa-hamburger"></i>
                         <p>
-                            Fai un ordine
+                            @timecheck
+                                Fai un ordine
+                            @else
+                                Listino prodotti
+                            @endtimecheck
                         </p>
                     </a>
                 </li>
