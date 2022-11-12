@@ -6,13 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	October 21st 2022 12:01:31 am
+ * Last Modified: 	November 12th 2022 3:27:22 am
  * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
- * 2022-10-20	G. Giorgio	    1.1 Feat: delete user today orders
+ * 2022-10-20	G. Giorgio	    Fix: cart badge & total in navbar
  * 2021-05-21	R. Andriano     Added order status message	
  * 2021-04-10	R. Andriano	    First release (Order by class OrderByStudent)
  * -----
@@ -178,3 +178,9 @@
     }
 </script>
 @endsection
+
+@push('js')
+
+    @include('partials._cartjs')
+        
+@endpush

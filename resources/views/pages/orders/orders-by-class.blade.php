@@ -6,8 +6,17 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Friday, April 9th 2021, 9:19:53 pm
  * -----
- * Last Modified: 	April 30th 2021 9:21:27 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 12th 2022 3:26:57 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-12	G. Giorgio 	    Fix: cart badge & total in navbar
+ * 2021-05-01	R. Andriano	    New: Added Order Status Message
+ * 2021-04-15	R. Andriano	    Fix: improved card-accordion
+ * 2021-04-10	R. Andriano     new: OrdersByStudent fix: OrderByClass
+ * 2021-04-09	R. Andriano     new: getOrdersOfTodayByClass()
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -129,3 +138,9 @@
 
 
 @endsection
+
+@push('js')
+
+        @include('partials._cartjs')
+        
+@endpush

@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 14th, 2021 11:16pm
  * -----
- * Last Modified: 	April 21st 2021 9:52:59 am
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 12th 2022 3:22:51 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -48,14 +48,32 @@
 @include('plugins.lodashjs')
 <script>
     const get_cart_route = '{{ route("cart.get") }}';
-    const edit_cart_route = '{{ route("cart.edit") }}';
-    const empty_cart_route = '{{ route("cart.empty") }}';
-    const products = @JSON($products);
-    const max_units_ordable = @JSON(config('smartbreak.max_units_ordable'));
 
     $(function () {
         reloadTotal();
     });
+
+    function reloadTotal() {
+        $.get(get_cart_route, function (res) {
+            $(".cart-total").html(formatPrice(res.total));
+            $(".cart-num-items").html(res.num_items);
+
+            $.each(res.categ, function(key, value) {
+                $("#category-item-" + key).text(value);
+            });
+        });
+    }
+</script>
+
+{{-- Queste funzioni vengono caricate solo in choose-product e cart-checkout--}}
+@isset($products)
+<script>
+    const edit_cart_route = '{{ route("cart.edit") }}';
+    const empty_cart_route = '{{ route("cart.empty") }}';    
+    const products = @JSON($products);  
+    
+    const max_units_ordable = @JSON(config('smartbreak.max_units_ordable'));
+
 
     function emptyCartRefresh(){
         emptyCart(function(){
@@ -110,16 +128,5 @@
             });
         }
     }, 200);
-
-    function reloadTotal() {
-        $.get(get_cart_route, function (res) {
-            $(".cart-total").html(formatPrice(res.total));
-            $(".cart-num-items").html(res.num_items);
-
-            $.each(res.categ, function(key, value) {
-                $("#category-item-" + key).text(value);
-            });
-        });
-    }
-
 </script>
+@endisset

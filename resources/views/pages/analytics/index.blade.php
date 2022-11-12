@@ -6,8 +6,20 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 30th, 2021 10:54am
  * -----
- * Last Modified: 	May 3rd 2021 4:47:22 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 12th 2022 3:27:25 am
+ * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-12	G. Giorgio 	    Fix: cart badge & total in navbar
+ * 2021-05-03	R. Andriano	    Fix: Analytics for students
+ * 2021-04-23	R. Andriano	    Analytics for users
+ * 2021-04-24	R. Andriano     Analytics code cleanup & fix to speedup first load
+ * 2021-04-16	R. Andriano     Category statistics - Analytics by period
+ * 2021-04-10	G. Ciriello     analytics controller improvement
+ * 2021-04-07	G. Ciriello     analytics sales figures
+ * 2021-03-21	G. Ciriello     Setup analytics
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -125,6 +137,9 @@
 @endsection
 
 @push('js')
+
+@include('partials._cartjs')
+
 <script>
     //global variables
 var formMove = null;
@@ -272,4 +287,5 @@ var pieChart = new Chart(pieCtx, {
 });
 
 </script>
+
 @endpush
