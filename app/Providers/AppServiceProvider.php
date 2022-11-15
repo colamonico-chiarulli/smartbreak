@@ -88,18 +88,13 @@ class AppServiceProvider extends ServiceProvider
     
         // Blade custom if: 
         // return true when date is today, time-range enabled and time in timerange-orders
-        Blade::if('timecheck', function ($date) {
-            $time_range = config('smartbreak.orders_timerange');
-            $current_hour = now()->toTimeString(); //hh:mm:ss
+        Blade::if('timecheck', function ($date=null) {
+            $date = $date ?? date('Y-m-d'); // if null set it to today
             
-            if($date == date('Y-m-d')) {
-                if (!$time_range['enabled']){
+            if($date == date('Y-m-d') && isOrderTime()){
                     return true;
-                } elseif ($current_hour >= $time_range['from'] && $current_hour <= $time_range['to']){
-                        return true;
-                    } else {
-                        return false;            
-                    }
+            } else {
+                    return false;
             }
         });
     }

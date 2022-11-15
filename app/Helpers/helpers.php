@@ -51,7 +51,12 @@ function formatPrice($amount)
 {
     return number_format($amount, 2, ',', '.').' €';
 }
-
+/**
+ * formatShortDate
+ *
+ * @param date $date
+ * @return string day-Month
+ */
 function formatShortDate($date)
 {
     return
@@ -60,10 +65,37 @@ function formatShortDate($date)
         Carbon\Carbon::parse($date)->translatedFormat('d-M');
 }
 
+/**
+ * formatDate
+ *
+ * @param date $date
+ * @return string dd-mm-aa
+ */
 function formatDate($date)
 {
     return
         $date instanceof Carbon\Carbon ?
         $date->format('d/m/Y') :
         Carbon\Carbon::parse($date)->format('d/m/Y');
+}
+
+/**
+ * isOrderTime
+ * 
+ * Check if now is order time or not
+ *
+ * @return boolean
+ */
+function isOrderTime(){
+        //get config timerange variable
+        $time_range = config('smartbreak.orders_timerange');
+        $current_hour = now()->toTimeString(); //hh:mm:ss
+        
+        if (!$time_range['enabled']){
+                return true;
+            } elseif ($current_hour >= $time_range['from'] && $current_hour <= $time_range['to']){
+                    return true;
+                } else {
+                    return false;            
+        }
 }

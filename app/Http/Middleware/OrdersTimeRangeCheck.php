@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Monday, April 19th 2021, 6:21:58 pm
  * -----
- * Last Modified: 	January 10th 2022 5:33:08 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.it>
+ * Last Modified: 	November 15th 2022 4:45:23 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -70,15 +70,10 @@ class OrdersTimeRangeCheck
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {
-
-        $time_range = config('smartbreak.orders_timerange');
-        $current_hour = now()->toTimeString(); //hh:mm:ss
-
+    {       
         if(
-            $time_range['enabled'] &&
             Gate::allows('is-student') &&
-            ($current_hour <= $time_range['from'] || $current_hour >= $time_range['to'])
+            !isOrderTime()
         ){
             abort_if($request->ajax(), 403);
             return redirect('student-orders');
