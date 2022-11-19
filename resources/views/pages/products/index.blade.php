@@ -118,14 +118,14 @@
                     </td>
                     <td>
                         <a class="btn btn-info btn-sm" href="{{ route('products.show', $product->id) }}">
-                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-eye" title="Vedi"></i>
                         </a>
                         <a class="btn btn-warning btn-sm" href="{{ route('products.edit', $product->id) }}">
-                            <i class="fas fa-pencil-alt"></i>
+                            <i class="fas fa-pencil-alt" title="Modifica"></i>
                         </a>
                         <a class="btn btn-danger btn-sm" href="javascript:;"
                             onclick="deleteProduct('{{ route('products.destroy', $product->id) }}', '{{ $product->name }}')">
-                            <i class=" fas fa-trash"></i>
+                            <i class=" fas fa-trash" title="Elimina"></i>
                         </a>
                     </td>
                 </tr>

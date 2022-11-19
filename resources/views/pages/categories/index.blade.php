@@ -72,13 +72,13 @@
                 <td>{{ $category->description }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('categories.show', $category->id) }}">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye" title="Vedi"></i>
                     </a>
                     <a class="btn btn-warning btn-sm" href="{{ route('categories.edit', $category->id) }}">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-pencil-alt" title="Modifica"></i>
                     </a>
                     <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteCategory('{{ route('categories.destroy', $category->id) }}', '{{ $category->name }}')">
-                        <i class=" fas fa-trash"></i>
+                        <i class=" fas fa-trash" title="Elimina"></i>
                     </a>
                 </td>
             </tr>

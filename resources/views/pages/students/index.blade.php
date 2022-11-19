@@ -96,13 +96,13 @@
                 <td>{{ $student->site->name ?? ''}}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('students.show', $student->id) }}">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye" title="Vedi"></i>
                     </a>
                     <a class="btn btn-warning btn-sm" href="{{ route('students.edit', $student->id) }}">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-pencil-alt" title="Modifica"></i>
                     </a>
                     <a class="btn btn-danger btn-sm" href="javascript:;" onclick="deleteUser('{{ route('students.destroy', $student->id) }}', '{{ $student->last_name }} {{ $student->first_name }}')">
-                        <i class=" fas fa-trash"></i>
+                        <i class=" fas fa-trash" title="Elimina"></i>
                     </a>
                 </td>
             </tr>
