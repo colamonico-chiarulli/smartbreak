@@ -62,7 +62,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
-
+use Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -293,6 +293,22 @@ class OrderController extends Controller
         $orders = Order::where('user_id', $user)
                 ->whereDate('created_at', $date)
                 ->delete();
+        
+    }
+
+
+    public function reBuy()
+    {
+        $date = date('Y-m-d');
+        $user = auth()->user()->id;
+
+        //ottengo i prodotti ordinati
+        $order_product = DB::table('order_product')
+            ->join('orders', 'order_id', '=', 'orders.id')
+            ->where('user_id', $user)
+            ->whereDate('orders.created_at', $date)
+            ->get();
+        
         
     }
     

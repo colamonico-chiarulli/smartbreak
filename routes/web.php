@@ -135,7 +135,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
             Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
-            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');;
+            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');
+            Route::put('order-rebuy' , [OrderController::class, 'reBuy'])->name('order.rebuy');;
         });
         Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
         Route::get('student-orders', [OrderController::class, 'getOrdersByStudent'])->name('orders.by-student');

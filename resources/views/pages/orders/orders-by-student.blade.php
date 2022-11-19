@@ -116,11 +116,23 @@
                         <tr class="table-primary">
 
                             <td class="text-left" colspan="2">
-                            {{-- Visualizza il pulsante cancella solo nella data odierna e nel time-range dell'ordine --}}
-                            @timecheck($date)
-                                <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('order.delete') }}')">
-                                    <i class=" fas fa-trash"></i> Cancella ordine
-                                </button>
+                            
+                            @timecheck
+
+                                {{-- Visualizza il punsante cancella solo nella data odierna e nel time-range dell'ordine --}}
+                                @if ($date == date('Y-m-d'))
+                                    <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('order.delete') }}')">
+                                        <i class=" fas fa-trash"></i> Cancella ordine
+                                    </button>
+                                
+                                {{-- Visualizza il pulsante 'acquista di nuovo' solo nel time-range consentito ma in giorni diversi da quello odierno--}}
+                                @else
+
+                                    <button class="btn btn-success" href="javascript:;" onclick="reBuy('{{ route('order.rebuy') }}')">
+                                        <i class="fas fa-cart-plus"></i> Aggiungi al carrello
+                                    </button>
+                                @endif
+
                             @endtimecheck
                             </td>
 
