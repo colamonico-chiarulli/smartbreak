@@ -50,10 +50,10 @@
 
 @section('content')
 
-<div id="student-accordion">
+<div id="student-accordion" class="Slidable">
     @foreach($orders_by_day as $date=>$order)
-    <div class="card card-default">
-        <div class="card-header">
+    <div class="card card-default Slidable-content" style="transform: translate(0px, 0px); background-position-x: 0px;" id="card">
+        <div class="card-header Slidable">
             <h3 class="card-title w-75 text-bold">
                 <a class="d-block w-75 collapsed " data-toggle="collapse" href="#data-{{$date}}">
                     {{formatDate($date)}}
@@ -134,3 +134,9 @@
     {!! $orders->links() !!}
 </div>
 @endsection
+
+@push('js')
+
+    @include('partials.gestures')
+
+@endpush
