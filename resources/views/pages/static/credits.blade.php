@@ -93,8 +93,24 @@ Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da 
 </ul>
 
 <h2>Manutenzione - Contributi</h2>
+<h3>a.s. 2020-2021</h3>
 <ul>
    <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li>
+</ul>
+<h3>Developers Team - a.s. 2022-2023</h3>
+<h4><a href="https://github.com/colamonico-chiarulli/smartbreak/blob/master/CHANGELOG.md" target="_blank">Consulta il Changelog</a></h4>
+<ul>
+   <li>Fabio Caccavone - 5InfA </li>
+   <li>Nico Chimienti - 5InfA </li>
+   <li>Giuseppe Giorgio - 5InfA </li>
+   <li>Francesco Liantonio - 5InfB </li>
+   <li>Anthony Liuzzi - 5InfA </li>
+   <li>Gabriele Antonio Losurdo - 5InfA </li>
+   <li>Toni Marziliano - 5InfA </li>
+   <li>Claudio Montenegro - 5InfA </li>
+   <li>Nicola Sergio - 5InfA </li>
+   <li>Costantino Tassielli - 5InfA </li>
+   <li>Camilla Vaira - 5InfA </li>
 </ul>
 
 <h2>Beta tester e documentazione</h2>
