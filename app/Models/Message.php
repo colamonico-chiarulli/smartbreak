@@ -1,17 +1,18 @@
 <?php
+
 /**
- * File:	\resources\views\plugins\sweetalert.blade.php
+ * File:	\app\Models\Message.php
  * @package smartbreak
- * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
- * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: 	March 7th, 2021 9:38pm
+ * @author  Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
+ * Created Date: Tuesday, November 22nd 2022, 4:41:18 pm
  * -----
- * Last Modified: 	November 23rd 2022 5:38:56 pm
+ * Last Modified: 	November 22nd 2022 6:09:58 pm
  * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
- * * HISTORY:
+ * -----
+ * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
- * 2022-11-23	F. Caccavone	Show the new message
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -43,29 +44,52 @@
  * logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
  * is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
  * must display the words
- * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
+ * "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2022".
  * 
  * ------------------------------------------------------------------------------
  */
 
 ?>
-@push('js')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if(Session::has('msg'))
-<script>
-    {{-- Strip double quotes from json string --}}
-    var msg={!! session('msg') !!}.replace(/\"/g, "")
-    Swal.fire({
-        titleText: '{{ session('title') }}',
-        icon: 'info',
-        html: '<div class="text-left">'+msg+'</div>',
-        showCancelButton: false,
-        focusConfirm: false,
-        confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> Ok!',
-        confirmButtonAriaLabel: 'Ok!'
-    });
-</script>
-@endif
+<?php
 
-@endpush
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
+use App\Casts\SanitizedHtml;
+
+class Message extends Model
+{
+    use HasFactory;
+    use Sortable;
+
+    protected $tables = 'messages';
+
+    protected $guarded = ['id'];
+
+    public $sortable = [
+        'title',
+        'message',
+        'destination',
+        'created_at',
+    ];
+
+    protected $casts = [
+        'message' => SanitizedHtml::class,
+    ];
+
+    public static function validationRules()
+    {
+        return ([
+            "title" =>["required"],
+            "message" => ["required"],
+            "destination" => ["required"],
+        ]);
+    }
+
+    public function messageUsers()
+    {
+        return $this->hasMany(MessageUsers::class, 'message_id');
+    }
+}

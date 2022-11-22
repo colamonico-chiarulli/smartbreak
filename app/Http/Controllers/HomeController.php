@@ -1,13 +1,22 @@
 <?php
+
 /**
- * File:	/app/Http/Controllers/HomeController.php
+ * File:	\app\Http\Controllers\HomeController.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	April 26th 2021 4:00:06 pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 23rd 2022 5:37:47 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * -----
+ * * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2022-11-23	F. Caccavone	Check if there's a new message for users
+ * 2021-04-26	R. Andriano	    Home for Bar managers
+ * 2021-02-21	G. Ciriello     Gate improvements
+ * 2020-12-15	G. Ciriello     Init project	
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -50,8 +59,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Gate;
+use App\Models\Message;
+use App\Models\MessageUsers;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
@@ -69,8 +80,33 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $role = auth()->user()->role;
+        $userid = auth()->user()->id;
+
+        //get all new messages for user (from latest to oldest)
+        $message = Message::where('destination', $role)
+            ->whereDoesntHave('messageUsers', function ($query) use ($userid) {
+                $query->where('user_id', $userid);
+            })->latest()->get();
+
+        //if there are message they are marked as read into message_users table
+        if (!$message->isEmpty()) {
+            $message->each(function ($msg) use ($userid) {
+                MessageUsers::create([
+                    'message_id' => $msg['id'],
+                    'user_id' => $userid,
+                ]);
+            });
+
+            // and latest message is send to SweetAlert trough session 
+            $msg = $message->first()->only(['title', 'message']);
+
+            $request->session()->flash('title',$msg['title']);
+            $request->session()->flash('msg', json_encode($msg['message']));
+        }
+
         if (Gate::check('is-manager')) {
             $route = 'products.by-day';
         } elseif (Gate::check('is-student')) {

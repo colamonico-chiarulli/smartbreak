@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	/routes/web.php
+ * File:	\routes\web.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	November 9th 2022 09:39:29 pm
- * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 22nd 2022 6:53:59 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -83,6 +83,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CronController;
+use App\Http\Controllers\MessageController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
@@ -120,7 +121,6 @@ Route::get('reset-num-items-products', [CronController::class, 'resetNumItemsPro
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-
     Route::post('upload-file', [UploadController::class, 'store']);
     Route::delete('upload-file', [UploadController::class, 'delete']);
     Route::get('analytics', [AnalyticsController::class, 'getAnalyticsPage'])->name('analytics');
@@ -157,6 +157,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ADMIN AREA
     Route::group(['middleware' => 'can:is-admin'], function () {
         Route::resource('sites', SiteController::class);
+        Route::resource('messages', MessageController::class);
         Route::resource('classes', SchoolclassController::class);
         Route::resource('users', UserController::class);
         Route::resource('students', StudentController::class);
