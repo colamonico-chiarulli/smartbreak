@@ -1,17 +1,18 @@
 <?php
 /**
- * File:	/routes/web.php
+ * File:	\routes\web.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	November 9th 2022 09:39:29 pm
- * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 26th 2022 4:41:24 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-11-26	F. Caccavone	Site switch
  * 2022-11-09	G. Losurdo      1.1 Price-list / Place an order feature	
  * 2022-10-20	G. Giorgio      Delete today orders for students
  * 2021-05-18	R. Andriano     Landing page
@@ -146,6 +147,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'can:is-admin-or-manager'], function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
+        Route::get('switch-site', [SiteController::class, 'switchView'])->name('sites.switchView');
+        Route::post('switch', [SiteController::class, 'switch'])->name('sites.switch');
 
         Route::get('orders-by-day/{date?}', [OrderController::class, 'getOrdersByDay'])->name('orders.by-day');
         Route::get('products-by-day/{date?}', [OrderController::class, 'getProductsByDay'])->name('products.by-day');

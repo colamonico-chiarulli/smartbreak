@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	/app/Http/Controllers/SiteController.php
+ * File:	\app\Http\Controllers\SiteController.php
  * @package smartbreak
  * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 18th, 2021 7:30pm
  * -----
- * Last Modified: 	March 26th, 2021 8:33pm
- * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 26th 2022 4:24:39 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -50,7 +50,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Site;
+use Illuminate\Support\Arr;
+use App\Models\User;
 
 class SiteController extends Controller
 {
@@ -141,5 +144,58 @@ class SiteController extends Controller
     {
         $site->delete();
         return $site;
+    }
+
+    /**
+     * Show the view to switch the manager's site
+     * 
+    */
+    public function switchView(Request $request, $date = null)
+    {
+        $date = $date ?: now()->toDateString();
+        $products = DB::table('orders')
+        ->join('order_product', 'id', '=', 'order_id')
+        ->join('products', 'product_id', '=', 'products.id')
+        ->join('users', 'user_id', '=', 'users.id')
+        ->select('products.id', 'products.name', 'order_product.price', 'num_items', 'default_daily_stock',
+                 DB::raw('SUM(quantity) as quantity'),
+                 DB::raw('SUM(order_product.price * order_product.quantity) as total')
+                 )
+        ->whereDate('orders.created_at', $date)
+        ->groupBy('product_id')
+        ->orderBy('name', 'asc')
+        ->get()
+        ->count();
+        $sites = Site::orderby('id', 'asc')->get();
+        $orders = [];
+        foreach($sites as $site){
+            $products = DB::table('orders')
+                ->join('order_product', 'id', '=', 'order_id')
+                ->join('products', 'product_id', '=', 'products.id')
+                ->join('users', 'user_id', '=', 'users.id')
+                ->select('products.id', 'products.name', 'order_product.price', 'num_items', 'default_daily_stock',
+                        DB::raw('SUM(quantity) as quantity'),
+                        DB::raw('SUM(order_product.price * order_product.quantity) as total')
+                        )
+                ->where('users.site_id', $site->id)
+                ->where('status', '=', 'CONFIRMED')
+                ->whereDate('orders.created_at', $date)
+                ->groupBy('product_id')
+                ->orderBy('name', 'asc')
+                ->get()
+                ->count();
+            $orders = Arr::prepend($orders, $products, $site->id);
+        }
+        return view('pages.sites.switch', compact('sites', 'orders'));
+    }
+
+    /**
+     * Script to switch che site for the manager
+     * 
+     */
+    public function switch(Request $request)
+    {
+        User::where('id', '=', auth()->user()->id)
+                ->update(['site_id' => $request->input('site_id')]);
     }
 }

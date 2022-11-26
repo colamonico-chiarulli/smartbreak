@@ -1,17 +1,18 @@
 <?php
 /**
- * File:	/resources/views/layouts/navbar.blade.php
+ * File:	\resources\views\layouts\navbar.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	November 5th 2022 12:30:41 pm
- * Modified By: 	Nicola Sergio <nicola.sergio@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 26th 2022 4:39:46 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-11-26	F. Caccavone	Link to switch site
  * 2022-11-05	N. Sergio	    1.1 Fix: Set users/guest link for Smartbreak-logo
  * 2022-11-04	G. Giorgio	    1.1 Fix: Hide cart icon out of orders time-range
  * 2021-05-04   R. Andriano     Fix navbar for extra small device / added google avatar
@@ -216,6 +217,12 @@
                     <a class="nav-link text-dark">👋 &nbsp;{{ auth()->user()->first_name }}</a>
                 @endif
             </li>
+
+            @can('is-manager')
+                <li class="nav-item d-none d-md-block">
+                    <a href="{{ route('sites.switchView') }}" title="Cambia sede" class="nav-link text-dark">Sede: {{ auth()->user()->site->name }}</a>
+                </li>
+            @endcan
 
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 @csrf

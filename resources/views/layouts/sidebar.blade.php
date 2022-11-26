@@ -1,17 +1,18 @@
 <?php
 /**
- * File:	/resources/views/layouts/sidebar.blade.php
+ * File:	\resources\views\layouts\sidebar.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	November 9th 2022 09:39:29 pm
- * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 26th 2022 4:39:36 pm
+ * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-11-26	F. Caccavone	Link to switch site
  * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
  * 2021-05-21	R. Andriano	    fix: automatic active item in sidebar
  * 2021-04-21	R. Andriano	    Fixed navbar for extra-small device
@@ -199,6 +200,15 @@
                         <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Modifica giacenze
+                        </p>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="{{ route('sites.switchView') }}" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Cambia sede
                         </p>
                     </a>
                 </li>
