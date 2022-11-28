@@ -21,7 +21,8 @@
         "laravel/ui": "^3.1",
         "maatwebsite/excel": "^3.1",
         "silviolleite/laravelpwa": "^2.0",
-        "spatie/laravel-medialibrary": "^9.0.0"
+        "spatie/laravel-medialibrary": "^9.0.0",
+        "stevebauman/purify": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

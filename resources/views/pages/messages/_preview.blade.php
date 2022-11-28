@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	\resources\views\pages\messages\create.blade.php
+ * File:	/resources/views/pages/messages/_preview.blade.php
  * @package smartbreak
- * @author  Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: Tuesday, November 22nd 2022, 5:04:30 pm
+ * Created Date: Tuesday, November 29th 2022, 5:02:45 pm
  * -----
- * Last Modified: 	November 22nd 2022 5:04:43 pm
- * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 29th 2022 5:02:45 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -49,17 +49,22 @@
  */
 
 ?>
-
-@extends('layouts.app', ['title' => 'Crea messaggio'])
-
-@section('content')
-
-    @include('pages.messages._form', [
-        'cardTitle' => 'Invia un nuovo messaggio',
-        'headercolor' => 'bg-success',
-        'action' => route('messages.store'),
-        'button' => 'Salva',
-    ])
-@endsection
-
-@include('pages.messages._preview');
+@push('js')
+<script>
+function preview(){
+    var title=$("#title").val();
+    var msg=$("#summernote").val();
+    Swal.fire({
+        titleText: title,
+        icon: 'info',
+        html: '<div class="text-left">'+msg+'</div>',
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Ok!',
+        confirmButtonAriaLabel: 'Ok!',
+        confirmButtonColor: '#0277bd',
+    });
+}
+</script>
+@endpush

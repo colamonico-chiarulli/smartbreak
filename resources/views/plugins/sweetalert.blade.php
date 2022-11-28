@@ -63,7 +63,8 @@
         focusConfirm: false,
         confirmButtonText:
             '<i class="fa fa-thumbs-up"></i> Ok!',
-        confirmButtonAriaLabel: 'Ok!'
+        confirmButtonAriaLabel: 'Ok!',
+        confirmButtonColor: '#0277bd',
     });
 </script>
 @endif
