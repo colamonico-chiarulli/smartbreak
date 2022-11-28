@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	\resources\views\pages\messages\create.blade.php
+ * File:	/app/Casts/SanitizedHtml.php
  * @package smartbreak
- * @author  Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: Tuesday, November 22nd 2022, 5:04:30 pm
+ * Created Date: Monday, November 28th 2022, 7:16:18 pm
  * -----
- * Last Modified: 	November 22nd 2022 5:04:43 pm
- * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 28th 2022 10:04:47 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -49,17 +49,40 @@
  */
 
 ?>
+<?php
 
-@extends('layouts.app', ['title' => 'Crea messaggio'])
+namespace App\Casts;
 
-@section('content')
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Stevebauman\Purify\Facades\Purify;
 
-    @include('pages.messages._form', [
-        'cardTitle' => 'Invia un nuovo messaggio',
-        'headercolor' => 'bg-success',
-        'action' => route('messages.store'),
-        'button' => 'Salva',
-    ])
-@endsection
+class SanitizedHtml implements CastsAttributes
+{
+    /**
+     * Cast the given value.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  string  $key
+     * @param  mixed  $value
+     * @param  array  $attributes
+     * @return mixed
+     */
+    public function get($model, string $key, $value, array $attributes)
+    {
+        return Purify::clean($value);   
+    }
 
-@include('pages.messages._preview');
+    /**
+     * Prepare the given value for storage.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  string  $key
+     * @param  mixed  $value
+     * @param  array  $attributes
+     * @return mixed
+     */
+    public function set($model, string $key, $value, array $attributes)
+    {
+        return $value;
+    }
+}

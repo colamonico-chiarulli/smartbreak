@@ -62,3 +62,5 @@
 ])
 
 @endsection
+
+@include('pages.messages._preview');

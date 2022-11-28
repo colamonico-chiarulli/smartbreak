@@ -74,18 +74,17 @@
                     </div>
                     @endif
 
-                    <div class=" form-group">
+                    <div class="form-group">
                         <label for="message">Titolo *</label>
                         <input type="text" class="form-control @error('title')is-invalid @enderror" id="title"
                             name="title" maxlength="30" {{$readonly ?? '' }}
                             value="{{ $message->title ?? old('title') }}">
                     </div>
 
-                    <div class=" form-group">
-                        <label for="message">Messaggio *</label>
-                        <textarea class="form-control @error('message')is-invalid @enderror" rows="10" id="message"
-                            name="message" placeholder="Messaggio da inviare" {{$readonly ?? ''
-                            }}>{{ $message->message ?? old('message') }}</textarea>
+                    <div class="form-group">
+                        <label for="summernote">Messaggio *</label>
+                        <textarea class="form-control @error('message')is-invalid @enderror" rows="10" id="summernote"
+                            name="message" placeholder="Messaggio da inviare" {{$readonly ?? ''}}>@empty($message->message){{old('message')}}@endempty</textarea>
                     </div>
 
                     <div class=" form-group">
@@ -93,17 +92,20 @@
                         <select class="form-control @error('destination')is-invalid @enderror" id="destination"
                             name="destination" {{$readonly ?? '' }}>
                             <option value="">Seleziona un Ruolo </option>
-                            <option value="ADMIN" @if($message->destination == "ADMIN")
+                            <option value="ADMIN" 
+                                @if($message->destination == "ADMIN")
                                 selected="selected"
                                 @endif
                                 >Amministratori</option>
                             </option>
-                            <option value="MANAGER" @if($message->destination == "MANAGER")
+                            <option value="MANAGER" 
+                                @if($message->destination == "MANAGER")
                                 selected="selected"
                                 @endif
                                 >BAR Manager</option>
                             </option>
-                            <option value="STUDENT" @if($message->destination == "STUDENT")
+                            <option value="STUDENT" 
+                                @if($message->destination == "STUDENT")
                                 selected="selected"
                                 @endif
                                 >Studenti</option>
@@ -116,6 +118,7 @@
                 <div class="card-footer">
                     @empty($readonly)
                     <button type="submit" class="btn btn-primary">{{$button}}</button>
+                    <button type="button" class="btn btn-info" onclick="preview()">Anteprima</button>
                     @endempty
                 </div>
             </form>
@@ -123,3 +126,5 @@
     </div>
 
 </div>
+
+@include('plugins.summernote')

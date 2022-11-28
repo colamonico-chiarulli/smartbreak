@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	\resources\views\pages\messages\create.blade.php
+ * File:	/resources/views/plugins/summernote.blade.php
  * @package smartbreak
- * @author  Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * @author  Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
- * Created Date: Tuesday, November 22nd 2022, 5:04:30 pm
+ * Created Date: Tuesday, November 29th 2022, 5:52:26 pm
  * -----
- * Last Modified: 	November 22nd 2022 5:04:43 pm
- * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 29th 2022 5:52:26 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -50,16 +50,28 @@
 
 ?>
 
-@extends('layouts.app', ['title' => 'Crea messaggio'])
+@push('css')
+<!-- include summernote css -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+@endpush
 
-@section('content')
+@push('js')
+  <!-- include summernote js -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    @include('pages.messages._form', [
-        'cardTitle' => 'Invia un nuovo messaggio',
-        'headercolor' => 'bg-success',
-        'action' => route('messages.store'),
-        'button' => 'Salva',
-    ])
-@endsection
 
-@include('pages.messages._preview');
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+        height: 200,   
+        toolbar: [
+          ['style', ['bold', 'italic', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    });
+  </script>
+
+@endpush
