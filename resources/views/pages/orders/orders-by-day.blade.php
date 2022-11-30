@@ -96,12 +96,6 @@
             </h3>
             <h6 class="text-right"> {{ formatPrice(collect($class)->sum('total')) }}</h6>
 
-            {{-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                </div> --}}
-
         </div>
 
         <div class="{{ $class[0]->status == "CONFIRMED" ? "show" : "collapse" }}" id="class-{{ $class_id }}">

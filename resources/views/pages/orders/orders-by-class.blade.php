@@ -76,11 +76,6 @@
                 </a>
             </h3>
             <h6 class="text-right"> {{ formatPrice(collect($orders[$user])->sum('total')) }}</h6>
-            {{-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                </div> --}}
         </div>
 
         <div id="user-{{$user}}" class="collapse" data-parent="#class-accordion">

@@ -70,11 +70,6 @@
             </h3>
             <h6 class="text-right"> {{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</h6>
 
-            {{-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div> --}}
             <div class="row">
                 
                 @if ($date == date('Y-m-d'))
@@ -121,7 +116,7 @@
                         <tr class="table-primary">
 
                             <td class="text-left" colspan="2">
-                            {{-- Visualizza il punsante cancella solo nella data odierna e nel time-range dell'ordine --}}
+                            {{-- Visualizza il pulsante cancella solo nella data odierna e nel time-range dell'ordine --}}
                             @timecheck($date)
                                 <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('order.delete') }}')">
                                     <i class=" fas fa-trash"></i> Cancella ordine
