@@ -60,7 +60,7 @@
                 </a>
             </h4>
         </div>
-        {{-- tab apert: {{ $loop->first ? 'show' : 'collapse' }} --}}
+
         <div id="category-{{ $category->id }}" class="collapse" data-parent="#categories-accordion">
             <div class="card-body">
                 @each('pages.products._product-detail', $category->products, 'product')
