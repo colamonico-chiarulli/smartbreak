@@ -325,5 +325,14 @@ class OrderController extends Controller
             ->whereDate('orders.created_at', $date)
             ->get();
         dd($order_product);
+        
+        $order_product->each(function ($item, $key){
+           $product_index = 'cart.'.$item->product_id;
+           $qta=session()->get($product_index) + $item->quantity;
+
+           session()->put($product_index, $qta);
+        });
+        $cart=session()->get('cart');
+        //dd($cart);
     }
 }
