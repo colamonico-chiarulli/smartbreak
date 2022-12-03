@@ -1,13 +1,13 @@
 <?php
 /**
- * File:	/resources/views/layouts/navbar.blade.php
+ * File:	\resources\views\layouts\navbar.blade.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 31st, 2021 5:29pm
  * -----
- * Last Modified: 	November 5th 2022 12:30:41 pm
- * Modified By: 	Nicola Sergio <nicola.sergio@colamonicochiarulli.edu.it>
+ * Last Modified: 	December 3rd 2022 9:34:31 pm
+ * Modified By: 	Nicola Sergio <nicola.sergio.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -16,10 +16,10 @@
  * 2022-11-04	G. Giorgio	    1.1 Fix: Hide cart icon out of orders time-range
  * 2021-05-04   R. Andriano     Fix navbar for extra small device / added google avatar
  * 2021-04-12	G. Ciriello     Improvements
- * 2021-01-31	G. Ciriello     Various update on layout and views	
+ * 2021-01-31	G. Ciriello     Various update on layout and views
  * 2020-12-20	G. Ciriello	    First release
  * -----
- * 
+ *
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
  * SmartBreak is a School Bar food booking web application
@@ -61,7 +61,7 @@
         <!-- Sidebar menu Button -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link mr-2" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars fa-lg"></i></a>
             </li>
         </ul>
         <h6>
