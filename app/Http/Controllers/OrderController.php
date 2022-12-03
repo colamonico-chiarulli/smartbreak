@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File:	/app/Http/Controllers/OrderController.php
  * @package smartbreak
@@ -82,37 +83,40 @@ class OrderController extends Controller
      */
     public function getOrdersByDay($date = null)
     {
-       $date = $date ?: now()->toDateString();
-       $site_id = auth()->user()->site->id;
-        
-       $orders = DB::table('orders')
-               ->join('order_product', 'id', '=', 'order_id')
-               ->join('products', 'product_id', '=', 'products.id')
-               ->join('users', 'user_id', '=', 'users.id')
-               ->join('classes', 'class_id', '=', 'classes.id')
-               ->select('class_id', 'status',
-                        DB::raw('CONCAT(year,course,"-", section) as class_name'),
-                        'products.id', 'products.name',
-                        DB::raw('SUM(quantity) as quantity'),
-                        DB::raw('SUM(order_product.price * order_product.quantity) as total')
-                        )
-               ->where('users.site_id', $site_id)
-               ->whereDate('orders.created_at', $date)
-               ->groupBy('class_id', 'product_id')
-               ->get(); 
- 
+        $date = $date ?: now()->toDateString();
+        $site_id = auth()->user()->site->id;
+
+        $orders = DB::table('orders')
+            ->join('order_product', 'id', '=', 'order_id')
+            ->join('products', 'product_id', '=', 'products.id')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->join('classes', 'class_id', '=', 'classes.id')
+            ->select(
+                'class_id',
+                'status',
+                DB::raw('CONCAT(year,course,"-", section) as class_name'),
+                'products.id',
+                'products.name',
+                DB::raw('SUM(quantity) as quantity'),
+                DB::raw('SUM(order_product.price * order_product.quantity) as total')
+            )
+            ->where('users.site_id', $site_id)
+            ->whereDate('orders.created_at', $date)
+            ->groupBy('class_id', 'product_id')
+            ->get();
+
         //Ordina per classe e prodotto
         $orders = $orders->SortBy([
-            ['class_name','asc'],
-            ['name','asc']
+            ['class_name', 'asc'],
+            ['name', 'asc']
         ]);
-        
+
         //Raggruppa gli ordini per classe
-        $classes=$orders->groupBy('class_id')->toArray();
+        $classes = $orders->groupBy('class_id')->toArray();
 
         return view('pages.orders.orders-by-day', compact('classes', 'date'));
     }
-    
+
     /**
      *  getProductsByDay
      *  Prepara la vista Ordini per Prodotto
@@ -130,26 +134,31 @@ class OrderController extends Controller
 
         // Prendo tutti gli ordini di oggi
         $products = DB::table('orders')
-        ->join('order_product', 'id', '=', 'order_id')
-        ->join('products', 'product_id', '=', 'products.id')
-        ->join('users', 'user_id', '=', 'users.id')
-        ->select('products.id', 'products.name', 'order_product.price', 'num_items', 'default_daily_stock',
-                 DB::raw('SUM(quantity) as quantity'),
-                 DB::raw('SUM(order_product.price * order_product.quantity) as total')
-                 )
-        ->where('users.site_id', $site_id)
-        ->whereDate('orders.created_at', $date)
-        ->groupBy('product_id')
-        ->orderBy('name', 'asc')
-        ->get(); 
+            ->join('order_product', 'id', '=', 'order_id')
+            ->join('products', 'product_id', '=', 'products.id')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->select(
+                'products.id',
+                'products.name',
+                'order_product.price',
+                'num_items',
+                'default_daily_stock',
+                DB::raw('SUM(quantity) as quantity'),
+                DB::raw('SUM(order_product.price * order_product.quantity) as total')
+            )
+            ->where('users.site_id', $site_id)
+            ->whereDate('orders.created_at', $date)
+            ->groupBy('product_id')
+            ->orderBy('name', 'asc')
+            ->get();
 
-        
+
         //dd($products);        
 
         return view('pages.orders.products-by-day', compact('products', 'date'));
     }
-    
-    
+
+
     /**
      * getOrdersOfTodayByClass()
      *
@@ -162,40 +171,45 @@ class OrderController extends Controller
     public function getOrdersOfTodayByClass()
     {
         $class_id = auth()->user()->class->id;
-        $class_name= auth()->user()->class->name; 
+        $class_name = auth()->user()->class->name;
         $date = date('Y-m-d');
-        
+
         $orders = DB::table('orders')
-                ->join('order_product', 'id', '=', 'order_id')
-                ->join('products', 'product_id', '=', 'products.id')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('user_id', 'users.last_name', 'users.first_name', 'products.id', 'products.name', 
-                         DB::raw('SUM(quantity) as quantity'),
-                         DB::raw('SUM(order_product.price * order_product.quantity) as total')
-                         )
-                ->whereDate('orders.created_at', $date)
-                ->where('class_id', $class_id)
-                ->groupBy('user_id', 'product_id')
-                ->get(); 
-  
+            ->join('order_product', 'id', '=', 'order_id')
+            ->join('products', 'product_id', '=', 'products.id')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->select(
+                'user_id',
+                'users.last_name',
+                'users.first_name',
+                'products.id',
+                'products.name',
+                DB::raw('SUM(quantity) as quantity'),
+                DB::raw('SUM(order_product.price * order_product.quantity) as total')
+            )
+            ->whereDate('orders.created_at', $date)
+            ->where('class_id', $class_id)
+            ->groupBy('user_id', 'product_id')
+            ->get();
+
         //Ordina per cognome e nome
         $orders = $orders->SortBy([
-            ['last_name','asc'],
-            ['first_name','asc']
+            ['last_name', 'asc'],
+            ['first_name', 'asc']
         ]);
-        
+
         //Raggruppa gli ordini per utente
-        $orders=$orders->groupBy('user_id')->toArray();
-        
+        $orders = $orders->groupBy('user_id')->toArray();
+
         //Recupera lo STATUS degli ordini della classe partendo da un eventuale ordine utente
         //Se l'utente non ha fatto ordini, non riuscirà a visualizzere lo status
-        $status=Order::select('status')
-                ->where('user_id', auth()->user()->id)
-                ->whereDate('created_at', date('Y-m-d'))
-                ->get()
-                ->pluck('status');
-        
-        return view('pages.orders.orders-by-class', compact('status','orders','class_name'));
+        $status = Order::select('status')
+            ->where('user_id', auth()->user()->id)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->get()
+            ->pluck('status');
+
+        return view('pages.orders.orders-by-class', compact('status', 'orders', 'class_name'));
     }
 
     /**
@@ -210,31 +224,33 @@ class OrderController extends Controller
     public function getOrdersByStudent()
     {
         $user_id = auth()->user()->id;
-        
+
         //recupera gli ordini dell'utente per data e prodotto
         $orders = DB::table('orders')
-                ->join('order_product', 'id', '=', 'order_id')
-                ->join('products', 'product_id', '=', 'products.id')
-                ->select(DB::raw('DATE(orders.created_at) as date_order'),
-                        'products.id', 'products.name as name',
-                         DB::raw('SUM(quantity) as quantity'),
-                         DB::raw('SUM(order_product.price * order_product.quantity) as total')
-                         )
-                ->where('user_id', $user_id)
-                ->groupBy('date_order','products.id')
-                ->orderBy('date_order', 'desc')
-                ->paginate(30);
-        
+            ->join('order_product', 'id', '=', 'order_id')
+            ->join('products', 'product_id', '=', 'products.id')
+            ->select(
+                DB::raw('DATE(orders.created_at) as date_order'),
+                'products.id',
+                'products.name as name',
+                DB::raw('SUM(quantity) as quantity'),
+                DB::raw('SUM(order_product.price * order_product.quantity) as total')
+            )
+            ->where('user_id', $user_id)
+            ->groupBy('date_order', 'products.id')
+            ->orderBy('date_order', 'desc')
+            ->paginate(30);
+
         //raggruppa gli ordini per data
-        $orders_by_day=$orders->groupBy('date_order');
-        
+        $orders_by_day = $orders->groupBy('date_order');
+
         //Recupera lo STATUS degli ordini del giorno partendo da un eventuale ordine utente
-        $status=Order::select('status')
-                    ->where('user_id', $user_id)
-                    ->whereDate('created_at', date('Y-m-d'))
-                    ->get()
-                    ->pluck('status');
-        return view('pages.orders.orders-by-student', compact('status','orders','orders_by_day'));
+        $status = Order::select('status')
+            ->where('user_id', $user_id)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->get()
+            ->pluck('status');
+        return view('pages.orders.orders-by-student', compact('status', 'orders', 'orders_by_day'));
     }
 
     /**
@@ -246,15 +262,16 @@ class OrderController extends Controller
      * @param	request	$request	
      * @return	void
      */
-    public function setOrderStatus(Request $request){
+    public function setOrderStatus(Request $request)
+    {
         $class_id = $request->input('class_id');
         $status = $request->input('status');
-        if ($status == 'READY' or $status == 'INCOMPLETE'){
-            $orders=Order::join('users', 'users.id', '=', 'user_id')
+        if ($status == 'READY' or $status == 'INCOMPLETE') {
+            $orders = Order::join('users', 'users.id', '=', 'user_id')
                 ->where('class_id', $class_id)
                 ->whereDate('orders.created_at', date('Y-m-d'))
                 ->update(['status' => $status]);
-        }       
+        }
     }
 
 
@@ -265,16 +282,16 @@ class OrderController extends Controller
     {
         $date = date('Y-m-d');
         $user = auth()->user()->id;
-        
+
         //ottengo i prodotti ordinati
         $order_product = DB::table('order_product')
             ->join('orders', 'order_id', '=', 'orders.id')
             ->where('user_id', $user)
             ->whereDate('orders.created_at', $date)
             ->get();
-        
+
         //per ogni prodotto ordinato ripristino la giacenza
-        foreach ($order_product as $item){
+        foreach ($order_product as $item) {
             $product = Product::find($item->product_id);
             //$product->num_items = $product->num_items + $item->quantity;
             //$product->save();
@@ -291,15 +308,14 @@ class OrderController extends Controller
 
         //cancella tutti gli ordini del giorno e dell'utente
         $orders = Order::where('user_id', $user)
-                ->whereDate('created_at', $date)
-                ->delete();
-        
+            ->whereDate('created_at', $date)
+            ->delete();
     }
 
 
-    public function reBuy()
+    public function rebuyOrder(Request $request)
     {
-        $date = date('Y-m-d');
+        $date = $request->input('orderDate');
         $user = auth()->user()->id;
 
         //ottengo i prodotti ordinati
@@ -308,10 +324,6 @@ class OrderController extends Controller
             ->where('user_id', $user)
             ->whereDate('orders.created_at', $date)
             ->get();
-        
-        
+        dd($order_product);
     }
-    
 }
-
-

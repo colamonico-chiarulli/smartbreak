@@ -128,8 +128,8 @@
                                 {{-- Visualizza il pulsante 'acquista di nuovo' solo nel time-range consentito ma in giorni diversi da quello odierno--}}
                                 @else
 
-                                    <button class="btn btn-success" href="javascript:;" onclick="reBuy('{{ route('order.rebuy') }}')">
-                                        <i class="fas fa-cart-plus"></i> Aggiungi al carrello
+                                    <button class="btn btn-success" href="javascript:;" onclick="reBuy('{{ $date }}')">
+                                        <i class="fas fa-cart-plus"></i> Acquista di nuovo
                                     </button>
                                 @endif
 
@@ -180,6 +180,24 @@
                         toastr.error('Impossibile cancellare questo ordine');
                     }
                 })
+            }
+        });
+    }
+
+    function reBuy(date){
+        console.log(date);
+        $.ajax({
+            url: '{{ route("order.rebuy") }}',
+            method: "POST",
+            data: {
+                orderDate: date,
+            },
+            success: function () {
+                location.href = "{{route('cart.checkout')}}";
+            },
+            error: function(error) {
+                console.log(error);
+                toastr.error('Si è verificato un errore: ' + error);
             }
         });
     }
