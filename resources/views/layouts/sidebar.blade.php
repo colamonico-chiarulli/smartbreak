@@ -200,6 +200,17 @@
                     </a>
                 </li>
                 @endcan
+
+                @can('is-manager')
+                <li class="nav-item">
+                    <a href="{{ route('on-off.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <p>
+                            Apri/Chiudi Bar
+                        </p>
+                    </a>
+                </li>
+                @endcan
                 
                 <li class="nav-item">
                     <hr>

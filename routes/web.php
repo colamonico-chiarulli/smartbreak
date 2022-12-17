@@ -84,6 +84,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CronController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\OnOffController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
@@ -152,6 +153,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('orders-set-status', [OrderController::class, 'setOrderStatus'])->name('orders.set-status');
         Route::get('products-stocks', [ProductController::class, 'getStocks'])->name('products.stocks');
         Route::post('set-stocks', [ProductController::class, 'setStocks'])->name('products.set-stocks');
+
+        Route::resource('on-off', OnOffController::class);
     });
 
     // ADMIN AREA
