@@ -85,7 +85,7 @@ class FirstMigration extends Migration
             $table->string('google_avatar')->nullable();
 
             $table->string('password');
-            $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN'])->default('STUDENT');
+            $table->enum('role', ['STUDENT', 'MANAGER', 'ADMIN', "EMPLOYEE"])->default('STUDENT');
             $table->rememberToken();
 
             $table->foreignId('class_id')->on('classes')->nullable(); // only for students

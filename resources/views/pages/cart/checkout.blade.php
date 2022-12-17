@@ -72,9 +72,16 @@
     <a href="{{ route("cart.choose-products") }}" class="btn btn-primary">
         <i class="fas fa-arrow-left"></i> Aggiungi altro
     </a>
+    @can("is-student")
     <button class="btn btn-success" onclick="createOrder()">
         <i class="fa fa-check"></i> Conferma ordine
     </button>
+    @endcan
+    @can("is-employee")
+    <button class="btn btn-success" onclick="payOrder()">
+        <i class="fa fa-check"></i> Paga ordine
+    </button>
+    @endcan
 </div>
 @endif
 
@@ -100,6 +107,10 @@
                 }
             });
         }, 1000);
+        payOrder = _.debounce(function(){
+            $.post('{{ route('cart.create-order') }}', function(res){
+                // 
+            }, 1000);
     </script>
 
 @endpush
