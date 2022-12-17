@@ -6,8 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	November 9th 2022 09:39:29 pm
- * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	December 17th 2022 11:25:26 am
+ * Modified By: 	Nicola Sergio <nicola.sergio@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
@@ -19,7 +19,7 @@
  * 2021-01-24	R. Andriano     Added toastr notification
  * 2021-01-09	G. Ciriello     ui improvements in product card
  * 2020-12-21	G. Ciriello     Product view
- * 2020-12-15	G. Ciriello     Init project	
+ * 2020-12-15	G. Ciriello     Init project
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -105,7 +105,7 @@
                 </a>
             </h4>
             @timecheck
-                <div class="text-right"> 
+                <div class="text-right">
                     🛒<span id="category-item-{{ $category->id }}" class="badge badge-info">0</span>
                 </div>
             @endtimecheck
@@ -124,16 +124,60 @@
 
 @timecheck
 <div class="text-center">
-    <a class="btn btn-lg btn-success my-4" href="{{ route('cart.checkout') }}">
+    <a class="btn btn-lg btn-success my-4" >
         <i class="fa fa-shopping-cart"></i> Vai al riepilogo
     </a>
 </div>
 @endtimecheck
 
+
+<div class="text-right" id="go-to-checkout">
+    <a href="{{ route('cart.checkout') }}">
+        <button
+            type="button"
+            class="btn btn-success btn-lg rounded-circle text-center"
+            >
+            <i class="fa fa-shopping-cart mx-auto" ></i>
+        </button>
+    </a>
+</div>
+
 @endsection
+
+
+
+@push('css')
+    <style>
+        #go-to-checkout {
+            position: fixed;
+            display: none;
+        }
+    </style>
+
+@endpush
+
 
 @push('js')
 
     @include('partials._cartjs', ['products' => $categories->pluck('products')->collapse()->keyBy('id')])
+    <script type="text/javascript">
+        let div = document.getElementById("go-to-checkout");
 
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+             scrollFunction();
+            };
+
+        function scrollFunction() {
+        if (
+            document.body.scrollTop > 20 ||
+             document.documentElement.scrollTop > 20
+        ) {
+            div.style.display = "block";
+        } else {
+             div.style.display = "none";
+        }
+    }
+    </script>
 @endpush
