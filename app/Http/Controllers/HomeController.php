@@ -109,7 +109,7 @@ class HomeController extends Controller
 
         if (Gate::check('is-manager')) {
             $route = 'products.by-day';
-        } elseif (Gate::check('is-student')) {
+        } elseif (Gate::check('is-buyer')) {
             $route = 'cart.choose-products';
         } elseif (Gate::check('is-admin')) {
             $route = 'analytics';

@@ -79,10 +79,16 @@ class CartController extends Controller
 {
     public function chooseProducts(Request $request)
     {
+        $site=auth()->user()->site_id;
+        if (is_null($site)){
+            $sites = Site::all();
+            return view('pages.users.choose-site', compact('sites'));
+        }
+
         $search_name = request()->search_name;
 
         $categories = Category::with(['products' => function ($query) use ($search_name) {
-            $query->where('site_id', auth()->user()->site_id)
+            $query->where('site_id', $site)
                 ->where('name', 'like', '%'.$search_name.'%')
                 ->where('num_items','>',0)
                 ->orderBy('name');
