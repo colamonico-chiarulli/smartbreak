@@ -143,10 +143,10 @@
           <p>SmartBreak è un'applicazione web progettata e realizzata
             con gli studenti <br> dell’indirizzo di
             <a target="_blank"
-              href="https://colamonicochiarulli.edu.it/istituto/carta-identita/indirizzi-studio/istruzione-tecnica-tecnologica/tecnologico-colamonico/indirizzo-informatica-telecomunicazioni.html"><i>Informatica
+              href="https://www.colamonicochiarulli.edu.it/indirizzo-di-studio/informatico/"><i>Informatica
                 e Telecomunicazioni</i></a>,
             nell’ambito del PON <a
-              href="https://colamonicochiarulli.edu.it/didattica/area-comune/pon-fesr/pon-2014-2020/pon-app-factory.html"
+              href="https://www.colamonicochiarulli.edu.it/2020/11/16/pon-app-factory/"
               target="_blank">“The App Factory”</a> nell'a.s. 2020-21
           </p>
         </div>
