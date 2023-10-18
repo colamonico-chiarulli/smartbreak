@@ -57,7 +57,7 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicons -->
+  <!-- Favicons -->
   <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
 
   <!-- Google Fonts -->
@@ -95,7 +95,8 @@
           <li><a class="nav-link scrollto" href="#features">Funzionalità</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-          <li><a class="nav-link scrollto" href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak">Supporto</a></li>
+          <li><a class="nav-link scrollto"
+              href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak">Supporto</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -111,15 +112,21 @@
           class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1"
           data-aos="fade-up">
           <div>
-            <h1>SmartBreak</h1>
+            <h1>SmartBreak demo</h1>
             <h2>Ordina la tua merenda al BAR della scuola con un click!</h2>
 
             <a class="download-btn mt-2" href="{{ route('login.google') }}">
               <i class="bi bi-google"></i> Accesso studenti
             </a>
-            <a class="download-btn mt-2" href="{{ route('home') }}">
-              <i class="bi bi-person-circle"></i> Accesso admin
-            </a>
+ 
+              <a class="download-btn mt-2" href="{{ route('home') }}">
+                <i class="bi bi-person-circle"></i> Accesso admin
+              </a>
+              <p>Per la demo <b>Maker Faire 2023</b>, usa il pulsante <b>Accesso admin</b> e le credenziali <br>
+                email:<b>demo@s.b</b><br>
+                password:<b>demo</b>
+              </p>
+
           </div>
         </div>
         <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img"
@@ -215,7 +222,8 @@
             <ul>
               <li><i class="bi bi-lightning-charge"></i> <b>Accesso rapido</b><br> Accedi ora con il tuo account
                 istituzionale.</li>
-              <li><i class="bi bi-check"></i> <b>Catalogo prodotti</b><br> Scegli i tuoi prodotti e conferma l’ordine.</li>
+              <li><i class="bi bi-check"></i> <b>Catalogo prodotti</b><br> Scegli i tuoi prodotti e conferma l’ordine.
+              </li>
               <li><i class="bi bi-graph-up"></i> <b>Statistiche</b><br> Monitora le tue spese settimanali, mensili ed
                 annuali.</li>
             </ul>
@@ -429,7 +437,7 @@
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
-      <div class="container"  data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>FAQ</h2>
@@ -507,11 +515,14 @@
                   class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-6" class="collapse" data-bs-parent=".accordion-list">
                 <p>
-                  In caso di difficoltà di accesso si consiglia di <a style="display: inline" class="m-0 p-0" href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak/supporto-accesso" target="_blank">
-                    <b>cancellare la cronologia</b></a> del browser o <b>uscire da tutti gli account Google</b> e riprovare <br>
-                    - Sul dispositivo, apri una pagina Google, ad esempio www.google.com <br>
-                    - In alto a destra, seleziona la tua iniziale o l'immagine del tuo profilo. <br>
-                    - Nel menu, scegli <b>Esci</b> o <b>Esci da tutti gli account.</b>
+                  In caso di difficoltà di accesso si consiglia di <a style="display: inline" class="m-0 p-0"
+                    href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak/supporto-accesso"
+                    target="_blank">
+                    <b>cancellare la cronologia</b></a> del browser o <b>uscire da tutti gli account Google</b> e
+                  riprovare <br>
+                  - Sul dispositivo, apri una pagina Google, ad esempio www.google.com <br>
+                  - In alto a destra, seleziona la tua iniziale o l'immagine del tuo profilo. <br>
+                  - Nel menu, scegli <b>Esci</b> o <b>Esci da tutti gli account.</b>
                 </p>
               </div>
             </li>
@@ -538,14 +549,15 @@
               <a href="https://colamonicochiarulli.edu.it" target="_blank">IISS Colamonico Chiarulli </a><br>
               Via C. Colamonico, n. 5 <br>
               70021 - Acquaviva delle Fonti (BA)<br>
-              Italia <br><br>
+              Italia <br>
+              <a href="mailto:smartbreak@colamonicochiarulli.edu.it">smartbreak@colamonicochiarulli.edu.it<br>
             </p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Links</h4>
-              <i class="bx bx-chevron-right"></i> <a href="{{ url('/credits') }}">Credits</a><br>
-              <i class="bx bx-chevron-right"></i> <a href="{{ url('/privacy') }}">Privacy</a><br>
+            <i class="bx bx-chevron-right"></i> <a href="{{ url('/credits') }}">Credits</a><br>
+            <i class="bx bx-chevron-right"></i> <a href="{{ url('/privacy') }}">Privacy</a><br>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
