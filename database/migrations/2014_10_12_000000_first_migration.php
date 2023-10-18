@@ -140,7 +140,7 @@ class FirstMigration extends Migration
             $table->decimal('price', 6, 2);
 
             $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
 
             $table->primary(['order_id', 'product_id']);
 
