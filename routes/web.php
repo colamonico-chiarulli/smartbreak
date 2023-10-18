@@ -170,6 +170,12 @@ Route::group(['middleware' => 'auth'], function () {
             $exitCode = Artisan::call('optimize:clear');
             return 'Cache cleared ' . $exitCode;
         });
+
+        // Esegue il seeder che crea gli ordini del giorno
+        Route::get('today', function() {
+            $exitCode = Artisan::call('db:seed --class=OrdersTodaySeeder');
+            return 'Creati ordini per ogni studente per la data odierna ' . $exitCode;
+        });
     });
 });
 

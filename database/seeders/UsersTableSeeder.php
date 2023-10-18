@@ -101,18 +101,18 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'email' => 'student@smartbreak.it',
-            'password' => Hash::make('StudentPassword'),
+            'email' => 'demo@s.b',
+            'password' => Hash::make('demo'),
             'first_name' => $faker->firstName(),
             'last_name' => $faker->lastName(),
             'role' => 'STUDENT',
-            'class_id' => 12, //1INF-A
+            'class_id' => 21, //5INF-A
             'site_id' => 1,
         ]);
 
         // Generating (5..10) Fake students for each classroom
         foreach ($classes as $class) {
-            foreach (range(5, 10) as $i) {
+            foreach (range(5, 15) as $i) {
                 DB::table('users')->insert([
                     'email' => $faker->unique()->email(),
                     'password' => Hash::make($faker->password()),
@@ -125,6 +125,7 @@ class UsersTableSeeder extends Seeder
             }
         }
 
+        /*
         $students = array(
             array("first_name" => "Fabio", "last_name" => "Caccavone", "email" => "fabio.caccavone.inf@colamonicochiarulli.edu.it", "password" => "kf7uYBel4NMz2Lq9", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
             array("first_name" => "Enzo", "last_name" => "Giorgio", "email" => "enzo.giorgio.inf@colamonicochiarulli.edu.it", "password" => "vEf5tkaCdwm9soSn", "role" => "STUDENT", "class_id" => 21, "site_id" => 1),
@@ -153,5 +154,6 @@ class UsersTableSeeder extends Seeder
         );
 
         DB::table('users')->insert($students);
+        */
     }
 }

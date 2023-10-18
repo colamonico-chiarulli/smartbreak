@@ -1,12 +1,13 @@
 <?php
+
 /**
- * File:	/database/seeders/OrdersTableSeeder.php
+ * File:	/database/seeders/OrdersTodaySeeder.php
  * @package smartbreak
  * @author  Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 27th, 2021 12:06pm
  * -----
- * Last Modified: 	April 30th 2021 11:12:25 am
+ * Last Modified: 	October 18th 2023 11:12:25 am
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
@@ -55,7 +56,7 @@ use App\Models\Product;
 
 use Faker;
 
-class OrdersTableSeeder extends Seeder
+class OrdersTodaySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -70,31 +71,29 @@ class OrdersTableSeeder extends Seeder
 
         //Per ogni studente
         foreach ($students as $student) {
-            // Crea da 10 a 50 Ordini negli ultimi 2 mesi
-            $nOrders = mt_rand(10, 50);
-            for ($i=0; $i < $nOrders; $i++) {
-                $dateTime=$faker->dateTimeBetween('2023-09-01', 'yesterday', 'Europe/Rome');
-                //$dateTime=$faker->dateTimeBetween('-2 month', 'now', 'Europe/Rome');
-                $order = $student->orders()->create([
-                    'created_at' => $dateTime,
-                    'updated_at' => $dateTime,
-                ]);
+            // Crea un ordine per il giorno corrente
 
-                //Ciascun ordine ha da 1 a 3 prodotti casuali della sede dell'utente
-                $faker = Faker\Factory::create('it_IT');
-                $nProducts = mt_rand(1, 3);
-                for ($p=0; $p <= $nProducts; $p++) {
-                    if ($student->site_id == 1) {
-                        $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
-                    } else {
-                        $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
-                    }
-                    //quantità da 1 a 2
-                    $order->products()->attach($product->id, [
-                        'quantity' => $faker->numberBetween(1, 2),
-                        'price' => $product->price
-                    ]);
+
+            $dateTime = date("Y/m/d");
+            $order = $student->orders()->create([
+                'created_at' => $dateTime,
+                'updated_at' => $dateTime,
+            ]);
+
+            //Ciascun ordine ha da 1 a 3 prodotti casuali della sede dell'utente
+            $faker = Faker\Factory::create('it_IT');
+            $nProducts = mt_rand(1, 3);
+            for ($p = 0; $p <= $nProducts; $p++) {
+                if ($student->site_id == 1) {
+                    $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
+                } else {
+                    $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
                 }
+                //quantità da 1 a 2
+                $order->products()->attach($product->id, [
+                    'quantity' => $faker->numberBetween(1, 2),
+                    'price' => $product->price
+                ]);
             }
         }
     }
