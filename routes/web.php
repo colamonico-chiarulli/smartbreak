@@ -176,6 +176,12 @@ Route::group(['middleware' => 'auth'], function () {
             $exitCode = Artisan::call('db:seed --class=OrdersTodaySeeder');
             return 'Creati ordini per ogni studente per la data odierna ' . $exitCode;
         });
+
+        // Esegue il comando per creare lo storage:link
+        Route::get('linkstorage', function() {
+            $exitCode = Artisan::call('storage:link');;
+            return 'Eseguito php storage:link ' . $exitCode;
+        });
     });
 });
 
