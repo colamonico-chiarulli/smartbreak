@@ -66,12 +66,12 @@ class OrdersTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('it_IT');
         $students = User::where('role', 'STUDENT')->get();
-        $products = Product::all();
+        //$products = Product::all();
 
         //Per ogni studente
         foreach ($students as $student) {
             // Crea da 10 a 50 Ordini negli ultimi 2 mesi
-            $nOrders = mt_rand(10, 50);
+            $nOrders = mt_rand(5, 20);
             for ($i=0; $i < $nOrders; $i++) {
                 $dateTime=$faker->dateTimeBetween('2023-09-01', 'yesterday', 'Europe/Rome');
                 //$dateTime=$faker->dateTimeBetween('-2 month', 'now', 'Europe/Rome');
@@ -81,17 +81,16 @@ class OrdersTableSeeder extends Seeder
                 ]);
 
                 //Ciascun ordine ha da 1 a 3 prodotti casuali della sede dell'utente
+                $products = Product::Where('site_id',$student->site_id)->get();
                 $faker = Faker\Factory::create('it_IT');
                 $nProducts = mt_rand(1, 3);
                 for ($p=0; $p <= $nProducts; $p++) {
-                    if ($student->site_id == 1) {
-                        $product = $products->where('id', $faker->unique()->numberBetween(1, 75))->first();
-                    } else {
-                        $product = $products->where('id', $faker->unique()->numberBetween(76, 150))->first();
-                    }
+                    $product = $faker->unique()->randomElement($products);
+
                     //quantità da 1 a 2
                     $order->products()->attach($product->id, [
-                        'quantity' => $faker->numberBetween(1, 2),
+                        // 'quantity' => $faker->numberBetween(1, 2),
+                        'quantity' => 1,
                         'price' => $product->price
                     ]);
                 }
