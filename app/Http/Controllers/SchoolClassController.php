@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 18th, 2021 7:30pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	May 18th 2021 5:52:19 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -100,7 +102,7 @@ class SchoolClassController extends Controller
         // validare i dati di input
         $request->validate(SchoolClass::validationRules());
 
-        SchoolClass::create($request->all());
+        //SchoolClass::create($request->all());
 
         return redirect()->route('classes.index')
             ->with('success', 'Classe aggiunta.');
@@ -143,7 +145,7 @@ class SchoolClassController extends Controller
     {
         $request->validate(SchoolClass::validationRules());
 
-        $class->update($request->all());
+        //$class->update($request->all());
         return redirect()->route('classes.index')
             ->with('success', 'Classe aggiornata!');
     }
@@ -156,7 +158,7 @@ class SchoolClassController extends Controller
      */
     public function destroy(SchoolClass $class)
     {
-        $class->delete();
+        //$class->delete();
 
         return $class;
     }
@@ -183,7 +185,7 @@ class SchoolClassController extends Controller
      */
     public function importSchoolClassCSV() 
     {       
-        Excel::import(new SchoolClassImport,request()->file('file'));
+        //Excel::import(new SchoolClassImport,request()->file('file'));
         return back()->with('success', 'Importazione classi completata');
     }
 }

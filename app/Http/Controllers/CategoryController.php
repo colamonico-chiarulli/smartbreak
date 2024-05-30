@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 1st, 2021 11:34am
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	March 27th, 2021 7:17pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -87,7 +89,7 @@ class CategoryController extends Controller
         // validare i dati di input
         $request->validate(Category::validationRules());
 
-        Category::create($request->all());
+       // Category::create($request->all());
 
         return redirect()->route('categories.index')
             ->with('success', 'Categoria aggiunta.');
@@ -126,7 +128,7 @@ class CategoryController extends Controller
     {
         $request->validate(Category::validationRules());
 
-        $category->update($request->all());
+        //$category->update($request->all());
         return redirect()->route('categories.index')
             ->with('success', 'Categoria aggiornata!');
     }
@@ -139,7 +141,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        //$category->delete();
         return $category;
     }
 }

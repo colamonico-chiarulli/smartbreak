@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 19th, 2021 12:49pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	May 18th 2021 5:07:28 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -94,7 +96,7 @@ class UserController extends Controller
         // validare i dati di input
         $request->validate(User::validationRules());
 
-        User::create($request->all());
+        //User::create($request->all());
 
         return redirect()->route('users.index')
             ->with('success', 'Utente aggiunto');
@@ -135,7 +137,7 @@ class UserController extends Controller
     {
         $request->validate(User::validationRules());
 
-        $user->update($request->all());
+        //$user->update($request->all());
         return redirect()->route('users.index')
             ->with('success', 'Utente aggiornato!');
     }
@@ -148,7 +150,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        //$user->delete();
         return $user;
     }
 
@@ -174,7 +176,7 @@ class UserController extends Controller
      */
     public function importStudentCSV() 
     {
-        Excel::import(new UsersImport,request()->file('file'));
+        //Excel::import(new UsersImport,request()->file('file'));
         return back()->with('success', 'Importazione Studenti completata');
     }
 }

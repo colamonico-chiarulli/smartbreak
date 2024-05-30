@@ -6,6 +6,8 @@
  * @copyright	(c)2022 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Tuesday, November 22nd 2022, 4:55:35 pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	November 23rd 2022 5:33:48 pm
  * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
  * -----
@@ -95,7 +97,7 @@ class MessageController extends Controller
     {
         // validare i dati di input
         $request->validate(Message::validationRules());
-        Message::create($request->all());
+        //Message::create($request->all());
         
         return redirect()->route('messages.index')
                ->with('success', 'Messaggio aggiunto');
@@ -134,7 +136,7 @@ class MessageController extends Controller
     {
         $request->validate(Message::validationRules());
 
-        $message->update($request->all());
+        //$message->update($request->all());
         return redirect()->route('messages.index')
             ->with('success', 'Messaggio aggiornato!');
     }
@@ -147,7 +149,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        $message->delete();
+        //$message->delete();
         return $message;
     }
 }

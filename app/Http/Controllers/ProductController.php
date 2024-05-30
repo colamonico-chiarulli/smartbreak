@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	January 11th, 2021 5:00pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	May 6th 2021 8:25:54 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -120,13 +122,13 @@ class ProductController extends Controller
         // validare i dati di input
         $request->validate(Product::validationRules());
 
-
+       /*
         if ($product) {
             $product->update($request->all());
         } else {
             $product = Product::create($request->all());
         }
-
+        */
         if (request()->photo) {
             $temporaryFile = TemporaryFile::where('folder', $request->photo)->first();
             if ($temporaryFile) {
@@ -187,7 +189,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        //$product->delete();
 
         return $product;
     }

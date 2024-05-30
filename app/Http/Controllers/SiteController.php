@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 18th, 2021 7:30pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	March 26th, 2021 8:33pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -87,7 +89,7 @@ class SiteController extends Controller
         // validare i dati di input
         $request->validate(Site::validationRules());
 
-        Site::create($request->all());
+        //Site::create($request->all());
 
         return redirect()->route('sites.index')
             ->with('success', 'Sede aggiunta.');
@@ -126,7 +128,7 @@ class SiteController extends Controller
     {
         $request->validate(Site::validationRules());
 
-        $site->update($request->all());
+        //$site->update($request->all());
         return redirect()->route('sites.index')
             ->with('success', 'Sede aggiornata!');
     }
@@ -139,7 +141,7 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
-        $site->delete();
+        //$site->delete();
         return $site;
     }
 }

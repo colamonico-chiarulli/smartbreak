@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	March 26th, 2021 4:06pm
  * -----
+ * 30/05/2024   R. Andriano Demo mode: disabled create, update, delete
+ * -----
  * Last Modified: 	March 27th, 2021 7:17pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -120,7 +122,7 @@ class StudentController extends Controller
         $site = SchoolClass::find($request->class_id)->site_id;
         $request->request->add(['site_id' => $site]);
 
-        User::create($request->all());
+        //User::create($request->all());
 
         return redirect()->route('students.index')
             ->with('success', 'Studente aggiunto');
@@ -161,7 +163,7 @@ class StudentController extends Controller
     {
         $request->validate(User::StudentValidationRules());
 
-        $student->update($request->all());
+        //$student->update($request->all());
         return redirect()->route('students.index')
             ->with('success', 'Utente aggiornato!');
     }
@@ -174,7 +176,7 @@ class StudentController extends Controller
      */
     public function destroy(User $student)
     {
-        $student->delete();
+        //$student->delete();
         return $student;
     }
 }
