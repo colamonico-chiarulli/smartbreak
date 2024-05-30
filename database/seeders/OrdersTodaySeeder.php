@@ -66,11 +66,14 @@ class OrdersTodaySeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create('it_IT');
-        $students = User::where('role', 'STUDENT')->get();
+        //$students = User::where('role', 'STUDENT')->get();
         //$products = Product::all();
 
         //Per ogni studente
-        foreach ($students as $student) {
+        //foreach ($students as $student) {
+        //Sceglie a caso 60 studenti 
+        for ($i=0; $i<=60; $i++){
+            $student = User::where('role', 'STUDENT')->inRandomOrder()->first();
             // Crea un ordine per il giorno corrente
             $products = Product::Where('site_id',$student->site_id)->get();
 
@@ -86,9 +89,10 @@ class OrdersTodaySeeder extends Seeder
             for ($p = 0; $p <= $nProducts; $p++) {
                 $product = $faker->unique()->randomElement($products);
 
-           //quantità da 1 a 2
+           //quantità 1 
                 $order->products()->attach($product->id, [
-                    'quantity' => $faker->numberBetween(1, 2),
+                   // 'quantity' => $faker->numberBetween(1, 2),
+                    'quantity' => 1,
                     'price' => $product->price
                 ]);
             }
