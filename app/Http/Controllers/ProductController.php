@@ -222,7 +222,7 @@ class ProductController extends Controller
         if($product=Product::find($id)){
             $product->num_items=$request->input('num_items');
             $product->default_daily_stock=$request->input('default_daily_stock');
-            $product->save();
+            //$product->save();
         }     
     }
 }

@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
+ * 2024/05/30   R. Andriano Demo mode: login student, admin, manager
+ * -----
  * Last Modified: 	February 27th, 2021 5:03pm
  * Modified By: 	Giovanni Ciriello
  * -----
@@ -64,6 +66,13 @@
                     </a>
                 </div>
             </div>
+            <p>Credenziali <b>SmartBreak demo</b></p>
+            <table class="table">
+                <tr><th>Tipo utente</th><th>email</th><th>Password</th></tr>
+                <tr><td><b>Studente</b></td><td>demo@sb</td><td>demo</td><tr>
+                <tr><td><b>Bar Manager</b></td><td>manager1@sb</td><td>ManagerPassword</td><tr>
+                <tr><td><b>Amministratore</b></td><td>admin@sb</td><td>AdminPassword</td><tr>
+            </table>
         </div>
 
         <div class="col-md-6">

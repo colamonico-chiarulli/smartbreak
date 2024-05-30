@@ -6,6 +6,8 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	June 30th, 2021 10:54am
  * -----
+ * 2024/05/30   R. Andriano Demo mode: login student, admin, manager
+ * -----
  * Last Modified: 	September 15th 2022 5:43:26 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
@@ -114,19 +116,17 @@
           <div>
             <h1>SmartBreak demo</h1>
             <h2>Ordina la tua merenda al BAR della scuola con un click!</h2>
-
+            <!--
             <a class="download-btn mt-2" href="{{ route('login.google') }}">
               <i class="bi bi-google"></i> Accesso studenti
             </a>
- 
+          -->
               <a class="download-btn mt-2" href="{{ route('home') }}">
+                <!--
                 <i class="bi bi-person-circle"></i> Accesso admin
+                -->
+                <i class="bi bi-person-circle"></i> Accedi
               </a>
-              <p>Per la demo <b>Maker Faire 2023</b>, usa il pulsante <b>Accesso admin</b> e le credenziali <br>
-                email:<b>demo@s.b</b><br>
-                password:<b>demo</b>
-              </p>
-
           </div>
         </div>
         <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img"
