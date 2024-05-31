@@ -6,12 +6,14 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	November 22nd 2022 6:53:59 pm
- * Modified By: 	Fabio Caccavone <fabio.caccavone.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	December 3rd 2022 3:27:22 am
+ * Modified By: 	Camilla Vaira <camilla.vaira.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-12-03   C. Vaira        rebuy Feature
+ * 2022-11-22	F. Caccavone    1.2 Message for users feature
  * 2022-11-09	G. Losurdo      1.1 Price-list / Place an order feature	
  * 2022-10-20	G. Giorgio      Delete today orders for students
  * 2021-05-18	R. Andriano     Landing page
@@ -135,7 +137,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('empty', [CartController::class, 'emptyCart'])->name('cart.empty');
             Route::get('checkout', [CartController::class, 'checkoutCart'])->name('cart.checkout');
             Route::post('create-order', [CartController::class, 'createOrder'])->name('cart.create-order');
-            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');;
+            Route::delete('order-delete' , [OrderController::class, 'deleteOrder'])->name('order.delete');
+            Route::post('order-rebuy' , [OrderController::class, 'rebuyOrder'])->name('order.rebuy');;
         });
         Route::get('choose-products', [CartController::class, 'chooseProducts'])->name('cart.choose-products');
         Route::get('student-orders', [OrderController::class, 'getOrdersByStudent'])->name('orders.by-student');
