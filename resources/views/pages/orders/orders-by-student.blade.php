@@ -6,12 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Saturday, April 10th 2021, 10:25:26 am
  * -----
- * Last Modified: 	November 12th 2022 3:27:22 am
- * Modified By: 	Giuseppe Giorgio <giuseppe.giorgio.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	December 3rd 2022 3:27:22 am
+ * Modified By: 	Camilla Vaira <camilla.vaira.inf@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2022-12-03	C. Vaira	    reBuy Feature
  * 2022-10-20	G. Giorgio	    Fix: cart badge & total in navbar
  * 2021-05-21	R. Andriano     Added order status message	
  * 2021-04-10	R. Andriano	    First release (Order by class OrderByStudent)
@@ -71,17 +72,19 @@
             <h6 class="text-right"> {{ formatPrice(collect($orders_by_day[$date])->sum('total')) }}</h6>
 
             <div class="row">
-                
+
                 @if ($date == date('Y-m-d'))
-                    @isset($status[0])
-                        @if ($status[0]=="READY") <span class="badge badge-success d-block">Ordine pronto</span>@endif
-                        @if ($status[0]=="INCOMPLETE") <span class="badge badge-warning d-block">Ordine pronto ma incompleto</span>@endif
-                    @endisset
+                @isset($status[0])
+                @if ($status[0]=="READY") <span class="badge badge-success d-block">Ordine pronto</span>@endif
+                @if ($status[0]=="INCOMPLETE") <span class="badge badge-warning d-block">Ordine pronto ma
+                    incompleto</span>@endif
+                @endisset
                 @endif
             </div>
         </div>
 
-        <div id="data-{{$date}}" class="collapse {{ $date == date('Y-m-d') ? 'show': '' }} " data-parent="#student-accordion">
+        <div id="data-{{$date}}" class="collapse {{ $date == date('Y-m-d') ? 'show': '' }} "
+            data-parent="#student-accordion">
             <div class="card-body">
 
                 <table class="table table-sm table-striped">
@@ -116,12 +119,28 @@
                         <tr class="table-primary">
 
                             <td class="text-left" colspan="2">
-                            {{-- Visualizza il pulsante cancella solo nella data odierna e nel time-range dell'ordine --}}
-                            @timecheck($date)
-                                <button class="btn btn-danger" href="javascript:;" onclick="deleteOrder('{{ route('order.delete') }}')">
+
+                                @timecheck
+
+                                {{-- Visualizza il pulsante cancella solo nella data odierna e nel time-range
+                                dell'ordine --}}
+                                @if ($date == date('Y-m-d'))
+                                <button class="btn btn-danger" href="javascript:;"
+                                    onclick="deleteOrder('{{ route('order.delete') }}')">
                                     <i class=" fas fa-trash"></i> Cancella ordine
                                 </button>
-                            @endtimecheck
+
+                                {{-- Visualizza il pulsante 'acquista di nuovo' solo nel time-range consentito ma in
+                                giorni diversi da quello odierno--}}
+                                @else
+
+                                <button class="btn btn-success" href="javascript:;"
+                                    onclick="reBuy('{{ $date }}')">
+                                    <i class="fas fa-cart-plus"></i> Acquista di nuovo
+                                </button>
+                                @endif
+
+                                @endtimecheck
                             </td>
 
                             <td class="text-right">
@@ -171,11 +190,27 @@
             }
         });
     }
+
+    function reBuy(rowDate){
+        $.ajax({
+            url: '{{ route("order.rebuy") }}',
+            method: 'POST',
+            data: {
+                orderDate: rowDate,
+            },
+            success: function () {
+                location.href = '{{route("cart.checkout")}}';
+            },
+            error: function(error) {
+                toastr.error('Si è verificato un errore: ' + error);
+            }
+        });
+    }
 </script>
 @endsection
 
 @push('js')
 
-    @include('partials._cartjs')
-        
+@include('partials._cartjs')
+
 @endpush
