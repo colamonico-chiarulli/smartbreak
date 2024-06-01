@@ -71,3 +71,15 @@ input.noarrows[type="number"] {
     width: 200px;
     height:200px;
 }
+
+.sticky-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: none;
+}
+
+.sticky-button.sticky {
+    display: block;
+}

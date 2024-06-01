@@ -6,12 +6,14 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	December 17th 2022 11:25:26 am
- * Modified By: 	Nicola Sergio <nicola.sergio@colamonicochiarulli.edu.it>
+ * Last Modified: 	June 1st 2024 4:09:10 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2024-06-01	R. Andriano  	Fix to sticky cart button
+ * 2022-12-17	N. Sergio  	    Added sticky cart button
  * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
  * 2022-01-07	R. Andriano	    Add images disclaimer text
  * 2021-04-15	R. Andriano	    New: Total items by category in choose-products
@@ -128,56 +130,29 @@
         <i class="fa fa-shopping-cart"></i> Vai al riepilogo
     </a>
 </div>
-@endtimecheck
-
-
-<div class="text-right" id="go-to-checkout">
+<div class="sticky-button">
     <a href="{{ route('cart.checkout') }}">
-        <button
-            type="button"
-            class="btn btn-success btn-lg rounded-circle text-center"
-            >
-            <i class="fa fa-shopping-cart mx-auto" ></i>
-        </button>
+        <button type="button"class="btn btn-success btn-md rounded-circle text-center" title="Vai al riepilogo"><i class="fa fa-shopping-cart" ></i></button>
     </a>
 </div>
+@endtimecheck
 
 @endsection
-
-
-
-@push('css')
-    <style>
-        #go-to-checkout {
-            position: fixed;
-            display: none;
-        }
-    </style>
-
-@endpush
-
 
 @push('js')
 
     @include('partials._cartjs', ['products' => $categories->pluck('products')->collapse()->keyBy('id')])
-    <script type="text/javascript">
-        let div = document.getElementById("go-to-checkout");
 
-
-        // When the user scrolls down 20px from the top of the document, show the button
+    @timecheck
+    <script>
         window.onscroll = function () {
-             scrollFunction();
-            };
-
-        function scrollFunction() {
-        if (
-            document.body.scrollTop > 20 ||
-             document.documentElement.scrollTop > 20
-        ) {
-            div.style.display = "block";
-        } else {
-             div.style.display = "none";
-        }
-    }
+            const button = document.querySelector(".sticky-button");
+            if (window.pageYOffset >= 200) {
+                button.classList.add("sticky");
+            } else {
+                button.classList.remove("sticky");
+            }
+        };
     </script>
+    @endtimecheck
 @endpush
