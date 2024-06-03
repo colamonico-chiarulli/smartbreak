@@ -6,8 +6,14 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	May 3rd 2021 8:08:40 pm
+ * Last Modified: 	June 3rd 2024 11:49:36 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2024-06-03	R. Andriano	    1.3 Added school privacy config
+ * 2020-12-15   G. Ciriello     Init project
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -49,7 +55,7 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-sm-inline">
-        <a href="/privacy" title="Privacy Policy">Privacy</a>&nbsp;
+        <a href="{{config('smartbreak.school_url_privacy')}}" title="Privacy Policy" target="_blank">Privacy</a>&nbsp;
         <a href="/credits" title="Credits">Credits</a>
     </div>
     <!-- Default to the left -->

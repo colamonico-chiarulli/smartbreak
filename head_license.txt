@@ -1,8 +1,17 @@
-SmartBreak is a School Bar food booking web application 
-developed during the PON course "The AppFactory" 2020-2021 with teachers 
-& students of "Informatica e Telecomunicazioni" 
-at IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
-Expert dr. Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
+SmartBreak
+Order your snack at the school bar with a click!
+---
+SmartBreak is an innovative PWA (Progressive Web App) that revolutionizes 
+school bar orders, improving efficiency, convenience and sustainability for 
+students, bar staff and schools.
+It was designed and developed with with the contribution of students 
+during the PON "The AppFactory" course between December 2020 and April 2021, 
+in the "Computer Science and Telecommunications" course of study at the 
+IISS "C. Colamonico - N. Chiarulli" - Acquaviva delle Fonti (BA) - Italy.
+Project expert and developer: Dr. Giovanni Ciriello.
+Tutor and developer: prof. Rino Andriano
+Maintenance and further development is currently entrusted to a team of 
+teachers and student developers from the same school.
 ----------------------------------------------------------------------------
 SmartBreak is free software; you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License version 3 as published by
@@ -23,7 +32,7 @@ Section 5 of the GNU Affero General Public License version 3.
 
 In accordance with Section 7(b) of the GNU Affero General Public License version 3,
 these Appropriate Legal Notices must retain the display of the SmartBreak
-logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
+logo,the IISS "Colamonico-Chiarulli" copyright notice and the credits link. If the display of the logo
 is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
 must display the words
 "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - <<yeartoyear('fc','now')>>".
