@@ -6,7 +6,7 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	December 15th, 2020 11:05pm
  * -----
- * Last Modified: 	June 1st 2024 4:09:10 pm
+ * Last Modified: 	September 20th 2024 8:29:35 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
@@ -126,7 +126,7 @@
 
 @timecheck
 <div class="text-center">
-    <a class="btn btn-lg btn-success my-4" >
+    <a class="btn btn-lg btn-success my-4" href="{{ route('cart.checkout') }}" >
         <i class="fa fa-shopping-cart"></i> Vai al riepilogo
     </a>
 </div>
