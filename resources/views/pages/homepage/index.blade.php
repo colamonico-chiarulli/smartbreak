@@ -6,8 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	June 30th, 2021 10:54am
  * -----
- * Last Modified: 	September 15th 2022 5:43:26 pm
+ * Last Modified: 	June 3rd 2024 11:45:54 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
+ * -----
+ * HISTORY:
+ * Date      	By           	Comments
+ * ----------	-------------	----------------------------------
+ * 2024-06-03	R. Andriano	1.3 Added school parameter
  * -----
  * @license	https://www.gnu.org/licenses/agpl-3.0.html AGPL 3.0
  * ------------------------------------------------------------------------------
@@ -51,13 +56,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SmartBreak - IISS Colamonico Chiarulli Acquaviva delle Fonti (BA)</title>
+  <!--<title>SmartBreak - IISS Colamonico Chiarulli Acquaviva delle Fonti (BA)</title>-->
+  <title>SmartBreak - {{config('smartbreak.school_name')}} - {{config('smartbreak.school_city')}}</title>
   <meta content="WebApp per prenotazioni al Bar della scuola" name="description">
   <meta content="smartbreak" name="keywords">
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicons -->
+  <!-- Favicons -->
   <link rel="icon" href="{{  asset('img/logos/icon.svg') }}">
 
   <!-- Google Fonts -->
@@ -86,7 +92,8 @@
 
       <div class="logo">
         <a href="/"><img src="img/logos/logo.svg" alt="Smartbreak logo" class="img-fluid"></a>
-        <h5 style="margin-left:60px"><a href="https://colamonicochiarulli.edu.it">IISS Colamonico Chiarulli</a></h5>
+        <h5 style="margin-left:60px"><a
+            href="{{config('smartbreak.school_url')}}">{{config('smartbreak.school_name')}}</a></h5>
       </div>
 
       <nav id="navbar" class="navbar">
@@ -95,7 +102,8 @@
           <li><a class="nav-link scrollto" href="#features">Funzionalità</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-          <li><a class="nav-link scrollto" href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak">Supporto</a></li>
+          <li><a class="nav-link scrollto"
+              href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak">Supporto</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -140,15 +148,13 @@
 
         <div class="section-title">
           <h2>Funzionalità App</h2>
-          <p>SmartBreak è un'applicazione web progettata e realizzata
-            con gli studenti <br> dell’indirizzo di
-            <a target="_blank"
-              href="https://www.colamonicochiarulli.edu.it/indirizzo-di-studio/informatico/"><i>Informatica
-                e Telecomunicazioni</i></a>,
-            nell’ambito del PON <a
-              href="https://www.colamonicochiarulli.edu.it/2020/11/16/pon-app-factory/"
-              target="_blank">“The App Factory”</a> nell'a.s. 2020-21
+          <p>SmartBreak è un'innovativa applicazione web che rivoluziona gli ordini al bar della scuola,<br>
+            migliorando efficienza, comodità e sostenibilità per studenti, personale del bar e istituzioni scolastiche
           </p>
+          <br>
+          <p>Progettata e sviluppata con il contributo degli studenti <br>
+            presso l'<a href="https//colamonicochiarulli.edu.it">IISS C. Colamonico - N. Chiarulli</a> di Acquaviva
+            delle Fonti (BA)</p>
         </div>
 
         <div class="row no-gutters">
@@ -210,12 +216,18 @@
           <div class="col-md-8 pt-2" data-aos="fade-up">
             <h3>Funzionalità per lo studente</h3>
             <p class="fst-italic">
-              Puoi ordinare ogni giorno scolastico <b>dalle 7:00 alle 9:10</b>
+              Puoi ordinare ogni giorno scolastico <b>dalle ore {{config('smartbreak.orders_timerange.from')}} alle
+                {{config('smartbreak.orders_timerange.to')}}</b>
             </p>
             <ul>
               <li><i class="bi bi-lightning-charge"></i> <b>Accesso rapido</b><br> Accedi ora con il tuo account
                 istituzionale.</li>
-              <li><i class="bi bi-check"></i> <b>Catalogo prodotti</b><br> Scegli i tuoi prodotti e conferma l’ordine.</li>
+              <li><i class="bi bi-check"></i> <b>Catalogo prodotti</b><br> Scegli i tuoi prodotti e conferma l’ordine.
+              </li>
+              <li><i class="bi bi-card-checklist"></i> <b>Gestisci i tuoi ordini</b><br>Consulta l'archivio dei tuoi
+                ordini, acquista di nuovo o cancella l'ultimo</li>
+              <li><i class="bi bi-list-stars"></i> <b>Lista della classe</b><br>Consulta gli ordini della tua classe del
+                giorno per distribuire i prodotti</li>
               <li><i class="bi bi-graph-up"></i> <b>Statistiche</b><br> Monitora le tue spese settimanali, mensili ed
                 annuali.</li>
             </ul>
@@ -233,10 +245,12 @@
               Pannello di Controllo per il Bar Manager.
             </p>
             <ul>
-              <li><i class="bi bi-gear"></i></i> <b>Gestisci prodotti e categorie</b><br> Aggiungi modifica e rimuovi
+              <li><i class="bi bi-gear"></i><b>Gestisci prodotti e categorie</b><br> Aggiungi modifica e rimuovi
                 le categorie e i prodotti.</li>
-              <li><i class="bi bi-clock-history"></i> <b>Imposta lo stato degli ordini</b><br> Scegli quali ordini hai
-                preparato e comunica se sono incompleti.</li>
+              <li><i class="bi bi-clock-history"></i> <b>Gestisci gli ordini</b><br>Consulta gli ordini per prodotto e
+                per classe.
+                <br> Scegli quali ordini hai preparato e comunica se sono incompleti.
+              </li>
               <li><i class="bi bi-collection"></i> <b>Gestisci velocemente le giacenze</b><br> Gestisci i prodotti in
                 magazzino e le loro disponibilità</li>
               <li><i class="bi bi-arrow-clockwise"></i> <b>Disponibilità giornaliere</b><br> Imposta una quantità
@@ -326,110 +340,38 @@
       </div>
     </section><!-- End Gallery Section -->
 
-    <!-- ======= Testimonials Section ======= 
-    <section id="testimonials" class="testimonials section-bg">
-      <div class="container" data-aos="fade-up">
-
+    <!-- ======= Premiazioni Section ======= -->
+    <section id="rewards">
+      <div class="container">
         <div class="section-title">
-          <h2>Recensioni</h2>
-          <p>Recensioni utenti</p>
-        </div>
 
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Anthony Liuzzi</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Mi trovo molto bene con quest'app, eseguo gli ordini facilmente senza riscontrare problemi.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="landing-assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Claudio Montenegro</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quest'app mi permette di fare ordini rapidamente, inoltre informa che tipo di allergeni ci sono
-                  all'interno di ogni prodotto.Insomma l'app perfetta!
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="landing-assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Costantino Tassielli</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quest'app è fantastica, una vera bomba! Ti permette di vedere l'andamento delle vendite, i tuoi ordini
-                  totali e... tanto altro!!Cosa aspetti!? Installala ora e testala subito!
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="landing-assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Fabio Caccavone</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  ...
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="landing-assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>Nicola Sergio</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa
-                  labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>Giuseppe Giorgio</h3>
-                <h4>Founder</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  ...
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
+          <h2>Premi e riconoscimenti</h2>
+          <div class="text-left">
+            <p>SmartBreak <strong><a
+                  href="https://www.colamonicochiarulli.edu.it/2023/10/11/smartbreak-al-maker-faire-2023/"
+                  target="_blank">è stato selezionato</a></strong> ed ha partecipato <strong><a
+                  href="https://makerfairerome.eu/it/espositori/?edition=2023&amp;exhibit=2320169" target="_blank">come
+                  espositore</a></strong> al <strong><a href="https://makerfairerome.eu/it/edizioni/2023-it/"
+                  target="_blank">Maker Faire
+                  2023.</a><br>
+              </strong>L'evento europeo dove esperti del settore, maker e innovatori si incontrano per condividere i
+              loro progetti con il grande pubblico.
+            </p>
+            <p>&nbsp</p>
+            <p>SmartBreak è <strong>stato premiato al <a
+                  href="https://www.colamonicochiarulli.edu.it/2023/12/16/premio-imprendi-per-linnovazione/"
+                  target="_blank">secondo
+                  posto</a></strong> al concorso nazionale <strong><a href="https://www.imprendi.org/progetti"
+                  target="_blank">Premio Imprendi per l’Innovazione 2022-23</a></strong> della Fondazione
+              Imprendi</strong> di Padova
+            </p>
           </div>
-          <div class="swiper-pagination"></div>
         </div>
-
-      </div>
-    </section>
-    End Testimonials Section -->
+    </section><!-- End Premiazioni Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
-      <div class="container"  data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>FAQ</h2>
@@ -445,7 +387,8 @@
                 <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-1" class="collapse" data-bs-parent=".accordion-list">
                 <p>
-                  No, gli ordini possono essere effettuati <b>dalle ore 7:00 alle 9:10</b> di ogni giorno scolastico.
+                  No, gli ordini possono essere effettuati <b>dalle ore {{config('smartbreak.orders_timerange.from')}}
+                    alle {{config('smartbreak.orders_timerange.to')}} </b> di ogni giorno scolastico.
                 </p>
               </div>
             </li>
@@ -478,11 +421,12 @@
             <li>
               <i class="bx bx-help-circle icon-help"></i>
               <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed">
-                Come si accede?
+                Perché non è previsto il pagamento elettronico per gli studenti?
                 <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
                 <p>
-                  Possono accedere solamente gli studenti con il proprio account istituzionale.
+                  Per questioni di Privacy, per evitare profilazioni da parte del gestore del Bar e per consentire
+                  l'utilizzo di tutti gli studenti, anche minorenni, senza particolari autorizzazioni dei genitori.
                 </p>
               </div>
             </li>
@@ -490,12 +434,11 @@
             <li>
               <i class="bx bx-help-circle icon-help"></i>
               <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed">
-                Sono obbligato ad usare SmartBreak? <i class="bx bx-chevron-down icon-show"></i><i
-                  class="bx bx-chevron-up icon-close"></i></a>
+                Come si accede?
+                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
                 <p>
-                  L’utilizzo dell’App non è né obbligatorio, né esclusivo, si può sempre utilizzare l’ordine cartaceo
-                  (ad esempio, in caso di difficoltà di accesso al servizio web).
+                  Possono accedere solamente gli studenti con il proprio account istituzionale.
                 </p>
               </div>
             </li>
@@ -507,11 +450,14 @@
                   class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-6" class="collapse" data-bs-parent=".accordion-list">
                 <p>
-                  In caso di difficoltà di accesso si consiglia di <a style="display: inline" class="m-0 p-0" href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak/supporto-accesso" target="_blank">
-                    <b>cancellare la cronologia</b></a> del browser o <b>uscire da tutti gli account Google</b> e riprovare <br>
-                    - Sul dispositivo, apri una pagina Google, ad esempio www.google.com <br>
-                    - In alto a destra, seleziona la tua iniziale o l'immagine del tuo profilo. <br>
-                    - Nel menu, scegli <b>Esci</b> o <b>Esci da tutti gli account.</b>
+                  In caso di difficoltà di accesso si consiglia di <a style="display: inline" class="m-0 p-0"
+                    href="https://sites.google.com/colamonicochiarulli.edu.it/guida-smartbreak/supporto-accesso"
+                    target="_blank">
+                    <b>cancellare la cronologia</b></a> del browser o <b>uscire da tutti gli account Google</b> e
+                  riprovare <br>
+                  - Sul dispositivo, apri una pagina Google, ad esempio www.google.com <br>
+                  - In alto a destra, seleziona la tua iniziale o l'immagine del tuo profilo. <br>
+                  - Nel menu, scegli <b>Esci</b> o <b>Esci da tutti gli account.</b>
                 </p>
               </div>
             </li>
@@ -535,28 +481,29 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h3>SmartBreak</h3>
             <p>
-              <a href="https://colamonicochiarulli.edu.it" target="_blank">IISS Colamonico Chiarulli </a><br>
-              Via C. Colamonico, n. 5 <br>
-              70021 - Acquaviva delle Fonti (BA)<br>
-              Italia <br><br>
+              <a href="{{config('smartbreak.school_url')}}" target="_blank">{{config('smartbreak.school_name')}}</a><br>
+              {{config('smartbreak.school_address')}}<br>
+              {{config('smartbreak.school_city')}}<br>
+              {{config('smartbreak.school_country')}}<br><br>
             </p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Links</h4>
-              <i class="bx bx-chevron-right"></i> <a href="{{ url('/credits') }}">Credits</a><br>
-              <i class="bx bx-chevron-right"></i> <a href="{{ url('/privacy') }}">Privacy</a><br>
+            <i class="bx bx-chevron-right"></i> <a href="{{ url('/credits') }}">Credits</a><br>
+            <i class="bx bx-chevron-right"></i> <a href="{{config('smartbreak.school_url_privacy')}}"
+              title="Privacy Policy" target="_blank">Privacy</a><br>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>I nostri Social</h4>
             <p>Rimani aggiornato grazie ai nostri canali social.</p>
             <div class="social-links mt-3">
-              <a href="https://www.facebook.com/IISS-Colamonico-Chiarulli-625046681002397" class="facebook"><i
+              <a href="{{config('smartbreak.school_url_facebook')}}" class="facebook"><i
                   class="bx bxl-facebook"></i></a>
-              <a href="https://www.instagram.com/istitutocolamonicochiarulli/" class="instagram"><i
+              <a href="{{config('smartbreak.school_url_instagram')}}" class="instagram"><i
                   class="bx bxl-instagram"></i></a>
-              <a href="https://www.youtube.com/c/IISSCColamonicoNChiarulliAcquavivadelleFonti" class="google-plus"><i
+              <a href="{{config('smartbreak.school_url_youtube')}}" class="google-plus"><i
                   class="bx bxl-youtube"></i></a>
             </div>
           </div>
