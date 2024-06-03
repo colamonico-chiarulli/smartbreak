@@ -1,10 +1,22 @@
-# SMARTBREAK
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/colamonico-chiarulli/smartbreak/blob/master/public/img/logos/logo.svg" width="400"></a></p>
+
+<div align="center"> 
+
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/colamonico-chiarulli/smartbreak)  ![GitHub top language](https://img.shields.io/github/languages/top/colamonico-chiarulli/smartbreak) ![languages](https://img.shields.io/github/languages/count/colamonico-chiarulli/smartbreak) ![Project Forks](https://img.shields.io/github/forks/colamonico-chiarulli/smartbreak?style=social)  ![GitHub Release Date](https://img.shields.io/github/release-date/colamonico-chiarulli/smartbreak) ![license](https://img.shields.io/badge/License-AGPLv3.0-green)
+
+</div>
+
+
+> ## SmartBreak LICENSE - AGPL 3.0
+>*Order your snack at the school bar with a click!*
 ---
-SmartBreak is a School Bar food booking web application 
-developed during the PON course "The AppFactory" 2020-2021 with teachers 
-& students of "Informatica e Telecomunicazioni" 
-at IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
-Expert dr. Giovanni Ciriello <giovanni.ciriello.5@gmail.com>
+**SmartBreak** is an innovative PWA (Progressive Web App) that revolutionizes school bar orders, improving efficiency, convenience and sustainability for students, bar staff and schools.\
+It was designed and developed with with the contribution of students during the PON "*The AppFactory*" course between December 2020 and April 2021, in the "Computer Science and Telecommunications" course of study at the **IISS "C. Colamonico - N. Chiarulli"** Acquaviva delle Fonti (BA) - Italy.\
+
+Project expert and developer: [Dr. Giovanni Ciriello](https://github.com/giovanniciriello)\
+Tutor and developer: [prof. Rino Andriano](https://github.com/colamonico-chiarulli/smartbreak/commits?author=rino-andriano) \
+Maintenance and further development is currently entrusted to a team of teachers and student developers from the same school.
+
 ---
 SmartBreak is free software; you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License version 3 as published by
@@ -25,10 +37,10 @@ Section 5 of the GNU Affero General Public License version 3.
 
 In accordance with Section 7(b) of the GNU Affero General Public License version 3,
 these Appropriate Legal Notices must retain the display of the SmartBreak
-logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
+logo,the IISS "Colamonico-Chiarulli" copyright notice and the credits link. If the display of the logo
 is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
 must display the words
-"(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - 2021".
+"(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it".
 
 ---
 

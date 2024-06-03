@@ -49,56 +49,78 @@
 
 @section('content')
 <h2>SmartBreak</h2>
-<p>
-è un'applicazione web per la gestione delle ordinazioni al Bar della scuola
-sviluppata durante il corso <a target="_blank" href="https://www.colamonicochiarulli.edu.it/didattica/area-comune/pon-fesr/pon-2014-2020/pon-app-factory-risultati.html"><strong>PON "The AppFactory"</strong></a> tra dicembre 2020 e aprile 2021, con insegnanti e studenti dell'indirizzo "Informatica e Telecomunicazioni" 
-presso l'IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy
-Esperto dr. <a target="_blank" href="https://giovanniciriello.github.io/">Giovanni Ciriello</a> - giovanni.ciriello.5@gmail.com
-</p>
+<h5><i>Ordina la tua merenda al bar della scuola con un click!</i></h5>
+<hr>
+<p>SmartBreak è un'innovativa applicazione web PWA (Progressive Web App) che rivoluziona gli ordini al bar della scuola,
+   migliorando efficienza, comodità e sostenibilità per studenti, personale del bar ed istituzioni scolastiche.</p>
+
+<p>Essa è stata progettata e sviluppata con il contributo degli studenti durante il corso <a target="_blank"
+      href="https://www.colamonicochiarulli.edu.it/2021/04/24/pon-app-factory-risultati/"><strong>PON
+         "The AppFactory"</strong></a> tra dicembre 2020 e aprile 2021, nell'indirizzo "Informatica e Telecomunicazioni"
+   presso l'IISS "C. Colamonico - N. Chiarulli" Acquaviva delle Fonti (BA)-Italy.</p>
+
+<p>Esperto del progetto e sviluppatore: <a target="_blank" href="https://giovanniciriello.github.io/">dr. Giovanni
+      Ciriello</a><br>
+   Tutor e sviluppatore: <a target="_blank"
+      href="https://github.com/colamonico-chiarulli/smartbreak/commits?author=rino-andriano"></a>prof. Rino Andriano</p>
+
+<p>La manutenzione e lo sviluppo ulteriore è attualmente affidato ad team di docenti e studenti sviluppatori della
+   stessa scuola.</p>
+
 <h2>Licenza</h2>
 <p>
-SmartBreak is free software; you can redistribute it and/or modify it under
-the terms of the <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License version 3</a> as published by
-the Free Software Foundation<br>
+   SmartBreak is free software; you can redistribute it and/or modify it under
+   the terms of the <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public
+      License version 3</a> as published by
+   the Free Software Foundation<br>
 </p>
 <p>
-SmartBreak is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
-details.</p>
+   SmartBreak is distributed in the hope that it will be useful, but WITHOUT
+   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+   details.</p>
 <p>
 <p>
-The interactive user interfaces in original and modified versions
-of this program must display Appropriate Legal Notices, as required under
-Section 5 of the GNU Affero General Public License version 3.
+   The interactive user interfaces in original and modified versions
+   of this program must display Appropriate Legal Notices, as required under
+   Section 5 of the GNU Affero General Public License version 3.
 </p>
 <p>
-In accordance with Section 7(b) of the GNU Affero General Public License version 3,
-these Appropriate Legal Notices must retain the display of the SmartBreak
-logo and IISS "Colamonico-Chiarulli" copyright notice. If the display of the logo
-is not reasonably feasible for technical reasons, the Appropriate Legal Notices 
-must display the words
-"(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - {{ date('Y')}}".
+   In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+   these Appropriate Legal Notices <strong>must retain the display of the SmartBreak
+      logo, the IISS "Colamonico-Chiarulli" copyright notice and the credits link.</strong> If the display of the logo
+   is not reasonably feasible for technical reasons, the Appropriate Legal Notices
+   must display the words
+   "(C) IISS Colamonico-Chiarulli-https://colamonicochiarulli.edu.it - {{ date('Y')}}".
 </p>
 <h2>Codice sorgente</h2>
 <p>
-Per lo sviluppo di dell'applicazione si è utilizzato il  framework PHP <a href="https://laravel.com/" target="_blank">Laravel</a>.<br>
-Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da <br>
-<a href="https://github.com/colamonico-chiarulli/smartbreak" target="_blank">https://github.com/colamonico-chiarulli/smartbreak</a>
+   Per lo sviluppo di dell'applicazione si è utilizzato il framework PHP <a href="https://laravel.com/"
+      target="_blank">Laravel</a>.<br>
+   Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da <br>
+   <a href="https://github.com/colamonico-chiarulli/smartbreak"
+      target="_blank">https://github.com/colamonico-chiarulli/smartbreak</a>
 </p>
-<h2>Sviluppatori</h2>
+<p>
 <ul>
-   <li>Giovanni Ciriello - giovanni.ciriello.5@gmail.com</li> 
-   <li>Rino Andriano - andriano@colamonicochiarulli.edu.it</li> 
+   <li><a target="_blank" href="https://github.com/colamonico-chiarulli/smartbreak/blob/master/README.md">SmartBreak
+         documentazione</a></li>
+   <li><a target="_blank" href="https://sbtest.colamonicochiarulli.it">SmartBreak demo</a></li>
+</ul>
+</p>
+<h2>Sviluppatori versione 1.0</h2>
+<ul>
+   <li>Giovanni Ciriello - giovanni.ciriello.5@gmail.com</li>
+   <li>Rino Andriano - andriano@colamonicochiarulli.edu.it</li>
+</ul>
+<h2>Sviluppatori versioni successive</h2>
+<ul>
+   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/blob/master/CHANGELOG.md" target="_blank">Consulta il
+         Changelog</a></li>
 </ul>
 
-<h2>Manutenzione - Contributi</h2>
-<h3>a.s. 2020-2021</h3>
-<ul>
-   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li>
-</ul>
+
 <h3>Developers Team - a.s. 2022-2023</h3>
-<h4><a href="https://github.com/colamonico-chiarulli/smartbreak/blob/master/CHANGELOG.md" target="_blank">Consulta il Changelog</a></h4>
 <ul>
    <li>Fabio Caccavone - 5InfA </li>
    <li>Nico Chimienti - 5InfA </li>
@@ -113,18 +135,24 @@ Il codice sorgente di <strong>SmartBreak</strong> è liberamente scaricabile da 
    <li>Camilla Vaira - 5InfA </li>
 </ul>
 
-<h2>Beta tester e documentazione</h2>
+<h2>Beta tester e documentazione a.s. 2020-2021</h2>
 <ul>
-<li>Fabio Caccavone - fabio.caccavone.inf@colamonicochiarulli.edu.it</li> 
-<li>Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li> 
-<li>Nicola Sergio - nicola.sergio.inf@colamonicochiarulli.edu.it</li> 
+   <li>Fabio Caccavone - fabio.caccavone.inf@colamonicochiarulli.edu.it</li>
+   <li>Giuseppe Giorgio - giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li>
+   <li>Nicola Sergio - nicola.sergio.inf@colamonicochiarulli.edu.it</li>
 </ul>
-
-<h2>Alunni del corso PON</h2>
+<h2>Manutenzione - Contributi a.s. 2020-2021</h2>
+<ul>
+   <li><a href="https://github.com/colamonico-chiarulli/smartbreak/pull/1" target="_blank">PR#1</a> Giuseppe Giorgio -
+      giuseppe.giorgio.inf@colamonicochiarulli.edu.it</li>
+</ul>
+<h2>Alunni del corso PON a.s. 2020-2021</h2>
 <p>
-Caccavone Fabio,Capotorti Antonio, Chimienti Marco, Cosmo	Alessandro, Cruciata	Francesco Giovanni, Dellaccio Gabriel, Gigante Filippo,
-Giorgio Giuseppe, Iacovelli Marco, Ladisa Fabio, Liantonio Francesco, Pavone Alessia, Perniola	Antonella, Pontrelli Michele, Santorsola Gianluigi, 
-Scianatico Donato, Sergio Nicola, Serrone Vito, Simonetti Cosimo, Vitolla Chiara
+   Caccavone Fabio,Capotorti Antonio, Chimienti Marco, Cosmo Alessandro, Cruciata Francesco Giovanni, Dellaccio Gabriel,
+   Gigante Filippo,
+   Giorgio Giuseppe, Iacovelli Marco, Ladisa Fabio, Liantonio Francesco, Pavone Alessia, Perniola Antonella, Pontrelli
+   Michele, Santorsola Gianluigi,
+   Scianatico Donato, Sergio Nicola, Serrone Vito, Simonetti Cosimo, Vitolla Chiara
 </p>
 <h2>Tutor</h2>
 <ul>
