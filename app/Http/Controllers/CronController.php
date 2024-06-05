@@ -51,7 +51,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+//only in demo
+use Database\Seeders\OrdersTodaySeeder;
 use DB;
+
+
 
 /**
  * CronController.
@@ -65,6 +69,10 @@ class CronController extends Controller
         $this->checkToken();
         Product::where('default_daily_stock', '>', 0)
             ->update(['num_items' => DB::raw("`default_daily_stock`")]);
+
+        //only in demo mode - seed today fake orders
+        $seeder = new OrdersTodaySeeder();
+        $seeder->run();
     }
 
     private function checkToken()
