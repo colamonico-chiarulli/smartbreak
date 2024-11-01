@@ -6,12 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: Tuesday, April 12th 2021, 12:39:38 pm
  * -----
- * Last Modified: 	June 3rd 2024 11:48:15 pm
+ * Last Modified: 	November 1st 2024 08:00:00 pm
  * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2024-11-01   R. Andriano     1.4 Added ENV WORKING_DAYS & CUSTOM_HOLIDAYS
  * 2024-06-03	R. Andriano	    1.3 Added school config
  * 2023-11-26	R. Andriano	    1.2 Added check ENV for max_units_ordable
  * 2022-10-20	R. Andriano     1.1 Added check ENV for FROM-TO order-time-range
@@ -75,8 +76,9 @@ return [
 
     'orders_timerange' => [
         'enabled' => env('ORDERS_TIMERANGE_CHECK_ENABLED', true),
-        // example: orders allowed between 7:00 and 9:10
         'from' => env('ORDERS_TIMERANGE_CHECK_FROM',"07:00:00"),
         'to' => env('ORDERS_TIMERANGE_CHECK_TO', "09:10:00"),
+        'working_days' => array_map('intval', explode(',', env('WORKING_DAYS', '1,2,3,4,5'))),
+        'custom_holidays' => array_map('trim', explode(',', env('CUSTOM_HOLIDAYS', '')))
     ]
 ];

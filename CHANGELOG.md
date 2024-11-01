@@ -12,6 +12,7 @@
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2025-09-23	R. Andriano	  Changelog 1.4
  * 2024-06-03	R. Andriano	  Changelog 1.3
  * 2022-11-22	N. Sergio 	  Changelog 1.2
 -->
@@ -30,6 +31,19 @@ La manutenzione e lo sviluppo ulteriore è attualmente affidato ad team di docen
 ---
  ### Documentazione delle modifche più significative di SmartBreak.
 ---
+> ## [v.1.4.0] - (2025-09-23)
+---
+- [x] **Configurazione** (Amministratori) - [Rino Andriano](https://github.com/colamonico-chiarulli/smartbreak/commits?author=rino-andriano)\
+  Aggiunti nel file di configurazione **.env** i seguenti parametri che consentono di definire le festività in cui il servizio BAR è sospeso e quindi non è possibile effettuare ordini
+    * **WORKING_DAYS**=1,2,3,4,5 <br>
+     \# Working days (1=Monday, 7=Sunday) comma separated <br>
+    * **CUSTOM_HOLIDAYS**=23-12-2024::06-01-2025,03-03-2025,04-03-2025,17-04-2024::22-04-2025,23-04-2025,24-04-2025,07-06-2025::16-09-2025<br>
+    \# Festività italiane già escluse: Capodanno, Epifania, Liberazione, Festa del Lavoro, Repubblica <br>
+      \# Ferragosto, Tutti i Santi, Immacolata, Natale, Santo Stefano, Pasqua, Lunedì dell'Angelo <br>
+      \# Additional holidays (format: DD-MM-YYYY or DD-MM-YYYY::DD-MM-YYYY for periods) comma separated <br>
+      \# Example: 25-04-2024,23-12-2024::06-01-2025,01-08-2024::31-08-2024 <br>
+  
+
 ---
 > ## [v.1.3.0] - (2024-06-05)
 ---
