@@ -6,12 +6,13 @@
  * @copyright	(c)2021 IISS Colamonico-Chiarulli Acquaviva delle Fonti (BA) Italy
  * Created Date: 	February 6th, 2021 7:01pm
  * -----
- * Last Modified: 	November 11th 2022 09:39:05 pm
- * Modified By: 	Gabriele Losurdo <gabriele.losurdo.inf@colamonicochiarulli.edu.it>
+ * Last Modified: 	November 1st 2024 11:19:34 pm
+ * Modified By: 	Rino Andriano <andriano@colamonicochiarulli.edu.it>
  * -----
  * HISTORY:
  * Date      	By           	Comments
  * ----------	-------------	----------------------------------
+ * 2024-11-01	R. Andriano	    1.4 Added ENV WORKING_DAYS & CUSTOM_HOLIDAYS
  * 2022-11-09	G. Losurdo  	1.1 Price-list / Place an order feature
  * 2022-01-13	R. Andriano	    Fix: Cart now list only products with stock > 0
  * 2021-04-19	R. Andriano	    fix : cart-category checkout
@@ -96,6 +97,7 @@ class CartController extends Controller
             $time_range = config('smartbreak.orders_timerange');
             $request->session()->flash('info', 'Puoi fare un ordine dalle '
                 . $time_range['from'] . ' alle ' . $time_range['to']
+                . ' in un giorno non festivo'
             );
         }
         return view('pages.cart.choose-products', compact('categories', 'search_name', 'title'));
