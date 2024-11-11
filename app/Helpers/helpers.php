@@ -227,7 +227,7 @@ function isItalianHoliday(Carbon $date): bool
 function getItalianHolidays(Carbon $date): array
 {
 // Calcolo della Pasqua
-$easterSunday = Carbon::create($date->year)->easterSunday();
+$easterSunday = Carbon::create(date("Y-M-d", easter_date($date->year)));
 $easterMonday = $easterSunday->copy()->addDay();
 
     return [
